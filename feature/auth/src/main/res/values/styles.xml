@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LogoTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/app_name_size</item>
+        <item name="android:fontFamily">@font/roboto_mono_bold</item>
+        <item name="android:text">@string/app_name</item>
+    </style>
+
+    <style name="BigTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:fontFamily">@font/roboto_mono_bold</item>
+    </style>
+
+    <style name="MediumTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+        <item name="android:fontFamily">@font/roboto_mono_bold</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:fontFamily">@font/roboto_mono_bold</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:fontFamily">@font/roboto_mono_medium</item>
+    </style>
+
+
+</resources>

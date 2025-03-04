@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/app_name"
+        style="@style/LogoTextViewStyle"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/app_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sign_in"
+        style="@style/BigTextViewStyle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30sp"
+        android:text="@string/sign_in"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/email_et"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/roboto_mono_medium"
+        android:hint="@string/email"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="30sp"
+        android:fontFamily="@font/roboto_mono_medium"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sign_in_btn"
+        style="@style/ButtonStyle"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/darkBlue"
+        android:text="@string/sign_in"
+        android:textColor="@color/pink" />
+
+    <include layout="@layout/fragment_sign_in_or_up" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sign_up_btn"
+        style="@style/ButtonStyle"
+        android:layout_marginTop="30sp"
+        android:backgroundTint="@color/pink"
+        android:text="@string/sign_up"
+        android:textColor="@color/darkBlue" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/continue_as_a_guest_btn"
+        style="@style/BigTextViewStyle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="@string/continue_as_a_guest"
+        android:textColor="@color/grey" />
+
+</LinearLayout>

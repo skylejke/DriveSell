@@ -57,5 +57,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 [bundles]
 lifecycle = ["androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-livedata-ktx"]
 retrofit = ["retrofit", "converter-gson"]
-navigation = ["androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx", "androidx-navigation-safe-args-gradle-plugin"]
+navigation = ["androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx"]
 dataStore = ["androidx-datastore", "androidx-datastore-preferences"]

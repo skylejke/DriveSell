@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="boxColor">#25405B</color>
+    <color name="lineColor">#E1CBD7</color>
+    <color name="buttonColor">#E1CBD7</color>
+    <color name="activeIconColor">#E1CBD7</color>
+</resources>

@@ -21,10 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Drive Sell"
 include(":app")
-include(":feature")
 include(":core")
+include(":feature")
 include(":feature:auth")
-include(":core:repository")
-include(":feature:cars")
-include(":feature:settings")
-include(":feature:profile")
