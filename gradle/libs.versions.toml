@@ -46,6 +46,10 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "daggerVersion" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "daggerVersion" }
+dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "daggerVersion" }
+dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "daggerVersion" }
+dagger-android-processor = { module = "com.google.dagger:dagger-android-processor", version.ref = "daggerVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -59,3 +63,4 @@ lifecycle = ["androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx
 retrofit = ["retrofit", "converter-gson"]
 navigation = ["androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx"]
 dataStore = ["androidx-datastore", "androidx-datastore-preferences"]
+dagger = ["dagger", "dagger-android", "dagger-android-support"]

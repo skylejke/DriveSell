@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
+<!--        <item name="boxStrokeColor">@color/pink</item>-->
+<!--        <item name="boxStrokeErrorColor">@color/red</item>-->
+<!--        <item name="hintTextColor">@color/pink</item>-->
+<!--        <item name="android:textColor">@color/pink</item>-->
+<!--    </style>-->
+
+<!--    <style name="CustomEditText">-->
+<!--        <item name="android:layout_height">60dp</item>-->
+<!--        <item name="android:textColor">@color/pink</item>-->
+<!--        <item name="android:fontFamily">@font/roboto_mono_bold</item>-->
+<!--    </style>-->
+</resources>

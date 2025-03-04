@@ -1,5 +1,6 @@
 package ru.point.core.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,11 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     protected lateinit var navigator: Navigator
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        navigator = (requireActivity() as NavigatorProvider).getNavigator(findNavController())
+    }
+
     abstract fun createView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,7 +34,6 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View = createView(inflater, container).also {
         _binding = it
-        navigator = (requireActivity() as NavigatorProvider).getNavigator(findNavController())
     }.root
 
     override fun onDestroyView() {

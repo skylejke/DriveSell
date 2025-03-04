@@ -3,7 +3,9 @@ package ru.point.drivesell
 import androidx.navigation.NavController
 import ru.point.core.navigation.Navigator
 
-class NavigatorImpl(private val navController: NavController) : Navigator {
+class NavigatorImpl(
+    private val navController: NavController
+) : Navigator {
     override fun popBackStack() {
         navController.popBackStack()
     }

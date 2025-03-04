@@ -21,7 +21,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         (requireActivity() as BottomBarManager).hide()
 
         binding.signInBtn.setOnClickListener {
-
+            navigator.fromRegisterFragmentToLoginFragment()
         }
     }
 }
