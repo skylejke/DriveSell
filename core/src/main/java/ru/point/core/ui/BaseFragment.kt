@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import ru.point.core.navigation.BottomBarManager
 import ru.point.core.navigation.Navigator
 import ru.point.core.navigation.NavigatorProvider
 
@@ -34,6 +35,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View = createView(inflater, container).also {
         _binding = it
+        (requireActivity() as BottomBarManager).show()
     }.root
 
     override fun onDestroyView() {

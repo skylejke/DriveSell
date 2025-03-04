@@ -22,45 +22,49 @@
         app:fontFamily="@font/roboto" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_et"
+        android:id="@+id/username_til"
         style="@style/AuthTextInputLayout"
         android:hint="@string/username"
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username_et"
             style="@style/EditTextStyle"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_et"
+        android:id="@+id/email_til"
         style="@style/AuthTextInputLayout"
         android:hint="@string/email"
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_et"
             style="@style/EditTextStyle"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_number_et"
+        android:id="@+id/phone_number_til"
         style="@style/AuthTextInputLayout"
         android:hint="@string/phone_number"
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_number_et"
             style="@style/EditTextStyle"
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_et"
+        android:id="@+id/password_til"
         style="@style/AuthTextInputLayout"
         android:hint="@string/password"
         app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_et"
             style="@style/EditTextStyle"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>

@@ -7,13 +7,18 @@
         android:title="@string/home" />
 
     <item
+        android:id="@+id/searchFragment"
         android:icon="@drawable/search_icon"
         android:title="@string/search" />
 
-    <item android:title="@string/add" />
+    <item
+        android:id="@+id/addCarFragment"
+        android:icon="@drawable/add_icon"
+        android:title="@string/add" />
 
     <item
-        android:id="@+id/favouriteFragment"
+        android:id="@+id/favouritesFragment"
+        android:icon="@drawable/favourite_icon"
         android:title="@string/favourites" />
 
     <item

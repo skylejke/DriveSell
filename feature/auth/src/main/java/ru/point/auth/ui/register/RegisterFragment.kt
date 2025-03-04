@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import ru.point.auth.databinding.FragmentRegisterBinding
 import ru.point.core.navigation.BottomBarManager
-import ru.point.core.ui.BaseFragment
+import ru.point.core.ui.BaseAuthFragment
 
 
-class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
+class RegisterFragment : BaseAuthFragment<FragmentRegisterBinding>() {
     override fun createView(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -20,8 +20,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as BottomBarManager).hide()
 
+        binding.signUpBtn.setOnClickListener {
+            //navigator.fromRegisterFragmentToHomeFragment()
+        }
+
         binding.signInBtn.setOnClickListener {
             navigator.fromRegisterFragmentToLoginFragment()
+        }
+
+        binding.continueAsAGuestBtn.setOnClickListener {
+            navigator.fromRegisterFragmentToHomeFragment()
         }
     }
 }

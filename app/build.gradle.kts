@@ -45,6 +45,11 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":feature:auth"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:add_car"))
+    implementation(project(":feature:favourites"))
+    implementation(project(":feature:profile"))
+    implementation(project(":feature:search"))
 
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.dagger)

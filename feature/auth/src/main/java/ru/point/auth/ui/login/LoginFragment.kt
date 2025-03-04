@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import ru.point.auth.databinding.FragmentLoginBinding
 import ru.point.core.navigation.BottomBarManager
-import ru.point.core.ui.BaseFragment
+import ru.point.core.ui.BaseAuthFragment
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>() {
+class LoginFragment : BaseAuthFragment<FragmentLoginBinding>() {
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentLoginBinding.inflate(inflater, container, false)
@@ -17,8 +17,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as BottomBarManager).hide()
 
+        binding.signInBtn.setOnClickListener {
+            //navigator.fromLoginFragmentToHomeFragment()
+        }
+
         binding.signUpBtn.setOnClickListener {
             navigator.fromLoginFragmentToRegisterFragment()
+        }
+
+        binding.continueAsAGuestBtn.setOnClickListener {
+            navigator.fromLoginFragmentToHomeFragment()
         }
     }
 }

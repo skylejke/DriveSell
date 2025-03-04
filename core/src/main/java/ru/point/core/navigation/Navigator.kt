@@ -4,4 +4,6 @@ interface Navigator {
     fun popBackStack()
     fun fromLoginFragmentToRegisterFragment()
     fun fromRegisterFragmentToLoginFragment()
+    fun fromLoginFragmentToHomeFragment()
+    fun fromRegisterFragmentToHomeFragment()
 }

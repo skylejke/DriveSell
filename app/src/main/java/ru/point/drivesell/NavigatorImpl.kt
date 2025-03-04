@@ -17,4 +17,12 @@ class NavigatorImpl(
     override fun fromRegisterFragmentToLoginFragment() {
         navController.navigate(R.id.action_registerFragment_to_loginFragment)
     }
+
+    override fun fromLoginFragmentToHomeFragment() {
+        navController.navigate(R.id.action_loginFragment_to_homeFragment)
+    }
+
+    override fun fromRegisterFragmentToHomeFragment() {
+        navController.navigate(R.id.action_registerFragment_to_homeFragment)
+    }
 }
