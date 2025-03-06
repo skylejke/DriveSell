@@ -1,4 +1,5 @@
 plugins {
+    kotlin("plugin.serialization") version "2.1.10"
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
@@ -52,9 +53,16 @@ dependencies {
     implementation(project(":feature:search"))
 
     implementation(libs.bundles.navigation)
+
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

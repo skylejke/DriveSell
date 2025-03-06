@@ -14,6 +14,7 @@ lifecycleVersion = "2.8.7"
 coilVersion = "2.7.0"
 dataStoreVersion = "1.1.3"
 kotlinxCoroutinesAndroidVersion = "1.9.0"
+kotlinSerializationVersion = "2.1.10"
 kotlinxSerializationJsonVersion = "1.7.3"
 navVersion = "2.8.8"
 retrofitVersion = "2.11.0"
@@ -37,6 +38,7 @@ coil = { module = "io.coil-kt:coil", version.ref = "coilVersion" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "dataStoreVersion" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStoreVersion" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroidVersion" }
+kotlinx-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlinSerializationVersion" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navVersion" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navVersion" }
