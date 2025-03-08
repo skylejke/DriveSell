@@ -1,8 +1,9 @@
 package ru.point.auth.di
 
 import androidx.lifecycle.ViewModel
+import ru.point.core.di.FeatureDepsProvider
 
-internal class ComponentHolderAuthVM() : ViewModel() {
+internal class AuthComponentHolderVM() : ViewModel() {
     init {
         _authComponent = DaggerAuthComponent.builder().deps(FeatureDepsProvider.featureDeps).build()
     }

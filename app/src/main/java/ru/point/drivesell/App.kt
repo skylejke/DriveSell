@@ -1,7 +1,7 @@
 package ru.point.drivesell
 
 import android.app.Application
-import ru.point.auth.di.FeatureDepsStore
+import ru.point.core.di.FeatureDepsStore
 import ru.point.drivesell.di.AppComponent
 import ru.point.drivesell.di.DaggerAppComponent
 
@@ -11,7 +11,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.create()
+        appComponent = DaggerAppComponent.builder().provideContext(context = applicationContext).build()
         FeatureDepsStore.featureDeps = appComponent
     }
 }

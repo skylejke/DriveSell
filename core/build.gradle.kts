@@ -44,6 +44,7 @@ dependencies {
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)
 
+    implementation(libs.retrofit)
     implementation(libs.bundles.navigation)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

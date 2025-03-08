@@ -3,10 +3,12 @@ package ru.point.auth.di
 import dagger.Component
 import ru.point.auth.ui.login.LoginFragment
 import ru.point.auth.ui.register.RegisterFragment
+import ru.point.core.di.FeatureDeps
 import ru.point.core.di.FeatureScope
 
 @[FeatureScope Component(
     modules = [
+        AuthStorageModule::class,
         AuthRepositoryModule::class,
         AuthUseCaseModule::class,
         AuthViewModelFactoryModule::class],

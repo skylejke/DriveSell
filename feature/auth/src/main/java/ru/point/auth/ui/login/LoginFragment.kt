@@ -4,15 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import jakarta.inject.Inject
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 import ru.point.auth.databinding.FragmentLoginBinding
-import ru.point.auth.di.ComponentHolderAuthVM
+import ru.point.auth.di.AuthComponentHolderVM
 import ru.point.auth.di.authComponent
 import ru.point.core.ext.bottomBar
 import ru.point.core.ui.ComponentHolderFragment
 
-class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
+internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
     @Inject
     lateinit var loginViewModelFactory: LoginViewModelFactory
@@ -21,7 +27,7 @@ class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<ComponentHolderAuthVM>()
+        initHolder<AuthComponentHolderVM>()
         authComponent.inject(this)
     }
 
@@ -32,8 +38,24 @@ class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
         super.onViewCreated(view, savedInstanceState)
         bottomBar.hide()
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
+                loginViewModel.loginState.filterNotNull().collect { state ->
+                    if (state) {
+                        navigator.fromLoginFragmentToHomeFragment()
+                        Toast.makeText(requireContext(), "Successfully logged in", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
         binding.signInBtn.setOnClickListener {
-            navigator.fromLoginFragmentToHomeFragment()
+            loginViewModel.login(
+                username = binding.usernameEt.text.toString(),
+                password = binding.passwordEt.text.toString()
+            )
         }
 
         binding.signUpBtn.setOnClickListener {

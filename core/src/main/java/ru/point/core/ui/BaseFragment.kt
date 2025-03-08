@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import ru.point.core.ext.bottomBar
 import ru.point.core.navigation.Navigator
 import ru.point.core.navigation.NavigatorProvider
 
@@ -33,6 +34,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = createView(inflater, container).also {
+        bottomBar.show()
         _binding = it
     }.root
 

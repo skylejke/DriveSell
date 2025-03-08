@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.adapters.result)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

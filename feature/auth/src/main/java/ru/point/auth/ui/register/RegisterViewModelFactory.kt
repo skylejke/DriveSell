@@ -4,7 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.point.auth.domain.RegisterUseCase
 
-class RegisterViewModelFactory(val registerUseCase: RegisterUseCase) : ViewModelProvider.Factory {
+@Suppress("UNCHECKED_CAST")
+internal class RegisterViewModelFactory(
+    private val registerUseCase: RegisterUseCase,
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>) =
         RegisterViewModel(registerUseCase = registerUseCase) as T
 }

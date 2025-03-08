@@ -6,7 +6,7 @@ import ru.point.auth.data.model.LoginRequest
 import ru.point.auth.data.model.RegisterRequest
 import ru.point.auth.data.model.Token
 
-interface AuthService {
+internal interface AuthService {
     @POST("/login")
     suspend fun login(@Body loginRequest: LoginRequest): Result<Token>
 

@@ -1,4 +1,4 @@
-package ru.point.auth.di
+package ru.point.core.di
 
 import kotlin.properties.Delegates.notNull
 

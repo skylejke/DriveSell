@@ -20,15 +20,15 @@
         android:text="@string/sign_in" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_til"
+        android:id="@+id/username_til"
         style="@style/AuthTextInputLayout"
-        android:hint="@string/email"
+        android:hint="@string/username"
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_et"
+            android:id="@+id/username_et"
             style="@style/EditTextStyle"
-            android:inputType="textEmailAddress" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
