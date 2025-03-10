@@ -51,6 +51,8 @@ dependencies {
     implementation(project(":feature:favourites"))
     implementation(project(":feature:profile"))
     implementation(project(":feature:search"))
+    implementation(project(":feature:menu"))
+    implementation(project(":feature:settings"))
 
     implementation(libs.bundles.navigation)
 

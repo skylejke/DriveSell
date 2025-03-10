@@ -1,3 +1,22 @@
 <resources>
     <string name="fragment_search_name">Search fragment</string>
+    <string name="search_by_filters">Search by filters</string>
+    <string name="brand">Brand</string>
+    <string name="model">Model</string>
+    <string name="year">Year</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="price">Price</string>
+    <string name="mileage">Mileage</string>
+    <string name="engine_power">Engine power</string>
+    <string name="engine_capacity">Engine capacity</string>
+    <string name="fuel_type">Fuel type</string>
+    <string name="body_type">Body type</string>
+    <string name="color">Color</string>
+    <string name="transmission">Transmission</string>
+    <string name="drivetrain">Drivetrain</string>
+    <string name="wheel">Wheel</string>
+    <string name="condition">Condition</string>
+    <string name="owners">Owners</string>
+    <string name="show_ads">Show ads</string>
 </resources>

@@ -1,3 +1,5 @@
 <resources>
     <string name="fragment_name">Home fragment</string>
+    <string name="app_name">Drive Sell</string>
+    <string name="offers">offers</string>
 </resources>

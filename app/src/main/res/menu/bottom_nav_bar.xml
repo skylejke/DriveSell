@@ -22,8 +22,8 @@
         android:title="@string/favourites" />
 
     <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/person_icon"
-        android:title="@string/profile" />
+        android:id="@+id/menuFragment"
+        android:icon="@drawable/menu_icon"
+        android:title="@string/menu" />
 
 </menu>

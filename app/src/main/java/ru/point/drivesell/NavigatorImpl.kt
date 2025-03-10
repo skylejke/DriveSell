@@ -1,6 +1,7 @@
 package ru.point.drivesell
 
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import ru.point.core.navigation.Navigator
 
 class NavigatorImpl(
@@ -19,10 +20,24 @@ class NavigatorImpl(
     }
 
     override fun fromLoginFragmentToHomeFragment() {
-        navController.navigate(R.id.action_loginFragment_to_homeFragment)
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.loginFragment, inclusive = true)
+            .build()
+        navController.navigate(R.id.action_loginFragment_to_homeFragment, null, navOptions)
     }
 
     override fun fromRegisterFragmentToHomeFragment() {
-        navController.navigate(R.id.action_registerFragment_to_homeFragment)
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.registerFragment, inclusive = true)
+            .build()
+        navController.navigate(R.id.action_registerFragment_to_homeFragment, null, navOptions)
+    }
+
+    override fun fromMenuFragmentToProfileFragment() {
+        navController.navigate(R.id.action_menuFragment_to_profileFragment)
+    }
+
+    override fun fromMenuFragmentToSettingsFragment() {
+        navController.navigate(R.id.action_menuFragment_to_settingsFragment)
     }
 }

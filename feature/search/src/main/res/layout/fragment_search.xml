@@ -1,13 +1,414 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchFragment">
 
-    <com.google.android.material.textview.MaterialTextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/fragment_search_name" />
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:context=".SearchFragment">
 
-</FrameLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/search_by_filter_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_by_filters"
+            android:textSize="30sp"
+            app:fontFamily="@font/roboto_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/brand_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/brand"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/brand_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_by_filter_tv" />
+
+        <Spinner
+            android:id="@+id/brand_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/brand_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/model_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/model"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/model_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/brand_list" />
+
+        <Spinner
+            android:id="@+id/model_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/model_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/year_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/year"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/model_tv" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/year_et_min"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/min"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/year_et_max"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/year_tv" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/year_et_max"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/max"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/year_et_min"
+            app:layout_constraintTop_toBottomOf="@id/year_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/price"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/year_et_min" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/price_et_min"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/min"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/price_et_max"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price_tv" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/price_et_max"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/max"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/price_et_min"
+            app:layout_constraintTop_toBottomOf="@id/price_tv" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mileage_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/mileage"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price_et_min" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mileage_et_min"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/min"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/mileage_et_max"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mileage_tv" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mileage_et_max"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/max"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/mileage_et_min"
+            app:layout_constraintTop_toBottomOf="@id/mileage_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/engine_power_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/engine_power"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mileage_et_min" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/engine_power_min"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/min"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/engine_power_max"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/engine_power_tv" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/engine_power_max"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/max"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/engine_power_min"
+            app:layout_constraintTop_toBottomOf="@id/engine_power_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/engine_capacity_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/engine_capacity"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/engine_power_min" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/engine_capacity_min"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/min"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/engine_capacity_max"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/engine_capacity_tv" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/engine_capacity_max"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/max"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/engine_capacity_min"
+            app:layout_constraintTop_toBottomOf="@id/engine_capacity_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fuel_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/fuel_type"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/fuel_type_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/engine_capacity_min" />
+
+        <Spinner
+            android:id="@+id/fuel_type_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fuel_type_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/body_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/body_type"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/body_type_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fuel_type_tv" />
+
+        <Spinner
+            android:id="@+id/body_type_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/body_type_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/color_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/color"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/color_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/body_type_tv" />
+
+        <Spinner
+            android:id="@+id/color_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/color_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/transmission_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/transmission"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/transmission_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/color_tv" />
+
+        <Spinner
+            android:id="@+id/transmission_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/transmission_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/drivetrain_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/drivetrain"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/drivetrain_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transmission_tv" />
+
+        <Spinner
+            android:id="@+id/drivetrain_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/drivetrain_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/wheel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/wheel"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/wheel_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/drivetrain_tv" />
+
+        <Spinner
+            android:id="@+id/wheel_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/wheel_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/condition_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/condition"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/condition_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wheel_tv" />
+
+        <Spinner
+            android:id="@+id/condition_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/condition_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/owners_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/owners"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto"
+            app:layout_constraintBottom_toBottomOf="@id/owners_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/condition_tv" />
+
+        <Spinner
+            android:id="@+id/owners_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/owners_tv" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/show_ads"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/owners_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
