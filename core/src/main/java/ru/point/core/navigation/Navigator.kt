@@ -8,4 +8,5 @@ interface Navigator {
     fun fromRegisterFragmentToHomeFragment()
     fun fromMenuFragmentToProfileFragment()
     fun fromMenuFragmentToSettingsFragment()
+    fun fromMenuFragmentToLogInFragment()
 }

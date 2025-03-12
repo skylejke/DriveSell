@@ -5,27 +5,27 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.point.auth.data.model.LoginRequest
 import ru.point.auth.domain.LoginUseCase
-import ru.point.auth.domain.LoginWithTokenUseCase
+import ru.point.user.model.LoginRequest
+import ru.point.user.repository.UserRepository
 
 internal class LoginViewModel(
     private val loginUseCase: LoginUseCase,
-    private val loginWithTokenUseCase: LoginWithTokenUseCase
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private var _loginState = MutableStateFlow<Boolean?>(null)
-    val loginState get() = _loginState.asStateFlow()
+    private var _isAuthorized = MutableStateFlow<Boolean?>(null)
+    val isAuthorized get() = _isAuthorized.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _loginState.value = loginWithTokenUseCase.invoke()
+            _isAuthorized.value = userRepository.isAuthorized()
         }
     }
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
-            _loginState.value = loginUseCase.invoke(
+            _isAuthorized.value = loginUseCase.invoke(
                 loginRequest = LoginRequest(
                     username = username,
                     password = password

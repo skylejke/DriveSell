@@ -40,4 +40,8 @@ class NavigatorImpl(
     override fun fromMenuFragmentToSettingsFragment() {
         navController.navigate(R.id.action_menuFragment_to_settingsFragment)
     }
+
+    override fun fromMenuFragmentToLogInFragment() {
+        navController.navigate(R.id.action_menuFragment_to_loginFragment)
+    }
 }

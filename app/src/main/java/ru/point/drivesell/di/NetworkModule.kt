@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class NetworkModule {
     @[Provides AppScope]
-    fun provideRetrofit() = Retrofit.Builder()
+    fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl("http://192.168.1.23:8080")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(ResultCallAdapterFactory.create())

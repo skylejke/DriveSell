@@ -40,12 +40,10 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
-                loginViewModel.loginState.filterNotNull().collect { state ->
+                loginViewModel.isAuthorized.filterNotNull().collect { state ->
                     if (state) {
                         navigator.fromLoginFragmentToHomeFragment()
                         Toast.makeText(requireContext(), "Successfully logged in", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

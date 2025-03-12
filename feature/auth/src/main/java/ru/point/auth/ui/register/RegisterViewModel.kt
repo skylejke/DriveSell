@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.point.auth.data.model.RegisterRequest
 import ru.point.auth.domain.RegisterUseCase
+import ru.point.user.model.RegisterRequest
 
 internal class RegisterViewModel(
     private val registerUseCase: RegisterUseCase,

@@ -45,6 +45,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":data:user"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:home"))
     implementation(project(":feature:add_car"))

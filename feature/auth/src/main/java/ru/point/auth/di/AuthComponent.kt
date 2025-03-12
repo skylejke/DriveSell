@@ -5,11 +5,13 @@ import ru.point.auth.ui.login.LoginFragment
 import ru.point.auth.ui.register.RegisterFragment
 import ru.point.core.di.FeatureDeps
 import ru.point.core.di.FeatureScope
+import ru.point.user.di.TokenStorageModule
+import ru.point.user.di.UserRepositoryModule
 
 @[FeatureScope Component(
     modules = [
-        AuthStorageModule::class,
-        AuthRepositoryModule::class,
+        TokenStorageModule::class,
+        UserRepositoryModule::class,
         AuthUseCaseModule::class,
         AuthViewModelFactoryModule::class],
     dependencies = [FeatureDeps::class]

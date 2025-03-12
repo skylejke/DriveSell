@@ -11,7 +11,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import ru.point.core.navigation.BottomBarManager
-import ru.point.core.navigation.Navigator
 import ru.point.core.navigation.NavigatorProvider
 import ru.point.drivesell.databinding.ActivityMainBinding
 
@@ -55,7 +54,6 @@ class MainActivity : AppCompatActivity(), BottomBarManager, NavigatorProvider {
         binding.bottomNavigation.isVisible = true
     }
 
-    override fun getNavigator(navController: NavController): Navigator {
-        return NavigatorImpl(navController)
-    }
+    override fun getNavigator(navController: NavController) =
+        NavigatorImpl(navController)
 }
