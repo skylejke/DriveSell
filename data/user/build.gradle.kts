@@ -38,6 +38,8 @@ dependencies {
 
     implementation(project(":core"))
 
+    implementation (libs.java.jwt)
+
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)

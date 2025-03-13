@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="ru.point.profile.ProfileFragment"
+        android:name="ru.point.profile.ui.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
 

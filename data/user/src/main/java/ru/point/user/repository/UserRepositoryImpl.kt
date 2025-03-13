@@ -1,5 +1,6 @@
 package ru.point.user.repository
 
+import com.auth0.jwt.JWT
 import ru.point.user.model.LoginRequest
 import ru.point.user.model.RegisterRequest
 import ru.point.user.service.UserService
@@ -26,4 +27,7 @@ class UserRepositoryImpl(
     }
 
     override suspend fun isAuthorized() = tokenStorage.token != null
+
+    override suspend fun getUserData() =
+        userService.getUserData(userId = JWT.decode(tokenStorage.token).subject).getOrNull()
 }
