@@ -8,4 +8,11 @@
     <string name="delete_profile">Delete profile</string>
     <string name="back_button">Back button</string>
     <string name="edit_button">Edit button</string>
+    <string name="cancel">Cancel</string>
+    <string name="close_button">Close button</string>
+    <string name="check_button">Check button</string>
+    <string name="change_password">Change password</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
 </resources>

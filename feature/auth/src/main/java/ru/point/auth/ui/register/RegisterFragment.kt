@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.launch
 import ru.point.auth.databinding.FragmentRegisterBinding
 import ru.point.auth.di.authComponent
 import ru.point.core.ext.bottomBar
+import ru.point.core.ext.repeatOnLifecycleScope
 import ru.point.core.ui.ComponentHolderFragment
 import javax.inject.Inject
 
@@ -38,27 +36,25 @@ internal class RegisterFragment : ComponentHolderFragment<FragmentRegisterBindin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         bottomBar.hide()
 
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
-                registerViewModel.registerState.filterNotNull().collect { state ->
-                    if (state) {
-                        navigator.fromRegisterFragmentToHomeFragment()
-                        Toast.makeText(
-                            requireContext(),
-                            "Successful registration",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Something went wrong",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
+        collectRegisterFields()
+
+        binding.usernameEt.doOnTextChanged { _, _, _, _ ->
+            binding.usernameTil.error = null
+        }
+
+        binding.emailEt.doOnTextChanged { _, _, _, _ ->
+            binding.emailTil.error = null
+        }
+
+        binding.phoneNumberEt.doOnTextChanged { _, _, _, _ ->
+            binding.phoneNumberTil.error = null
+        }
+
+        binding.passwordEt.doOnTextChanged { _, _, _, _ ->
+            binding.passwordTil.error = null
         }
 
         binding.signUpBtn.setOnClickListener {
@@ -76,6 +72,43 @@ internal class RegisterFragment : ComponentHolderFragment<FragmentRegisterBindin
 
         binding.continueAsAGuestBtn.setOnClickListener {
             navigator.fromRegisterFragmentToHomeFragment()
+        }
+    }
+
+    private fun collectRegisterFields() {
+        repeatOnLifecycleScope {
+            registerViewModel.usernameError.filterNotNull().collect {
+                binding.usernameTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            registerViewModel.emailError.filterNotNull().collect {
+                binding.emailTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            registerViewModel.phoneNumberError.filterNotNull().collect {
+                binding.phoneNumberTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            registerViewModel.passwordError.filterNotNull().collect {
+                binding.passwordTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            registerViewModel.registerEvent.collect {
+                navigator.fromRegisterFragmentToHomeFragment()
+                Toast.makeText(
+                    requireContext(),
+                    "Successful registration",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }

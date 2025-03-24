@@ -5,17 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.launch
 import ru.point.auth.databinding.FragmentLoginBinding
 import ru.point.auth.di.AuthComponentHolderVM
 import ru.point.auth.di.authComponent
 import ru.point.core.ext.bottomBar
+import ru.point.core.ext.repeatOnLifecycleScope
 import ru.point.core.ui.ComponentHolderFragment
 
 internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
@@ -36,17 +34,17 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         bottomBar.hide()
 
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
-                loginViewModel.isAuthorized.filterNotNull().collect { state ->
-                    if (state) {
-                        navigator.fromLoginFragmentToHomeFragment()
-                        Toast.makeText(requireContext(), "Successfully logged in", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+        collectLoginFields()
+
+        binding.usernameEt.doOnTextChanged { _, _, _, _ ->
+            binding.usernameTil.error = null
+        }
+
+        binding.passwordEt.doOnTextChanged { _, _, _, _ ->
+            binding.passwordTil.error = null
         }
 
         binding.signInBtn.setOnClickListener {
@@ -62,6 +60,30 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
         binding.continueAsAGuestBtn.setOnClickListener {
             navigator.fromLoginFragmentToHomeFragment()
+        }
+    }
+
+    private fun collectLoginFields(){
+        repeatOnLifecycleScope {
+            loginViewModel.usernameError.filterNotNull().collect {
+                binding.usernameTil.error = it
+            }
+        }
+        repeatOnLifecycleScope {
+            loginViewModel.passwordError.filterNotNull().collect {
+                binding.passwordTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            loginViewModel.loginEvent.filterNotNull().collect {
+                navigator.fromLoginFragmentToHomeFragment()
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully logged in",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }

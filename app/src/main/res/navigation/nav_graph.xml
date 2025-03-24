@@ -52,9 +52,16 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="ru.point.profile.ui.ProfileFragment"
+        android:name="ru.point.profile.ui.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editUserDataFragment"
+            app:destination="@id/editUserDataFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editPasswordFragment"
+            app:destination="@id/editPasswordFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"
@@ -82,5 +89,16 @@
         android:id="@+id/settingsFragment"
         android:name="ru.point.settings.SettingsFragment"
         android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings"/>
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/editUserDataFragment"
+        android:name="ru.point.profile.ui.editUserData.EditUserDataFragment"
+        android:label="EditUserDataFragment"
+        tools:layout="@layout/fragment_edit_user_data" />
+
+    <fragment
+        android:id="@+id/editPasswordFragment"
+        android:name="ru.point.profile.ui.editPassword.EditPasswordFragment"
+        android:label="EditPasswordFragment"
+        tools:layout="@layout/fragment_edit_password" />
 </navigation>

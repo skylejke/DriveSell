@@ -1,4 +1,4 @@
-package ru.point.drivesell
+package ru.point.drivesell.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -8,11 +8,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import ru.point.core.navigation.BottomBarManager
 import ru.point.core.navigation.NavigatorProvider
+import ru.point.drivesell.R
 import ru.point.drivesell.databinding.ActivityMainBinding
+import ru.point.drivesell.utils.NavigatorImpl
 
 class MainActivity : AppCompatActivity(), BottomBarManager, NavigatorProvider {
 
@@ -40,9 +42,9 @@ class MainActivity : AppCompatActivity(), BottomBarManager, NavigatorProvider {
 
     override fun onStart() {
         super.onStart()
-        setupWithNavController(
+        NavigationUI.setupWithNavController(
             binding.bottomNavigation,
-            findNavController(this, R.id.nav_host_fragment)
+            this.findNavController(R.id.nav_host_fragment)
         )
     }
 

@@ -13,7 +13,7 @@ internal class MenuViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private var _isAuthorized = MutableStateFlow<Boolean?>(null)
+    private val _isAuthorized = MutableStateFlow<Boolean?>(null)
     val isAuthorized get() = _isAuthorized.asStateFlow()
 
     init {

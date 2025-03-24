@@ -25,7 +25,7 @@
 
     <style name="ButtonStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">52dp</item>
+        <item name="android:layout_height">60dp</item>
         <item name="android:textSize">@dimen/big_text_size</item>
         <item name="android:fontFamily">@font/roboto_bold</item>
     </style>

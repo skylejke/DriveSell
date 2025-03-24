@@ -1,8 +1,9 @@
-package ru.point.drivesell
+package ru.point.drivesell.utils
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import ru.point.core.navigation.Navigator
+import ru.point.drivesell.R
 
 class NavigatorImpl(
     private val navController: NavController
@@ -43,5 +44,13 @@ class NavigatorImpl(
 
     override fun fromMenuFragmentToLogInFragment() {
         navController.navigate(R.id.action_menuFragment_to_loginFragment)
+    }
+
+    override fun fromProfileFragmentToEditUserDataFragment() {
+        navController.navigate(R.id.action_profileFragment_to_editUserDataFragment)
+    }
+
+    override fun fromProfileFragmentToEditPasswordFragment() {
+        navController.navigate(R.id.action_profileFragment_to_editPasswordFragment)
     }
 }
