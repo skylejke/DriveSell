@@ -37,7 +37,27 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
         bottomBar.hide()
 
-        collectLoginFields()
+        repeatOnLifecycleScope {
+            loginViewModel.usernameError.filterNotNull().collect {
+                binding.usernameTil.error = it
+            }
+        }
+        repeatOnLifecycleScope {
+            loginViewModel.passwordError.filterNotNull().collect {
+                binding.passwordTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            loginViewModel.loginEvent.filterNotNull().collect {
+                navigator.fromLoginFragmentToHomeFragment()
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully logged in",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
         binding.usernameEt.doOnTextChanged { _, _, _, _ ->
             binding.usernameTil.error = null
@@ -60,30 +80,6 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
         binding.continueAsAGuestBtn.setOnClickListener {
             navigator.fromLoginFragmentToHomeFragment()
-        }
-    }
-
-    private fun collectLoginFields(){
-        repeatOnLifecycleScope {
-            loginViewModel.usernameError.filterNotNull().collect {
-                binding.usernameTil.error = it
-            }
-        }
-        repeatOnLifecycleScope {
-            loginViewModel.passwordError.filterNotNull().collect {
-                binding.passwordTil.error = it
-            }
-        }
-
-        repeatOnLifecycleScope {
-            loginViewModel.loginEvent.filterNotNull().collect {
-                navigator.fromLoginFragmentToHomeFragment()
-                Toast.makeText(
-                    requireContext(),
-                    "Successfully logged in",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
         }
     }
 }

@@ -15,4 +15,8 @@
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
     <string name="confirm_new_password">Confirm new password</string>
+    <string name="delete_profile_dialog_title">Delete profile?</string>
+    <string name="delete_profile_dialog_message">Are you sure you want to delete your profile?</string>
+    <string name="delete_profile_dialog_positive_button">Yes</string>
+    <string name="delete_profile_dialog_negative_button">Cancel</string>
 </resources>

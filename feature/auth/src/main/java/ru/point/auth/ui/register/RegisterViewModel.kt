@@ -21,7 +21,7 @@ internal class RegisterViewModel(
     private val registerUseCase: RegisterUseCase,
 ) : ViewModel() {
 
-    private val _registerEvent = MutableSharedFlow<Unit>()
+    private val _registerEvent = MutableSharedFlow<Unit>(replay = 1)
     val registerEvent get() = _registerEvent.asSharedFlow()
 
     private val _usernameError = MutableStateFlow<String?>(null)

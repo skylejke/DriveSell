@@ -1,5 +1,6 @@
 package ru.point.user.repository
 
+import ru.point.user.model.DeleteUserResponse
 import ru.point.user.model.EditUserDataRequest
 import ru.point.user.model.EditUserPasswordRequest
 import ru.point.user.model.LoginRequest
@@ -18,5 +19,5 @@ interface UserRepository {
     suspend fun getUserData(): UserDataResponse?
     suspend fun editUserData(editUserDataRequest: EditUserDataRequest): Result<UpdateUserDataResponse>
     suspend fun editPassword(editUserPasswordRequest: EditUserPasswordRequest): Result<UpdateUserPasswordResponse>
-    suspend fun deleteProfile()
+    suspend fun deleteProfile(): Result<DeleteUserResponse>
 }

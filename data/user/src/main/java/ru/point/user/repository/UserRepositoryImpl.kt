@@ -14,15 +14,13 @@ class UserRepositoryImpl(
 ) : UserRepository {
 
     override suspend fun login(loginRequest: LoginRequest) =
-        userService.login(loginRequest).map { response ->
-            tokenStorage.token = response.token?.token
-            response
+        userService.login(loginRequest).onSuccess {
+            tokenStorage.token = it.token?.token
         }
 
     override suspend fun register(registerRequest: RegisterRequest) =
-        userService.register(registerRequest).map { response ->
-            tokenStorage.token = response.token?.token
-            response
+        userService.register(registerRequest).onSuccess {
+            tokenStorage.token = it.token?.token
         }
 
     override suspend fun logOut() {
@@ -47,5 +45,7 @@ class UserRepositoryImpl(
         )
 
     override suspend fun deleteProfile() =
-        userService.deleteProfile(userId = JWT.decode(tokenStorage.token).subject)
+        userService.deleteProfile(userId = JWT.decode(tokenStorage.token).subject).onSuccess {
+            tokenStorage.token = null
+        }
 }

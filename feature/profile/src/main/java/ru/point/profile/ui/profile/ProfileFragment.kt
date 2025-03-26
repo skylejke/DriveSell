@@ -1,13 +1,17 @@
 package ru.point.profile.ui.profile
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import ru.point.core.ext.bottomBar
 import ru.point.core.ext.repeatOnLifecycleScope
 import ru.point.core.ui.ComponentHolderFragment
+import ru.point.profile.R
 import ru.point.profile.databinding.FragmentProfileBinding
 import ru.point.profile.di.ProfileComponentHolderVM
 import ru.point.profile.di.profileComponent
@@ -45,6 +49,20 @@ internal class ProfileFragment : ComponentHolderFragment<FragmentProfileBinding>
             }
         }
 
+        repeatOnLifecycleScope {
+            profileViewModel.deleteProfileEvent.collect {
+                navigator.fromProfileFragmentToLoginFragment()
+            }
+        }
+
+        binding.deleteProfileBtn.setOnClickListener {
+            DeleteProfileDialog { profileViewModel.deleteUser() }
+                .show(
+                    childFragmentManager,
+                    DeleteProfileDialog.TAG
+                )
+        }
+
         binding.profileToolBar.editIcon.setOnClickListener {
             navigator.fromProfileFragmentToEditUserDataFragment()
         }
@@ -57,4 +75,25 @@ internal class ProfileFragment : ComponentHolderFragment<FragmentProfileBinding>
             navigator.fromProfileFragmentToEditPasswordFragment()
         }
     }
+
+    class DeleteProfileDialog(private val onPositiveClick: () -> Unit) : DialogFragment() {
+
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+            AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.delete_profile_dialog_title))
+                .setMessage(getString(R.string.delete_profile_dialog_message))
+                .setPositiveButton(getString(R.string.delete_profile_dialog_positive_button)) { dialog, _ ->
+                    onPositiveClick()
+                    dialog.dismiss()
+                }
+                .setNegativeButton(getString(R.string.delete_profile_dialog_negative_button)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+
+        companion object {
+            const val TAG = "DeleteProfileDialog"
+        }
+    }
+
 }

@@ -39,7 +39,40 @@ internal class RegisterFragment : ComponentHolderFragment<FragmentRegisterBindin
 
         bottomBar.hide()
 
-        collectRegisterFields()
+        repeatOnLifecycleScope {
+            registerViewModel.usernameError.filterNotNull().collect {
+                binding.usernameTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            registerViewModel.emailError.filterNotNull().collect {
+                binding.emailTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            registerViewModel.phoneNumberError.filterNotNull().collect {
+                binding.phoneNumberTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            registerViewModel.passwordError.filterNotNull().collect {
+                binding.passwordTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            registerViewModel.registerEvent.filterNotNull().collect {
+                navigator.fromRegisterFragmentToHomeFragment()
+                Toast.makeText(
+                    requireContext(),
+                    "Successful registration",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
         binding.usernameEt.doOnTextChanged { _, _, _, _ ->
             binding.usernameTil.error = null
@@ -72,43 +105,6 @@ internal class RegisterFragment : ComponentHolderFragment<FragmentRegisterBindin
 
         binding.continueAsAGuestBtn.setOnClickListener {
             navigator.fromRegisterFragmentToHomeFragment()
-        }
-    }
-
-    private fun collectRegisterFields() {
-        repeatOnLifecycleScope {
-            registerViewModel.usernameError.filterNotNull().collect {
-                binding.usernameTil.error = it
-            }
-        }
-
-        repeatOnLifecycleScope {
-            registerViewModel.emailError.filterNotNull().collect {
-                binding.emailTil.error = it
-            }
-        }
-
-        repeatOnLifecycleScope {
-            registerViewModel.phoneNumberError.filterNotNull().collect {
-                binding.phoneNumberTil.error = it
-            }
-        }
-
-        repeatOnLifecycleScope {
-            registerViewModel.passwordError.filterNotNull().collect {
-                binding.passwordTil.error = it
-            }
-        }
-
-        repeatOnLifecycleScope {
-            registerViewModel.registerEvent.collect {
-                navigator.fromRegisterFragmentToHomeFragment()
-                Toast.makeText(
-                    requireContext(),
-                    "Successful registration",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
         }
     }
 }

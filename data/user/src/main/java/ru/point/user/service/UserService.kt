@@ -6,6 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
+import ru.point.user.model.DeleteUserResponse
 import ru.point.user.model.EditUserDataRequest
 import ru.point.user.model.EditUserPasswordRequest
 import ru.point.user.model.LoginRequest
@@ -38,6 +39,6 @@ interface UserService {
         @Body editUserPasswordRequest: EditUserPasswordRequest
     ): Result<UpdateUserPasswordResponse>
 
-    @DELETE("/profile/{userId}/")
-    suspend fun deleteProfile(@Path("userId") userId: String)
+    @DELETE("/profile/{userId}")
+    suspend fun deleteProfile(@Path("userId") userId: String): Result<DeleteUserResponse>
 }

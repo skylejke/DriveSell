@@ -34,34 +34,6 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
 
         bottomBar.hide()
 
-        collectEditUserDataFields()
-
-        binding.usernameEt.doOnTextChanged { _, _, _, _ ->
-            binding.usernameTil.error = null
-        }
-
-        binding.emailEt.doOnTextChanged { _, _, _, _ ->
-            binding.emailTil.error = null
-        }
-
-        binding.phoneNumberEt.doOnTextChanged { _, _, _, _ ->
-            binding.phoneNumberTil.error = null
-        }
-
-        binding.fragmentEditUserDataToolBar.checkIcon.setOnClickListener {
-            editUserDataViewModel.editUserData(
-                username = binding.usernameEt.text.toString().takeIf { it.isNotBlank() },
-                email = binding.emailEt.text.toString().takeIf { it.isNotBlank() },
-                phoneNumber = binding.phoneNumberEt.text.toString().takeIf { it.isNotBlank() }
-            )
-        }
-
-        binding.fragmentEditUserDataToolBar.closeIcon.setOnClickListener {
-            navigator.popBackStack()
-        }
-    }
-
-    private fun collectEditUserDataFields() {
         repeatOnLifecycleScope {
             editUserDataViewModel.userData.filterNotNull().collect { userData ->
                 with(binding) {
@@ -94,6 +66,30 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
             editUserDataViewModel.userDataChangedEvent.collect {
                 navigator.popBackStack()
             }
+        }
+
+        binding.usernameEt.doOnTextChanged { _, _, _, _ ->
+            binding.usernameTil.error = null
+        }
+
+        binding.emailEt.doOnTextChanged { _, _, _, _ ->
+            binding.emailTil.error = null
+        }
+
+        binding.phoneNumberEt.doOnTextChanged { _, _, _, _ ->
+            binding.phoneNumberTil.error = null
+        }
+
+        binding.fragmentEditUserDataToolBar.checkIcon.setOnClickListener {
+            editUserDataViewModel.editUserData(
+                username = binding.usernameEt.text.toString().takeIf { it.isNotBlank() },
+                email = binding.emailEt.text.toString().takeIf { it.isNotBlank() },
+                phoneNumber = binding.phoneNumberEt.text.toString().takeIf { it.isNotBlank() }
+            )
+        }
+
+        binding.fragmentEditUserDataToolBar.closeIcon.setOnClickListener {
+            navigator.popBackStack()
         }
     }
 }

@@ -11,4 +11,5 @@ interface Navigator {
     fun fromMenuFragmentToLogInFragment()
     fun fromProfileFragmentToEditUserDataFragment()
     fun fromProfileFragmentToEditPasswordFragment()
+    fun fromProfileFragmentToLoginFragment()
 }

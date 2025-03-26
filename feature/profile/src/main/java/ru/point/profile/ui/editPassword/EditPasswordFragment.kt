@@ -32,7 +32,29 @@ internal class EditPasswordFragment : BaseFragment<FragmentEditPasswordBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        collectEditPasswordFields()
+        repeatOnLifecycleScope {
+            editPasswordViewModel.oldPasswordError.filterNotNull().collect {
+                binding.oldPasswordTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            editPasswordViewModel.newPasswordError.filterNotNull().collect {
+                binding.newPasswordTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            editPasswordViewModel.confirmNewPasswordError.filterNotNull().collect {
+                binding.confirmNewPasswordTil.error = it
+            }
+        }
+
+        repeatOnLifecycleScope {
+            editPasswordViewModel.passwordChangedEvent.collect {
+                navigator.popBackStack()
+            }
+        }
 
         binding.oldPasswordEt.doOnTextChanged { _, _, _, _ ->
             binding.oldPasswordTil.error = null
@@ -56,32 +78,6 @@ internal class EditPasswordFragment : BaseFragment<FragmentEditPasswordBinding>(
 
         binding.fragmentEditUserDataToolBar.closeIcon.setOnClickListener {
             navigator.popBackStack()
-        }
-    }
-
-    private fun collectEditPasswordFields() {
-        repeatOnLifecycleScope {
-            editPasswordViewModel.oldPasswordError.filterNotNull().collect {
-                binding.oldPasswordTil.error = it
-            }
-        }
-
-        repeatOnLifecycleScope {
-            editPasswordViewModel.newPasswordError.filterNotNull().collect {
-                binding.newPasswordTil.error = it
-            }
-        }
-
-        repeatOnLifecycleScope {
-            editPasswordViewModel.confirmNewPasswordError.filterNotNull().collect {
-                binding.confirmNewPasswordTil.error = it
-            }
-        }
-
-        repeatOnLifecycleScope {
-            editPasswordViewModel.passwordChangedEvent.collect {
-                navigator.popBackStack()
-            }
         }
     }
 }

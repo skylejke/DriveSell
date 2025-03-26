@@ -53,4 +53,8 @@ class NavigatorImpl(
     override fun fromProfileFragmentToEditPasswordFragment() {
         navController.navigate(R.id.action_profileFragment_to_editPasswordFragment)
     }
+
+    override fun fromProfileFragmentToLoginFragment() {
+        navController.navigate(R.id.action_profileFragment_to_loginFragment)
+    }
 }
