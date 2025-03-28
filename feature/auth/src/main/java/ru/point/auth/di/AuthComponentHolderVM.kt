@@ -17,7 +17,6 @@ internal class AuthComponentHolderVM() : ViewModel() {
 private var _authComponent: AuthComponent? = null
     set(value) {
         if (field == null) field = value
-
     }
 
 internal val authComponent get() = requireNotNull(_authComponent)

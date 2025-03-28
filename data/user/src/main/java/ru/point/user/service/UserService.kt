@@ -13,8 +13,8 @@ import ru.point.user.model.LoginRequest
 import ru.point.user.model.LoginResponse
 import ru.point.user.model.RegisterRequest
 import ru.point.user.model.RegisterResponse
-import ru.point.user.model.UpdateUserDataResponse
-import ru.point.user.model.UpdateUserPasswordResponse
+import ru.point.user.model.EditDataResponse
+import ru.point.user.model.EditPasswordResponse
 import ru.point.user.model.UserDataResponse
 
 interface UserService {
@@ -31,13 +31,13 @@ interface UserService {
     suspend fun editUserData(
         @Path("userId") userId: String,
         @Body editUserDataRequest: EditUserDataRequest
-    ): Result<UpdateUserDataResponse>
+    ): Result<EditDataResponse>
 
     @PATCH("/profile/{userId}/updatePassword")
     suspend fun editPassword(
         @Path("userId") userId: String,
         @Body editUserPasswordRequest: EditUserPasswordRequest
-    ): Result<UpdateUserPasswordResponse>
+    ): Result<EditPasswordResponse>
 
     @DELETE("/profile/{userId}")
     suspend fun deleteProfile(@Path("userId") userId: String): Result<DeleteUserResponse>

@@ -15,7 +15,7 @@ import ru.point.core.ext.isValidUserName
 import ru.point.profile.domain.EditUserDataUseCase
 import ru.point.profile.domain.GetUserDataUseCase
 import ru.point.user.model.EditUserDataRequest
-import ru.point.user.model.UpdateUserDataResponse
+import ru.point.user.model.EditDataResponse
 import ru.point.user.model.UserDataResponse
 
 internal class EditUserDataViewModel(
@@ -76,18 +76,18 @@ internal class EditUserDataViewModel(
                     if (error is HttpException && error.code() == 409) {
                         val errorBody = error.response()?.errorBody()?.string()
                         errorBody?.let {
-                            val updateUserDataResponse =
-                                Json.decodeFromString<UpdateUserDataResponse>(it)
+                            val editDataResponse =
+                                Json.decodeFromString<EditDataResponse>(it)
 
-                            when (updateUserDataResponse.message) {
+                            when (editDataResponse.message) {
                                 "Username is taken" -> _usernameError.value =
-                                    updateUserDataResponse.message
+                                    editDataResponse.message
 
                                 "Email is taken" -> _emailError.value =
-                                    updateUserDataResponse.message
+                                    editDataResponse.message
 
                                 "Phone number is taken" -> _phoneNumberError.value =
-                                    updateUserDataResponse.message
+                                    editDataResponse.message
                             }
                         }
                     }

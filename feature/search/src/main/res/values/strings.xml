@@ -19,4 +19,77 @@
     <string name="condition">Condition</string>
     <string name="owners">Owners</string>
     <string name="show_ads">Show ads</string>
+
+    <string-array name="body_types">
+        <item>Sedan</item>
+        <item>Coupe</item>
+        <item>Station Wagon (Estate)</item>
+        <item>Hatchback</item>
+        <item>Minivan</item>
+        <item>Pickup Truck</item>
+        <item>Limousine</item>
+        <item>Van</item>
+        <item>Convertible</item>
+        <item>Liftback</item>
+        <item>Suv</item>
+        <item>Truck</item>
+    </string-array>
+
+    <string-array name="conditions">
+        <item>Not broken</item>
+        <item>Broken</item>
+        <item>Does not matter</item>
+        <item>Requires repair</item>
+    </string-array>
+
+    <string-array name="drivetrains">
+        <item>AWD</item>
+        <item>FWD</item>
+        <item>RWD</item>
+    </string-array>
+
+    <string-array name="fuel_types">
+        <item>Petrol</item>
+        <item>Diesel</item>
+        <item>Hybrid</item>
+        <item>Electric</item>
+    </string-array>
+
+    <string-array name="transmissions">
+        <item>Automatic</item>
+        <item>Robotized</item>
+        <item>Continuously variable</item>
+        <item>Manual</item>
+    </string-array>
+
+    <string-array name="wheels">
+        <item>Right</item>
+        <item>Left</item>
+    </string-array>
+
+    <string-array name="owners">
+        <item>Zero</item>
+        <item>One</item>
+        <item>No more than two</item>
+        <item>No more than three</item>
+    </string-array>
+
+    <string-array name="colors">
+        <item>Black</item>
+        <item>Gray</item>
+        <item>Silver</item>
+        <item>White</item>
+        <item>Red</item>
+        <item>Pink</item>
+        <item>Orange</item>
+        <item>Gold</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Light Blue</item>
+        <item>Blue</item>
+        <item>Violet</item>
+        <item>Purple</item>
+        <item>Brown</item>
+        <item>Beige</item>
+    </string-array>
 </resources>

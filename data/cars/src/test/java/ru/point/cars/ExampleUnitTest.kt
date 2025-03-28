@@ -1,4 +1,4 @@
-package ru.point.data
+package ru.point.cars
 
 import org.junit.Test
 

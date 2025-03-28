@@ -1,11 +1,14 @@
 package ru.point.menu.ui
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import ru.point.core.ui.ComponentHolderFragment
+import ru.point.menu.R
 import ru.point.menu.databinding.FragmentMenuBinding
 import ru.point.menu.di.MenuComponentHolderVM
 import ru.point.menu.di.menuComponent
@@ -67,9 +71,33 @@ internal class MenuFragment : ComponentHolderFragment<FragmentMenuBinding>() {
         }
 
         binding.logOutBtn.setOnClickListener {
-            menuViewModel.logOut()
-            navigator.fromMenuFragmentToLogInFragment()
-            Toast.makeText(requireContext(), "Log out", Toast.LENGTH_SHORT).show()
+            LogOutDialog { logOut() }.show(childFragmentManager, LogOutDialog.TAG)
         }
+    }
+
+    class LogOutDialog(private val onPositiveClick: () -> Unit) : DialogFragment() {
+
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+            AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.logout_dialog_title))
+                .setMessage(getString(R.string.logout_dialog_message))
+                .setPositiveButton(getString(R.string.logout_dialog_positive_button)) { dialog, _ ->
+                    onPositiveClick()
+                    dialog.dismiss()
+                }
+                .setNegativeButton(getString(R.string.logout_dialog_negative_button)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+
+        companion object {
+            const val TAG = "LogOutDialog"
+        }
+    }
+
+    private fun logOut() {
+        menuViewModel.logOut()
+        navigator.fromMenuFragmentToLogInFragment()
+        Toast.makeText(requireContext(), "Log out", Toast.LENGTH_SHORT).show()
     }
 }

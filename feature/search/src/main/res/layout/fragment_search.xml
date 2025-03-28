@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFragment">
+    tools:context=".ui.SearchFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        tools:context=".SearchFragment">
+        tools:context=".ui.SearchFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/search_by_filter_tv"
@@ -23,45 +23,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/brand_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/brand"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/brand_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_by_filter_tv" />
-
-        <Spinner
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/brand_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/brand_tv" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/model_tv"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/model"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/model_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/brand_list" />
-
-        <Spinner
-            android:id="@+id/model_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:hint="@string/brand"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/model_tv" />
+            app:layout_constraintTop_toBottomOf="@id/search_by_filter_tv">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/brand_list_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/model_list"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
+            android:hint="@string/model"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/brand_list">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/model_list_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/year_tv"
@@ -72,7 +67,7 @@
             android:textSize="16sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/model_tv" />
+            app:layout_constraintTop_toBottomOf="@id/model_list" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/year_et_min"
@@ -81,6 +76,7 @@
             android:layout_marginTop="8dp"
             android:hint="@string/min"
             android:textSize="16sp"
+            android:inputType="number"
             app:layout_constraintEnd_toStartOf="@id/year_et_max"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/max"
+            android:inputType="number"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
@@ -116,6 +113,7 @@
             android:layout_marginTop="8dp"
             android:hint="@string/min"
             android:textSize="16sp"
+            android:inputType="number"
             app:layout_constraintEnd_toStartOf="@id/price_et_max"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/max"
+            android:inputType="number"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
@@ -151,6 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/min"
+            android:inputType="number"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@id/mileage_et_max"
             app:layout_constraintHorizontal_weight="1"
@@ -163,6 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/max"
+            android:inputType="number"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
@@ -186,6 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/min"
+            android:inputType="numberDecimal"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@id/engine_power_max"
             app:layout_constraintHorizontal_weight="1"
@@ -197,6 +199,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:inputType="numberDecimal"
             android:hint="@string/max"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -222,6 +225,7 @@
             android:layout_marginTop="8dp"
             android:hint="@string/min"
             android:textSize="16sp"
+            android:inputType="numberDecimal"
             app:layout_constraintEnd_toStartOf="@id/engine_capacity_max"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -233,171 +237,148 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="@string/max"
+            android:inputType="numberDecimal"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/engine_capacity_min"
             app:layout_constraintTop_toBottomOf="@id/engine_capacity_tv" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/fuel_type_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/fuel_type"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/fuel_type_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/engine_capacity_min" />
-
-        <Spinner
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fuel_type_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/fuel_type_tv" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/body_type_tv"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/body_type"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/body_type_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fuel_type_tv" />
+            android:hint="@string/fuel_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/engine_capacity_max">
 
-        <Spinner
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/fuel_type_list_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/body_type_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/body_type_tv" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/color_tv"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/color"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/color_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/body_type_tv" />
+            android:hint="@string/body_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fuel_type_list">
 
-        <Spinner
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/body_type_list_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/color_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/color_tv" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/transmission_tv"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/transmission"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/transmission_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/color_tv" />
+            android:hint="@string/color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/body_type_list">
 
-        <Spinner
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/color_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/transmission_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/transmission_tv" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/drivetrain_tv"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/drivetrain"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/drivetrain_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/transmission_tv" />
+            android:hint="@string/transmission"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/color_list">
 
-        <Spinner
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/transmission_list_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/drivetrain_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/drivetrain_tv" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/wheel_tv"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/wheel"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/wheel_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/drivetrain_tv" />
+            android:hint="@string/drivetrain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/color_list">
 
-        <Spinner
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/drivetrain_list_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/wheel_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/wheel_tv" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/condition_tv"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/condition"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/condition_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wheel_tv" />
+            android:hint="@string/wheel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/drivetrain_list">
 
-        <Spinner
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/wheel_list_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/condition_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/condition_tv" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/owners_tv"
-            android:layout_width="wrap_content"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/owners"
-            android:textSize="16sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="@id/owners_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/condition_tv" />
-
-        <Spinner
-            android:id="@+id/owners_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:hint="@string/condition"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/owners_tv" />
+            app:layout_constraintTop_toBottomOf="@id/wheel_list">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/condition_list_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/owners_list"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/owners"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/condition_list">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/owners_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/search_btn"
@@ -408,7 +389,7 @@
             android:text="@string/show_ads"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/owners_tv" />
+            app:layout_constraintTop_toBottomOf="@id/owners_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

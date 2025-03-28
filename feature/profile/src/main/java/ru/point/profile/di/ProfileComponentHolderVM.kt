@@ -17,7 +17,6 @@ internal class ProfileComponentHolderVM() : ViewModel() {
 private var _profileComponent: ProfileComponent? = null
     set(value) {
         if (field == null) field = value
-
     }
 
 internal val profileComponent get() = requireNotNull(_profileComponent)

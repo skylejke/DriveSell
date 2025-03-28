@@ -68,7 +68,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="ru.point.search.SearchFragment"
+        android:name="ru.point.search.ui.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
 
