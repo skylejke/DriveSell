@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.create
-import ru.point.core.di.FeatureScope
+import ru.point.common.di.FeatureScope
 import ru.point.user.repository.UserRepository
 import ru.point.user.repository.UserRepositoryImpl
 import ru.point.user.service.UserService

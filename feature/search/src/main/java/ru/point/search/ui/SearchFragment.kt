@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import ru.point.core.ext.repeatOnLifecycleScope
-import ru.point.core.ui.ComponentHolderFragment
+import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ui.ComponentHolderFragment
 import ru.point.search.R
 import ru.point.search.databinding.FragmentSearchBinding
 import ru.point.search.di.SearchComponentHolderVM

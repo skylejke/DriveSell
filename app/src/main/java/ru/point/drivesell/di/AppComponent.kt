@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import retrofit2.Retrofit
-import ru.point.core.di.FeatureDeps
+import ru.point.common.di.FeatureDeps
 
 @[AppScope Component(
     modules = [

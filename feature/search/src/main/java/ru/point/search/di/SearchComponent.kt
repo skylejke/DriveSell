@@ -2,8 +2,8 @@ package ru.point.search.di
 
 import dagger.Component
 import ru.point.cars.di.CarsRepositoryModule
-import ru.point.core.di.FeatureDeps
-import ru.point.core.di.FeatureScope
+import ru.point.common.di.FeatureDeps
+import ru.point.common.di.FeatureScope
 import ru.point.search.ui.SearchFragment
 
 @[FeatureScope Component(

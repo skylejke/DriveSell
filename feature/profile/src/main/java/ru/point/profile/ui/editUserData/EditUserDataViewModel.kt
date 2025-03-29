@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import retrofit2.HttpException
-import ru.point.core.ext.isValidEmail
-import ru.point.core.ext.isValidPhoneNumber
-import ru.point.core.ext.isValidUserName
+import ru.point.common.ext.isValidEmail
+import ru.point.common.ext.isValidPhoneNumber
+import ru.point.common.ext.isValidUserName
 import ru.point.profile.domain.EditUserDataUseCase
 import ru.point.profile.domain.GetUserDataUseCase
-import ru.point.user.model.EditUserDataRequest
 import ru.point.user.model.EditDataResponse
+import ru.point.user.model.EditUserDataRequest
 import ru.point.user.model.UserDataResponse
 
 internal class EditUserDataViewModel(

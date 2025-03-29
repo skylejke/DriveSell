@@ -1,8 +1,8 @@
 package ru.point.profile.di
 
 import dagger.Component
-import ru.point.core.di.FeatureDeps
-import ru.point.core.di.FeatureScope
+import ru.point.common.di.FeatureDeps
+import ru.point.common.di.FeatureScope
 import ru.point.profile.ui.editPassword.EditPasswordFragment
 import ru.point.profile.ui.editUserData.EditUserDataFragment
 import ru.point.profile.ui.profile.ProfileFragment

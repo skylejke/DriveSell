@@ -1,7 +1,7 @@
 package ru.point.drivesell.app
 
 import android.app.Application
-import ru.point.core.di.FeatureDepsStore
+import ru.point.common.di.FeatureDepsStore
 import ru.point.drivesell.di.AppComponent
 import ru.point.drivesell.di.DaggerAppComponent
 

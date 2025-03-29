@@ -1,7 +1,7 @@
 package ru.point.search.di
 
 import androidx.lifecycle.ViewModel
-import ru.point.core.di.FeatureDepsProvider
+import ru.point.common.di.FeatureDepsProvider
 
 internal class SearchComponentHolderVM() : ViewModel() {
     init {

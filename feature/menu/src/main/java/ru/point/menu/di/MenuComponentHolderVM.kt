@@ -1,7 +1,7 @@
 package ru.point.menu.di
 
 import androidx.lifecycle.ViewModel
-import ru.point.core.di.FeatureDepsProvider
+import ru.point.common.di.FeatureDepsProvider
 
 internal class MenuComponentHolderVM() : ViewModel() {
     init {

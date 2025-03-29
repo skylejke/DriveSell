@@ -2,7 +2,7 @@ package ru.point.drivesell.utils
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
-import ru.point.core.navigation.Navigator
+import ru.point.common.navigation.Navigator
 import ru.point.drivesell.R
 
 class NavigatorImpl(

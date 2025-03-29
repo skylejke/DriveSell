@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core:common"))
 
     implementation(libs.bundles.navigation)
     implementation(libs.androidx.core.ktx)

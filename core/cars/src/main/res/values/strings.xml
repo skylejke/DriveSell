@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="car_primary_photo">Car primary photo</string>
+    <string name="car_price">%1$,d $</string>
+    <string name="car_brand_model_year">%1$s %2$s, %3$d</string>
+    <string name="car_specs">%1$s km • %2$sL • %3$s HP • %4$s • %5$s • %6$s</string>
+</resources>

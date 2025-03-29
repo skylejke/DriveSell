@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import ru.point.core.ext.bottomBar
-import ru.point.core.ext.repeatOnLifecycleScope
-import ru.point.core.ui.ComponentHolderFragment
+import ru.point.common.ext.bottomBar
+import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ui.ComponentHolderFragment
 import ru.point.profile.R
 import ru.point.profile.databinding.FragmentProfileBinding
 import ru.point.profile.di.ProfileComponentHolderVM

@@ -5,12 +5,13 @@ import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.point.common.BuildConfig
 
 @Module
 class NetworkModule {
     @[Provides AppScope]
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.1.23:8080")
+        .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(ResultCallAdapterFactory.create())
         .build()

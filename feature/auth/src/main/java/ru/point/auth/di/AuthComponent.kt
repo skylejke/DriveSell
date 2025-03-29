@@ -3,8 +3,8 @@ package ru.point.auth.di
 import dagger.Component
 import ru.point.auth.ui.login.LoginFragment
 import ru.point.auth.ui.register.RegisterFragment
-import ru.point.core.di.FeatureDeps
-import ru.point.core.di.FeatureScope
+import ru.point.common.di.FeatureDeps
+import ru.point.common.di.FeatureScope
 import ru.point.user.di.TokenStorageModule
 import ru.point.user.di.UserRepositoryModule
 

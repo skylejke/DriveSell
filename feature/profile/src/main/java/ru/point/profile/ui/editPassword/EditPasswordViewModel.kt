@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import ru.point.core.ext.isValidPassword
+import ru.point.common.ext.isValidPassword
 import ru.point.profile.domain.EditPasswordUseCase
 import ru.point.user.model.EditUserPasswordRequest
 

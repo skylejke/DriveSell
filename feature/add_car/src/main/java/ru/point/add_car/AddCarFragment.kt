@@ -3,7 +3,7 @@ package ru.point.add_car
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import ru.point.add_car.databinding.FragmentAddCarBinding
-import ru.point.core.ui.BaseFragment
+import ru.point.common.ui.BaseFragment
 
 
 class AddCarFragment : BaseFragment<FragmentAddCarBinding>() {

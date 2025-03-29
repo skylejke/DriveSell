@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core:common"))
     implementation(project(":data:cars"))
 
     implementation(libs.bundles.dagger)

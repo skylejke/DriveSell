@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.point.core.ext.bottomBar
-import ru.point.core.ui.BaseFragment
+import ru.point.common.ext.bottomBar
+import ru.point.common.ui.BaseFragment
 import ru.point.settings.databinding.FragmentSettingsBinding
 
 

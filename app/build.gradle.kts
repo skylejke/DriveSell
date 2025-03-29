@@ -44,7 +44,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core:common"))
+    implementation(project(":core:cars"))
     implementation(project(":data:user"))
     implementation(project(":data:cars"))
     implementation(project(":feature:auth"))

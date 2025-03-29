@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import ru.point.auth.domain.LoginUseCase
 import ru.point.auth.domain.RegisterUseCase
-import ru.point.core.di.FeatureScope
+import ru.point.common.di.FeatureScope
 import ru.point.user.repository.UserRepository
 
 @Module

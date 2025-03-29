@@ -2,7 +2,7 @@ package ru.point.favourites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import ru.point.core.ui.BaseFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.favourites.databinding.FragmentFavouritesBinding
 
 

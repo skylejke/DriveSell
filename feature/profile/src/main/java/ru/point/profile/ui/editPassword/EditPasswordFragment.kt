@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
-import ru.point.core.ext.repeatOnLifecycleScope
-import ru.point.core.ui.BaseFragment
+import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ui.BaseFragment
 import ru.point.profile.databinding.FragmentEditPasswordBinding
 import ru.point.profile.di.profileComponent
 import javax.inject.Inject

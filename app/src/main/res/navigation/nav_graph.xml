@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="ru.point.home.HomeFragment"
+        android:name="ru.point.home.ui.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
 

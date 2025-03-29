@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core:common"))
     implementation(project(":data:user"))
 
     implementation(libs.bundles.navigation)

@@ -2,4 +2,9 @@
     <string name="fragment_name">Home fragment</string>
     <string name="app_name">Drive Sell</string>
     <string name="offers">offers</string>
+
+    <plurals name="car_ads_counter">
+        <item quantity="one">%1$d offer</item>
+        <item quantity="other">%1$d offers</item>
+    </plurals>
 </resources>

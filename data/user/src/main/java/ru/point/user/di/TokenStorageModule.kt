@@ -3,7 +3,7 @@ package ru.point.user.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import ru.point.core.di.FeatureScope
+import ru.point.common.di.FeatureScope
 import ru.point.user.storage.TokenStorage
 import ru.point.user.storage.TokenStorageImpl
 

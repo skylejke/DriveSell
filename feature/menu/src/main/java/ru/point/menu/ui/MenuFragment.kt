@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import ru.point.core.ui.ComponentHolderFragment
+import ru.point.common.ui.ComponentHolderFragment
 import ru.point.menu.R
 import ru.point.menu.databinding.FragmentMenuBinding
 import ru.point.menu.di.MenuComponentHolderVM

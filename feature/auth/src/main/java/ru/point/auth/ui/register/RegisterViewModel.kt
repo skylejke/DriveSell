@@ -10,10 +10,10 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import retrofit2.HttpException
 import ru.point.auth.domain.RegisterUseCase
-import ru.point.core.ext.isValidEmail
-import ru.point.core.ext.isValidPassword
-import ru.point.core.ext.isValidPhoneNumber
-import ru.point.core.ext.isValidUserName
+import ru.point.common.ext.isValidEmail
+import ru.point.common.ext.isValidPassword
+import ru.point.common.ext.isValidPhoneNumber
+import ru.point.common.ext.isValidUserName
 import ru.point.user.model.RegisterRequest
 import ru.point.user.model.RegisterResponse
 

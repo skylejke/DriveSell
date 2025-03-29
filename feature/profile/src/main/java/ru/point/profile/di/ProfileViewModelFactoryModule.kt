@@ -2,7 +2,7 @@ package ru.point.profile.di
 
 import dagger.Module
 import dagger.Provides
-import ru.point.core.di.FeatureScope
+import ru.point.common.di.FeatureScope
 import ru.point.profile.domain.DeleteProfileUseCase
 import ru.point.profile.domain.EditPasswordUseCase
 import ru.point.profile.domain.EditUserDataUseCase

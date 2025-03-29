@@ -1,7 +1,7 @@
 package ru.point.profile.di
 
 import androidx.lifecycle.ViewModel
-import ru.point.core.di.FeatureDepsProvider
+import ru.point.common.di.FeatureDepsProvider
 
 internal class ProfileComponentHolderVM() : ViewModel() {
     init {

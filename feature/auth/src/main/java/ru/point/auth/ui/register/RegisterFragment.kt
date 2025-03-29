@@ -11,13 +11,13 @@ import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
 import ru.point.auth.databinding.FragmentRegisterBinding
 import ru.point.auth.di.authComponent
-import ru.point.core.ext.bottomBar
-import ru.point.core.ext.repeatOnLifecycleScope
-import ru.point.core.ui.ComponentHolderFragment
+import ru.point.common.ext.bottomBar
+import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ui.BaseFragment
 import javax.inject.Inject
 
 
-internal class RegisterFragment : ComponentHolderFragment<FragmentRegisterBinding>() {
+internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     @Inject
     lateinit var registerViewModelFactory: RegisterViewModelFactory

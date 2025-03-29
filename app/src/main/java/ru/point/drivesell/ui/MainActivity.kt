@@ -10,8 +10,8 @@ import androidx.core.view.updatePadding
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import ru.point.core.navigation.BottomBarManager
-import ru.point.core.navigation.NavigatorProvider
+import ru.point.common.navigation.BottomBarManager
+import ru.point.common.navigation.NavigatorProvider
 import ru.point.drivesell.R
 import ru.point.drivesell.databinding.ActivityMainBinding
 import ru.point.drivesell.utils.NavigatorImpl
@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity(), BottomBarManager, NavigatorProvider {
                 left = bars.left,
                 top = bars.top,
                 right = bars.right,
-                bottom = bars.bottom,
             )
             WindowInsetsCompat.CONSUMED
         }

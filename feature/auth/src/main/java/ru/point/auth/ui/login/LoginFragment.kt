@@ -12,9 +12,9 @@ import kotlinx.coroutines.flow.filterNotNull
 import ru.point.auth.databinding.FragmentLoginBinding
 import ru.point.auth.di.AuthComponentHolderVM
 import ru.point.auth.di.authComponent
-import ru.point.core.ext.bottomBar
-import ru.point.core.ext.repeatOnLifecycleScope
-import ru.point.core.ui.ComponentHolderFragment
+import ru.point.common.ext.bottomBar
+import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ui.ComponentHolderFragment
 
 internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
