@@ -12,7 +12,8 @@ import ru.point.cars.databinding.CarListItemBinding
 import ru.point.cars.model.AdVo
 
 
-class CarAdapter : ListAdapter<AdVo, CarAdapter.CarViewHolder>(DiffUtilCarCallback()) {
+class CarAdapter(private val onAdapterItemClick: OnAdapterItemClick<AdVo>) :
+    ListAdapter<AdVo, CarAdapter.CarViewHolder>(DiffUtilCarCallback()) {
 
     class CarViewHolder(private val binding: CarListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -67,5 +68,8 @@ class CarAdapter : ListAdapter<AdVo, CarAdapter.CarViewHolder>(DiffUtilCarCallba
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            onAdapterItemClick.onClick(getItem(position))
+        }
     }
 }

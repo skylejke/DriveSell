@@ -16,4 +16,7 @@ interface CarsService {
 
     @GET("/cars")
     suspend fun getCars(@Query("query") query: String = ""): Result<List<AdDto>>
+
+    @GET("/cars/{adId}")
+    suspend fun getCarAdById(@Path("adId") adId: String): Result<AdDto>
 }

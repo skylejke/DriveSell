@@ -16,6 +16,7 @@ import ru.point.home.di.HomeComponentHolderVM
 import ru.point.home.di.homeComponent
 import javax.inject.Inject
 
+
 internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
 
     @Inject
@@ -28,7 +29,7 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _carAdapter = CarAdapter()
+        _carAdapter = CarAdapter { navigator.fromHomeFragmentToCarDetailsFragment(it.id) }
         initHolder<HomeComponentHolderVM>()
         homeComponent.inject(this)
     }

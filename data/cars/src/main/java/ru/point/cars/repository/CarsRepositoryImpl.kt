@@ -11,4 +11,7 @@ class CarsRepositoryImpl(private val carsService: CarsService) : CarsRepository 
 
     override suspend fun getCars(query: String) =
         carsService.getCars(query)
+
+    override suspend fun getCarAdById(adId: String) =
+        carsService.getCarAdById(adId)
 }

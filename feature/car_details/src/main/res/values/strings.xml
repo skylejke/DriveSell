@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fav_button">Favorite button</string>
+    <string name="back_button">Back button</string>
+    <string name="compare_button">Compare button</string>
+    <string name="specifications">Specifications</string>
+    <string name="year_of_release">Year of release: %1$s</string>
+    <string name="car_details_mileage">Mileage: %1$s km</string>
+    <string name="car_details_body_type">Body type: %1$s</string>
+    <string name="car_details_color">Color: %1$s</string>
+    <string name="car_details_engine">Engine: %1$s L / %2$s HP / %3$s</string>
+    <string name="car_details_transmission">Transmission: %1$s</string>
+    <string name="car_details_drivetrain">Drivetrain: %1$s</string>
+    <string name="car_details_wheel">Wheel: %1$s</string>
+    <string name="car_details_condition">Condition: %1$s</string>
+    <string name="car_details_owners">Owners: %1$s</string>
+    <string name="car_details_vin">Vin: %1$s</string>
+    <string name="car_details_ownership_period">Ownership period: %1$s</string>
+    <string name="seller_s_comment">Seller\'s comment</string>
+    <string name="car_details_car_price">%1$,d $</string>
+    <string name="car_details_brand_model_year">%1$s %2$s, %3$d</string>
+</resources>

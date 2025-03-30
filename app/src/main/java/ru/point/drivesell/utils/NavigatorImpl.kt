@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import ru.point.common.navigation.Navigator
 import ru.point.drivesell.R
+import ru.point.home.ui.HomeFragmentDirections
 
 class NavigatorImpl(
     private val navController: NavController
@@ -56,5 +57,10 @@ class NavigatorImpl(
 
     override fun fromProfileFragmentToLoginFragment() {
         navController.navigate(R.id.action_profileFragment_to_loginFragment)
+    }
+
+    override fun fromHomeFragmentToCarDetailsFragment(adId: String) {
+        val action = HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(adId)
+        navController.navigate(action)
     }
 }

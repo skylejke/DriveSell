@@ -36,7 +36,11 @@
         android:id="@+id/homeFragment"
         android:name="ru.point.home.ui.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/addCarFragment"
@@ -104,4 +108,15 @@
         android:name="ru.point.profile.ui.editPassword.EditPasswordFragment"
         android:label="EditPasswordFragment"
         tools:layout="@layout/fragment_edit_password" />
+
+    <fragment
+        android:id="@+id/carDetailsFragment"
+        android:name="ru.point.car_details.ui.CarDetailsFragment"
+        android:label="CarDetailsFragment"
+        tools:layout="@layout/fragment_car_details">
+        <argument
+            android:name="adId"
+            android:defaultValue=''
+            app:argType="string" />
+    </fragment>
 </navigation>
