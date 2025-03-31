@@ -6,7 +6,7 @@ import ru.point.user.model.EditUserPasswordRequest
 import ru.point.user.model.LoginRequest
 import ru.point.user.model.RegisterRequest
 import ru.point.user.service.UserService
-import ru.point.user.storage.TokenStorage
+import ru.point.common.storage.TokenStorage
 
 class UserRepositoryImpl(
     private val userService: UserService,

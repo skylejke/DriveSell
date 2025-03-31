@@ -4,7 +4,7 @@ import dagger.Component
 import ru.point.common.di.FeatureDeps
 import ru.point.common.di.FeatureScope
 import ru.point.menu.ui.MenuFragment
-import ru.point.user.di.TokenStorageModule
+import ru.point.common.di.TokenStorageModule
 import ru.point.user.di.UserRepositoryModule
 
 @[FeatureScope Component(

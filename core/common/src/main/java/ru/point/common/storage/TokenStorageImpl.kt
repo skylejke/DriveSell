@@ -1,4 +1,4 @@
-package ru.point.user.storage
+package ru.point.common.storage
 
 import android.content.SharedPreferences
 import androidx.core.content.edit

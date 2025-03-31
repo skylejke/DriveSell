@@ -9,4 +9,5 @@ interface CarsRepository {
     suspend fun getModelsByBrand(brandName: String): Result<List<ModelDto>>
     suspend fun getCars(query: String = ""): Result<List<AdDto>>
     suspend fun getCarAdById(adId: String): Result<AdDto>
+    suspend fun getUsersAds(): Result<List<AdDto>>
 }

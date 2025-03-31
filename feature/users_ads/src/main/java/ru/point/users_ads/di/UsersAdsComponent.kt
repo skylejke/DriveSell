@@ -1,22 +1,22 @@
-package ru.point.home.di
+package ru.point.users_ads.di
 
 import dagger.Component
 import ru.point.cars.di.CarsRepositoryModule
 import ru.point.common.di.FeatureDeps
 import ru.point.common.di.FeatureScope
 import ru.point.common.di.TokenStorageModule
-import ru.point.home.ui.HomeFragment
+import ru.point.users_ads.ui.UsersAdsFragment
 
 @[FeatureScope Component(
-    modules = [TokenStorageModule::class, CarsRepositoryModule::class, HomeUseCaseModule::class, HomeViewModelFactoryModule::class],
+    modules = [TokenStorageModule::class, CarsRepositoryModule::class, UsersAdsViewModelFactoryModule::class],
     dependencies = [FeatureDeps::class]
 )]
-internal interface HomeComponent {
-    fun inject(homeFragment: HomeFragment)
+internal interface UsersAdsComponent {
+    fun inject(usersAdsFragment: UsersAdsFragment)
 
     @Component.Builder
     interface Builder {
         fun deps(featureDeps: FeatureDeps): Builder
-        fun build(): HomeComponent
+        fun build(): UsersAdsComponent
     }
 }

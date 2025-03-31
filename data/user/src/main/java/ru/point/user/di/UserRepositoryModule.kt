@@ -5,10 +5,10 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.create
 import ru.point.common.di.FeatureScope
+import ru.point.common.storage.TokenStorage
 import ru.point.user.repository.UserRepository
 import ru.point.user.repository.UserRepositoryImpl
 import ru.point.user.service.UserService
-import ru.point.user.storage.TokenStorage
 
 @Module
 class UserRepositoryModule {

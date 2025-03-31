@@ -5,9 +5,10 @@ import ru.point.car_details.ui.CarDetailsFragment
 import ru.point.cars.di.CarsRepositoryModule
 import ru.point.common.di.FeatureDeps
 import ru.point.common.di.FeatureScope
+import ru.point.common.di.TokenStorageModule
 
 @[FeatureScope Component(
-    modules = [CarsRepositoryModule::class, CarDetailsViewModelFactoryModule::class],
+    modules = [TokenStorageModule::class, CarsRepositoryModule::class, CarDetailsViewModelFactoryModule::class],
     dependencies = [FeatureDeps::class]
 )]
 internal interface CarDetailsComponent {

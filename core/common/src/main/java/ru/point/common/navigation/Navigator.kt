@@ -13,4 +13,6 @@ interface Navigator {
     fun fromProfileFragmentToEditPasswordFragment()
     fun fromProfileFragmentToLoginFragment()
     fun fromHomeFragmentToCarDetailsFragment(adId: String)
+    fun fromMenuFragmentToUsersAdsFragment()
+    fun fromUsersAdsFragmentToCarDetailsFragment(adId: String)
 }

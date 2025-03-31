@@ -19,4 +19,7 @@ interface CarsService {
 
     @GET("/cars/{adId}")
     suspend fun getCarAdById(@Path("adId") adId: String): Result<AdDto>
+
+    @GET("/profile/{userId}/ads")
+    suspend fun getUsersAds(@Path("userId") userId: String): Result<List<AdDto>>
 }

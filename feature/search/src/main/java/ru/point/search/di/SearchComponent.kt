@@ -4,10 +4,11 @@ import dagger.Component
 import ru.point.cars.di.CarsRepositoryModule
 import ru.point.common.di.FeatureDeps
 import ru.point.common.di.FeatureScope
+import ru.point.common.di.TokenStorageModule
 import ru.point.search.ui.SearchFragment
 
 @[FeatureScope Component(
-    modules = [CarsRepositoryModule::class, SearchUseCaseModule::class, SearchViewModelFactoryModule::class],
+    modules = [TokenStorageModule::class, CarsRepositoryModule::class, SearchUseCaseModule::class, SearchViewModelFactoryModule::class],
     dependencies = [FeatureDeps::class]
 )]
 internal interface SearchComponent {

@@ -39,6 +39,7 @@ android {
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:cars"))
+    implementation(project(":data:user"))
 
     implementation (libs.java.jwt)
 

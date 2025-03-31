@@ -1,11 +1,10 @@
-package ru.point.user.di
+package ru.point.common.di
 
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import ru.point.common.di.FeatureScope
-import ru.point.user.storage.TokenStorage
-import ru.point.user.storage.TokenStorageImpl
+import ru.point.common.storage.TokenStorage
+import ru.point.common.storage.TokenStorageImpl
 
 @Module
 class TokenStorageModule {

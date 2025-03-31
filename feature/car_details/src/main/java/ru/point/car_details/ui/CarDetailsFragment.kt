@@ -12,6 +12,7 @@ import ru.point.car_details.databinding.FragmentCarDetailsBinding
 import ru.point.car_details.di.CarDetailsComponentHolderVM
 import ru.point.car_details.di.carDetailsComponent
 import ru.point.cars.model.AdVo
+import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ui.ComponentHolderFragment
 import javax.inject.Inject
@@ -41,6 +42,8 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bottomBar.hide()
 
         binding.carPhotos.apply {
             adapter = carPhotoAdapter

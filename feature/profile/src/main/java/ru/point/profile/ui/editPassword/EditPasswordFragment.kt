@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
+import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ui.BaseFragment
 import ru.point.profile.databinding.FragmentEditPasswordBinding
@@ -31,6 +32,8 @@ internal class EditPasswordFragment : BaseFragment<FragmentEditPasswordBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bottomBar.hide()
 
         repeatOnLifecycleScope {
             editPasswordViewModel.oldPasswordError.filterNotNull().collect {

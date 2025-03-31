@@ -1,4 +1,4 @@
-package ru.point.user.storage
+package ru.point.common.storage
 
 interface TokenStorage {
     var token: String?

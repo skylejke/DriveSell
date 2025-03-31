@@ -58,6 +58,10 @@ internal class MenuFragment : ComponentHolderFragment<FragmentMenuBinding>() {
             }
         }
 
+        binding.myAdsBtn.setOnClickListener {
+            navigator.fromMenuFragmentToUsersAdsFragment()
+        }
+
         binding.logInBtn.setOnClickListener {
             navigator.fromMenuFragmentToLogInFragment()
         }

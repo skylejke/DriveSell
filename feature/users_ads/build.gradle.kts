@@ -1,23 +1,19 @@
 plugins {
     kotlin("plugin.serialization") version "2.1.10"
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.navigation.safe.args)
 }
 
 android {
-    namespace = "ru.point.drivesell"
+    namespace = "ru.point.users_ads"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "ru.point.drivesell"
         minSdk = 30
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -45,22 +41,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
     implementation(project(":core:cars"))
-    implementation(project(":data:user"))
+    implementation(project(":core:common"))
     implementation(project(":data:cars"))
-    implementation(project(":feature:auth"))
-    implementation(project(":feature:home"))
-    implementation(project(":feature:add_car"))
-    implementation(project(":feature:favourites"))
-    implementation(project(":feature:profile"))
-    implementation(project(":feature:search"))
-    implementation(project(":feature:menu"))
-    implementation(project(":feature:settings"))
-    implementation(project(":feature:car_details"))
-    implementation(project(":feature:users_ads"))
-
-    implementation(libs.bundles.navigation)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
@@ -72,11 +55,13 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.adapters.result)
 
+    implementation(libs.fragment.ktx)
+
+    implementation(libs.bundles.lifecycle)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

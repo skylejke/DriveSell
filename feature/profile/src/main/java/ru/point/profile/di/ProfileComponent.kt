@@ -6,7 +6,7 @@ import ru.point.common.di.FeatureScope
 import ru.point.profile.ui.editPassword.EditPasswordFragment
 import ru.point.profile.ui.editUserData.EditUserDataFragment
 import ru.point.profile.ui.profile.ProfileFragment
-import ru.point.user.di.TokenStorageModule
+import ru.point.common.di.TokenStorageModule
 import ru.point.user.di.UserRepositoryModule
 
 @[FeatureScope Component(

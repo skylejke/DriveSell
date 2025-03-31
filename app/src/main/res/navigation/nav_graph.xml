@@ -90,6 +90,9 @@
         <action
             android:id="@+id/action_menuFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_usersAdsFragment"
+            app:destination="@id/usersAdsFragment" />
     </fragment>
 
     <fragment
@@ -118,5 +121,15 @@
             android:name="adId"
             android:defaultValue=''
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/usersAdsFragment"
+        android:name="ru.point.users_ads.ui.UsersAdsFragment"
+        android:label="UsersAdsFragment"
+        tools:layout="@layout/fragment_users_ads" >
+        <action
+            android:id="@+id/action_usersAdsFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment" />
     </fragment>
 </navigation>

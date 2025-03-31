@@ -1,4 +1,4 @@
-package ru.point.feature
+package ru.point.users_ads
 
 import org.junit.Test
 
