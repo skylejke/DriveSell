@@ -12,19 +12,7 @@ android {
 
     defaultConfig {
         minSdk = 30
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
     }
 
     compileOptions {
@@ -45,6 +33,7 @@ dependencies {
     implementation(project(":core:cars"))
     implementation(project(":core:common"))
     implementation(project(":data:cars"))
+    implementation(project(":data:user"))
 
     implementation(libs.bundles.dagger)
     implementation(libs.androidx.navigation.fragment.ktx)

@@ -1,4 +1,5 @@
 plugins {
+    kotlin("plugin.serialization") version "2.1.10"
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
@@ -10,19 +11,7 @@ android {
 
     defaultConfig {
         minSdk = 30
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
     }
 
     compileOptions {
@@ -51,8 +40,13 @@ dependencies {
 
     implementation(libs.retrofit)
 
+    implementation (libs.java.jwt)
+
     implementation(libs.bundles.navigation)
-    
+
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

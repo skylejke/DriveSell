@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import ru.point.common.ext.isValidPassword
-import ru.point.profile.domain.EditPasswordUseCase
 import ru.point.user.model.EditUserPasswordRequest
+import ru.point.user.repository.UserRepository
 
 internal class EditPasswordViewModel(
-    private val editPasswordUseCase: EditPasswordUseCase,
+    private val userRepository: UserRepository,
 ) :
     ViewModel() {
 
@@ -36,7 +36,7 @@ internal class EditPasswordViewModel(
     ) {
         if (!validatePasswordFields(oldPassword, newPassword, confirmNewPassword)) return
         viewModelScope.launch {
-            editPasswordUseCase.invoke(
+            userRepository.editPassword(
                 EditUserPasswordRequest(
                     oldPassword = oldPassword,
                     newPassword = newPassword,

@@ -9,16 +9,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import retrofit2.HttpException
-import ru.point.auth.domain.RegisterUseCase
 import ru.point.common.ext.isValidEmail
 import ru.point.common.ext.isValidPassword
 import ru.point.common.ext.isValidPhoneNumber
 import ru.point.common.ext.isValidUserName
+import ru.point.user.model.AuthResponse
 import ru.point.user.model.RegisterRequest
-import ru.point.user.model.RegisterResponse
+import ru.point.user.repository.UserRepository
 
 internal class RegisterViewModel(
-    private val registerUseCase: RegisterUseCase,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _registerEvent = MutableSharedFlow<Unit>(replay = 1)
@@ -39,8 +39,8 @@ internal class RegisterViewModel(
     fun register(username: String, email: String, phoneNumber: String, password: String) {
         if (!validateRegisterFields(username, email, phoneNumber, password)) return
         viewModelScope.launch {
-            registerUseCase.invoke(
-                registerRequest = RegisterRequest(
+            userRepository.register(
+                RegisterRequest(
                     username = username,
                     email = email,
                     phoneNumber = phoneNumber,
@@ -54,7 +54,7 @@ internal class RegisterViewModel(
                     if (error is HttpException && error.code() == 409) {
                         val errorBody = error.response()?.errorBody()?.string()
                         errorBody?.let {
-                            val registerResponse = Json.decodeFromString<RegisterResponse>(it)
+                            val registerResponse = Json.decodeFromString<AuthResponse>(it)
                             when (registerResponse.message) {
                                 "Username is taken" -> _usernameError.value =
                                     registerResponse.message

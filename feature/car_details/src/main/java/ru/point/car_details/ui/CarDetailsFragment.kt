@@ -1,9 +1,14 @@
 package ru.point.car_details.ui
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.flow.filterNotNull
@@ -34,6 +39,8 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         initHolder<CarDetailsComponentHolderVM>()
         carDetailsComponent.inject(this)
         carDetailsViewModel.getCarAdById(args.adId)
+        carDetailsViewModel.checkIsUsersAd(args.userId)
+        carDetailsViewModel.checkIsFavourite(args.adId)
         _carPhotoAdapter = CarPhotoAdapter()
     }
 
@@ -45,8 +52,53 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
 
         bottomBar.hide()
 
-        binding.carPhotos.apply {
-            adapter = carPhotoAdapter
+        binding.carPhotos.adapter = carPhotoAdapter
+
+        repeatOnLifecycleScope {
+            carDetailsViewModel.isUsersAd.filterNotNull().collect { isUsersAd ->
+                if (isUsersAd) {
+                    binding.carDetailsToolBar.compareIcon.background =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.edit_icon)
+                    binding.carDetailsToolBar.favIcon.background =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.delete_icon)
+                } else {
+                    binding.carDetailsToolBar.compareIcon.background =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.compare_plus_icon)
+                    binding.carDetailsToolBar.favIcon.background =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.fav_icon)
+                }
+            }
+        }
+
+        var currentFavouriteState: Boolean? = null
+
+        binding.carDetailsToolBar.favIcon.setOnClickListener {
+            if (carDetailsViewModel.isUsersAd.value!!) {
+                DeleteAdDialog { deleteAd() }.show(
+                    childFragmentManager,
+                    DeleteAdDialog.TAG
+                )
+            } else {
+                currentFavouriteState?.let { isFavourite ->
+                    if (isFavourite) {
+                        carDetailsViewModel.removeCarFromFavourites(args.adId)
+                    } else {
+                        carDetailsViewModel.addCarToFavourites(args.adId)
+                    }
+                }
+            }
+        }
+
+        repeatOnLifecycleScope {
+            carDetailsViewModel.isFavourite.filterNotNull().collect { isFavourite ->
+                if (!carDetailsViewModel.isUsersAd.value!!) {
+                    currentFavouriteState = isFavourite
+                    binding.carDetailsToolBar.favIcon.background = ContextCompat.getDrawable(
+                        requireContext(),
+                        if (isFavourite) R.drawable.fav_filled_icon else R.drawable.fav_icon
+                    )
+                }
+            }
         }
 
         repeatOnLifecycleScope {
@@ -64,7 +116,8 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         carPhotoAdapter.submitList(adVo.photos)
         binding.carDetailsSpecs.creationDate.text = adVo.creationDate
         binding.carDetailsSpecs.price.text =
-            resources.getString(R.string.car_details_car_price, adVo.car.price).replace(",", " ")
+            resources.getString(R.string.car_details_car_price, adVo.car.price)
+                .replace(",", " ")
         binding.carDetailsSpecs.brandModelYear.text = resources.getString(
             R.string.car_details_brand_model_year,
             adVo.car.brand,
@@ -101,6 +154,33 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
             resources.getString(R.string.car_details_vin, adVo.car.vin)
         binding.carDetailsSpecs.sellerSCommentTvValue.text = adVo.car.description
     }
+
+    class DeleteAdDialog(private val onPositiveClick: () -> Unit) : DialogFragment() {
+
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+            AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.delete_ad_dialog_title))
+                .setMessage(getString(R.string.delete_ad_dialog_message))
+                .setPositiveButton(getString(R.string.delete_ad_dialog_positive_button)) { dialog, _ ->
+                    onPositiveClick()
+                    dialog.dismiss()
+                }
+                .setNegativeButton(getString(R.string.delete_ad_dialog_negative_button)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+
+        companion object {
+            const val TAG = "DeleteAdDialog"
+        }
+    }
+
+    private fun deleteAd() {
+        carDetailsViewModel.deleteAd(args.adId)
+        navigator.popBackStack()
+        Toast.makeText(requireContext(), "Deleted Ad", Toast.LENGTH_SHORT).show()
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

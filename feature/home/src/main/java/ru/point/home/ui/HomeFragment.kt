@@ -29,7 +29,7 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _carAdapter = CarAdapter { navigator.fromHomeFragmentToCarDetailsFragment(it.id) }
+        _carAdapter = CarAdapter { navigator.fromHomeFragmentToCarDetailsFragment(it.id, it.userId) }
         initHolder<HomeComponentHolderVM>()
         homeComponent.inject(this)
     }

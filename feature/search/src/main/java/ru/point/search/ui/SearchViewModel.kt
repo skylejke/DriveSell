@@ -5,14 +5,14 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.point.search.domain.GetBrandsUseCase
-import ru.point.search.domain.GetModelsByBrandUseCase
+import ru.point.cars.repository.CarsRepository
 import ru.point.search.domain.model.BrandVo
 import ru.point.search.domain.model.ModelVo
+import ru.point.search.domain.model.asBrandVo
+import ru.point.search.domain.model.asModelVo
 
 internal class SearchViewModel(
-    private val getBrandsUseCase: GetBrandsUseCase,
-    private val getModelsByBrandUseCase: GetModelsByBrandUseCase
+    private val carsRepository: CarsRepository
 ) : ViewModel() {
 
     private val _brands = MutableStateFlow<List<BrandVo>>(emptyList())
@@ -27,16 +27,16 @@ internal class SearchViewModel(
 
     fun getBrands() {
         viewModelScope.launch {
-            getBrandsUseCase().onSuccess {
-                _brands.value = it
+            carsRepository.getBrands().onSuccess { brandList ->
+                _brands.value = brandList.map { it.asBrandVo }
             }
         }
     }
 
     fun getModels(brandName: String) {
         viewModelScope.launch {
-            getModelsByBrandUseCase(brandName).onSuccess {
-                _models.value = it
+            carsRepository.getModelsByBrand(brandName).onSuccess { modelList ->
+                _models.value = modelList.map { it.asModelVo }
             }
         }
     }

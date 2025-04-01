@@ -6,39 +6,36 @@ import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
-import ru.point.user.model.DeleteUserResponse
+import ru.point.common.model.ResponseMessage
+import ru.point.user.model.AuthResponse
 import ru.point.user.model.EditUserDataRequest
 import ru.point.user.model.EditUserPasswordRequest
 import ru.point.user.model.LoginRequest
-import ru.point.user.model.LoginResponse
 import ru.point.user.model.RegisterRequest
-import ru.point.user.model.RegisterResponse
-import ru.point.user.model.EditDataResponse
-import ru.point.user.model.EditPasswordResponse
-import ru.point.user.model.UserDataResponse
+import ru.point.user.model.UserData
 
 interface UserService {
     @POST("/login")
-    suspend fun login(@Body loginRequest: LoginRequest): Result<LoginResponse>
+    suspend fun login(@Body loginRequest: LoginRequest): Result<AuthResponse>
 
     @POST("/register")
-    suspend fun register(@Body registerRequest: RegisterRequest): Result<RegisterResponse>
+    suspend fun register(@Body registerRequest: RegisterRequest): Result<AuthResponse>
 
     @GET("/profile/{userId}")
-    suspend fun getUserData(@Path("userId") userId: String): Result<UserDataResponse>
+    suspend fun getUserData(@Path("userId") userId: String): Result<UserData>
 
     @PATCH("/profile/{userId}")
     suspend fun editUserData(
         @Path("userId") userId: String,
         @Body editUserDataRequest: EditUserDataRequest
-    ): Result<EditDataResponse>
+    ): Result<ResponseMessage>
 
     @PATCH("/profile/{userId}/updatePassword")
     suspend fun editPassword(
         @Path("userId") userId: String,
         @Body editUserPasswordRequest: EditUserPasswordRequest
-    ): Result<EditPasswordResponse>
+    ): Result<ResponseMessage>
 
     @DELETE("/profile/{userId}")
-    suspend fun deleteProfile(@Path("userId") userId: String): Result<DeleteUserResponse>
+    suspend fun deleteProfile(@Path("userId") userId: String): Result<ResponseMessage>
 }

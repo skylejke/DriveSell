@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import ru.point.common.navigation.Navigator
 import ru.point.drivesell.R
+import ru.point.favourites.ui.FavouritesFragmentDirections
 import ru.point.home.ui.HomeFragmentDirections
 import ru.point.users_ads.ui.UsersAdsFragmentDirections
 
@@ -60,9 +61,9 @@ class NavigatorImpl(
         navController.navigate(R.id.action_profileFragment_to_loginFragment)
     }
 
-    override fun fromHomeFragmentToCarDetailsFragment(adId: String) {
+    override fun fromHomeFragmentToCarDetailsFragment(adId: String, userId: String) {
         navController.navigate(
-            HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(adId)
+            HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(adId, userId)
         )
     }
 
@@ -70,9 +71,15 @@ class NavigatorImpl(
         navController.navigate(R.id.action_menuFragment_to_usersAdsFragment)
     }
 
-    override fun fromUsersAdsFragmentToCarDetailsFragment(adId: String) {
+    override fun fromUsersAdsFragmentToCarDetailsFragment(adId: String, userId: String) {
         navController.navigate(
-            UsersAdsFragmentDirections.actionUsersAdsFragmentToCarDetailsFragment(adId)
+            UsersAdsFragmentDirections.actionUsersAdsFragmentToCarDetailsFragment(adId, userId)
+        )
+    }
+
+    override fun fromFavouritesFragmentToCarDetailsFragment(adId: String, userId: String) {
+        navController.navigate(
+            FavouritesFragmentDirections.actionFavouritesFragmentToCarDetailsFragment(adId, userId)
         )
     }
 }

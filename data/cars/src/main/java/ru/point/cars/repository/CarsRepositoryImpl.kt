@@ -1,6 +1,5 @@
 package ru.point.cars.repository
 
-import com.auth0.jwt.JWT
 import ru.point.cars.service.CarsService
 import ru.point.common.storage.TokenStorage
 
@@ -21,5 +20,28 @@ class CarsRepositoryImpl(
         carsService.getCarAdById(adId)
 
     override suspend fun getUsersAds() =
-        carsService.getUsersAds(userId = JWT.decode(tokenStorage.token).subject)
+        carsService.getUsersAds(userId = tokenStorage.getUserId())
+
+    override suspend fun deleteAd(adId: String) =
+        carsService.deleteAd(tokenStorage.getUserId(), adId)
+
+    override suspend fun getUsersFavourites() =
+        carsService.getUsersFavourite(userId = tokenStorage.getUserId())
+
+    override suspend fun addCarToFavourites(adId: String) =
+        carsService.addCarToFavourites(
+            userId = tokenStorage.getUserId(),
+            adId = adId
+        )
+
+    override suspend fun removeCarFromFavourites(adId: String) =
+        carsService.removeCarFromFavourites(
+            userId = tokenStorage.getUserId(),
+            adId = adId
+        )
+
+    override suspend fun checkIsFavourite(adId: String) =
+        getUsersFavourites().map {
+            it.contains(getCarAdById(adId).getOrNull())
+        }
 }

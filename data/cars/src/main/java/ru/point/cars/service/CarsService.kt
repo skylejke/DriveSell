@@ -1,11 +1,14 @@
 package ru.point.cars.service
 
+import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.point.cars.model.AdDto
 import ru.point.cars.model.BrandDto
 import ru.point.cars.model.ModelDto
+import ru.point.common.model.ResponseMessage
 
 interface CarsService {
     @GET("/brands")
@@ -22,4 +25,25 @@ interface CarsService {
 
     @GET("/profile/{userId}/ads")
     suspend fun getUsersAds(@Path("userId") userId: String): Result<List<AdDto>>
+
+    @DELETE("/profile/{userId}/ads/{adId}")
+    suspend fun deleteAd(
+        @Path("userId") userId: String,
+        @Path("adId") adId: String
+    ): Result<ResponseMessage>
+
+    @GET("/profile/{userId}/favourites")
+    suspend fun getUsersFavourite(@Path("userId") userId: String): Result<List<AdDto>>
+
+    @POST("/profile/{userId}/favourites/{adId}")
+    suspend fun addCarToFavourites(
+        @Path("userId") userId: String,
+        @Path("adId") adId: String
+    ): Result<ResponseMessage>
+
+    @DELETE("/profile/{userId}/favourites/{adId}")
+    suspend fun removeCarFromFavourites(
+        @Path("userId") userId: String,
+        @Path("adId") adId: String
+    ): Result<ResponseMessage>
 }

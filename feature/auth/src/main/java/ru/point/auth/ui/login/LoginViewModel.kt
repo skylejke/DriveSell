@@ -8,12 +8,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import ru.point.auth.domain.LoginUseCase
 import ru.point.user.model.LoginRequest
 import ru.point.user.repository.UserRepository
 
 internal class LoginViewModel(
-    private val loginUseCase: LoginUseCase,
     private val userRepository: UserRepository
 ) : ViewModel() {
 
@@ -35,7 +33,7 @@ internal class LoginViewModel(
     fun login(username: String, password: String) {
         if (!validateLoginFields(username, password)) return
         viewModelScope.launch {
-            loginUseCase.invoke(LoginRequest(username = username, password = password)).fold(
+            userRepository.login(LoginRequest(username = username, password = password)).fold(
                 onSuccess = {
                     _loginEvent.emit(Unit)
                 },

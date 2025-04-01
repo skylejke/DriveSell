@@ -8,7 +8,11 @@ import ru.point.common.di.TokenStorageModule
 import ru.point.home.ui.HomeFragment
 
 @[FeatureScope Component(
-    modules = [TokenStorageModule::class, CarsRepositoryModule::class, HomeUseCaseModule::class, HomeViewModelFactoryModule::class],
+    modules = [
+        TokenStorageModule::class,
+        CarsRepositoryModule::class,
+        HomeViewModelFactoryModule::class
+    ],
     dependencies = [FeatureDeps::class]
 )]
 internal interface HomeComponent {

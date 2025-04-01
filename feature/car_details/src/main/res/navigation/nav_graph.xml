@@ -14,6 +14,10 @@
             android:name="adId"
             android:defaultValue=''
             app:argType="string" />
+        <argument
+            android:name="userId"
+            app:argType="string"
+            android:defaultValue='' />
     </fragment>
 
 </navigation>

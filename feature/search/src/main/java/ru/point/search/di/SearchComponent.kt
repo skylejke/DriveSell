@@ -8,7 +8,11 @@ import ru.point.common.di.TokenStorageModule
 import ru.point.search.ui.SearchFragment
 
 @[FeatureScope Component(
-    modules = [TokenStorageModule::class, CarsRepositoryModule::class, SearchUseCaseModule::class, SearchViewModelFactoryModule::class],
+    modules = [
+        TokenStorageModule::class,
+        CarsRepositoryModule::class,
+        SearchViewModelFactoryModule::class
+    ],
     dependencies = [FeatureDeps::class]
 )]
 internal interface SearchComponent {

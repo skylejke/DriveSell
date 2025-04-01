@@ -6,9 +6,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.point.cars.model.AdVo
-import ru.point.home.domain.GetCarsUseCase
+import ru.point.cars.model.asAdVo
+import ru.point.cars.repository.CarsRepository
 
-internal class HomeViewModel(private val getCarsUseCase: GetCarsUseCase) : ViewModel() {
+internal class HomeViewModel(private val carsRepository: CarsRepository) : ViewModel() {
 
     private val _cars = MutableStateFlow<List<AdVo>>(emptyList())
     val cars get() = _cars.asStateFlow()
@@ -19,14 +20,9 @@ internal class HomeViewModel(private val getCarsUseCase: GetCarsUseCase) : ViewM
 
     fun getCars() {
         viewModelScope.launch {
-            getCarsUseCase().fold(
-                onSuccess = {
-                    _cars.value = it
-
-                }, onFailure = {
-
-                }
-            )
+            carsRepository.getCars().onSuccess { carList ->
+                _cars.value = carList.map { it.asAdVo }
+            }
         }
     }
 }

@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/roboto_bold"
-        android:textSize="40sp"
-        android:text="@string/favourite" />
+        android:text="@string/favourites"
+        android:textSize="40sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouriteList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

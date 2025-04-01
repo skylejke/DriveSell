@@ -1,7 +1,6 @@
 package ru.point.users_ads.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +28,7 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _carAdapter = CarAdapter { navigator.fromHomeFragmentToCarDetailsFragment(it.id) }
+        _carAdapter = CarAdapter { navigator.fromUsersAdsFragmentToCarDetailsFragment(it.id, it.userId) }
         initHolder<UsersAdsComponentHolderVM>()
         usersAdsComponent.inject(this)
     }
@@ -51,8 +50,11 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
         repeatOnLifecycleScope {
             usersAdsViewModel.usersAds.collect { usersAdsList ->
                 carAdapter.submitList(usersAdsList)
-                Log.d("govno", "onViewCreated: $usersAdsList")
             }
+        }
+
+        binding.usersAdsToolBar.backIcon.setOnClickListener {
+            navigator.popBackStack()
         }
     }
 

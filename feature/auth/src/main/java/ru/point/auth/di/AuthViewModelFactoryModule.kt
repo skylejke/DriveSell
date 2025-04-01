@@ -2,8 +2,6 @@ package ru.point.auth.di
 
 import dagger.Module
 import dagger.Provides
-import ru.point.auth.domain.LoginUseCase
-import ru.point.auth.domain.RegisterUseCase
 import ru.point.auth.ui.login.LoginViewModelFactory
 import ru.point.auth.ui.register.RegisterViewModelFactory
 import ru.point.common.di.FeatureScope
@@ -13,16 +11,10 @@ import ru.point.user.repository.UserRepository
 internal class AuthViewModelFactoryModule {
 
     @[Provides FeatureScope]
-    fun provideLoginViewModelFactory(
-        loginUseCase: LoginUseCase,
-        userRepository: UserRepository
-    ) = LoginViewModelFactory(
-        loginUseCase = loginUseCase,
-        userRepository = userRepository
-    )
+    fun provideLoginViewModelFactory(userRepository: UserRepository) =
+        LoginViewModelFactory(userRepository = userRepository)
 
     @[Provides FeatureScope]
-    fun provideRegisterViewModelFactory(
-        registerUseCase: RegisterUseCase,
-    ) = RegisterViewModelFactory(registerUseCase = registerUseCase)
+    fun provideRegisterViewModelFactory(userRepository: UserRepository) =
+        RegisterViewModelFactory(userRepository = userRepository)
 }

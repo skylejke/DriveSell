@@ -7,16 +7,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.point.profile.domain.DeleteProfileUseCase
-import ru.point.profile.domain.GetUserDataUseCase
-import ru.point.user.model.UserDataResponse
+import ru.point.user.model.UserData
+import ru.point.user.repository.UserRepository
 
 internal class ProfileViewModel(
-    private val getUserDataUseCase: GetUserDataUseCase,
-    private val deleteProfileUseCase: DeleteProfileUseCase
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private val _userData = MutableStateFlow<UserDataResponse?>(null)
+    private val _userData = MutableStateFlow<UserData?>(null)
     val userData get() = _userData.asStateFlow()
 
     private val _deleteProfileEvent = MutableSharedFlow<Unit>(replay = 1)
@@ -28,13 +26,13 @@ internal class ProfileViewModel(
 
     fun refreshUserData() {
         viewModelScope.launch {
-            _userData.value = getUserDataUseCase()
+            _userData.value = userRepository.getUserData()
         }
     }
 
     fun deleteUser() {
         viewModelScope.launch {
-            deleteProfileUseCase.invoke().onSuccess {
+            userRepository.deleteProfile().onSuccess {
                 _deleteProfileEvent.emit(Unit)
             }
         }

@@ -1,6 +1,8 @@
 plugins {
+    kotlin("plugin.serialization") version "2.1.10"
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -9,19 +11,7 @@ android {
 
     defaultConfig {
         minSdk = 30
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
     }
 
     compileOptions {
@@ -39,7 +29,19 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:cars"))
     implementation(project(":core:common"))
+    implementation(project(":data:cars"))
+
+    implementation(libs.bundles.dagger)
+    ksp(libs.dagger.compiler)
+    ksp(libs.dagger.android.processor)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.adapters.result)
 
     implementation(libs.bundles.navigation)
     implementation(libs.androidx.core.ktx)

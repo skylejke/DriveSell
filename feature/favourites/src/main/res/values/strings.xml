@@ -1,4 +1,4 @@
 <resources>
     <string name="fragment_favourites_name">Favourites fragment</string>
-    <string name="favourite">Favourite</string>
+    <string name="favourites">Favourites</string>
 </resources>

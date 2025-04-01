@@ -5,11 +5,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.point.menu.domain.LogOutUseCase
 import ru.point.user.repository.UserRepository
 
 internal class MenuViewModel(
-    private val logOutUseCase: LogOutUseCase,
     private val userRepository: UserRepository
 ) : ViewModel() {
 
@@ -24,7 +22,7 @@ internal class MenuViewModel(
 
     fun logOut() {
         viewModelScope.launch {
-            logOutUseCase()
+            userRepository.logOut()
         }
     }
 }

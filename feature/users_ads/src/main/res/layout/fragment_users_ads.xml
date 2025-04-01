@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context="ru.point.users_ads.ui.UsersAdsFragment">
 
+    <include
+        android:id="@+id/users_ads_tool_bar"
+        layout="@layout/fragment_users_ads_tool_bar" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

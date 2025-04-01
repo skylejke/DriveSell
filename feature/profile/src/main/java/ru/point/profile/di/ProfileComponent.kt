@@ -3,17 +3,16 @@ package ru.point.profile.di
 import dagger.Component
 import ru.point.common.di.FeatureDeps
 import ru.point.common.di.FeatureScope
+import ru.point.common.di.TokenStorageModule
 import ru.point.profile.ui.editPassword.EditPasswordFragment
 import ru.point.profile.ui.editUserData.EditUserDataFragment
 import ru.point.profile.ui.profile.ProfileFragment
-import ru.point.common.di.TokenStorageModule
 import ru.point.user.di.UserRepositoryModule
 
 @[FeatureScope Component(
     modules = [
         TokenStorageModule::class,
         UserRepositoryModule::class,
-        ProfileUseCaseModule::class,
         ProfileViewModelFactoryModule::class
     ],
     dependencies = [FeatureDeps::class]

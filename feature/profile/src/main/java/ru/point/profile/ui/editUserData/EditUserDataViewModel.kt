@@ -12,18 +12,16 @@ import retrofit2.HttpException
 import ru.point.common.ext.isValidEmail
 import ru.point.common.ext.isValidPhoneNumber
 import ru.point.common.ext.isValidUserName
-import ru.point.profile.domain.EditUserDataUseCase
-import ru.point.profile.domain.GetUserDataUseCase
-import ru.point.user.model.EditDataResponse
+import ru.point.common.model.ResponseMessage
 import ru.point.user.model.EditUserDataRequest
-import ru.point.user.model.UserDataResponse
+import ru.point.user.model.UserData
+import ru.point.user.repository.UserRepository
 
 internal class EditUserDataViewModel(
-    private val getUserDataUseCase: GetUserDataUseCase,
-    private val editUserDataUseCase: EditUserDataUseCase
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private val _userData = MutableStateFlow<UserDataResponse?>(null)
+    private val _userData = MutableStateFlow<UserData?>(null)
     val userData get() = _userData.asStateFlow()
 
     private val _usernameError = MutableStateFlow<String?>(null)
@@ -40,7 +38,7 @@ internal class EditUserDataViewModel(
 
     init {
         viewModelScope.launch {
-            _userData.value = getUserDataUseCase()
+            _userData.value = userRepository.getUserData()
         }
     }
 
@@ -62,7 +60,7 @@ internal class EditUserDataViewModel(
         if (!validateUserDataFields(updatedUsername, updatedEmail, updatedPhoneNumber)) return
 
         viewModelScope.launch {
-            editUserDataUseCase.invoke(
+            userRepository.editUserData(
                 EditUserDataRequest(
                     username = updatedUsername,
                     email = updatedEmail,
@@ -77,7 +75,7 @@ internal class EditUserDataViewModel(
                         val errorBody = error.response()?.errorBody()?.string()
                         errorBody?.let {
                             val editDataResponse =
-                                Json.decodeFromString<EditDataResponse>(it)
+                                Json.decodeFromString<ResponseMessage>(it)
 
                             when (editDataResponse.message) {
                                 "Username is taken" -> _usernameError.value =
