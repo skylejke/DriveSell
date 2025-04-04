@@ -57,6 +57,10 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
                     )
             }
         }
+
+        binding.homeToolBar.searchIcon.setOnClickListener {
+            navigator.fromHomeFragmentToSearchFragment()
+        }
     }
 
     override fun onDestroy() {

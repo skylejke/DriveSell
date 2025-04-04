@@ -44,4 +44,48 @@ class CarsRepositoryImpl(
         getUsersFavourites().map {
             it.contains(getCarAdById(adId).getOrNull())
         }
+
+    override suspend fun searchCarsByFilters(
+        brand: String?,
+        model: String?,
+        yearMin: Short?,
+        yearMax: Short?,
+        priceMin: Int?,
+        priceMax: Int?,
+        mileageMin: Int?,
+        mileageMax: Int?,
+        enginePowerMin: Short?,
+        enginePowerMax: Short?,
+        engineCapacityMin: Double?,
+        engineCapacityMax: Double?,
+        fuelType: String?,
+        bodyType: String?,
+        color: String?,
+        transmission: String?,
+        drivetrain: String?,
+        wheel: String?,
+        condition: String?,
+        owners: String?
+    ) = carsService.searchCarsByFilters(
+        brand = brand,
+        model = model,
+        yearMin = yearMin,
+        yearMax = yearMax,
+        priceMin = priceMin,
+        priceMax = priceMax,
+        mileageMin = mileageMin,
+        mileageMax = mileageMax,
+        enginePowerMin = enginePowerMin,
+        enginePowerMax = enginePowerMax,
+        engineCapacityMin = engineCapacityMin,
+        engineCapacityMax = engineCapacityMax,
+        fuelType = fuelType,
+        bodyType = bodyType,
+        color = color,
+        transmission = transmission,
+        drivetrain = drivetrain,
+        wheel = wheel,
+        condition = condition,
+        owners = owners,
+    )
 }

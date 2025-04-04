@@ -3,7 +3,7 @@
     android:id="@+id/car_details_tool_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/md_theme_primary">
+    android:background="@color/md_theme_background">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/back_icon"
@@ -12,6 +12,7 @@
         android:layout_gravity="start"
         android:layout_marginStart="16dp"
         android:background="@drawable/back_icon"
+        android:backgroundTint="@color/md_theme_onBackground"
         android:contentDescription="@string/back_button" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -21,6 +22,7 @@
         android:layout_gravity="end"
         android:layout_marginEnd="16dp"
         android:background="@drawable/fav_icon"
+        android:backgroundTint="@color/md_theme_onBackground"
         android:contentDescription="@string/fav_button" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -30,6 +32,7 @@
         android:layout_gravity="end"
         android:layout_marginEnd="16dp"
         android:background="@drawable/compare_plus_icon"
+        android:backgroundTint="@color/md_theme_onBackground"
         android:contentDescription="@string/compare_button" />
 
 </com.google.android.material.appbar.MaterialToolbar>

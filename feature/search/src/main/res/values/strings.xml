@@ -19,6 +19,8 @@
     <string name="condition">Condition</string>
     <string name="owners">Owners</string>
     <string name="show_ads">Show ads</string>
+    <string name="back_button">Back button</string>
+    <string name="ad_search">Ad Search</string>
 
     <string-array name="body_types">
         <item>Sedan</item>
@@ -38,7 +40,6 @@
     <string-array name="conditions">
         <item>Not broken</item>
         <item>Broken</item>
-        <item>Does not matter</item>
         <item>Requires repair</item>
     </string-array>
 
@@ -92,4 +93,9 @@
         <item>Brown</item>
         <item>Beige</item>
     </string-array>
+
+    <plurals name="car_ads_counter">
+        <item quantity="one">%1$d offer</item>
+        <item quantity="other">%1$d offers</item>
+    </plurals>
 </resources>

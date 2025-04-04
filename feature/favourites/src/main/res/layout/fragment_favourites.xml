@@ -13,7 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/favourites"
-        android:textSize="40sp" />
+        android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouriteList"

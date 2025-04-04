@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    android:layout_height="match_parent">
 
     <include
-        android:id="@+id/home_tool_bar"
-        layout="@layout/fragment_home_tool_bar" />
+        android:id="@+id/search_results_tool_bar"
+        layout="@layout/fragment_search_results_tool_bar" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/car_ads_counter"
@@ -19,7 +18,7 @@
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_tool_bar"
+        app:layout_constraintTop_toBottomOf="@id/search_results_tool_bar"
         tools:text="1337 offers" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -27,8 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/sort_icon"
-        android:tint="@color/md_theme_onSurface"
+        android:background="@drawable/sort_icon"
+        android:backgroundTint="@color/md_theme_onBackground"
         app:layout_constraintBottom_toBottomOf="@id/car_ads_counter"
         app:layout_constraintEnd_toEndOf="parent" />
 

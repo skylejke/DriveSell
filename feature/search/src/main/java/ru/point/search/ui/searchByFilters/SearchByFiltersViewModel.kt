@@ -1,4 +1,4 @@
-package ru.point.search.ui
+package ru.point.search.ui.searchByFilters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,7 @@ import ru.point.search.domain.model.ModelVo
 import ru.point.search.domain.model.asBrandVo
 import ru.point.search.domain.model.asModelVo
 
-internal class SearchViewModel(
+internal class SearchByFiltersViewModel(
     private val carsRepository: CarsRepository
 ) : ViewModel() {
 

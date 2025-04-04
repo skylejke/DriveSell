@@ -1,4 +1,4 @@
-package ru.point.search.ui
+package ru.point.search.ui.searchByFilters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,12 +10,12 @@ import androidx.fragment.app.viewModels
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.search.R
-import ru.point.search.databinding.FragmentSearchBinding
+import ru.point.search.databinding.FragmentSearchByFiltersBinding
 import ru.point.search.di.SearchComponentHolderVM
 import ru.point.search.di.searchComponent
 import javax.inject.Inject
 
-internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>() {
+internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchByFiltersBinding>() {
 
     private var _brandsAdapter: ArrayAdapter<String>? = null
     private val brandsAdapter get() = requireNotNull(_brandsAdapter)
@@ -48,9 +48,9 @@ internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>()
     private val transmissionAdapter get() = requireNotNull(_transmissionAdapter)
 
     @Inject
-    lateinit var searchViewModelFactory: SearchViewModelFactory
+    lateinit var searchByFiltersViewModelFactory: SearchByFiltersViewModelFactory
 
-    private val searchViewModel by viewModels<SearchViewModel> { searchViewModelFactory }
+    private val searchByFiltersViewModel by viewModels<SearchByFiltersViewModel> { searchByFiltersViewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,14 +60,14 @@ internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>()
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentSearchBinding.inflate(inflater, container, false)
+        FragmentSearchByFiltersBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapters()
 
         repeatOnLifecycleScope {
-            searchViewModel.brands.collect { brands ->
+            searchByFiltersViewModel.brands.collect { brands ->
                 brandsAdapter.clear()
                 brandsAdapter.addAll(brands.map { it.name })
                 brandsAdapter.notifyDataSetChanged()
@@ -75,7 +75,7 @@ internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>()
         }
 
         repeatOnLifecycleScope {
-            searchViewModel.models.collect { models ->
+            searchByFiltersViewModel.models.collect { models ->
                 modelsAdapter.clear()
                 modelsAdapter.addAll(models.map { it.name })
                 modelsAdapter.notifyDataSetChanged()
@@ -83,12 +83,37 @@ internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>()
         }
 
         binding.brandListTv.setOnItemClickListener { parent, view, position, id ->
-            val selectedBrand = parent.getItemAtPosition(position) as String
             binding.modelList.isVisible = true
-            searchViewModel.getModels(selectedBrand)
+            binding.modelListTv.setText("", false)
+            searchByFiltersViewModel.getModels(parent.getItemAtPosition(position) as String)
+        }
+
+        binding.searchBtn.setOnClickListener {
+            navigator.fromSearchByFiltersFragmentToSearchResultsFragment(
+                brand = binding.brandListTv.text.toString().takeIf { it.isNotBlank() },
+                model = binding.modelListTv.text.toString().takeIf { it.isNotBlank() },
+                yearMin = binding.yearEtMin.text.toString().takeIf { it.isNotBlank() },
+                yearMax = binding.yearEtMax.text.toString().takeIf { it.isNotBlank() },
+                priceMin = binding.priceEtMin.text.toString().takeIf { it.isNotBlank() },
+                priceMax = binding.priceEtMax.text.toString().takeIf { it.isNotBlank() },
+                mileageMin = binding.mileageEtMin.text.toString().takeIf { it.isNotBlank() },
+                mileageMax = binding.mileageEtMax.text.toString().takeIf { it.isNotBlank() },
+                enginePowerMin = binding.enginePowerMin.text.toString().takeIf { it.isNotBlank() },
+                enginePowerMax = binding.enginePowerMax.text.toString().takeIf { it.isNotBlank() },
+                engineCapacityMin = binding.engineCapacityMin.text.toString().takeIf { it.isNotBlank() },
+                engineCapacityMax = binding.engineCapacityMax.text.toString().takeIf { it.isNotBlank() },
+                fuelType = binding.fuelTypeListTv.text.toString().takeIf { it.isNotBlank() },
+                bodyType = binding.bodyTypeListTv.text.toString().takeIf { it.isNotBlank() },
+                color = binding.colorTv.text.toString().takeIf { it.isNotBlank() },
+                transmission = binding.transmissionListTv.text.toString().takeIf { it.isNotBlank() },
+                drivetrain = binding.drivetrainListTv.text.toString().takeIf { it.isNotBlank() },
+                wheel = binding.wheelListTv.text.toString().takeIf { it.isNotBlank() },
+                condition = binding.conditionListTv.text.toString().takeIf { it.isNotBlank() },
+                owners = binding.ownersTv.text.toString().takeIf { it.isNotBlank() }
+            )
         }
     }
-
+    
     private fun initializeAdapters() {
         _brandsAdapter = ArrayAdapter(
             requireContext(),
@@ -146,30 +171,34 @@ internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>()
         )
     }
 
-    private fun setAdapters() {
-        binding.brandListTv.setAdapter(brandsAdapter)
+    private fun setAdapters() = with(binding) {
+        brandListTv.setAdapter(brandsAdapter)
 
-        binding.modelListTv.setAdapter(modelsAdapter)
+        modelListTv.setAdapter(modelsAdapter)
 
-        binding.fuelTypeListTv.setAdapter(fuelTypeAdapter)
+        fuelTypeListTv.setAdapter(fuelTypeAdapter)
 
-        binding.bodyTypeListTv.setAdapter(bodyTypeAdapter)
+        bodyTypeListTv.setAdapter(bodyTypeAdapter)
 
-        binding.colorTv.setAdapter(colorAdapter)
+        colorTv.setAdapter(colorAdapter)
 
-        binding.transmissionListTv.setAdapter(transmissionAdapter)
+        transmissionListTv.setAdapter(transmissionAdapter)
 
-        binding.drivetrainListTv.setAdapter(drivetrainAdapter)
+        drivetrainListTv.setAdapter(drivetrainAdapter)
 
-        binding.wheelListTv.setAdapter(wheelAdapter)
+        wheelListTv.setAdapter(wheelAdapter)
 
-        binding.conditionListTv.setAdapter(conditionAdapter)
+        conditionListTv.setAdapter(conditionAdapter)
 
-        binding.ownersTv.setAdapter(ownersAdapter)
+        ownersTv.setAdapter(ownersAdapter)
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        clearAdapters()
+    }
+
+    private fun clearAdapters() {
         _brandsAdapter = null
         _modelsAdapter = null
         _fuelTypeAdapter = null

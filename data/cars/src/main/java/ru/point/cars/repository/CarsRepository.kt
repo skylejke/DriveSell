@@ -16,4 +16,26 @@ interface CarsRepository {
     suspend fun addCarToFavourites(adId: String): Result<ResponseMessage>
     suspend fun removeCarFromFavourites(adId: String): Result<ResponseMessage>
     suspend fun checkIsFavourite(adId: String): Result<Boolean>
+    suspend fun searchCarsByFilters(
+        brand: String? = null,
+        model: String? = null,
+        yearMin: Short? = null,
+        yearMax: Short? = null,
+        priceMin: Int? = null,
+        priceMax: Int? = null,
+        mileageMin: Int? = null,
+        mileageMax: Int? = null,
+        enginePowerMin: Short? = null,
+        enginePowerMax: Short? = null,
+        engineCapacityMin: Double? = null,
+        engineCapacityMax: Double? = null,
+        fuelType: String? = null,
+        bodyType: String? = null,
+        color: String? = null,
+        transmission: String? = null,
+        drivetrain: String? = null,
+        wheel: String? = null,
+        condition: String? = null,
+        owners: String? = null
+    ): Result<List<AdDto>>
 }

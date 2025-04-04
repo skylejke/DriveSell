@@ -46,4 +46,28 @@ interface CarsService {
         @Path("userId") userId: String,
         @Path("adId") adId: String
     ): Result<ResponseMessage>
+
+    @GET("/cars/filters")
+    suspend fun searchCarsByFilters(
+        @Query("brand") brand: String? = null,
+        @Query("model") model: String? = null,
+        @Query("yearMin") yearMin: Short? = null,
+        @Query("yearMax") yearMax: Short? = null,
+        @Query("priceMin") priceMin: Int? = null,
+        @Query("priceMax") priceMax: Int? = null,
+        @Query("mileageMin") mileageMin: Int? = null,
+        @Query("mileageMax") mileageMax: Int? = null,
+        @Query("enginePowerMin") enginePowerMin: Short? = null,
+        @Query("enginePowerMax") enginePowerMax: Short? = null,
+        @Query("engineCapacityMin") engineCapacityMin: Double? = null,
+        @Query("engineCapacityMax") engineCapacityMax: Double? = null,
+        @Query("fuelType") fuelType: String? = null,
+        @Query("bodyType") bodyType: String? = null,
+        @Query("color") color: String? = null,
+        @Query("transmission") transmission: String? = null,
+        @Query("drivetrain") drivetrain: String? = null,
+        @Query("wheel") wheel: String? = null,
+        @Query("condition") condition: String? = null,
+        @Query("owners") owners: String? = null
+    ): Result<List<AdDto>>
 }

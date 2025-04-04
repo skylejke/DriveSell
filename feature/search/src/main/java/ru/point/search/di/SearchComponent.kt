@@ -5,7 +5,9 @@ import ru.point.cars.di.CarsRepositoryModule
 import ru.point.common.di.FeatureDeps
 import ru.point.common.di.FeatureScope
 import ru.point.common.di.TokenStorageModule
-import ru.point.search.ui.SearchFragment
+import ru.point.search.ui.search.SearchFragment
+import ru.point.search.ui.searchByFilters.SearchByFiltersFragment
+import ru.point.search.ui.searchResults.SearchResultsFragment
 
 @[FeatureScope Component(
     modules = [
@@ -16,6 +18,8 @@ import ru.point.search.ui.SearchFragment
     dependencies = [FeatureDeps::class]
 )]
 internal interface SearchComponent {
+    fun inject(searchByFiltersFragment: SearchByFiltersFragment)
+    fun inject(searchResultsFragment: SearchResultsFragment)
     fun inject(searchFragment: SearchFragment)
 
     @Component.Builder

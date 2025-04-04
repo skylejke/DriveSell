@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.navigation.safe.args)
 }
 
 android {
@@ -29,6 +30,7 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
+    implementation(project(":core:cars"))
     implementation(project(":data:cars"))
 
     implementation(libs.bundles.dagger)
