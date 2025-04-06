@@ -155,6 +155,11 @@
         android:label="SearchResultsFragment">
 
         <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
             android:name="brand"
             app:argType="string"
             app:nullable="true" />
@@ -261,5 +266,9 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="ru.point.search.ui.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
+    </fragment>
 </navigation>

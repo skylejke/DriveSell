@@ -29,6 +29,9 @@ dependencies {
     implementation(project(":core:cars"))
     implementation(project(":data:user"))
 
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
     implementation (libs.java.jwt)
 
     implementation(libs.bundles.dagger)

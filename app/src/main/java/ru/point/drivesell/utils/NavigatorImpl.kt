@@ -6,6 +6,7 @@ import ru.point.common.navigation.Navigator
 import ru.point.drivesell.R
 import ru.point.favourites.ui.FavouritesFragmentDirections
 import ru.point.home.ui.HomeFragmentDirections
+import ru.point.search.ui.search.SearchFragmentDirections
 import ru.point.search.ui.searchByFilters.SearchByFiltersFragmentDirections
 import ru.point.search.ui.searchResults.SearchResultsFragmentDirections
 import ru.point.users_ads.ui.UsersAdsFragmentDirections
@@ -87,12 +88,43 @@ class NavigatorImpl(
 
     override fun fromSearchResultsFragmentToCarDetailsFragment(adId: String, userId: String) {
         navController.navigate(
-            SearchResultsFragmentDirections.actionSearchResultsFragmentToCarDetailsFragment(adId, userId)
+            SearchResultsFragmentDirections.actionSearchResultsFragmentToCarDetailsFragment(
+                adId,
+                userId
+            )
         )
     }
 
     override fun fromHomeFragmentToSearchFragment() {
         navController.navigate(R.id.action_homeFragment_to_searchFragment)
+    }
+
+    override fun fromSearchFragmentToSearchResultsFragment(query: String) {
+        navController.navigate(
+            SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(
+                query = query,
+                brand = null,
+                model = null,
+                yearMin = null,
+                yearMax = null,
+                priceMin = null,
+                priceMax = null,
+                mileageMin = null,
+                mileageMax = null,
+                enginePowerMin = null,
+                enginePowerMax = null,
+                engineCapacityMin = null,
+                engineCapacityMax = null,
+                fuelType = null,
+                bodyType = null,
+                color = null,
+                transmission = null,
+                drivetrain = null,
+                wheel = null,
+                condition = null,
+                owners = null,
+            )
+        )
     }
 
     override fun fromSearchByFiltersFragmentToSearchResultsFragment(
@@ -119,6 +151,7 @@ class NavigatorImpl(
     ) {
         navController.navigate(
             SearchByFiltersFragmentDirections.actionSearchByFiltersFragmentToSearchResultsFragment(
+                query = null,
                 brand = brand,
                 model = model,
                 yearMin = yearMin,

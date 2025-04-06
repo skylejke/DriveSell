@@ -21,6 +21,8 @@
     <string name="show_ads">Show ads</string>
     <string name="back_button">Back button</string>
     <string name="ad_search">Ad Search</string>
+    <string name="you_searched">You searched</string>
+    <string name="clear_search_history">Clear search history</string>
 
     <string-array name="body_types">
         <item>Sedan</item>

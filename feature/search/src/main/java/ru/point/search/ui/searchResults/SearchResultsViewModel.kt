@@ -14,6 +14,14 @@ internal class SearchResultsViewModel(private val carsRepository: CarsRepository
     private val _foundAds = MutableStateFlow<List<AdVo>>(emptyList())
     val foundAds get() = _foundAds.asStateFlow()
 
+    fun searchCarsByQuery(query: String) {
+        viewModelScope.launch {
+            carsRepository.getCars(query = query).onSuccess { foundAds ->
+                _foundAds.value = foundAds.map { it.asAdVo }
+            }
+        }
+    }
+
     fun searchCarsByFilters(
         brand: String? = null,
         model: String? = null,

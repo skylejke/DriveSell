@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.point.cars.ui.CarAdapter
-import ru.point.cars.ui.SpacerItemDecorator
+import ru.point.cars.ui.CarAdapterDecorator
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.favourites.databinding.FragmentFavouritesBinding
@@ -43,7 +43,7 @@ internal class FavouritesFragment : ComponentHolderFragment<FragmentFavouritesBi
         binding.favouriteList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter
-            addItemDecoration(SpacerItemDecorator())
+            addItemDecoration(CarAdapterDecorator())
         }
 
         repeatOnLifecycleScope {

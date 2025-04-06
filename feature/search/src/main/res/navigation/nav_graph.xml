@@ -12,6 +12,11 @@
         android:label="SearchResultsFragment">
 
         <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
             android:name="brand"
             app:argType="string"
             app:nullable="true" />

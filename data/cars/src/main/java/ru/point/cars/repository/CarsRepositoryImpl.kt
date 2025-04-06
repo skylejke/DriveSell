@@ -1,11 +1,14 @@
 package ru.point.cars.repository
 
+import ru.point.cars.model.SearchHistory
+import ru.point.cars.room.DataBase
 import ru.point.cars.service.CarsService
 import ru.point.common.storage.TokenStorage
 
 class CarsRepositoryImpl(
     private val carsService: CarsService,
-    private val tokenStorage: TokenStorage
+    private val tokenStorage: TokenStorage,
+    private val dataBase: DataBase
 ) : CarsRepository {
     override suspend fun getBrands() =
         carsService.getBrands()
@@ -88,4 +91,19 @@ class CarsRepositoryImpl(
         condition = condition,
         owners = owners,
     )
+
+    override suspend fun insertSearchHistoryItem(query: String) =
+        dataBase.getSearchHistoryDao().insertSearchHistoryItem(
+            SearchHistory(
+                id = null,
+                query = query,
+                userId = tokenStorage.getUserId()
+            )
+        )
+
+    override fun getSearchHistory() =
+        dataBase.getSearchHistoryDao().getSearchHistory(tokenStorage.getUserId())
+
+    override suspend fun clearSearchHistory() =
+        dataBase.getSearchHistoryDao().clearSearchHistory()
 }

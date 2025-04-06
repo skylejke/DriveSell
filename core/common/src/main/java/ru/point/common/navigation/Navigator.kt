@@ -18,6 +18,7 @@ interface Navigator {
     fun fromFavouritesFragmentToCarDetailsFragment(adId: String, userId: String)
     fun fromSearchResultsFragmentToCarDetailsFragment(adId: String, userId: String)
     fun fromHomeFragmentToSearchFragment()
+    fun fromSearchFragmentToSearchResultsFragment(query: String)
     fun fromSearchByFiltersFragmentToSearchResultsFragment(
         brand: String? = null,
         model: String? = null,

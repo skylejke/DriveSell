@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class SpacerItemDecorator : RecyclerView.ItemDecoration() {
+class CarAdapterDecorator : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
         view: View,

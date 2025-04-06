@@ -14,7 +14,6 @@ jetbrainsKotlinJvm = "2.1.10"
 lifecycleVersion = "2.8.7"
 coilVersion = "2.7.0"
 dataStoreVersion = "1.1.3"
-kotlinxCoroutinesAndroidVersion = "1.9.0"
 kotlinSerializationVersion = "2.1.10"
 kotlinxSerializationJsonVersion = "1.7.3"
 navVersion = "2.8.9"
@@ -42,11 +41,9 @@ androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-view
 coil = { module = "io.coil-kt:coil", version.ref = "coilVersion" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "dataStoreVersion" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStoreVersion" }
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroidVersion" }
 kotlinx-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlinSerializationVersion" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navVersion" }
-androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navVersion" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navVersion" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }

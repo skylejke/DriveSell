@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.point.cars.ui.CarAdapter
-import ru.point.cars.ui.SpacerItemDecorator
+import ru.point.cars.ui.CarAdapterDecorator
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ui.BaseFragment
 import ru.point.search.R
@@ -33,31 +33,34 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
 
         searchComponent.inject(this)
 
-        _carAdapter =
-            CarAdapter { navigator.fromSearchResultsFragmentToCarDetailsFragment(it.id, it.userId) }
+        _carAdapter = CarAdapter { navigator.fromSearchResultsFragmentToCarDetailsFragment(it.id, it.userId) }
 
-        searchResultsViewModel.searchCarsByFilters(
-            brand = args.brand,
-            model = args.model,
-            yearMin = args.yearMin?.toShort(),
-            yearMax = args.yearMax?.toShort(),
-            priceMin = args.priceMin?.toInt(),
-            priceMax = args.priceMax?.toInt(),
-            mileageMin = args.mileageMin?.toInt(),
-            mileageMax = args.mileageMax?.toInt(),
-            enginePowerMin = args.enginePowerMin?.toShort(),
-            enginePowerMax = args.enginePowerMax?.toShort(),
-            engineCapacityMin = args.engineCapacityMin?.toDouble(),
-            engineCapacityMax = args.engineCapacityMax?.toDouble(),
-            fuelType = args.fuelType,
-            bodyType = args.bodyType,
-            color = args.color,
-            transmission = args.transmission,
-            drivetrain = args.drivetrain,
-            wheel = args.wheel,
-            condition = args.condition,
-            owners = args.owners
-        )
+        if (args.query != null) {
+            searchResultsViewModel.searchCarsByQuery(args.query!!)
+        } else {
+            searchResultsViewModel.searchCarsByFilters(
+                brand = args.brand,
+                model = args.model,
+                yearMin = args.yearMin?.toShort(),
+                yearMax = args.yearMax?.toShort(),
+                priceMin = args.priceMin?.toInt(),
+                priceMax = args.priceMax?.toInt(),
+                mileageMin = args.mileageMin?.toInt(),
+                mileageMax = args.mileageMax?.toInt(),
+                enginePowerMin = args.enginePowerMin?.toShort(),
+                enginePowerMax = args.enginePowerMax?.toShort(),
+                engineCapacityMin = args.engineCapacityMin?.toDouble(),
+                engineCapacityMax = args.engineCapacityMax?.toDouble(),
+                fuelType = args.fuelType,
+                bodyType = args.bodyType,
+                color = args.color,
+                transmission = args.transmission,
+                drivetrain = args.drivetrain,
+                wheel = args.wheel,
+                condition = args.condition,
+                owners = args.owners
+            )
+        }
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
@@ -69,7 +72,7 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
         binding.carList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter
-            addItemDecoration(SpacerItemDecorator())
+            addItemDecoration(CarAdapterDecorator())
         }
 
         repeatOnLifecycleScope {
