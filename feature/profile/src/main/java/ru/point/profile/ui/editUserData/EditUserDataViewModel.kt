@@ -33,8 +33,8 @@ internal class EditUserDataViewModel(
     private val _phoneNumberError = MutableStateFlow<String?>(null)
     val phoneNumberError get() = _phoneNumberError.asStateFlow()
 
-    private val _userDataChangedEvent = MutableSharedFlow<Unit>()
-    val userDataChangedEvent = _userDataChangedEvent.asSharedFlow()
+    private val _userDataChangedEvent = MutableSharedFlow<Unit>(replay = 1)
+    val userDataChangedEvent get() = _userDataChangedEvent.asSharedFlow()
 
     init {
         viewModelScope.launch {

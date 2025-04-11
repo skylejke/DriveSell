@@ -24,6 +24,9 @@ class CarDetailsViewModel(
     private val _isFavourite = MutableStateFlow<Boolean?>(null)
     val isFavourite get() = _isFavourite.asStateFlow()
 
+    private val _isGuest = MutableStateFlow<Boolean?>(null)
+    val isGuest get() = _isGuest.asStateFlow()
+
     fun getCarAdById(adId: String) {
         viewModelScope.launch {
             carsRepository.getCarAdById(adId).onSuccess {
@@ -35,6 +38,7 @@ class CarDetailsViewModel(
     fun checkIsUsersAd(userId: String) {
         viewModelScope.launch {
             _isUsersAd.value = userId == userRepository.getUserId()
+            _isGuest.value = !userRepository.isAuthorized()
         }
     }
 

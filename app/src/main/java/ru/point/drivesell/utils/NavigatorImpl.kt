@@ -175,4 +175,8 @@ class NavigatorImpl(
             )
         )
     }
+
+    override fun fromAddCarFragmentToHomeFragment() {
+        navController.navigate(R.id.action_addCarFragment_to_homeFragment)
+    }
 }

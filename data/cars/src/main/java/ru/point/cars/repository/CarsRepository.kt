@@ -1,7 +1,9 @@
 package ru.point.cars.repository
 
+import android.net.Uri
 import kotlinx.coroutines.flow.Flow
 import ru.point.cars.model.AdDto
+import ru.point.cars.model.AddCarRequest
 import ru.point.cars.model.BrandDto
 import ru.point.cars.model.ModelDto
 import ru.point.cars.model.SearchHistory
@@ -50,6 +52,8 @@ interface CarsRepository {
         condition: String? = null,
         owners: String? = null
     ): Result<List<AdDto>>
+
+    suspend fun createNewAd(car: AddCarRequest, photos: List<Uri>): Result<ResponseMessage>
 
     suspend fun insertSearchHistoryItem(query: String)
 

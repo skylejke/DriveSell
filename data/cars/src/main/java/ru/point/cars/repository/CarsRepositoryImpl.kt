@@ -1,14 +1,20 @@
 package ru.point.cars.repository
 
+import android.content.Context
+import android.net.Uri
+import ru.point.cars.model.AddCarRequest
 import ru.point.cars.model.SearchHistory
+import ru.point.cars.model.asRequestBody
 import ru.point.cars.room.DataBase
 import ru.point.cars.service.CarsService
+import ru.point.common.ext.uriToMultipart
 import ru.point.common.storage.TokenStorage
 
 class CarsRepositoryImpl(
     private val carsService: CarsService,
     private val tokenStorage: TokenStorage,
-    private val dataBase: DataBase
+    private val dataBase: DataBase,
+    private val context: Context,
 ) : CarsRepository {
     override suspend fun getBrands() =
         carsService.getBrands()
@@ -91,6 +97,15 @@ class CarsRepositoryImpl(
         condition = condition,
         owners = owners,
     )
+
+    override suspend fun createNewAd(car: AddCarRequest, photos: List<Uri>) =
+        carsService.createNewAd(
+            userId = tokenStorage.getUserId(),
+            car = car.asRequestBody,
+            photos = photos.map {
+                it.uriToMultipart(context)
+            }
+        )
 
     override suspend fun insertSearchHistoryItem(query: String) =
         dataBase.getSearchHistoryDao().insertSearchHistoryItem(

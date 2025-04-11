@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import jakarta.inject.Inject
@@ -14,6 +13,7 @@ import ru.point.auth.di.AuthComponentHolderVM
 import ru.point.auth.di.authComponent
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ext.showSnackbar
 import ru.point.common.ui.ComponentHolderFragment
 
 internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
@@ -51,11 +51,7 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
         repeatOnLifecycleScope {
             loginViewModel.loginEvent.filterNotNull().collect {
                 navigator.fromLoginFragmentToHomeFragment()
-                Toast.makeText(
-                    requireContext(),
-                    "Successfully logged in",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showSnackbar(binding.root, "Successfully logged in")
             }
         }
 

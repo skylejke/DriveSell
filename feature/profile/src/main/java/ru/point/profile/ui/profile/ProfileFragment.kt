@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ext.showSnackbar
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.profile.R
 import ru.point.profile.databinding.FragmentProfileBinding
@@ -100,6 +100,6 @@ internal class ProfileFragment : ComponentHolderFragment<FragmentProfileBinding>
     private fun deleteProfile(){
         profileViewModel.deleteUser()
         navigator.fromProfileFragmentToLoginFragment()
-        Toast.makeText(requireContext(), "Deleted Profile", Toast.LENGTH_SHORT).show()
+        showSnackbar(binding.root, "Deleted Profile")
     }
 }

@@ -320,7 +320,7 @@
             android:layout_marginTop="20dp"
             android:hint="@string/drivetrain"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/color_list">
+            app:layout_constraintTop_toBottomOf="@id/transmission_list">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/drivetrain_list_tv"

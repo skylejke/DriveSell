@@ -19,9 +19,15 @@ class CarsRepositoryModule {
     fun provideCarsRepository(
         carsService: CarsService,
         tokenStorage: TokenStorage,
-        dataBase: DataBase
+        dataBase: DataBase,
+        context: Context
     ): CarsRepository =
-        CarsRepositoryImpl(carsService = carsService, tokenStorage = tokenStorage, dataBase = dataBase)
+        CarsRepositoryImpl(
+            carsService = carsService,
+            tokenStorage = tokenStorage,
+            dataBase = dataBase,
+            context = context
+        )
 
     @[Provides FeatureScope]
     fun provideCarsService(retrofit: Retrofit) = retrofit.create<CarsService>()

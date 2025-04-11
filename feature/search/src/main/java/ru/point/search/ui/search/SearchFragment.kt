@@ -31,7 +31,7 @@ internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>()
         super.onCreate(savedInstanceState)
         initHolder<SearchComponentHolderVM>()
         searchComponent.inject(this)
-        _searchHistoryAdapter = SearchHistoryAdapter {}
+        _searchHistoryAdapter = SearchHistoryAdapter { navigator.fromSearchFragmentToSearchResultsFragment(it.query) }
     }
 
     override fun onStart() {

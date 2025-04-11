@@ -5,11 +5,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import ru.point.cars.model.BrandVo
+import ru.point.cars.model.ModelVo
+import ru.point.cars.model.asBrandVo
+import ru.point.cars.model.asModelVo
 import ru.point.cars.repository.CarsRepository
-import ru.point.search.domain.model.BrandVo
-import ru.point.search.domain.model.ModelVo
-import ru.point.search.domain.model.asBrandVo
-import ru.point.search.domain.model.asModelVo
 
 internal class SearchByFiltersViewModel(
     private val carsRepository: CarsRepository

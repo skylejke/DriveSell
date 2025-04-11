@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
@@ -13,6 +12,7 @@ import ru.point.auth.databinding.FragmentRegisterBinding
 import ru.point.auth.di.authComponent
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ext.showSnackbar
 import ru.point.common.ui.BaseFragment
 import javax.inject.Inject
 
@@ -66,11 +66,7 @@ internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         repeatOnLifecycleScope {
             registerViewModel.registerEvent.filterNotNull().collect {
                 navigator.fromRegisterFragmentToHomeFragment()
-                Toast.makeText(
-                    requireContext(),
-                    "Successful registration",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showSnackbar(binding.root, "Successful registration")
             }
         }
 

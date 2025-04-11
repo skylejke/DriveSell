@@ -15,3 +15,7 @@ fun String.isValidEmail(): Boolean {
 fun String.isValidPhoneNumber(): Boolean {
     return this.isNotBlank() && Regex("^(\\+7|8)[0-9]{10}$").matches(this)
 }
+
+fun String.isValidVIN(): Boolean {
+    return this.length == 17 && Regex("^[A-HJ-NPR-Z0-9]{17}$").matches(this)
+}

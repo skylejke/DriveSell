@@ -1,6 +1,8 @@
 plugins {
+    kotlin("plugin.serialization") version "2.1.10"
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -28,6 +30,27 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
+    implementation(project(":core:cars"))
+    implementation(project(":data:cars"))
+    implementation(project(":data:user"))
+
+    implementation(libs.bundles.dagger)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    ksp(libs.dagger.compiler)
+    ksp(libs.dagger.android.processor)
+
+    implementation(libs.coil)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.adapters.result)
+
+    implementation(libs.fragment.ktx)
+
+    implementation(libs.bundles.lifecycle)
 
     implementation(libs.bundles.navigation)
     implementation(libs.androidx.core.ktx)

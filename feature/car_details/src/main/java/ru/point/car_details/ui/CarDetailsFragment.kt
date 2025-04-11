@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
@@ -19,6 +18,7 @@ import ru.point.car_details.di.carDetailsComponent
 import ru.point.cars.model.AdVo
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ext.showSnackbar
 import ru.point.common.ui.ComponentHolderFragment
 import javax.inject.Inject
 
@@ -57,14 +57,14 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         repeatOnLifecycleScope {
             carDetailsViewModel.isUsersAd.filterNotNull().collect { isUsersAd ->
                 if (isUsersAd) {
-                    binding.carDetailsToolBar.compareIcon.background =
+                    binding.carDetailsToolBar.secondaryIcon.background =
                         ContextCompat.getDrawable(requireContext(), R.drawable.edit_icon)
-                    binding.carDetailsToolBar.favIcon.background =
+                    binding.carDetailsToolBar.primaryIcon.background =
                         ContextCompat.getDrawable(requireContext(), R.drawable.delete_icon)
                 } else {
-                    binding.carDetailsToolBar.compareIcon.background =
+                    binding.carDetailsToolBar.secondaryIcon.background =
                         ContextCompat.getDrawable(requireContext(), R.drawable.compare_plus_icon)
-                    binding.carDetailsToolBar.favIcon.background =
+                    binding.carDetailsToolBar.primaryIcon.background =
                         ContextCompat.getDrawable(requireContext(), R.drawable.fav_icon)
                 }
             }
@@ -72,7 +72,8 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
 
         var currentFavouriteState: Boolean? = null
 
-        binding.carDetailsToolBar.favIcon.setOnClickListener {
+        binding.carDetailsToolBar.primaryIcon.setOnClickListener {
+            if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, "Please log in to use favourites")
             if (carDetailsViewModel.isUsersAd.value!!) {
                 DeleteAdDialog { deleteAd() }.show(
                     childFragmentManager,
@@ -89,11 +90,15 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
             }
         }
 
+        binding.carDetailsToolBar.secondaryIcon.setOnClickListener {
+            if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, "Please log in to use car comparison")
+        }
+
         repeatOnLifecycleScope {
             carDetailsViewModel.isFavourite.filterNotNull().collect { isFavourite ->
                 if (!carDetailsViewModel.isUsersAd.value!!) {
                     currentFavouriteState = isFavourite
-                    binding.carDetailsToolBar.favIcon.background = ContextCompat.getDrawable(
+                    binding.carDetailsToolBar.primaryIcon.background = ContextCompat.getDrawable(
                         requireContext(),
                         if (isFavourite) R.drawable.fav_filled_icon else R.drawable.fav_icon
                     )
@@ -178,7 +183,7 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
     private fun deleteAd() {
         carDetailsViewModel.deleteAd(args.adId)
         navigator.popBackStack()
-        Toast.makeText(requireContext(), "Deleted Ad", Toast.LENGTH_SHORT).show()
+        showSnackbar(binding.root, "Deleted Ad")
     }
 
 

@@ -113,14 +113,17 @@ internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchB
             )
         }
     }
-    
+
     private fun initializeAdapters() {
         _brandsAdapter = ArrayAdapter(
             requireContext(),
             R.layout.spinner_dropdown_item
         )
 
-        _modelsAdapter = ArrayAdapter(requireContext(), R.layout.spinner_dropdown_item)
+        _modelsAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.spinner_dropdown_item
+        )
 
         _fuelTypeAdapter = ArrayAdapter(
             requireContext(),

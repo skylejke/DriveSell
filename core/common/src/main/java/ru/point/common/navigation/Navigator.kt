@@ -41,4 +41,5 @@ interface Navigator {
         condition: String? = null,
         owners: String? = null
     )
+    fun fromAddCarFragmentToHomeFragment()
 }

@@ -26,7 +26,7 @@ internal class EditPasswordViewModel(
     private val _confirmNewPasswordError = MutableStateFlow<String?>(null)
     val confirmNewPasswordError get() = _confirmNewPasswordError.asStateFlow()
 
-    private val _passwordChangedEvent = MutableSharedFlow<Unit>()
+    private val _passwordChangedEvent = MutableSharedFlow<Unit>(replay = 1)
     val passwordChangedEvent = _passwordChangedEvent.asSharedFlow()
 
     fun editPassword(

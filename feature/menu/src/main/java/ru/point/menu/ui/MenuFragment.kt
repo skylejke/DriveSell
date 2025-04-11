@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -15,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
+import ru.point.common.ext.showSnackbar
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.menu.R
 import ru.point.menu.databinding.FragmentMenuBinding
@@ -102,6 +102,6 @@ internal class MenuFragment : ComponentHolderFragment<FragmentMenuBinding>() {
     private fun logOut() {
         menuViewModel.logOut()
         navigator.fromMenuFragmentToLogInFragment()
-        Toast.makeText(requireContext(), "Log out", Toast.LENGTH_SHORT).show()
+        showSnackbar(binding.root, "Log out")
     }
 }

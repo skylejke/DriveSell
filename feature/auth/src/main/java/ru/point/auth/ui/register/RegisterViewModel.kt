@@ -105,7 +105,7 @@ internal class RegisterViewModel(
             _phoneNumberError.value = "Phone number must be provided"
             valid = false
         } else if (!phoneNumber.isValidPhoneNumber()) {
-            _passwordError.value = "Phone number is invalid"
+            _phoneNumberError.value = "Phone number is invalid"
             valid = false
         }
 

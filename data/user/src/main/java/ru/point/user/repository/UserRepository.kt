@@ -9,13 +9,22 @@ import ru.point.user.model.RegisterRequest
 import ru.point.user.model.UserData
 
 interface UserRepository {
+
     suspend fun getUserId(): String
+
     suspend fun login(loginRequest: LoginRequest): Result<AuthResponse>
+
     suspend fun register(registerRequest: RegisterRequest): Result<AuthResponse>
+
     suspend fun logOut()
+
     suspend fun isAuthorized(): Boolean
+
     suspend fun getUserData(): UserData?
+
     suspend fun editUserData(editUserDataRequest: EditUserDataRequest): Result<ResponseMessage>
+
     suspend fun editPassword(editUserPasswordRequest: EditUserPasswordRequest): Result<ResponseMessage>
+
     suspend fun deleteProfile(): Result<ResponseMessage>
 }

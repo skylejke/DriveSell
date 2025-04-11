@@ -38,14 +38,15 @@ dependencies {
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)
 
-    implementation(libs.retrofit)
-
     implementation (libs.java.jwt)
 
     implementation(libs.bundles.navigation)
 
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.adapters.result)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
