@@ -4,8 +4,8 @@ import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.provider.OpenableColumns
-import okhttp3.MultipartBody
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
@@ -19,7 +19,7 @@ fun Uri.uriToMultipart(context: Context): MultipartBody.Part {
 
     val requestBody = tempFile.asRequestBody("image/*".toMediaTypeOrNull())
 
-    return MultipartBody.Part.createFormData("photos", fileName, requestBody)
+    return MultipartBody.Part.createFormData("newPhotos", fileName, requestBody)
 }
 
 private fun getFileName(uri: Uri, contentResolver: ContentResolver): String? {

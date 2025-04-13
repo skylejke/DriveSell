@@ -40,6 +40,8 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        homeViewModel.getCars()
+
         binding.carList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter

@@ -18,9 +18,9 @@
             <option value="$PROJECT_DIR$/data/cars" />
             <option value="$PROJECT_DIR$/data/user" />
             <option value="$PROJECT_DIR$/feature" />
-            <option value="$PROJECT_DIR$/feature/add_car" />
             <option value="$PROJECT_DIR$/feature/auth" />
             <option value="$PROJECT_DIR$/feature/car_details" />
+            <option value="$PROJECT_DIR$/feature/car_editor" />
             <option value="$PROJECT_DIR$/feature/favourites" />
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/menu" />

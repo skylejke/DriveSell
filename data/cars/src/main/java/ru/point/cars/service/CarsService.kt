@@ -5,6 +5,7 @@ import okhttp3.RequestBody
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
@@ -81,5 +82,15 @@ interface CarsService {
         @Path("userId") userId: String,
         @Part("car") car: RequestBody,
         @Part photos: List<MultipartBody.Part>
+    ): Result<ResponseMessage>
+
+    @Multipart
+    @PATCH("/profile/{userId}/ads/{adId}")
+    suspend fun updateAd(
+        @Path("userId") userId: String,
+        @Path("adId") adId: String,
+        @Part("car") car: RequestBody,
+        @Part newPhotos: List<MultipartBody.Part>? = null,
+        @Part("removePhotoIds") removePhotoIds: RequestBody? = null
     ): Result<ResponseMessage>
 }

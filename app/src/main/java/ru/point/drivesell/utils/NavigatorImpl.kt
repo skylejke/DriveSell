@@ -2,6 +2,7 @@ package ru.point.drivesell.utils
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
+import ru.point.car_details.ui.CarDetailsFragmentDirections
 import ru.point.common.navigation.Navigator
 import ru.point.drivesell.R
 import ru.point.favourites.ui.FavouritesFragmentDirections
@@ -178,5 +179,14 @@ class NavigatorImpl(
 
     override fun fromAddCarFragmentToHomeFragment() {
         navController.navigate(R.id.action_addCarFragment_to_homeFragment)
+    }
+
+    override fun fromCarDetailsFragmentToEditCarFragment(adId: String, userId: String) {
+        navController.navigate(
+            CarDetailsFragmentDirections.actionCarDetailsFragmentToEditCarFragment(
+                adId = adId,
+                userId = userId
+            )
+        )
     }
 }

@@ -41,7 +41,6 @@ dependencies {
     implementation(project(":data:cars"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:home"))
-    implementation(project(":feature:add_car"))
     implementation(project(":feature:favourites"))
     implementation(project(":feature:profile"))
     implementation(project(":feature:search"))
@@ -49,6 +48,7 @@ dependencies {
     implementation(project(":feature:settings"))
     implementation(project(":feature:car_details"))
     implementation(project(":feature:users_ads"))
+    implementation(project(":feature:car_editor"))
 
     implementation(libs.bundles.navigation)
 

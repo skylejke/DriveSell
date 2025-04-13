@@ -47,9 +47,9 @@
 
     <fragment
         android:id="@+id/addCarFragment"
-        android:name="ru.point.add_car.ui.AddCarFragment"
+        android:name="ru.point.car_editor.ui.create.CreateCarFragment"
         android:label="AddCarFragment"
-        tools:layout="@layout/fragment_add_car" >
+        tools:layout="@layout/fragment_create_car">
 
         <action
             android:id="@+id/action_addCarFragment_to_homeFragment"
@@ -60,7 +60,7 @@
         android:id="@+id/favouritesFragment"
         android:name="ru.point.favourites.ui.FavouritesFragment"
         android:label="FavouritesFragment"
-        tools:layout="@layout/fragment_favourites" >
+        tools:layout="@layout/fragment_favourites">
         <action
             android:id="@+id/action_favouritesFragment_to_carDetailsFragment"
             app:destination="@id/carDetailsFragment" />
@@ -86,7 +86,7 @@
         android:id="@+id/searchByFiltersFragment"
         android:name="ru.point.search.ui.searchByFilters.SearchByFiltersFragment"
         android:label="SearchByFiltersFragment"
-        tools:layout="@layout/fragment_search_by_filters" >
+        tools:layout="@layout/fragment_search_by_filters">
         <action
             android:id="@+id/action_searchByFiltersFragment_to_searchResultsFragment"
             app:destination="@id/searchResultsFragment" />
@@ -139,15 +139,18 @@
             app:argType="string" />
         <argument
             android:name="userId"
-            app:argType="string"
-            android:defaultValue='' />
+            android:defaultValue=''
+            app:argType="string" />
+        <action
+            android:id="@+id/action_carDetailsFragment_to_editCarFragment"
+            app:destination="@id/editCarFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/usersAdsFragment"
         android:name="ru.point.users_ads.ui.UsersAdsFragment"
         android:label="UsersAdsFragment"
-        tools:layout="@layout/fragment_users_ads" >
+        tools:layout="@layout/fragment_users_ads">
         <action
             android:id="@+id/action_usersAdsFragment_to_carDetailsFragment"
             app:destination="@id/carDetailsFragment" />
@@ -155,9 +158,9 @@
 
     <fragment
         android:id="@+id/searchResultsFragment"
-        tools:layout="@layout/fragment_search_results"
         android:name="ru.point.search.ui.searchResults.SearchResultsFragment"
-        android:label="SearchResultsFragment">
+        android:label="SearchResultsFragment"
+        tools:layout="@layout/fragment_search_results">
 
         <argument
             android:name="query"
@@ -271,9 +274,24 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="ru.point.search.ui.search.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment">
         <action
             android:id="@+id/action_searchFragment_to_searchResultsFragment"
             app:destination="@id/searchResultsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editCarFragment"
+        android:name="ru.point.car_editor.ui.edit.EditCarFragment"
+        android:label="EditCarFragment"
+        tools:layout="@layout/fragment_edit_car">
+        <argument
+            android:name="adId"
+            android:defaultValue=''
+            app:argType="string" />
+        <argument
+            android:name="userId"
+            android:defaultValue=''
+            app:argType="string" />
     </fragment>
 </navigation>

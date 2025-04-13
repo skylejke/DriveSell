@@ -41,6 +41,8 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
 
         bottomBar.hide()
 
+        usersAdsViewModel.getUsersAds()
+
         binding.myAdsList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter

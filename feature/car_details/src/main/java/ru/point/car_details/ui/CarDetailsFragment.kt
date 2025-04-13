@@ -38,9 +38,6 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         super.onCreate(savedInstanceState)
         initHolder<CarDetailsComponentHolderVM>()
         carDetailsComponent.inject(this)
-        carDetailsViewModel.getCarAdById(args.adId)
-        carDetailsViewModel.checkIsUsersAd(args.userId)
-        carDetailsViewModel.checkIsFavourite(args.adId)
         _carPhotoAdapter = CarPhotoAdapter()
     }
 
@@ -53,6 +50,12 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         bottomBar.hide()
 
         binding.carPhotos.adapter = carPhotoAdapter
+
+        with(carDetailsViewModel) {
+            getCarAdById(args.adId)
+            checkIsUsersAd(args.userId)
+            checkIsFavourite(args.adId)
+        }
 
         repeatOnLifecycleScope {
             carDetailsViewModel.isUsersAd.filterNotNull().collect { isUsersAd ->
@@ -92,6 +95,9 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
 
         binding.carDetailsToolBar.secondaryIcon.setOnClickListener {
             if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, "Please log in to use car comparison")
+            if (carDetailsViewModel.isUsersAd.value!!) {
+                navigator.fromCarDetailsFragmentToEditCarFragment(args.adId, args.userId)
+            }
         }
 
         repeatOnLifecycleScope {

@@ -2,7 +2,9 @@ package ru.point.cars.repository
 
 import android.content.Context
 import android.net.Uri
-import ru.point.cars.model.AddCarRequest
+import okhttp3.RequestBody.Companion.toRequestBody
+import ru.point.cars.model.CreateCarRequest
+import ru.point.cars.model.EditCarRequest
 import ru.point.cars.model.SearchHistory
 import ru.point.cars.model.asRequestBody
 import ru.point.cars.room.DataBase
@@ -98,7 +100,7 @@ class CarsRepositoryImpl(
         owners = owners,
     )
 
-    override suspend fun createNewAd(car: AddCarRequest, photos: List<Uri>) =
+    override suspend fun createNewAd(car: CreateCarRequest, photos: List<Uri>) =
         carsService.createNewAd(
             userId = tokenStorage.getUserId(),
             car = car.asRequestBody,
@@ -106,6 +108,21 @@ class CarsRepositoryImpl(
                 it.uriToMultipart(context)
             }
         )
+
+    override suspend fun updateAd(
+        adId: String,
+        car: EditCarRequest,
+        newPhotos: List<Uri>,
+        removePhotoIds: List<String>
+    ) = carsService.updateAd(
+        userId = tokenStorage.getUserId(),
+        adId = adId,
+        car = car.asRequestBody,
+        newPhotos = if (newPhotos.isNotEmpty()) newPhotos.map { it.uriToMultipart(context) } else null,
+        removePhotoIds = if (removePhotoIds.isNotEmpty())
+            removePhotoIds.joinToString(separator = ",").toRequestBody() else null
+    )
+
 
     override suspend fun insertSearchHistoryItem(query: String) =
         dataBase.getSearchHistoryDao().insertSearchHistoryItem(

@@ -42,4 +42,5 @@ interface Navigator {
         owners: String? = null
     )
     fun fromAddCarFragmentToHomeFragment()
+    fun fromCarDetailsFragmentToEditCarFragment(adId: String, userId: String)
 }

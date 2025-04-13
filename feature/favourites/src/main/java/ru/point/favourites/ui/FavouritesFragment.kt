@@ -40,6 +40,8 @@ internal class FavouritesFragment : ComponentHolderFragment<FragmentFavouritesBi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        favouritesViewModel.getFavourites()
+
         binding.favouriteList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter

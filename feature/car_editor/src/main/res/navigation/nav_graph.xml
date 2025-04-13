@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/editCarFragment">
+
+    <fragment
+        android:id="@+id/editCarFragment"
+        android:name="ru.point.car_editor.ui.edit.EditCarFragment"
+        android:label="EditCarFragment"
+        tools:layout="@layout/fragment_edit_car">
+        <argument
+            android:name="adId"
+            android:defaultValue=''
+            app:argType="string" />
+        <argument
+            android:name="userId"
+            android:defaultValue=''
+            app:argType="string" />
+    </fragment>
+</navigation>
