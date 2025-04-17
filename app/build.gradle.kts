@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":feature:car_details"))
     implementation(project(":feature:users_ads"))
     implementation(project(":feature:car_editor"))
+    implementation(project(":feature:comparisons"))
 
     implementation(libs.bundles.navigation)
 

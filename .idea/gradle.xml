@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/feature/auth" />
             <option value="$PROJECT_DIR$/feature/car_details" />
             <option value="$PROJECT_DIR$/feature/car_editor" />
+            <option value="$PROJECT_DIR$/feature/comparisons" />
             <option value="$PROJECT_DIR$/feature/favourites" />
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/menu" />

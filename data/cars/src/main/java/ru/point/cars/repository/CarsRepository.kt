@@ -69,6 +69,13 @@ interface CarsRepository {
         removePhotoIds: List<String>
     ): Result<ResponseMessage>
 
+    suspend fun getUsersComparisons(): Result<List<AdDto>>
+
+    suspend fun addCarToComparisons(adId: String): Result<ResponseMessage>
+
+    suspend fun removeCarFromComparisons(adId: String): Result<ResponseMessage>
+
+    suspend fun checkIsInComparisons(adId: String): Result<Boolean>
 
     suspend fun insertSearchHistoryItem(query: String)
 

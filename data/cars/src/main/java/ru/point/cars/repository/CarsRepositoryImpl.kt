@@ -3,6 +3,7 @@ package ru.point.cars.repository
 import android.content.Context
 import android.net.Uri
 import okhttp3.RequestBody.Companion.toRequestBody
+import ru.point.cars.model.AdDto
 import ru.point.cars.model.CreateCarRequest
 import ru.point.cars.model.EditCarRequest
 import ru.point.cars.model.SearchHistory
@@ -10,6 +11,7 @@ import ru.point.cars.model.asRequestBody
 import ru.point.cars.room.DataBase
 import ru.point.cars.service.CarsService
 import ru.point.common.ext.uriToMultipart
+import ru.point.common.model.ResponseMessage
 import ru.point.common.storage.TokenStorage
 
 class CarsRepositoryImpl(
@@ -127,6 +129,25 @@ class CarsRepositoryImpl(
             removePhotoIds.joinToString(separator = ",").toRequestBody() else null
     )
 
+    override suspend fun getUsersComparisons(): Result<List<AdDto>> =
+        carsService.getUsersComparisons(userId = tokenStorage.getUserId())
+
+    override suspend fun addCarToComparisons(adId: String): Result<ResponseMessage> =
+        carsService.addCarToComparisons(
+            userId = tokenStorage.getUserId(),
+            adId = adId
+        )
+
+    override suspend fun removeCarFromComparisons(adId: String): Result<ResponseMessage> =
+        carsService.removeCarFromComparisons(
+            userId = tokenStorage.getUserId(),
+            adId = adId
+        )
+
+    override suspend fun checkIsInComparisons(adId: String) =
+        getUsersComparisons().map {
+            it.contains(getCarAdById(adId).getOrNull())
+        }
 
     override suspend fun insertSearchHistoryItem(query: String) =
         dataBase.getSearchHistoryDao().insertSearchHistoryItem(

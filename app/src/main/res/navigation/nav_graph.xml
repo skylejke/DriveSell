@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_menuFragment_to_usersAdsFragment"
             app:destination="@id/usersAdsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_comparisonsFragment"
+            app:destination="@id/comparisonsFragment" />
     </fragment>
 
     <fragment
@@ -294,4 +297,8 @@
             android:defaultValue=''
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/comparisonsFragment"
+        android:name="ru.point.comparisons.ui.ComparisonsFragment"
+        android:label="ComparisonsFragment" />
 </navigation>

@@ -189,4 +189,8 @@ class NavigatorImpl(
             )
         )
     }
+
+    override fun fromMenuFragmentToComparisonsFragment() {
+        navController.navigate(R.id.action_menuFragment_to_comparisonsFragment)
+    }
 }

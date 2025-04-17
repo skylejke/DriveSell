@@ -24,6 +24,9 @@ class CarDetailsViewModel(
     private val _isFavourite = MutableStateFlow<Boolean?>(null)
     val isFavourite get() = _isFavourite.asStateFlow()
 
+    private val _isInComparisons = MutableStateFlow<Boolean?>(null)
+    val isInComparisons get() = _isInComparisons.asStateFlow()
+
     private val _isGuest = MutableStateFlow<Boolean?>(null)
     val isGuest get() = _isGuest.asStateFlow()
 
@@ -62,6 +65,30 @@ class CarDetailsViewModel(
         viewModelScope.launch {
             carsRepository.removeCarFromFavourites(adId).onSuccess {
                 _isFavourite.value = false
+            }
+        }
+    }
+
+    fun checkIsInComparisons(adId: String) {
+        viewModelScope.launch {
+            carsRepository.checkIsInComparisons(adId).onSuccess {
+                _isInComparisons.value = it
+            }
+        }
+    }
+
+    fun addCarToComparisons(adId: String) {
+        viewModelScope.launch {
+            carsRepository.addCarToComparisons(adId).onSuccess {
+                _isInComparisons.value = true
+            }
+        }
+    }
+
+    fun removeCarFromComparisons(adId: String) {
+        viewModelScope.launch {
+            carsRepository.removeCarFromComparisons(adId).onSuccess {
+                _isInComparisons.value = false
             }
         }
     }

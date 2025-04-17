@@ -99,4 +99,19 @@ interface CarsService {
         @Part newPhotos: List<MultipartBody.Part>? = null,
         @Part("removePhotoIds") removePhotoIds: RequestBody? = null
     ): Result<ResponseMessage>
+
+    @GET("/profile/{userId}/comparisons")
+    suspend fun getUsersComparisons(@Path("userId") userId: String): Result<List<AdDto>>
+
+    @POST("/profile/{userId}/comparisons/{adId}")
+    suspend fun addCarToComparisons(
+        @Path("userId") userId: String,
+        @Path("adId") adId: String
+    ): Result<ResponseMessage>
+
+    @DELETE("/profile/{userId}/comparisons/{adId}")
+    suspend fun removeCarFromComparisons(
+        @Path("userId") userId: String,
+        @Path("adId") adId: String
+    ): Result<ResponseMessage>
 }

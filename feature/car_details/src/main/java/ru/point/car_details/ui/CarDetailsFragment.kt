@@ -55,6 +55,7 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
             getCarAdById(args.adId)
             checkIsUsersAd(args.userId)
             checkIsFavourite(args.adId)
+            checkIsInComparisons(args.adId)
         }
 
         repeatOnLifecycleScope {
@@ -93,13 +94,6 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
             }
         }
 
-        binding.carDetailsToolBar.secondaryIcon.setOnClickListener {
-            if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, "Please log in to use car comparison")
-            if (carDetailsViewModel.isUsersAd.value!!) {
-                navigator.fromCarDetailsFragmentToEditCarFragment(args.adId, args.userId)
-            }
-        }
-
         repeatOnLifecycleScope {
             carDetailsViewModel.isFavourite.filterNotNull().collect { isFavourite ->
                 if (!carDetailsViewModel.isUsersAd.value!!) {
@@ -107,6 +101,35 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
                     binding.carDetailsToolBar.primaryIcon.background = ContextCompat.getDrawable(
                         requireContext(),
                         if (isFavourite) R.drawable.fav_filled_icon else R.drawable.fav_icon
+                    )
+                }
+            }
+        }
+
+        var currentInComparisonsState: Boolean? = null
+
+        binding.carDetailsToolBar.secondaryIcon.setOnClickListener {
+            if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, "Please log in to use car comparison")
+            if (carDetailsViewModel.isUsersAd.value!!) {
+                navigator.fromCarDetailsFragmentToEditCarFragment(args.adId, args.userId)
+            } else {
+                currentInComparisonsState?.let { isInComparisons ->
+                    if (isInComparisons) {
+                        carDetailsViewModel.removeCarFromComparisons(args.adId)
+                    } else {
+                        carDetailsViewModel.addCarToComparisons(args.adId)
+                    }
+                }
+            }
+        }
+
+        repeatOnLifecycleScope {
+            carDetailsViewModel.isInComparisons.filterNotNull().collect { isInComparisons ->
+                if (!carDetailsViewModel.isUsersAd.value!!) {
+                    currentInComparisonsState = isInComparisons
+                    binding.carDetailsToolBar.secondaryIcon.background = ContextCompat.getDrawable(
+                        requireContext(),
+                        if (isInComparisons) R.drawable.compare_check_icon else R.drawable.compare_plus_icon
                     )
                 }
             }

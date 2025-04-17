@@ -43,4 +43,5 @@ interface Navigator {
     )
     fun fromAddCarFragmentToHomeFragment()
     fun fromCarDetailsFragmentToEditCarFragment(adId: String, userId: String)
+    fun fromMenuFragmentToComparisonsFragment()
 }

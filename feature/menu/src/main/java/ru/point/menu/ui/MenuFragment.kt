@@ -74,6 +74,10 @@ internal class MenuFragment : ComponentHolderFragment<FragmentMenuBinding>() {
             navigator.fromMenuFragmentToSettingsFragment()
         }
 
+        binding.comparisonsBtn.setOnClickListener {
+            navigator.fromMenuFragmentToComparisonsFragment()
+        }
+
         binding.logOutBtn.setOnClickListener {
             LogOutDialog { logOut() }.show(childFragmentManager, LogOutDialog.TAG)
         }
