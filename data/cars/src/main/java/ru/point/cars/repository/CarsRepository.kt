@@ -15,7 +15,11 @@ interface CarsRepository {
 
     suspend fun getModelsByBrand(brandName: String): Result<List<ModelDto>>
 
-    suspend fun getCars(query: String = ""): Result<List<AdDto>>
+    suspend fun getCars(
+        query: String,
+        sortParam: String,
+        orderParam: String
+    ): Result<List<AdDto>>
 
     suspend fun getCarAdById(adId: String): Result<AdDto>
 
@@ -51,7 +55,9 @@ interface CarsRepository {
         drivetrain: String? = null,
         wheel: String? = null,
         condition: String? = null,
-        owners: String? = null
+        owners: String? = null,
+        sortParam: String,
+        orderParam: String
     ): Result<List<AdDto>>
 
     suspend fun createNewAd(car: CreateCarRequest, photos: List<Uri>): Result<ResponseMessage>

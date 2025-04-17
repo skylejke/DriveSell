@@ -24,8 +24,8 @@ class CarsRepositoryImpl(
     override suspend fun getModelsByBrand(brandName: String) =
         carsService.getModelsByBrand(brandName)
 
-    override suspend fun getCars(query: String) =
-        carsService.getCars(query)
+    override suspend fun getCars(query: String, sortParam: String, orderParam: String) =
+        carsService.getCars(query, sortParam, orderParam)
 
     override suspend fun getCarAdById(adId: String) =
         carsService.getCarAdById(adId)
@@ -76,7 +76,9 @@ class CarsRepositoryImpl(
         drivetrain: String?,
         wheel: String?,
         condition: String?,
-        owners: String?
+        owners: String?,
+        sortParam: String,
+        orderParam: String
     ) = carsService.searchCarsByFilters(
         brand = brand,
         model = model,
@@ -98,6 +100,8 @@ class CarsRepositoryImpl(
         wheel = wheel,
         condition = condition,
         owners = owners,
+        sortParam = sortParam,
+        orderParam = orderParam
     )
 
     override suspend fun createNewAd(car: CreateCarRequest, photos: List<Uri>) =

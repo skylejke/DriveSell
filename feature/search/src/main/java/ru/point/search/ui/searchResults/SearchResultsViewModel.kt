@@ -14,11 +14,16 @@ internal class SearchResultsViewModel(private val carsRepository: CarsRepository
     private val _foundAds = MutableStateFlow<List<AdVo>>(emptyList())
     val foundAds get() = _foundAds.asStateFlow()
 
-    fun searchCarsByQuery(query: String) {
+    fun searchCarsByQuery(
+        query: String,
+        sortParam: String,
+        orderParam: String
+    ) {
         viewModelScope.launch {
-            carsRepository.getCars(query = query).onSuccess { foundAds ->
-                _foundAds.value = foundAds.map { it.asAdVo }
-            }
+            carsRepository.getCars(query = query, sortParam = sortParam, orderParam = orderParam)
+                .onSuccess { foundAds ->
+                    _foundAds.value = foundAds.map { it.asAdVo }
+                }
         }
     }
 
@@ -42,7 +47,9 @@ internal class SearchResultsViewModel(private val carsRepository: CarsRepository
         drivetrain: String? = null,
         wheel: String? = null,
         condition: String? = null,
-        owners: String? = null
+        owners: String? = null,
+        sortParam: String,
+        orderParam: String
     ) {
         viewModelScope.launch {
             carsRepository.searchCarsByFilters(
@@ -66,6 +73,8 @@ internal class SearchResultsViewModel(private val carsRepository: CarsRepository
                 wheel = wheel,
                 condition = condition,
                 owners = owners,
+                sortParam = sortParam,
+                orderParam = orderParam
             ).onSuccess { foundAds ->
                 _foundAds.value = foundAds.map { it.asAdVo }
             }

@@ -23,6 +23,14 @@
     <string name="ad_search">Ad Search</string>
     <string name="you_searched">You searched</string>
     <string name="clear_search_history">Clear search history</string>
+    <string name="lowest_price">Lowest price</string>
+    <string name="highest_price">Highest price</string>
+    <string name="lowest_mileage">Lowest mileage</string>
+    <string name="highest_mileage">Highest mileage</string>
+    <string name="newest_year">Newest year</string>
+    <string name="oldest_year">Oldest year</string>
+    <string name="newest_listed">Newest listed</string>
+    <string name="oldest_listed">Oldest listed</string>
 
     <string-array name="body_types">
         <item>Sedan</item>

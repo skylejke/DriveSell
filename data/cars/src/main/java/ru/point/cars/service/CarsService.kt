@@ -23,7 +23,11 @@ interface CarsService {
     suspend fun getModelsByBrand(@Path("brandName") brandName: String): Result<List<ModelDto>>
 
     @GET("/cars")
-    suspend fun getCars(@Query("query") query: String = ""): Result<List<AdDto>>
+    suspend fun getCars(
+        @Query("query") query: String,
+        @Query("sortParam") sortParam: String,
+        @Query("orderParam") orderParam: String
+    ): Result<List<AdDto>>
 
     @GET("/cars/{adId}")
     suspend fun getCarAdById(@Path("adId") adId: String): Result<AdDto>
@@ -73,7 +77,9 @@ interface CarsService {
         @Query("drivetrain") drivetrain: String? = null,
         @Query("wheel") wheel: String? = null,
         @Query("condition") condition: String? = null,
-        @Query("owners") owners: String? = null
+        @Query("owners") owners: String? = null,
+        @Query("sortParam") sortParam: String,
+        @Query("orderParam") orderParam: String
     ): Result<List<AdDto>>
 
     @Multipart

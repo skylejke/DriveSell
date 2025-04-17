@@ -320,7 +320,6 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
         }
     }
 
-
     private fun setPhotos(photos: List<String>) {
         val currentItems = carEditorPhotosAdapter.currentList.toMutableList()
         currentItems.addAll(

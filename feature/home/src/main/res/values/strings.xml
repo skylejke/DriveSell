@@ -3,6 +3,14 @@
     <string name="app_name">Drive Sell</string>
     <string name="offers">offers</string>
     <string name="search_button">Search button</string>
+    <string name="lowest_price">Lowest price</string>
+    <string name="highest_price">Highest price</string>
+    <string name="lowest_mileage">Lowest mileage</string>
+    <string name="highest_mileage">Highest mileage</string>
+    <string name="newest_year">Newest year</string>
+    <string name="oldest_year">Oldest year</string>
+    <string name="newest_listed">Newest listed</string>
+    <string name="oldest_listed">Oldest listed</string>
 
     <plurals name="car_ads_counter">
         <item quantity="one">%1$d offer</item>

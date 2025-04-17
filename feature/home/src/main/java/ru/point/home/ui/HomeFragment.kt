@@ -2,10 +2,14 @@ package ru.point.home.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.point.cars.model.enums.OrderParams
+import ru.point.cars.model.enums.SortParams
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
 import ru.point.common.ext.repeatOnLifecycleScope
@@ -63,6 +67,63 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
         binding.homeToolBar.searchIcon.setOnClickListener {
             navigator.fromHomeFragmentToSearchFragment()
         }
+
+        binding.sortBtn.setOnClickListener {
+            showSortMenu()
+        }
+    }
+
+    private fun showSortMenu() {
+        val sortMenu = PopupMenu(requireContext(), binding.sortBtn)
+        sortMenu.menuInflater.inflate(R.menu.sort_menu, sortMenu.menu)
+
+        sortMenu.setOnMenuItemClickListener { sortItem: MenuItem ->
+            when (sortItem.itemId) {
+                R.id.lowest_price -> {
+                    homeViewModel.getCars(SortParams.PRICE.toString(), OrderParams.ASC.toString())
+                    true
+                }
+
+                R.id.highest_price -> {
+                    homeViewModel.getCars(SortParams.PRICE.toString(), OrderParams.DESC.toString())
+                    true
+                }
+
+                R.id.lowest_mileage -> {
+                    homeViewModel.getCars(SortParams.MILEAGE.toString(), OrderParams.ASC.toString())
+                    true
+                }
+
+                R.id.highest_mileage -> {
+                    homeViewModel.getCars(SortParams.MILEAGE.toString(), OrderParams.DESC.toString())
+                    true
+                }
+
+                R.id.newest_year -> {
+                    homeViewModel.getCars(SortParams.YEAR.toString(), OrderParams.DESC.toString())
+                    true
+                }
+
+                R.id.oldest_year -> {
+                    homeViewModel.getCars(SortParams.YEAR.toString(), OrderParams.ASC.toString())
+                    true
+                }
+
+                R.id.newest_listed -> {
+                    homeViewModel.getCars(SortParams.DATE.toString(), OrderParams.DESC.toString())
+                    true
+                }
+
+                R.id.oldest_listed -> {
+                    homeViewModel.getCars(SortParams.DATE.toString(), OrderParams.ASC.toString())
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        sortMenu.show()
     }
 
     override fun onDestroy() {
