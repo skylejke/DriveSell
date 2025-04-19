@@ -38,6 +38,8 @@ dependencies {
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)
 
+    implementation(libs.coil)
+
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.kotlinx.serialization)

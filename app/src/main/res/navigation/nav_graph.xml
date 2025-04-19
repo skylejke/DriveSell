@@ -297,8 +297,14 @@
             android:defaultValue=''
             app:argType="string" />
     </fragment>
+
     <fragment
         android:id="@+id/comparisonsFragment"
+        tools:layout="@layout/fragment_comparisons"
         android:name="ru.point.comparisons.ui.ComparisonsFragment"
-        android:label="ComparisonsFragment" />
+        android:label="ComparisonsFragment" >
+        <action
+            android:id="@+id/action_comparisonsFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment" />
+    </fragment>
 </navigation>

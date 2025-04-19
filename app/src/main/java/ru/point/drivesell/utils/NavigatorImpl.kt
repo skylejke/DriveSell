@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import ru.point.car_details.ui.CarDetailsFragmentDirections
 import ru.point.common.navigation.Navigator
+import ru.point.comparisons.ui.ComparisonsFragmentDirections
 import ru.point.drivesell.R
 import ru.point.favourites.ui.FavouritesFragmentDirections
 import ru.point.home.ui.HomeFragmentDirections
@@ -192,5 +193,14 @@ class NavigatorImpl(
 
     override fun fromMenuFragmentToComparisonsFragment() {
         navController.navigate(R.id.action_menuFragment_to_comparisonsFragment)
+    }
+
+    override fun fromComparisonsFragmentToCarDetailsFragment(adId: String, userId: String) {
+        navController.navigate(
+            ComparisonsFragmentDirections.actionComparisonsFragmentToCarDetailsFragment(
+                adId = adId,
+                userId = userId
+            )
+        )
     }
 }

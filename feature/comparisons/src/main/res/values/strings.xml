@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="back_button">Back button</string>
+    <string name="engine_power">Engine power</string>
+    <string name="specifications">Specifications</string>
+    <string name="engine_capacity">Engine capacity</string>
+    <string name="fuel_type">Fuel type</string>
+    <string name="mileage">Mileage</string>
+    <string name="body_type">Body type</string>
+    <string name="color">Color</string>
+    <string name="transmission">Transmission</string>
+    <string name="drivetrain">Drivetrain</string>
+    <string name="wheel_position">Wheel position</string>
+    <string name="condition">Condition</string>
+    <string name="owners">Owners</string>
+    <string name="car_price">%1$,d $</string>
+    <string name="car_brand_model_year">%1$s %2$s, %3$d</string>
+</resources>
