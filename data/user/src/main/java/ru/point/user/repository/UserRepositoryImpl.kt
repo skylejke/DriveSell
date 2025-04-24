@@ -1,5 +1,6 @@
 package ru.point.user.repository
 
+import kotlinx.coroutines.flow.first
 import ru.point.common.storage.TokenStorage
 import ru.point.user.model.EditUserDataRequest
 import ru.point.user.model.EditUserPasswordRequest
@@ -17,19 +18,19 @@ class UserRepositoryImpl(
 
     override suspend fun login(loginRequest: LoginRequest) =
         userService.login(loginRequest).onSuccess {
-            tokenStorage.token = it.token?.token
+            tokenStorage.setToken(it.token?.token)
         }
 
     override suspend fun register(registerRequest: RegisterRequest) =
         userService.register(registerRequest).onSuccess {
-            tokenStorage.token = it.token?.token
+            tokenStorage.setToken(it.token?.token)
         }
 
     override suspend fun logOut() {
-        tokenStorage.token = null
+        tokenStorage.setToken(null)
     }
 
-    override suspend fun isAuthorized() = tokenStorage.token != null
+    override suspend fun isAuthorized() = tokenStorage.tokenFlow.first() != null
 
     override suspend fun getUserData() =
         userService.getUserData(userId = tokenStorage.getUserId())
@@ -48,6 +49,6 @@ class UserRepositoryImpl(
 
     override suspend fun deleteProfile() =
         userService.deleteProfile(userId = tokenStorage.getUserId()).onSuccess {
-            tokenStorage.token = null
+            tokenStorage.setToken(null)
         }
 }

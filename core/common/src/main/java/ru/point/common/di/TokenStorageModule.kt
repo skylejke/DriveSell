@@ -11,9 +11,5 @@ class TokenStorageModule {
 
     @[Provides FeatureScope]
     fun provideTokenStorage(context: Context): TokenStorage =
-        TokenStorageImpl(context.getSharedPreferences(SHARED_PREFS_USER, Context.MODE_PRIVATE))
-
-    companion object {
-        private const val SHARED_PREFS_USER = "user_prefs"
-    }
+        TokenStorageImpl(context = context)
 }

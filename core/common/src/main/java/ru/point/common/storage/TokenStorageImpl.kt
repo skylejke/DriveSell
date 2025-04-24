@@ -1,28 +1,40 @@
 package ru.point.common.storage
 
-import android.content.SharedPreferences
-import androidx.core.content.edit
+import android.content.Context
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import com.auth0.jwt.JWT
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 
-const val GUEST_ID = "GUEST_ID"
+class TokenStorageImpl(private val context: Context) : TokenStorage {
 
-class TokenStorageImpl(private val sharedPreferences: SharedPreferences) : TokenStorage {
-    override var token: String?
-        get() = sharedPreferences.getString(KEY_TOKEN, null)
-        set(value) {
-            sharedPreferences.edit {
-                if (value == null) {
-                    remove(KEY_TOKEN)
-                } else {
-                    putString(KEY_TOKEN, value)
-                }
+    override val tokenFlow = context.userDataStore.data
+        .map { prefs -> prefs[KEY_TOKEN] }
+
+    override suspend fun setToken(token: String?) {
+        context.userDataStore.edit { prefs ->
+            if (token == null) {
+                prefs -= KEY_TOKEN
+            } else {
+                prefs[KEY_TOKEN] = token
             }
         }
+    }
 
-    override fun getUserId() =
-        token?.let { JWT.decode(it).subject } ?: GUEST_ID
+    override suspend fun getUserId(): String =
+        context.userDataStore.data
+            .map { it[KEY_TOKEN] }
+            .first()?.let { JWT.decode(it).subject } ?: GUEST_ID
 
     companion object {
-        const val KEY_TOKEN = "token"
+        private val Context.userDataStore by preferencesDataStore(name = SHARED_PREFS_USER)
+
+        private const val GUEST_ID = "GUEST_ID"
+
+        private val KEY_TOKEN = stringPreferencesKey("TOKEN")
+
+        private const val SHARED_PREFS_USER = "USER_PREFS"
     }
 }

@@ -159,7 +159,7 @@ class CarsRepositoryImpl(
             )
         )
 
-    override fun getSearchHistory() =
+    override suspend fun getSearchHistory() =
         dataBase.getSearchHistoryDao().getSearchHistory(tokenStorage.getUserId())
 
     override suspend fun clearSearchHistory() =

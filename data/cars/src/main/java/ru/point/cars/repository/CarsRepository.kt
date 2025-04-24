@@ -80,7 +80,7 @@ interface CarsRepository {
 
     suspend fun insertSearchHistoryItem(query: String)
 
-    fun getSearchHistory(): Flow<List<SearchHistory>>
+    suspend fun getSearchHistory(): Flow<List<SearchHistory>>
 
     suspend fun clearSearchHistory()
 }
