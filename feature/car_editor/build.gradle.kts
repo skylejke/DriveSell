@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.fragment.ktx)
 
     implementation(libs.bundles.lifecycle)
-
+    implementation(libs.shimmer)
     implementation(libs.bundles.navigation)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

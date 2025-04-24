@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
 import ru.point.common.ext.bottomBar
+import ru.point.common.ext.clearErrorOnTextChanged
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ext.showSnackbar
+import ru.point.common.model.Status
 import ru.point.common.ui.BaseFragment
 import ru.point.profile.databinding.FragmentEditPasswordBinding
 import ru.point.profile.di.profileComponent
@@ -36,6 +39,12 @@ internal class EditPasswordFragment : BaseFragment<FragmentEditPasswordBinding>(
         bottomBar.hide()
 
         repeatOnLifecycleScope {
+            editPasswordViewModel.status.filterNotNull().collect {
+                updatePlaceholder(it)
+            }
+        }
+
+        repeatOnLifecycleScope {
             editPasswordViewModel.oldPasswordError.filterNotNull().collect {
                 binding.oldPasswordTil.error = it
             }
@@ -59,17 +68,11 @@ internal class EditPasswordFragment : BaseFragment<FragmentEditPasswordBinding>(
             }
         }
 
-        binding.oldPasswordEt.doOnTextChanged { _, _, _, _ ->
-            binding.oldPasswordTil.error = null
-        }
+        binding.oldPasswordEt.clearErrorOnTextChanged(binding.oldPasswordTil)
 
-        binding.newPasswordEt.doOnTextChanged { _, _, _, _ ->
-            binding.newPasswordTil.error = null
-        }
+        binding.newPasswordEt.clearErrorOnTextChanged(binding.newPasswordTil)
 
-        binding.confirmNewPasswordEt.doOnTextChanged { _, _, _, _ ->
-            binding.confirmNewPasswordTil.error = null
-        }
+        binding.confirmNewPasswordEt.clearErrorOnTextChanged(binding.confirmNewPasswordTil)
 
         binding.fragmentEditUserDataToolBar.checkIcon.setOnClickListener {
             editPasswordViewModel.editPassword(
@@ -81,6 +84,24 @@ internal class EditPasswordFragment : BaseFragment<FragmentEditPasswordBinding>(
 
         binding.fragmentEditUserDataToolBar.closeIcon.setOnClickListener {
             navigator.popBackStack()
+        }
+    }
+
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                loadingPlaceholder.root.isVisible = true
+            }
+
+            is Status.Success -> {
+                loadingPlaceholder.root.isVisible = false
+                showSnackbar(binding.root, "Successfully updated password")
+            }
+
+            is Status.Error -> {
+                loadingPlaceholder.root.isVisible = false
+                showSnackbar(binding.root, "Something went wrong")
+            }
         }
     }
 }

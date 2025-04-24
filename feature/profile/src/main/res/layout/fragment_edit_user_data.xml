@@ -10,6 +10,20 @@
         android:id="@+id/fragment_edit_user_data_tool_bar"
         layout="@layout/fragment_edit_user_data_tool_bar" />
 
+    <include
+        android:id="@+id/no_connection_placeholder"
+        layout="@layout/no_connection_placeholder"
+        android:visibility="gone" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="gone">
+
+        <include layout="@layout/fragment_edit_user_data_shimmer" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_til"
         style="@style/TextInputLayout"

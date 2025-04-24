@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.model.Status
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.comparisons.databinding.FragmentComparisonsBinding
 import ru.point.comparisons.di.ComparisonsComponentHolderVM
 import ru.point.comparisons.di.comparisonsComponent
+import ru.point.comparisons.ui.stateholder.ComparedCarsSpecsAdapter
+import ru.point.comparisons.ui.stateholder.ComparedCarsTitleAdapter
+import ru.point.comparisons.ui.stateholder.ComparisonsDecorator
 import javax.inject.Inject
 
 internal class ComparisonsFragment : ComponentHolderFragment<FragmentComparisonsBinding>() {
@@ -57,16 +62,70 @@ internal class ComparisonsFragment : ComponentHolderFragment<FragmentComparisons
         setAdapters()
 
         repeatOnLifecycleScope {
+            comparisonsViewModel.status.collect { status ->
+                updatePlaceholder(status)
+            }
+        }
+
+        repeatOnLifecycleScope {
             comparisonsViewModel.comparedCars.collect {
                 comparedCarsTitleAdapter.submitList(it)
                 comparedCarsSpecsAdapter.submitList(it)
             }
         }
 
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            comparisonsViewModel.getComparedCars()
+        }
+
         binding.comparisonsToolBar.backIcon.setOnClickListener {
             navigator.popBackStack()
         }
     }
+
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                shimmerLayoutTitles.isVisible = true
+                shimmerLayoutTitles.startShimmer()
+
+                shimmerLayoutSpecs.isVisible = true
+                shimmerLayoutTitles.startShimmer()
+
+                titlesRv.isVisible = false
+                specsRv.isVisible = false
+
+                noConnectionPlaceholder.root.isVisible = false
+            }
+
+            is Status.Success -> {
+                shimmerLayoutTitles.isVisible = false
+                shimmerLayoutTitles.stopShimmer()
+
+                shimmerLayoutSpecs.isVisible = false
+                shimmerLayoutSpecs.stopShimmer()
+
+                titlesRv.isVisible = true
+                specsRv.isVisible = true
+
+                noConnectionPlaceholder.root.isVisible = false
+            }
+
+            is Status.Error -> {
+                shimmerLayoutTitles.isVisible = false
+                shimmerLayoutTitles.stopShimmer()
+
+                shimmerLayoutSpecs.isVisible = false
+                shimmerLayoutSpecs.stopShimmer()
+
+                titlesRv.isVisible = false
+                specsRv.isVisible = false
+
+                noConnectionPlaceholder.root.isVisible = true
+            }
+        }
+    }
+
 
     fun setAdapters() {
         binding.titlesRv.apply {

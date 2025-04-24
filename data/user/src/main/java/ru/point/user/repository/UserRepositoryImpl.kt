@@ -32,7 +32,7 @@ class UserRepositoryImpl(
     override suspend fun isAuthorized() = tokenStorage.token != null
 
     override suspend fun getUserData() =
-        userService.getUserData(userId = tokenStorage.getUserId()).getOrNull()
+        userService.getUserData(userId = tokenStorage.getUserId())
 
     override suspend fun editUserData(editUserDataRequest: EditUserDataRequest) =
         userService.editUserData(

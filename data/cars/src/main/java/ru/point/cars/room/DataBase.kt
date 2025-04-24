@@ -8,7 +8,7 @@ import ru.point.cars.model.SearchHistory
 
 const val DATABASE_NAME = "drive_sell.db"
 
-@Database(entities = [SearchHistory::class], version = 1)
+@Database(entities = [SearchHistory::class], version = 1, exportSchema = false)
 abstract class DataBase : RoomDatabase() {
 
     abstract fun getSearchHistoryDao(): SearchHistoryDao

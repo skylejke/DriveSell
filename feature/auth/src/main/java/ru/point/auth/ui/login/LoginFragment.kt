@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.filterNotNull
@@ -12,8 +12,10 @@ import ru.point.auth.databinding.FragmentLoginBinding
 import ru.point.auth.di.AuthComponentHolderVM
 import ru.point.auth.di.authComponent
 import ru.point.common.ext.bottomBar
+import ru.point.common.ext.clearErrorOnTextChanged
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ext.showSnackbar
+import ru.point.common.model.Status
 import ru.point.common.ui.ComponentHolderFragment
 
 internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
@@ -38,6 +40,12 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
         bottomBar.hide()
 
         repeatOnLifecycleScope {
+            loginViewModel.status.filterNotNull().collect {
+                updatePlaceholder(it)
+            }
+        }
+
+        repeatOnLifecycleScope {
             loginViewModel.usernameError.filterNotNull().collect {
                 binding.usernameTil.error = it
             }
@@ -51,17 +59,12 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
         repeatOnLifecycleScope {
             loginViewModel.loginEvent.filterNotNull().collect {
                 navigator.fromLoginFragmentToHomeFragment()
-                showSnackbar(binding.root, "Successfully logged in")
             }
         }
 
-        binding.usernameEt.doOnTextChanged { _, _, _, _ ->
-            binding.usernameTil.error = null
-        }
+        binding.usernameEt.clearErrorOnTextChanged(binding.usernameTil)
 
-        binding.passwordEt.doOnTextChanged { _, _, _, _ ->
-            binding.passwordTil.error = null
-        }
+        binding.passwordEt.clearErrorOnTextChanged(binding.passwordTil)
 
         binding.signInBtn.setOnClickListener {
             loginViewModel.login(
@@ -76,6 +79,24 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
         binding.continueAsAGuestBtn.setOnClickListener {
             navigator.fromLoginFragmentToHomeFragment()
+        }
+    }
+
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                loadingPlaceholder.root.isVisible = true
+            }
+
+            is Status.Success -> {
+                loadingPlaceholder.root.isVisible = false
+                showSnackbar(root, "Successfully logged in")
+            }
+
+            is Status.Error -> {
+                loadingPlaceholder.root.isVisible = false
+                showSnackbar(root, "Something went wrong")
+            }
         }
     }
 }

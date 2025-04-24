@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -19,6 +20,7 @@ import ru.point.cars.model.AdVo
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ext.showSnackbar
+import ru.point.common.model.Status
 import ru.point.common.ui.ComponentHolderFragment
 import javax.inject.Inject
 
@@ -51,11 +53,12 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
 
         binding.carPhotos.adapter = carPhotoAdapter
 
-        with(carDetailsViewModel) {
-            getCarAdById(args.adId)
-            checkIsUsersAd(args.userId)
-            checkIsFavourite(args.adId)
-            checkIsInComparisons(args.adId)
+       getCarDetails()
+
+        repeatOnLifecycleScope {
+            carDetailsViewModel.status.collect { status ->
+                updatePlaceholder(status)
+            }
         }
 
         repeatOnLifecycleScope {
@@ -141,10 +144,70 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
             }
         }
 
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            getCarDetails()
+        }
+
         binding.carDetailsToolBar.backIcon.setOnClickListener {
             navigator.popBackStack()
         }
     }
+
+    private fun getCarDetails() {
+        with(carDetailsViewModel) {
+            getCarAdById(args.adId)
+            checkIsUsersAd(args.userId)
+            checkIsFavourite(args.adId)
+            checkIsInComparisons(args.adId)
+        }
+    }
+
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                shimmerPhoto.isVisible = true
+                shimmerPhoto.startShimmer()
+
+                shimmerSpecs.isVisible = true
+                shimmerSpecs.startShimmer()
+
+                carPhotos.isVisible = false
+                carDetailsSpecs.root.isVisible = false
+                carDetailsToolBar.secondaryIcon.isVisible = false
+                carDetailsToolBar.primaryIcon.isVisible = false
+                noConnectionPlaceholder.root.isVisible = false
+            }
+
+            is Status.Success -> {
+                shimmerPhoto.isVisible = false
+                shimmerPhoto.stopShimmer()
+
+                shimmerSpecs.isVisible = false
+                shimmerSpecs.stopShimmer()
+
+                carPhotos.isVisible = true
+                carDetailsSpecs.root.isVisible = true
+                carDetailsToolBar.secondaryIcon.isVisible = true
+                carDetailsToolBar.primaryIcon.isVisible = true
+                noConnectionPlaceholder.root.isVisible = false
+            }
+
+            is Status.Error -> {
+                shimmerPhoto.isVisible = false
+                shimmerPhoto.stopShimmer()
+
+                shimmerSpecs.isVisible = false
+                shimmerSpecs.stopShimmer()
+
+                carPhotos.isVisible = false
+                carDetailsSpecs.root.isVisible = false
+                carDetailsToolBar.secondaryIcon.isVisible = false
+                carDetailsToolBar.primaryIcon.isVisible = false
+                noConnectionPlaceholder.root.isVisible = true
+            }
+        }
+    }
+
 
     private fun setCarSpecs(adVo: AdVo) {
         carPhotoAdapter.submitList(adVo.photos)

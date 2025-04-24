@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import ru.point.common.ext.isValidPassword
+import ru.point.common.model.Status
 import ru.point.user.model.EditUserPasswordRequest
 import ru.point.user.repository.UserRepository
 
 internal class EditPasswordViewModel(
-    private val userRepository: UserRepository,
-) :
-    ViewModel() {
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     private val _oldPasswordError = MutableStateFlow<String?>(null)
     val oldPasswordError get() = _oldPasswordError.asStateFlow()
@@ -29,12 +29,19 @@ internal class EditPasswordViewModel(
     private val _passwordChangedEvent = MutableSharedFlow<Unit>(replay = 1)
     val passwordChangedEvent = _passwordChangedEvent.asSharedFlow()
 
+    private val _status = MutableStateFlow<Status?>(null)
+    val status get() = _status.asStateFlow()
+
     fun editPassword(
         oldPassword: String,
         newPassword: String,
         confirmNewPassword: String
     ) {
-        if (!validatePasswordFields(oldPassword, newPassword, confirmNewPassword)) return
+        _status.value = Status.Loading
+        if (!validatePasswordFields(oldPassword, newPassword, confirmNewPassword)) {
+            _status.value = Status.Error
+            return
+        }
         viewModelScope.launch {
             userRepository.editPassword(
                 EditUserPasswordRequest(
@@ -44,9 +51,11 @@ internal class EditPasswordViewModel(
                 )
             ).fold(
                 onSuccess = {
+                    _status.value = Status.Success
                     _passwordChangedEvent.emit(Unit)
                 },
                 onFailure = { error ->
+                    _status.value = Status.Error
                     if (error is HttpException) {
                         when (error.code()) {
                             403 -> _oldPasswordError.value = "Current password is incorrect"

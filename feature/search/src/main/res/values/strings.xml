@@ -31,6 +31,7 @@
     <string name="oldest_year">Oldest year</string>
     <string name="newest_listed">Newest listed</string>
     <string name="oldest_listed">Oldest listed</string>
+    <string name="nothing_found">Nothing found</string>
 
     <string-array name="body_types">
         <item>Sedan</item>

@@ -9,6 +9,11 @@
         android:id="@+id/search_results_tool_bar"
         layout="@layout/fragment_search_results_tool_bar" />
 
+    <include
+        android:id="@+id/nothing_found_place_holder"
+        layout="@layout/nothing_found_placeholder"
+        android:visibility="gone" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/car_ads_counter"
         android:layout_width="wrap_content"
@@ -31,6 +36,50 @@
         app:layout_constraintBottom_toBottomOf="@id/car_ads_counter"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/no_connection_placeholder"
+            layout="@layout/no_connection_placeholder"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_ads_counter">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/car_list_item_shimmer" />
+
+            <include layout="@layout/car_list_item_shimmer" />
+
+            <include layout="@layout/car_list_item_shimmer" />
+
+            <include layout="@layout/car_list_item_shimmer" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/car_list"
         android:layout_width="0dp"
@@ -41,6 +90,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_ads_counter" />
+        app:layout_constraintTop_toBottomOf="@id/car_ads_counter"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

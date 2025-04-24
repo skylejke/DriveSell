@@ -13,6 +13,7 @@ import ru.point.common.ext.isValidEmail
 import ru.point.common.ext.isValidPassword
 import ru.point.common.ext.isValidPhoneNumber
 import ru.point.common.ext.isValidUserName
+import ru.point.common.model.Status
 import ru.point.user.model.AuthResponse
 import ru.point.user.model.RegisterRequest
 import ru.point.user.repository.UserRepository
@@ -36,8 +37,15 @@ internal class RegisterViewModel(
     private val _passwordError = MutableStateFlow<String?>(null)
     val passwordError get() = _passwordError.asStateFlow()
 
+    private val _status = MutableStateFlow<Status?>(null)
+    val status get() = _status.asStateFlow()
+
     fun register(username: String, email: String, phoneNumber: String, password: String) {
-        if (!validateRegisterFields(username, email, phoneNumber, password)) return
+        _status.value = Status.Loading
+        if (!validateRegisterFields(username, email, phoneNumber, password)) {
+            _status.value = Status.Error
+            return
+        }
         viewModelScope.launch {
             userRepository.register(
                 RegisterRequest(
@@ -48,9 +56,11 @@ internal class RegisterViewModel(
                 )
             ).fold(
                 onSuccess = {
+                    _status.value = Status.Success
                     _registerEvent.emit(Unit)
                 },
                 onFailure = { error ->
+                    _status.value = Status.Error
                     if (error is HttpException && error.code() == 409) {
                         val errorBody = error.response()?.errorBody()?.string()
                         errorBody?.let {
@@ -67,7 +77,8 @@ internal class RegisterViewModel(
                             }
                         }
                     }
-                })
+                }
+            )
         }
     }
 

@@ -16,6 +16,7 @@ import ru.point.cars.model.asAdVo
 import ru.point.cars.model.asBrandVo
 import ru.point.cars.model.asModelVo
 import ru.point.cars.repository.CarsRepository
+import ru.point.common.model.Status
 
 internal class EditCarViewModel(private val carsRepository: CarsRepository) : ViewModel() {
 
@@ -31,31 +32,48 @@ internal class EditCarViewModel(private val carsRepository: CarsRepository) : Vi
     private val _editCarEvent = MutableSharedFlow<Unit>()
     val editCarEvent get() = _editCarEvent.asSharedFlow()
 
-    init {
-        getBrands()
-    }
+    private val _status = MutableStateFlow<Status>(Status.Loading)
+    val status get() = _status.asStateFlow()
 
     fun getBrands() {
+        _status.value = Status.Loading
         viewModelScope.launch {
-            carsRepository.getBrands().onSuccess { brandList ->
-                _brands.value = brandList.map { it.asBrandVo }
-            }
+            carsRepository.getBrands()
+                .onSuccess { brandList ->
+                    _status.value = Status.Success
+                    _brands.value = brandList.map { it.asBrandVo }
+                }
+                .onFailure {
+                    _status.value = Status.Error
+                }
         }
     }
 
     fun getModels(brandName: String) {
+        _status.value = Status.Loading
         viewModelScope.launch {
-            carsRepository.getModelsByBrand(brandName).onSuccess { modelList ->
-                _models.value = modelList.map { it.asModelVo }
-            }
+            carsRepository.getModelsByBrand(brandName)
+                .onSuccess { modelList ->
+                    _status.value = Status.Success
+                    _models.value = modelList.map { it.asModelVo }
+                }
+                .onFailure {
+                    _status.value = Status.Error
+                }
         }
     }
 
     fun getCarData(adId: String) {
+        _status.value = Status.Loading
         viewModelScope.launch {
-            carsRepository.getCarAdById(adId).onSuccess {
-                _carData.value = it.asAdVo
-            }
+            carsRepository.getCarAdById(adId)
+                .onSuccess {
+                    _status.value = Status.Success
+                    _carData.value = it.asAdVo
+                }
+                .onFailure {
+                    _status.value = Status.Error
+                }
         }
     }
 
@@ -73,7 +91,7 @@ internal class EditCarViewModel(private val carsRepository: CarsRepository) : Vi
                 removePhotoIds = removedPhotos
             ).fold(
                 onSuccess = { _editCarEvent.emit(Unit) },
-                onFailure = {  }
+                onFailure = { }
             )
         }
     }

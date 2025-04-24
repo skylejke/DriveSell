@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import ru.point.cars.model.AdVo
 import ru.point.cars.model.asAdVo
 import ru.point.cars.repository.CarsRepository
+import ru.point.common.model.Status
 import ru.point.user.repository.UserRepository
 
 class CarDetailsViewModel(
@@ -30,11 +31,18 @@ class CarDetailsViewModel(
     private val _isGuest = MutableStateFlow<Boolean?>(null)
     val isGuest get() = _isGuest.asStateFlow()
 
+    private val _status = MutableStateFlow<Status>(Status.Loading)
+    val status get() = _status.asStateFlow()
+
     fun getCarAdById(adId: String) {
+        _status.value = Status.Loading
         viewModelScope.launch {
-            carsRepository.getCarAdById(adId).onSuccess {
-                _carDetails.value = it.asAdVo
-            }
+            carsRepository.getCarAdById(adId)
+                .onSuccess {
+                    _status.value = Status.Success
+                    _carDetails.value = it.asAdVo
+                }
+                .onFailure { _status.value = Status.Error }
         }
     }
 

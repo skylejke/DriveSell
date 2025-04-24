@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.model.Status
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.favourites.databinding.FragmentFavouritesBinding
 import ru.point.favourites.di.FavouritesComponentHolderVM
@@ -49,8 +51,43 @@ internal class FavouritesFragment : ComponentHolderFragment<FragmentFavouritesBi
         }
 
         repeatOnLifecycleScope {
+            favouritesViewModel.status.collect { status ->
+                updatePlaceholder(status)
+            }
+        }
+
+        repeatOnLifecycleScope {
             favouritesViewModel.favourites.collect { favourites ->
                 carAdapter.submitList(favourites)
+            }
+        }
+
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            favouritesViewModel.getFavourites()
+        }
+    }
+
+    private fun updatePlaceholder(status: Status) {
+        with(binding) {
+            when (status) {
+                is Status.Loading -> {
+                    shimmerLayout.isVisible = true
+                    shimmerLayout.startShimmer()
+                    favouriteList.isVisible = false
+                    noConnectionPlaceholder.root.isVisible = false
+                }
+                is Status.Success -> {
+                    shimmerLayout.stopShimmer()
+                    shimmerLayout.isVisible = false
+                    favouriteList.isVisible = true
+                    noConnectionPlaceholder.root.isVisible = false
+                }
+                is Status.Error -> {
+                    shimmerLayout.stopShimmer()
+                    shimmerLayout.isVisible = false
+                    favouriteList.isVisible = false
+                    noConnectionPlaceholder.root.isVisible = true
+                }
             }
         }
     }

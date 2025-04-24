@@ -15,4 +15,5 @@
     <string name="owners">Owners</string>
     <string name="car_price">%1$,d $</string>
     <string name="car_brand_model_year">%1$s %2$s, %3$d</string>
+    <string name="comparisons">Comparisons</string>
 </resources>

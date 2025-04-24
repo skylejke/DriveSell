@@ -11,6 +11,7 @@ import ru.point.cars.model.SearchHistory
 import ru.point.common.model.ResponseMessage
 
 interface CarsRepository {
+
     suspend fun getBrands(): Result<List<BrandDto>>
 
     suspend fun getModelsByBrand(brandName: String): Result<List<ModelDto>>

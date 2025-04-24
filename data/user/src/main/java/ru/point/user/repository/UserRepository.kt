@@ -20,7 +20,7 @@ interface UserRepository {
 
     suspend fun isAuthorized(): Boolean
 
-    suspend fun getUserData(): UserData?
+    suspend fun getUserData(): Result<UserData?>
 
     suspend fun editUserData(editUserDataRequest: EditUserDataRequest): Result<ResponseMessage>
 

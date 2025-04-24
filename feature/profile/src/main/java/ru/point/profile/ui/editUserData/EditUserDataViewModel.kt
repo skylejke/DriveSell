@@ -13,6 +13,7 @@ import ru.point.common.ext.isValidEmail
 import ru.point.common.ext.isValidPhoneNumber
 import ru.point.common.ext.isValidUserName
 import ru.point.common.model.ResponseMessage
+import ru.point.common.model.Status
 import ru.point.user.model.EditUserDataRequest
 import ru.point.user.model.UserData
 import ru.point.user.repository.UserRepository
@@ -36,9 +37,24 @@ internal class EditUserDataViewModel(
     private val _userDataChangedEvent = MutableSharedFlow<Unit>(replay = 1)
     val userDataChangedEvent get() = _userDataChangedEvent.asSharedFlow()
 
+    private val _status = MutableStateFlow<Status>(Status.Loading)
+    val status get() = _status.asStateFlow()
+
     init {
+        getUserData()
+    }
+
+    fun getUserData() {
+        _status.value = Status.Loading
         viewModelScope.launch {
-            _userData.value = userRepository.getUserData()
+            userRepository.getUserData()
+                .onSuccess {
+                    _status.value = Status.Success
+                    _userData.value = it
+                }
+                .onFailure {
+                    _status.value = Status.Error
+                }
         }
     }
 

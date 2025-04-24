@@ -11,8 +11,26 @@
         layout="@layout/fragment_profile_tool_bar" />
 
     <include
+        android:id="@+id/no_connection_placeholder"
+        layout="@layout/no_connection_placeholder"
+        android:visibility="gone" />
+
+    <include
         android:id="@+id/profile_card"
         layout="@layout/fragment_profile_card" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="16dp"
+        tools:visibility="gone">
+
+        <include
+            android:id="@+id/profile_card_shimmer"
+            layout="@layout/fragment_profile_card_shimmer" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/log_in_btn"

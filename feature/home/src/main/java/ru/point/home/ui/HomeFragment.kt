@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.point.cars.model.enums.OrderParams
@@ -13,6 +14,7 @@ import ru.point.cars.model.enums.SortParams
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.model.Status
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.home.R
 import ru.point.home.databinding.FragmentHomeBinding
@@ -53,15 +55,35 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
         }
 
         repeatOnLifecycleScope {
-            homeViewModel.cars.collect { carList ->
-                carAdapter.submitList(carList)
-                binding.carAdsCounter.text =
-                    resources.getQuantityString(
-                        R.plurals.car_ads_counter,
-                        carList.size,
-                        carList.size
-                    )
+            homeViewModel.status.collect { status ->
+                updatePlaceholder(status)
             }
+        }
+
+        repeatOnLifecycleScope {
+            homeViewModel.cars.collect {
+                with(binding) {
+                    nothingFoundPlaceHolder.root.isVisible = it.isEmpty()
+                    sortBtn.isVisible = it.isNotEmpty()
+                    carAdsCounter.isVisible = it.isNotEmpty()
+                    carList.isVisible = it.isNotEmpty()
+                    if (it.isNotEmpty()) {
+                        carAdapter.submitList(it){
+                            carList.scrollToPosition(0)
+                        }
+                        carAdsCounter.text =
+                            resources.getQuantityString(
+                                R.plurals.car_ads_counter,
+                                it.size,
+                                it.size
+                            )
+                    }
+                }
+            }
+        }
+
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            homeViewModel.getCars()
         }
 
         binding.homeToolBar.searchIcon.setOnClickListener {
@@ -70,6 +92,33 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
 
         binding.sortBtn.setOnClickListener {
             showSortMenu()
+        }
+    }
+
+    private fun updatePlaceholder(status: Status) {
+        with(binding) {
+            when (status) {
+                is Status.Loading -> {
+                    shimmerLayout.isVisible = true
+                    shimmerLayout.startShimmer()
+                    carList.isVisible = false
+                    noConnectionPlaceholder.root.isVisible = false
+                }
+
+                is Status.Success -> {
+                    shimmerLayout.stopShimmer()
+                    shimmerLayout.isVisible = false
+                    carList.isVisible = true
+                    noConnectionPlaceholder.root.isVisible = false
+                }
+
+                is Status.Error -> {
+                    shimmerLayout.stopShimmer()
+                    shimmerLayout.isVisible = false
+                    carList.isVisible = false
+                    noConnectionPlaceholder.root.isVisible = true
+                }
+            }
         }
     }
 

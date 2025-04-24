@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
 import ru.point.common.ext.bottomBar
+import ru.point.common.ext.clearErrorOnTextChanged
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.model.Status
 import ru.point.common.ui.BaseFragment
 import ru.point.profile.databinding.FragmentEditUserDataBinding
 import ru.point.profile.di.profileComponent
@@ -33,6 +35,12 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         bottomBar.hide()
+
+        repeatOnLifecycleScope {
+            editUserDataViewModel.status.collect { status ->
+                updatePlaceholder(status)
+            }
+        }
 
         repeatOnLifecycleScope {
             editUserDataViewModel.userData.filterNotNull().collect { userData ->
@@ -68,17 +76,11 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
             }
         }
 
-        binding.usernameEt.doOnTextChanged { _, _, _, _ ->
-            binding.usernameTil.error = null
-        }
+        binding.usernameEt.clearErrorOnTextChanged(binding.usernameTil)
 
-        binding.emailEt.doOnTextChanged { _, _, _, _ ->
-            binding.emailTil.error = null
-        }
+        binding.emailEt.clearErrorOnTextChanged(binding.emailTil)
 
-        binding.phoneNumberEt.doOnTextChanged { _, _, _, _ ->
-            binding.phoneNumberTil.error = null
-        }
+        binding.phoneNumberEt.clearErrorOnTextChanged(binding.phoneNumberTil)
 
         binding.fragmentEditUserDataToolBar.checkIcon.setOnClickListener {
             editUserDataViewModel.editUserData(
@@ -88,8 +90,46 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
             )
         }
 
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            editUserDataViewModel.getUserData()
+        }
+
         binding.fragmentEditUserDataToolBar.closeIcon.setOnClickListener {
             navigator.popBackStack()
+        }
+    }
+
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                shimmerLayout.isVisible = true
+                shimmerLayout.startShimmer()
+                fragmentEditUserDataToolBar.checkIcon.isVisible = false
+                usernameTil.isVisible = false
+                emailTil.isVisible = false
+                phoneNumberTil.isVisible = false
+                noConnectionPlaceholder.root.isVisible = false
+            }
+
+            is Status.Success -> {
+                shimmerLayout.isVisible = false
+                shimmerLayout.stopShimmer()
+                fragmentEditUserDataToolBar.checkIcon.isVisible = true
+                usernameTil.isVisible = true
+                emailTil.isVisible = true
+                phoneNumberTil.isVisible = true
+                noConnectionPlaceholder.root.isVisible = false
+            }
+
+            is Status.Error -> {
+                shimmerLayout.isVisible = false
+                shimmerLayout.stopShimmer()
+                fragmentEditUserDataToolBar.checkIcon.isVisible = false
+                usernameTil.isVisible = false
+                emailTil.isVisible = false
+                phoneNumberTil.isVisible = false
+                noConnectionPlaceholder.root.isVisible = true
+            }
         }
     }
 }

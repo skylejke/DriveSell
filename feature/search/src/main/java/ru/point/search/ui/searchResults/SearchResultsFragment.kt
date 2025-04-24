@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import ru.point.cars.model.enums.SortParams
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.model.Status
 import ru.point.common.ui.BaseFragment
 import ru.point.search.R
 import ru.point.search.databinding.FragmentSearchResultsBinding
@@ -34,11 +36,8 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         searchComponent.inject(this)
-
         _carAdapter = CarAdapter { navigator.fromSearchResultsFragmentToCarDetailsFragment(it.id, it.userId) }
-
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
@@ -50,26 +49,45 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
         getSearchedCars()
 
         binding.carList.apply {
-            layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter
+            layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(CarAdapterDecorator())
         }
 
         repeatOnLifecycleScope {
+            searchResultsViewModel.status.collect { status ->
+                updatePlaceholder(status)
+            }
+        }
+
+        repeatOnLifecycleScope {
             searchResultsViewModel.foundAds.collect {
-                carAdapter.submitList(it)
-                binding.carAdsCounter.text =
-                    resources.getQuantityString(
-                        R.plurals.car_ads_counter,
-                        it.size,
-                        it.size
-                    )
+                with(binding) {
+                    nothingFoundPlaceHolder.root.isVisible = it.isEmpty()
+                    sortBtn.isVisible = it.isNotEmpty()
+                    carAdsCounter.isVisible = it.isNotEmpty()
+                    carList.isVisible = it.isNotEmpty()
+                    if (it.isNotEmpty()) {
+                        carAdapter.submitList(it){
+                            carList.scrollToPosition(0)
+                        }
+                        carAdsCounter.text =
+                            resources.getQuantityString(
+                                R.plurals.car_ads_counter,
+                                it.size,
+                                it.size
+                            )
+                    }
+                }
             }
         }
 
         binding.sortBtn.setOnClickListener {
-            showSortMenu(
-            )
+            showSortMenu()
+        }
+
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            getSearchedCars()
         }
 
         binding.searchResultsToolBar.backIcon.setOnClickListener {
@@ -130,6 +148,35 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
         sortMenu.show()
     }
 
+    private fun updatePlaceholder(status: Status) {
+        with(binding) {
+            when (status) {
+                is Status.Loading -> {
+                    shimmerLayout.isVisible = true
+                    shimmerLayout.startShimmer()
+                    carList.isVisible = false
+                    noConnectionPlaceholder.root.isVisible = false
+                }
+
+                is Status.Success -> {
+                    shimmerLayout.stopShimmer()
+                    shimmerLayout.isVisible = false
+                    carList.isVisible = true
+                    noConnectionPlaceholder.root.isVisible = false
+                }
+
+                is Status.Error -> {
+                    shimmerLayout.stopShimmer()
+                    sortBtn.isVisible = false
+                    carAdsCounter.isVisible = false
+                    shimmerLayout.isVisible = false
+                    carList.isVisible = false
+                    noConnectionPlaceholder.root.isVisible = true
+                }
+            }
+        }
+    }
+
     private fun getSearchedCars(
         sortParam: String = SortParams.DATE.toString(),
         orderParam: String = OrderParams.DESC.toString()
@@ -166,6 +213,11 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
                 orderParam = orderParam
             )
         }
+    }
+
+    override fun onDestroyView() {
+        binding.carList.adapter = null
+        super.onDestroyView()
     }
 
     override fun onDestroy() {

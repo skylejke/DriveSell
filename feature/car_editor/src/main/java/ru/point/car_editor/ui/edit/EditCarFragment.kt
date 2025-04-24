@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts.PickMultipleVisualMedia
 import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.flow.filterNotNull
@@ -23,7 +23,7 @@ import ru.point.cars.ui.CarEditorPhotosAdapter
 import ru.point.cars.ui.CarEditorPhotosAdapterItem
 import ru.point.common.ext.NumberErrorConsts
 import ru.point.common.ext.repeatOnLifecycleScope
-import ru.point.common.ext.showSnackbar
+import ru.point.common.model.Status
 import ru.point.common.ui.ComponentHolderFragment
 import javax.inject.Inject
 
@@ -34,64 +34,38 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
 
     private val editCarViewModel by viewModels<EditCarViewModel> { editCarViewModelFactory }
 
+    private var _carEditorPhotosAdapter: CarEditorPhotosAdapter? = null
+    private val carEditorPhotosAdapter get() = requireNotNull(_carEditorPhotosAdapter)
+
     private val args: EditCarFragmentArgs by navArgs()
 
-    val pickMultipleMedia =
+    private val pickMultipleMedia =
         registerForActivityResult(PickMultipleVisualMedia(30)) { uris ->
             if (uris.isNotEmpty()) {
-                val currentItems = carEditorPhotosAdapter.currentList.toMutableList()
-                currentItems.addAll(uris.map { CarEditorPhotosAdapterItem.Photo(it) })
-                carEditorPhotosAdapter.submitList(currentItems)
+                val items = carEditorPhotosAdapter.currentList.toMutableList()
+                items.addAll(uris.map { CarEditorPhotosAdapterItem.Photo(it) })
+                carEditorPhotosAdapter.submitList(items)
             }
         }
 
     private val removedPhotoIds = mutableListOf<String>()
 
-    private var _carEditorPhotosAdapter: CarEditorPhotosAdapter? = null
-    private val carEditorPhotosAdapter get() = requireNotNull(_carEditorPhotosAdapter)
-
-    private var _brandsAdapter: ArrayAdapter<String>? = null
-    private val brandsAdapter get() = requireNotNull(_brandsAdapter)
-
-    private var _modelsAdapter: ArrayAdapter<String>? = null
-    private val modelsAdapter get() = requireNotNull(_modelsAdapter)
-
-    private var _yearsAdapter: ArrayAdapter<String>? = null
-    private val yearsAdapter get() = requireNotNull(_yearsAdapter)
-
-    private var _fuelTypeAdapter: ArrayAdapter<String>? = null
-    private val fuelTypeAdapter get() = requireNotNull(_fuelTypeAdapter)
-
-    private var _bodyTypeAdapter: ArrayAdapter<String>? = null
-    private val bodyTypeAdapter get() = requireNotNull(_bodyTypeAdapter)
-
-    private var _colorAdapter: ArrayAdapter<String>? = null
-    private val colorAdapter get() = requireNotNull(_colorAdapter)
-
-    private var _drivetrainAdapter: ArrayAdapter<String>? = null
-    private val drivetrainAdapter get() = requireNotNull(_drivetrainAdapter)
-
-    private var _wheelAdapter: ArrayAdapter<String>? = null
-    private val wheelAdapter get() = requireNotNull(_wheelAdapter)
-
-    private var _conditionAdapter: ArrayAdapter<String>? = null
-    private val conditionAdapter get() = requireNotNull(_conditionAdapter)
-
-    private var _transmissionAdapter: ArrayAdapter<String>? = null
-    private val transmissionAdapter get() = requireNotNull(_transmissionAdapter)
-
-    private var _numberOfYearsAdapter: ArrayAdapter<String>? = null
-    private val numberOfYearsAdapter get() = requireNotNull(_numberOfYearsAdapter)
-
-    private var _numberOfMonthsAdapter: ArrayAdapter<String>? = null
-    private val numberOfMonthsAdapter get() = requireNotNull(_numberOfMonthsAdapter)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initHolder<CarEditorComponentHolderVM>()
         carEditorComponent.inject(this)
-        initializeAdapters()
-        editCarViewModel.getCarData(args.adId)
+
+        _carEditorPhotosAdapter = CarEditorPhotosAdapter(
+            onAddPhotoClick = {
+                pickMultipleMedia.launch(PickVisualMediaRequest(PickVisualMedia.ImageAndVideo))
+            },
+            onDeletePhotoClick = { photo ->
+                photo.photoId?.let { removedPhotoIds.add(it) }
+                carEditorPhotosAdapter.submitList(
+                    carEditorPhotosAdapter.currentList.filter { it != photo }
+                )
+            }
+        )
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
@@ -100,249 +74,191 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setAdapters()
+        clearFields()
 
-        binding.brandEt.setOnItemClickListener { parent, view, position, id ->
-            binding.modelEt.setText("", false)
-            editCarViewModel.getModels(parent.getItemAtPosition(position) as String)
+        with(binding.carEditorFields) {
+            brandEt.setSimpleItems(emptyArray())
+            modelEt.setSimpleItems(emptyArray())
+            yearEt.setSimpleItems(resources.getStringArray(R.array.years))
+            fuelTypeEt.setSimpleItems(resources.getStringArray(R.array.fuel_types))
+            bodyTypeEt.setSimpleItems(resources.getStringArray(R.array.body_types))
+            colorEt.setSimpleItems(resources.getStringArray(R.array.colors))
+            transmissionEt.setSimpleItems(resources.getStringArray(R.array.transmissions))
+            drivetrainEt.setSimpleItems(resources.getStringArray(R.array.drivetrains))
+            wheelEt.setSimpleItems(resources.getStringArray(R.array.wheels))
+            conditionEt.setSimpleItems(resources.getStringArray(R.array.conditions))
+            ownershipPeriodYearsEt.setSimpleItems(resources.getStringArray(R.array.number_of_years))
+            ownershipPeriodMonthsEt.setSimpleItems(resources.getStringArray(R.array.number_of_months))
         }
+
+        binding.photosRv.adapter = carEditorPhotosAdapter
+        carEditorPhotosAdapter.submitList(listOf(CarEditorPhotosAdapterItem.ButtonEditor))
+
+        editCarViewModel.getBrands()
+        editCarViewModel.getCarData(args.adId)
+
+        repeatOnLifecycleScope { editCarViewModel.status.collect { updatePlaceholder(it) } }
 
         repeatOnLifecycleScope {
             editCarViewModel.brands.collect { brands ->
-                brandsAdapter.clear()
-                brandsAdapter.addAll(brands.map { it.name })
-                brandsAdapter.notifyDataSetChanged()
+                binding.carEditorFields.brandEt.setSimpleItems(
+                    brands.map { it.name }.toTypedArray()
+                )
             }
         }
-
         repeatOnLifecycleScope {
             editCarViewModel.models.collect { models ->
-                modelsAdapter.clear()
-                modelsAdapter.addAll(models.map { it.name })
-                modelsAdapter.notifyDataSetChanged()
+                binding.carEditorFields.modelEt.setSimpleItems(
+                    models.map { it.name }.toTypedArray()
+                )
+                binding.carEditorFields.modelTil.isVisible = models.isNotEmpty()
             }
         }
 
         repeatOnLifecycleScope {
-            editCarViewModel.carData.filterNotNull().collect {
-                setData(it.car)
-                setPhotos(it.photos)
-                editCarViewModel.getModels(it.car.brand)
-            }
-        }
-
-        repeatOnLifecycleScope {
-            editCarViewModel.editCarEvent.collect {
-                navigator.popBackStack()
-                showSnackbar(binding.root, "Successfully edit car")
+            editCarViewModel.carData.filterNotNull().collect { data ->
+                populateFields(data.car)
+                populatePhotos(data.photos)
+                editCarViewModel.getModels(data.car.brand)
             }
         }
 
         binding.editCarToolBar.checkIcon.setOnClickListener {
-            with(binding) {
-                val ownershipPeriod = run {
-                    val yearsText = ownershipPeriodYearsEt.text.toString()
-                    val monthsText = ownershipPeriodMonthsEt.text.toString()
-                    if (yearsText.startsWith("0")) monthsText else "$yearsText $monthsText"
-                }
-
-                editCarViewModel.editCar(
-                    adId = args.adId,
-                    carUpdateRequest = EditCarRequest(
+            editCarViewModel.editCar(
+                adId = args.adId,
+                carUpdateRequest = binding.carEditorFields.run {
+                    EditCarRequest(
                         brand = brandEt.text.toString(),
                         model = modelEt.text.toString(),
-                        year = yearEt.text.toString().toShortOrNull()
-                            ?: NumberErrorConsts.ERROR_SHORT_VALUE,
-                        price = priceEt.text.toString().toIntOrNull()
-                            ?: NumberErrorConsts.ERROR_INT_VALUE,
-                        enginePower = enginePowerEt.text.toString().toShortOrNull()
-                            ?: NumberErrorConsts.ERROR_SHORT_VALUE,
-                        engineCapacity = engineCapacityEt.text.toString().toDoubleOrNull()
-                            ?: NumberErrorConsts.ERROR_DOUBLE_VALUE,
+                        year = yearEt.text.toString().toShortOrNull() ?: NumberErrorConsts.ERROR_SHORT_VALUE,
+                        price = priceEt.text.toString().toIntOrNull() ?: NumberErrorConsts.ERROR_INT_VALUE,
+                        enginePower = enginePowerEt.text.toString().toShortOrNull() ?: NumberErrorConsts.ERROR_SHORT_VALUE,
+                        engineCapacity = engineCapacityEt.text.toString().toDoubleOrNull() ?: NumberErrorConsts.ERROR_DOUBLE_VALUE,
                         fuelType = fuelTypeEt.text.toString(),
-                        mileage = mileageEt.text.toString().toIntOrNull()
-                            ?: NumberErrorConsts.ERROR_INT_VALUE,
+                        mileage = mileageEt.text.toString().toIntOrNull() ?: NumberErrorConsts.ERROR_INT_VALUE,
                         bodyType = bodyTypeEt.text.toString(),
                         color = colorEt.text.toString(),
                         transmission = transmissionEt.text.toString(),
                         driveTrain = drivetrainEt.text.toString(),
                         wheel = wheelEt.text.toString(),
                         condition = conditionEt.text.toString(),
-                        owners = numberOfOwnersEt.text.toString().toByteOrNull()
-                            ?: NumberErrorConsts.ERROR_BYTE_VALUE,
+                        owners = numberOfOwnersEt.text.toString().toByteOrNull() ?: NumberErrorConsts.ERROR_BYTE_VALUE,
                         vin = vinEt.text.toString(),
-                        ownershipPeriod = ownershipPeriod,
+                        ownershipPeriod = binding.carEditorFields.run {
+                            val years = ownershipPeriodYearsEt.text.toString()
+                            val months = ownershipPeriodMonthsEt.text.toString()
+                            if (years.startsWith("0")) months else "$years $months"
+                        },
                         description = descriptionEt.text.toString()
-                    ),
-                    newPhotos = carEditorPhotosAdapter.currentList
-                        .filterIsInstance<CarEditorPhotosAdapterItem.Photo>()
-                        .filter { it.photoId == null }
-                        .map { it.uri },
-                    removedPhotos = removedPhotoIds
-                )
-            }
-        }
-
-        binding.editCarToolBar.backIcon.setOnClickListener {
-            navigator.popBackStack()
-        }
-    }
-
-    private fun initializeAdapters() {
-
-        _carEditorPhotosAdapter =
-            CarEditorPhotosAdapter(
-                onAddPhotoClick = {
-                    pickMultipleMedia.launch(PickVisualMediaRequest(PickVisualMedia.ImageAndVideo))
-                },
-                onDeletePhotoClick = { photo ->
-                    val photoItem = photo
-                    val id = photoItem.photoId
-                    if (id != null) {
-                        removedPhotoIds.add(id)
-                    }
-                    carEditorPhotosAdapter.submitList(
-                        carEditorPhotosAdapter.currentList.filter { it != photo }
                     )
-                }
+                },
+                newPhotos = carEditorPhotosAdapter.currentList
+                    .filterIsInstance<CarEditorPhotosAdapterItem.Photo>()
+                    .filter { it.photoId == null }
+                    .map { it.uri },
+                removedPhotos = removedPhotoIds
             )
+        }
 
-        _brandsAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item
-        )
-
-        _modelsAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item
-        )
-
-        _yearsAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.years)
-        )
-
-        _fuelTypeAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.fuel_types)
-        )
-
-        _bodyTypeAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.body_types)
-        )
-
-        _colorAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.colors)
-        )
-
-        _drivetrainAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.drivetrains)
-        )
-
-        _wheelAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.wheels)
-        )
-
-        _conditionAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.conditions)
-        )
-
-        _transmissionAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.transmissions)
-        )
-
-        _numberOfYearsAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.number_of_years)
-        )
-
-        _numberOfMonthsAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.number_of_months)
-        )
-    }
-
-    private fun setAdapters() = with(binding) {
-        brandEt.setAdapter(brandsAdapter)
-        modelEt.setAdapter(modelsAdapter)
-        yearEt.setAdapter(yearsAdapter)
-        fuelTypeEt.setAdapter(fuelTypeAdapter)
-        bodyTypeEt.setAdapter(bodyTypeAdapter)
-        colorEt.setAdapter(colorAdapter)
-        transmissionEt.setAdapter(transmissionAdapter)
-        drivetrainEt.setAdapter(drivetrainAdapter)
-        wheelEt.setAdapter(wheelAdapter)
-        conditionEt.setAdapter(conditionAdapter)
-        ownershipPeriodYearsEt.setAdapter(numberOfYearsAdapter)
-        ownershipPeriodMonthsEt.setAdapter(numberOfMonthsAdapter)
-        photosRv.adapter = carEditorPhotosAdapter
-        carEditorPhotosAdapter.submitList(listOf(CarEditorPhotosAdapterItem.ButtonEditor))
-    }
-
-    private fun setData(carVo: CarVo) {
-        with(binding) {
-            brandEt.setText(carVo.brand, false)
-            modelEt.setText(carVo.model, false)
-            yearEt.setText(carVo.year.toString(), false)
-            vinEt.setText(carVo.vin)
-            priceEt.setText(carVo.price.toString())
-            mileageEt.setText(carVo.mileage.toString())
-            enginePowerEt.setText(carVo.enginePower.toString())
-            engineCapacityEt.setText(carVo.engineCapacity.toString())
-            fuelTypeEt.setText(carVo.fuelType, false)
-            bodyTypeEt.setText(carVo.bodyType, false)
-            colorEt.setText(carVo.color, false)
-            transmissionEt.setText(carVo.transmission, false)
-            drivetrainEt.setText(carVo.drivetrain, false)
-            wheelEt.setText(carVo.wheel, false)
-            conditionEt.setText(carVo.condition, false)
-            numberOfOwnersEt.setText(carVo.owners.toString())
-            descriptionEt.setText(carVo.description)
-            val (yearsText, monthsText) = parseOwnershipPeriod(carVo)
-            ownershipPeriodYearsEt.setText(yearsText, false)
-            ownershipPeriodMonthsEt.setText(monthsText, false)
+        binding.editCarToolBar.backIcon.setOnClickListener { navigator.popBackStack() }
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            editCarViewModel.getCarData(args.adId)
+            editCarViewModel.getBrands()
         }
     }
 
-    private fun setPhotos(photos: List<String>) {
-        val currentItems = carEditorPhotosAdapter.currentList.toMutableList()
-        currentItems.addAll(
-            photos.map { photoId ->
-                CarEditorPhotosAdapterItem.Photo(
-                    uri = "${BuildConfig.BASE_URL}/photos/$photoId".toUri(),
-                    photoId = photoId
-                )
-            }
-        )
-        carEditorPhotosAdapter.submitList(currentItems)
+    private fun clearFields() {
+        with(binding.carEditorFields) {
+            brandEt.setText("", false)
+            modelEt.setText("", false)
+            yearEt.setText("", false)
+            vinEt.text?.clear()
+            priceEt.text?.clear()
+            mileageEt.text?.clear()
+            enginePowerEt.text?.clear()
+            engineCapacityEt.text?.clear()
+            fuelTypeEt.setText("", false)
+            bodyTypeEt.setText("", false)
+            colorEt.setText("", false)
+            transmissionEt.setText("", false)
+            drivetrainEt.setText("", false)
+            wheelEt.setText("", false)
+            conditionEt.setText("", false)
+            numberOfOwnersEt.text?.clear()
+            descriptionEt.text?.clear()
+            ownershipPeriodYearsEt.setText("", false)
+            ownershipPeriodMonthsEt.setText("", false)
+            carEditorPhotosAdapter.submitList(listOf(CarEditorPhotosAdapterItem.ButtonEditor))
+        }
     }
 
-    private fun parseOwnershipPeriod(carVo: CarVo): Pair<String, String> {
-        val ownershipPeriodRegex =
-            """(?:(\d+)\s*years?)?\s*(?:(\d+)\s*months?)?""".toRegex(RegexOption.IGNORE_CASE)
+    private fun populateFields(car: CarVo) {
+        with(binding.carEditorFields) {
+            brandEt.setText(car.brand, false)
+            modelEt.setText(car.model, false)
+            yearEt.setText(car.year.toString(), false)
+            vinEt.setText(car.vin)
+            priceEt.setText(car.price.toString())
+            mileageEt.setText(car.mileage.toString())
+            enginePowerEt.setText(car.enginePower.toString())
+            engineCapacityEt.setText(car.engineCapacity.toString())
+            fuelTypeEt.setText(car.fuelType, false)
+            bodyTypeEt.setText(car.bodyType, false)
+            colorEt.setText(car.color, false)
+            transmissionEt.setText(car.transmission, false)
+            drivetrainEt.setText(car.drivetrain, false)
+            wheelEt.setText(car.wheel, false)
+            conditionEt.setText(car.condition, false)
+            numberOfOwnersEt.setText(car.owners.toString())
+            descriptionEt.setText(car.description)
+        }
+    }
 
-        val matchResult = ownershipPeriodRegex.find(carVo.ownershipPeriod)
-        val years = matchResult?.groups?.get(1)?.value?.toIntOrNull() ?: 0
-        val months = matchResult?.groups?.get(2)?.value?.toIntOrNull() ?: 0
+    private fun populatePhotos(photoIds: List<String>) {
+        val items = carEditorPhotosAdapter.currentList.toMutableList()
+        items.addAll(photoIds.map { id ->
+            CarEditorPhotosAdapterItem.Photo(
+                uri = "${BuildConfig.BASE_URL}/photos/$id".toUri(),
+                photoId = id
+            )
+        })
+        carEditorPhotosAdapter.submitList(items)
+    }
 
-        val yearsText = if (years > 0) "$years ${if (years == 1) "year" else "years"}" else ""
-        val monthsText = if (months > 0) "$months ${if (months == 1) "month" else "months"}" else ""
-        return yearsText to monthsText
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                shimmerLayout.isVisible = true
+                shimmerLayout.startShimmer()
+                editCarToolBar.checkIcon.isVisible = false
+                photosTv.isVisible = false
+                photosRv.isVisible = false
+                carEditorFields.root.isVisible = false
+                noConnectionPlaceholder.root.isVisible = false
+            }
+            is Status.Success -> {
+                shimmerLayout.isVisible = false
+                shimmerLayout.stopShimmer()
+                editCarToolBar.checkIcon.isVisible = true
+                photosTv.isVisible = true
+                photosRv.isVisible = true
+                carEditorFields.root.isVisible = true
+                noConnectionPlaceholder.root.isVisible = false
+            }
+            is Status.Error -> {
+                shimmerLayout.isVisible = false
+                shimmerLayout.stopShimmer()
+                editCarToolBar.checkIcon.isVisible = false
+                photosTv.isVisible = false
+                photosRv.isVisible = false
+                carEditorFields.root.isVisible = false
+                noConnectionPlaceholder.root.isVisible = true
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _carEditorPhotosAdapter = null
     }
 }

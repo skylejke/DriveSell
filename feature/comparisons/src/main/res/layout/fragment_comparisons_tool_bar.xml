@@ -15,4 +15,13 @@
         android:backgroundTint="@color/md_theme_onBackground"
         android:contentDescription="@string/back_button" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/comparisons_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/comparisons"
+        android:textSize="24sp" />
+
 </com.google.android.material.appbar.MaterialToolbar>

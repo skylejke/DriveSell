@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import ru.point.common.model.Status
 import ru.point.user.model.LoginRequest
 import ru.point.user.repository.UserRepository
 
@@ -24,20 +25,23 @@ internal class LoginViewModel(
     private val _passwordError = MutableStateFlow<String?>(null)
     val passwordError get() = _passwordError.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            if (userRepository.isAuthorized()) _loginEvent.emit(Unit)
-        }
-    }
+    private val _status = MutableStateFlow<Status?>(null)
+    val status get() = _status.asStateFlow()
 
     fun login(username: String, password: String) {
-        if (!validateLoginFields(username, password)) return
+        _status.value = Status.Loading
+        if (!validateLoginFields(username, password)) {
+            _status.value = Status.Error
+            return
+        }
         viewModelScope.launch {
             userRepository.login(LoginRequest(username = username, password = password)).fold(
                 onSuccess = {
+                    _status.value = Status.Success
                     _loginEvent.emit(Unit)
                 },
                 onFailure = { error ->
+                    _status.value = Status.Error
                     if (error is HttpException) {
                         when (error.code()) {
                             403 -> _passwordError.value = "Password is incorrect"

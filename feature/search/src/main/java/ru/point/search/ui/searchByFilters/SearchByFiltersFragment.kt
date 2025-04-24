@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.model.Status
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.search.R
 import ru.point.search.databinding.FragmentSearchByFiltersBinding
@@ -17,36 +17,6 @@ import javax.inject.Inject
 
 internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchByFiltersBinding>() {
 
-    private var _brandsAdapter: ArrayAdapter<String>? = null
-    private val brandsAdapter get() = requireNotNull(_brandsAdapter)
-
-    private var _modelsAdapter: ArrayAdapter<String>? = null
-    private val modelsAdapter get() = requireNotNull(_modelsAdapter)
-
-    private var _fuelTypeAdapter: ArrayAdapter<String>? = null
-    private val fuelTypeAdapter get() = requireNotNull(_fuelTypeAdapter)
-
-    private var _bodyTypeAdapter: ArrayAdapter<String>? = null
-    private val bodyTypeAdapter get() = requireNotNull(_bodyTypeAdapter)
-
-    private var _colorAdapter: ArrayAdapter<String>? = null
-    private val colorAdapter get() = requireNotNull(_colorAdapter)
-
-    private var _drivetrainAdapter: ArrayAdapter<String>? = null
-    private val drivetrainAdapter get() = requireNotNull(_drivetrainAdapter)
-
-    private var _wheelAdapter: ArrayAdapter<String>? = null
-    private val wheelAdapter get() = requireNotNull(_wheelAdapter)
-
-    private var _conditionAdapter: ArrayAdapter<String>? = null
-    private val conditionAdapter get() = requireNotNull(_conditionAdapter)
-
-    private var _ownersAdapter: ArrayAdapter<String>? = null
-    private val ownersAdapter get() = requireNotNull(_ownersAdapter)
-
-    private var _transmissionAdapter: ArrayAdapter<String>? = null
-    private val transmissionAdapter get() = requireNotNull(_transmissionAdapter)
-
     @Inject
     lateinit var searchByFiltersViewModelFactory: SearchByFiltersViewModelFactory
 
@@ -54,7 +24,6 @@ internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initializeAdapters()
         initHolder<SearchComponentHolderVM>()
         searchComponent.inject(this)
     }
@@ -64,153 +33,136 @@ internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapters()
+
+        clearFields()
+
+        with(binding.filtersFields) {
+            fuelTypeListTv.setSimpleItems(resources.getStringArray(R.array.fuel_types))
+            bodyTypeListTv.setSimpleItems(resources.getStringArray(R.array.body_types))
+            colorTv.setSimpleItems(resources.getStringArray(R.array.colors))
+            transmissionListTv.setSimpleItems(resources.getStringArray(R.array.transmissions))
+            drivetrainListTv.setSimpleItems(resources.getStringArray(R.array.drivetrains))
+            wheelListTv.setSimpleItems(resources.getStringArray(R.array.wheels))
+            conditionListTv.setSimpleItems(resources.getStringArray(R.array.conditions))
+            ownersTv.setSimpleItems(resources.getStringArray(R.array.owners))
+        }
+
+        searchByFiltersViewModel.getBrands()
+
+        repeatOnLifecycleScope {
+            searchByFiltersViewModel.status.collect { updatePlaceholder(it) }
+        }
 
         repeatOnLifecycleScope {
             searchByFiltersViewModel.brands.collect { brands ->
-                brandsAdapter.clear()
-                brandsAdapter.addAll(brands.map { it.name })
-                brandsAdapter.notifyDataSetChanged()
+                binding.filtersFields.brandListTv.setSimpleItems(
+                    brands.map { it.name }.toTypedArray()
+                )
             }
         }
 
         repeatOnLifecycleScope {
             searchByFiltersViewModel.models.collect { models ->
-                modelsAdapter.clear()
-                modelsAdapter.addAll(models.map { it.name })
-                modelsAdapter.notifyDataSetChanged()
+                binding.filtersFields.modelListTv.setSimpleItems(
+                    models.map { it.name }.toTypedArray()
+                )
+                binding.filtersFields.modelList.isVisible = models.isNotEmpty()
             }
         }
 
-        binding.brandListTv.setOnItemClickListener { parent, view, position, id ->
-            binding.modelList.isVisible = true
-            binding.modelListTv.setText("", false)
+        binding.filtersFields.brandListTv.setOnItemClickListener { parent, _, position, _ ->
+            binding.filtersFields.modelList.isVisible = true
+            binding.filtersFields.modelListTv.setText("", false)
             searchByFiltersViewModel.getModels(parent.getItemAtPosition(position) as String)
         }
 
-        binding.searchBtn.setOnClickListener {
-            navigator.fromSearchByFiltersFragmentToSearchResultsFragment(
-                brand = binding.brandListTv.text.toString().takeIf { it.isNotBlank() },
-                model = binding.modelListTv.text.toString().takeIf { it.isNotBlank() },
-                yearMin = binding.yearEtMin.text.toString().takeIf { it.isNotBlank() },
-                yearMax = binding.yearEtMax.text.toString().takeIf { it.isNotBlank() },
-                priceMin = binding.priceEtMin.text.toString().takeIf { it.isNotBlank() },
-                priceMax = binding.priceEtMax.text.toString().takeIf { it.isNotBlank() },
-                mileageMin = binding.mileageEtMin.text.toString().takeIf { it.isNotBlank() },
-                mileageMax = binding.mileageEtMax.text.toString().takeIf { it.isNotBlank() },
-                enginePowerMin = binding.enginePowerMin.text.toString().takeIf { it.isNotBlank() },
-                enginePowerMax = binding.enginePowerMax.text.toString().takeIf { it.isNotBlank() },
-                engineCapacityMin = binding.engineCapacityMin.text.toString().takeIf { it.isNotBlank() },
-                engineCapacityMax = binding.engineCapacityMax.text.toString().takeIf { it.isNotBlank() },
-                fuelType = binding.fuelTypeListTv.text.toString().takeIf { it.isNotBlank() },
-                bodyType = binding.bodyTypeListTv.text.toString().takeIf { it.isNotBlank() },
-                color = binding.colorTv.text.toString().takeIf { it.isNotBlank() },
-                transmission = binding.transmissionListTv.text.toString().takeIf { it.isNotBlank() },
-                drivetrain = binding.drivetrainListTv.text.toString().takeIf { it.isNotBlank() },
-                wheel = binding.wheelListTv.text.toString().takeIf { it.isNotBlank() },
-                condition = binding.conditionListTv.text.toString().takeIf { it.isNotBlank() },
-                owners = binding.ownersTv.text.toString().takeIf { it.isNotBlank() }
-            )
+        binding.filtersFields.searchBtn.setOnClickListener {
+            with(binding.filtersFields) {
+                navigator.fromSearchByFiltersFragmentToSearchResultsFragment(
+                    brand = brandListTv.text.toString().takeIf { it.isNotBlank() },
+                    model = modelListTv.text.toString().takeIf { it.isNotBlank() },
+                    yearMin = yearEtMin.text.toString().takeIf { it.isNotBlank() },
+                    yearMax = yearEtMax.text.toString().takeIf { it.isNotBlank() },
+                    priceMin = priceEtMin.text.toString().takeIf { it.isNotBlank() },
+                    priceMax = priceEtMax.text.toString().takeIf { it.isNotBlank() },
+                    mileageMin = mileageEtMin.text.toString().takeIf { it.isNotBlank() },
+                    mileageMax = mileageEtMax.text.toString().takeIf { it.isNotBlank() },
+                    enginePowerMin = enginePowerMin.text.toString().takeIf { it.isNotBlank() },
+                    enginePowerMax = enginePowerMax.text.toString().takeIf { it.isNotBlank() },
+                    engineCapacityMin = engineCapacityMin.text.toString().takeIf { it.isNotBlank() },
+                    engineCapacityMax = engineCapacityMax.text.toString().takeIf { it.isNotBlank() },
+                    fuelType = fuelTypeListTv.text.toString().takeIf { it.isNotBlank() },
+                    bodyType = bodyTypeListTv.text.toString().takeIf { it.isNotBlank() },
+                    color = colorTv.text.toString().takeIf { it.isNotBlank() },
+                    transmission = transmissionListTv.text.toString().takeIf { it.isNotBlank() },
+                    drivetrain = drivetrainListTv.text.toString().takeIf { it.isNotBlank() },
+                    wheel = wheelListTv.text.toString().takeIf { it.isNotBlank() },
+                    condition = conditionListTv.text.toString().takeIf { it.isNotBlank() },
+                    owners = ownersTv.text.toString().takeIf { it.isNotBlank() }
+                )
+            }
+        }
+
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            clearFields()
+            searchByFiltersViewModel.getBrands()
         }
     }
 
-    private fun initializeAdapters() {
-        _brandsAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item
-        )
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                shimmerLayout.isVisible = true
+                shimmerLayout.startShimmer()
+                filtersFields.root.isVisible = false
+                noConnectionPlaceholder.root.isVisible = false
+            }
 
-        _modelsAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item
-        )
+            is Status.Success -> {
+                shimmerLayout.isVisible = false
+                shimmerLayout.stopShimmer()
+                filtersFields.root.isVisible = true
+                noConnectionPlaceholder.root.isVisible = false
+            }
 
-        _fuelTypeAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.fuel_types)
-        )
-
-        _bodyTypeAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.body_types)
-        )
-
-        _colorAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.colors)
-        )
-
-        _drivetrainAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.drivetrains)
-        )
-
-        _wheelAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.wheels)
-        )
-
-        _conditionAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.conditions)
-        )
-
-        _ownersAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.owners)
-        )
-
-        _transmissionAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.spinner_dropdown_item,
-            resources.getStringArray(R.array.transmissions)
-        )
+            is Status.Error -> {
+                shimmerLayout.isVisible = false
+                shimmerLayout.stopShimmer()
+                filtersFields.root.isVisible = false
+                noConnectionPlaceholder.root.isVisible = true
+            }
+        }
     }
 
-    private fun setAdapters() = with(binding) {
-        brandListTv.setAdapter(brandsAdapter)
+    private fun clearFields() {
+        with(binding.filtersFields) {
+            brandListTv.setText("", false)
+            modelListTv.setText("", false)
+            modelList.isVisible = false
 
-        modelListTv.setAdapter(modelsAdapter)
+            yearEtMin.text?.clear()
+            yearEtMax.text?.clear()
 
-        fuelTypeListTv.setAdapter(fuelTypeAdapter)
+            priceEtMin.text?.clear()
+            priceEtMax.text?.clear()
 
-        bodyTypeListTv.setAdapter(bodyTypeAdapter)
+            mileageEtMin.text?.clear()
+            mileageEtMax.text?.clear()
 
-        colorTv.setAdapter(colorAdapter)
+            enginePowerMin.text?.clear()
+            enginePowerMax.text?.clear()
 
-        transmissionListTv.setAdapter(transmissionAdapter)
+            engineCapacityMin.text?.clear()
+            engineCapacityMax.text?.clear()
 
-        drivetrainListTv.setAdapter(drivetrainAdapter)
-
-        wheelListTv.setAdapter(wheelAdapter)
-
-        conditionListTv.setAdapter(conditionAdapter)
-
-        ownersTv.setAdapter(ownersAdapter)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        clearAdapters()
-    }
-
-    private fun clearAdapters() {
-        _brandsAdapter = null
-        _modelsAdapter = null
-        _fuelTypeAdapter = null
-        _bodyTypeAdapter = null
-        _colorAdapter = null
-        _drivetrainAdapter = null
-        _wheelAdapter = null
-        _conditionAdapter = null
-        _ownersAdapter = null
-        _transmissionAdapter = null
+            fuelTypeListTv.setText("", false)
+            bodyTypeListTv.setText("", false)
+            colorTv.setText("", false)
+            transmissionListTv.setText("", false)
+            drivetrainListTv.setText("", false)
+            wheelListTv.setText("", false)
+            conditionListTv.setText("", false)
+            ownersTv.setText("", false)
+        }
     }
 }

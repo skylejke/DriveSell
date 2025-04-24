@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="20dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/specs_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/specifications"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/engine_power_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/engine_power"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/specs_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/engine_power_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/engine_power_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/engine_capacity_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/engine_capacity"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/engine_power_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/engine_capacity_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/engine_capacity_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/fuel_type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/fuel_type"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/engine_capacity_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/fuel_type_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fuel_type_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mileage_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/mileage"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fuel_type_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mileage_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mileage_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/body_type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/body_type"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mileage_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/body_type_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/body_type_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/color_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/body_type_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/color_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/transmission_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/transmission"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/transmission_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transmission_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/drivetrain_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/drivetrain"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transmission_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/drivetrain_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drivetrain_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/wheel_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/wheel_position"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drivetrain_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/wheel_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wheel_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/condition_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/condition"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wheel_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/condition_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/condition_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/owners_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/owners"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/condition_value" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/owners_value"
+        android:layout_width="100dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/owners_tv" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/title_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="specs_tv, engine_power_tv, engine_capacity_tv, fuel_type_tv, mileage_tv, body_type_tv, color_tv, transmission_tv, drivetrain_tv, wheel_tv, condition_tv, owners_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

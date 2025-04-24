@@ -51,6 +51,8 @@ dependencies {
     implementation(project(":feature:car_editor"))
     implementation(project(":feature:comparisons"))
 
+    implementation(libs.splashScreen)
+
     implementation(libs.bundles.navigation)
 
     implementation(libs.bundles.dagger)

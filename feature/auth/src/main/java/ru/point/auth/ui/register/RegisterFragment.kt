@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
 import ru.point.auth.databinding.FragmentRegisterBinding
 import ru.point.auth.di.authComponent
 import ru.point.common.ext.bottomBar
+import ru.point.common.ext.clearErrorOnTextChanged
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ext.showSnackbar
+import ru.point.common.model.Status
 import ru.point.common.ui.BaseFragment
 import javax.inject.Inject
 
@@ -38,6 +40,12 @@ internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         bottomBar.hide()
+
+        repeatOnLifecycleScope {
+            registerViewModel.status.filterNotNull().collect {
+                updatePlaceholder(it)
+            }
+        }
 
         repeatOnLifecycleScope {
             registerViewModel.usernameError.filterNotNull().collect {
@@ -66,25 +74,16 @@ internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         repeatOnLifecycleScope {
             registerViewModel.registerEvent.filterNotNull().collect {
                 navigator.fromRegisterFragmentToHomeFragment()
-                showSnackbar(binding.root, "Successful registration")
             }
         }
 
-        binding.usernameEt.doOnTextChanged { _, _, _, _ ->
-            binding.usernameTil.error = null
-        }
+        binding.usernameEt.clearErrorOnTextChanged(binding.usernameTil)
 
-        binding.emailEt.doOnTextChanged { _, _, _, _ ->
-            binding.emailTil.error = null
-        }
+        binding.phoneNumberEt.clearErrorOnTextChanged(binding.phoneNumberTil)
 
-        binding.phoneNumberEt.doOnTextChanged { _, _, _, _ ->
-            binding.phoneNumberTil.error = null
-        }
+        binding.emailEt.clearErrorOnTextChanged(binding.emailTil)
 
-        binding.passwordEt.doOnTextChanged { _, _, _, _ ->
-            binding.passwordTil.error = null
-        }
+        binding.passwordEt.clearErrorOnTextChanged(binding.passwordTil)
 
         binding.signUpBtn.setOnClickListener {
             registerViewModel.register(
@@ -101,6 +100,24 @@ internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         binding.continueAsAGuestBtn.setOnClickListener {
             navigator.fromRegisterFragmentToHomeFragment()
+        }
+    }
+
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                loadingPlaceholder.root.isVisible = true
+            }
+
+            is Status.Success -> {
+                loadingPlaceholder.root.isVisible = false
+                showSnackbar(root, "Successful registration")
+            }
+
+            is Status.Error -> {
+                loadingPlaceholder.root.isVisible = false
+                showSnackbar(root, "Something went wrong")
+            }
         }
     }
 }

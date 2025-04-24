@@ -19,6 +19,7 @@ import ru.point.common.ext.NumberErrorConsts
 import ru.point.common.ext.isValidCapacity
 import ru.point.common.ext.isValidPower
 import ru.point.common.ext.isValidVIN
+import ru.point.common.model.Status
 import ru.point.user.repository.UserRepository
 
 internal class CreateCarViewModel(
@@ -92,26 +93,40 @@ internal class CreateCarViewModel(
     private val _ownershipPeriodError = MutableStateFlow<String?>(null)
     val ownershipPeriodError get() = _ownershipPeriodError.asStateFlow()
 
+    private val _status = MutableStateFlow<Status>(Status.Loading)
+    val status get() = _status.asStateFlow()
+
     init {
         viewModelScope.launch {
             _isGuest.value = !userRepository.isAuthorized()
-            getBrands()
         }
     }
 
     fun getBrands() {
+        _status.value = Status.Loading
         viewModelScope.launch {
-            carsRepository.getBrands().onSuccess { brandList ->
-                _brands.value = brandList.map { it.asBrandVo }
-            }
+            carsRepository.getBrands()
+                .onSuccess { brandList ->
+                    _status.value = Status.Success
+                    _brands.value = brandList.map { it.asBrandVo }
+                }
+                .onFailure {
+                    _status.value = Status.Error
+                }
         }
     }
 
     fun getModels(brandName: String) {
+        _status.value = Status.Loading
         viewModelScope.launch {
-            carsRepository.getModelsByBrand(brandName).onSuccess { modelList ->
-                _models.value = modelList.map { it.asModelVo }
-            }
+            carsRepository.getModelsByBrand(brandName)
+                .onSuccess { modelList ->
+                    _status.value = Status.Success
+                    _models.value = modelList.map { it.asModelVo }
+                }
+                .onFailure {
+                    _status.value = Status.Error
+                }
         }
     }
 

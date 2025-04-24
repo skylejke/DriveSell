@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ext.showSnackbar
+import ru.point.common.ext.toFormattedRussianPhone
+import ru.point.common.model.Status
 import ru.point.common.ui.ComponentHolderFragment
 import ru.point.profile.R
 import ru.point.profile.databinding.FragmentProfileBinding
@@ -41,11 +44,17 @@ internal class ProfileFragment : ComponentHolderFragment<FragmentProfileBinding>
         profileViewModel.refreshUserData()
 
         repeatOnLifecycleScope {
+            profileViewModel.status.collect { status ->
+                updatePlaceholder(status)
+            }
+        }
+
+        repeatOnLifecycleScope {
             profileViewModel.userData.collect { userData ->
                 with(binding.profileCard) {
                     username.text = userData?.username.toString()
                     email.text = userData?.email.toString()
-                    phoneNumber.text = userData?.phoneNumber.toString()
+                    phoneNumber.text = userData?.phoneNumber.orEmpty().toFormattedRussianPhone()
                 }
             }
         }
@@ -75,6 +84,41 @@ internal class ProfileFragment : ComponentHolderFragment<FragmentProfileBinding>
         binding.changePasswordBtn.setOnClickListener {
             navigator.fromProfileFragmentToEditPasswordFragment()
         }
+
+        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            profileViewModel.refreshUserData()
+        }
+    }
+
+    private fun updatePlaceholder(status: Status) = with(binding) {
+        when (status) {
+            is Status.Loading -> {
+                shimmerLayout.isVisible = true
+                shimmerLayout.startShimmer()
+                profileCard.root.isVisible = false
+                deleteProfileBtn.isVisible = false
+                changePasswordBtn.isVisible = false
+                noConnectionPlaceholder.root.isVisible = false
+            }
+
+            is Status.Success -> {
+                shimmerLayout.isVisible = false
+                shimmerLayout.stopShimmer()
+                profileCard.root.isVisible = true
+                deleteProfileBtn.isVisible = true
+                changePasswordBtn.isVisible = true
+                noConnectionPlaceholder.root.isVisible = false
+            }
+
+            is Status.Error -> {
+                shimmerLayout.isVisible = false
+                shimmerLayout.stopShimmer()
+                profileCard.root.isVisible = false
+                deleteProfileBtn.isVisible = false
+                changePasswordBtn.isVisible = false
+                noConnectionPlaceholder.root.isVisible = true
+            }
+        }
     }
 
     class DeleteProfileDialog(private val onPositiveClick: () -> Unit) : DialogFragment() {
@@ -97,7 +141,7 @@ internal class ProfileFragment : ComponentHolderFragment<FragmentProfileBinding>
         }
     }
 
-    private fun deleteProfile(){
+    private fun deleteProfile() {
         profileViewModel.deleteUser()
         navigator.fromProfileFragmentToLoginFragment()
         showSnackbar(binding.root, "Deleted Profile")

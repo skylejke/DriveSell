@@ -1,4 +1,4 @@
-package ru.point.comparisons.ui
+package ru.point.comparisons.ui.stateholder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import ru.point.cars.model.AdVo
 import ru.point.common.BuildConfig
 import ru.point.comparisons.R
@@ -27,7 +28,7 @@ internal class ComparedCarsTitleAdapter(
             with(binding) {
                 photo.load("${BuildConfig.BASE_URL}/photos/${adVo.photos.first()}") {
                     transformations(
-                        coil.transform.RoundedCornersTransformation(
+                        RoundedCornersTransformation(
                             8 * binding.root.context.resources.displayMetrics.density
                         )
                     )

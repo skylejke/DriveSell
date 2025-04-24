@@ -1,4 +1,4 @@
-package ru.point.comparisons.ui
+package ru.point.comparisons.ui.stateholder
 
 import android.graphics.Rect
 import android.view.View
