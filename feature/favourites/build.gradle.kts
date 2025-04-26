@@ -42,7 +42,7 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.adapters.result)
-    
+    implementation(libs.swipeRefreshLayout)
     implementation(libs.shimmer)
     implementation(libs.bundles.navigation)
     implementation(libs.androidx.core.ktx)

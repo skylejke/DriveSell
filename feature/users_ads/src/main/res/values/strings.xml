@@ -2,4 +2,5 @@
 <resources>
     <string name="my_ads">My ads</string>
     <string name="back_button">Back button</string>
+    <string name="you_haven_t_added_any_car_ads">You haven\'t added any car ads</string>
 </resources>

@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="24dp"
-    android:layout_height="wrap_content">
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/md_theme_surfaceContainer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_theme_primaryContainer"
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -28,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/photo"
@@ -40,7 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/price"
@@ -52,7 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/brand_model_year"

@@ -101,9 +101,6 @@
             android:id="@+id/action_menuFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_menuFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
             android:id="@+id/action_menuFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
@@ -114,11 +111,6 @@
             app:destination="@id/comparisonsFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="ru.point.settings.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/editUserDataFragment"
         android:name="ru.point.profile.ui.editUserData.EditUserDataFragment"
@@ -300,9 +292,9 @@
 
     <fragment
         android:id="@+id/comparisonsFragment"
-        tools:layout="@layout/fragment_comparisons"
         android:name="ru.point.comparisons.ui.ComparisonsFragment"
-        android:label="ComparisonsFragment" >
+        android:label="ComparisonsFragment"
+        tools:layout="@layout/fragment_comparisons">
         <action
             android:id="@+id/action_comparisonsFragment_to_carDetailsFragment"
             app:destination="@id/carDetailsFragment" />

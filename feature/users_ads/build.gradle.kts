@@ -42,12 +42,10 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.adapters.result)
-
     implementation(libs.fragment.ktx)
-
     implementation(libs.bundles.lifecycle)
-
     implementation(libs.shimmer)
+    implementation(libs.swipeRefreshLayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

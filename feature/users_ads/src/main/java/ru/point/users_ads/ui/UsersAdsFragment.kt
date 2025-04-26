@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.flow.combine
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
 import ru.point.common.ext.bottomBar
@@ -52,18 +53,26 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
         }
 
         repeatOnLifecycleScope {
-            usersAdsViewModel.status.collect { status ->
-                updatePlaceholder(status)
-            }
-        }
-
-        repeatOnLifecycleScope {
-            usersAdsViewModel.usersAds.collect { usersAdsList ->
-                carAdapter.submitList(usersAdsList)
-            }
+            combine(usersAdsViewModel.status, usersAdsViewModel.usersAds) { status, cars -> status to cars }
+                .collect { (status, cars) ->
+                    with(binding) {
+                        updatePlaceholder(status)
+                        if (status == Status.Success) {
+                            emptyPlaceholder.root.isVisible = cars.isEmpty()
+                            myAdsList.isVisible = cars.isNotEmpty()
+                            if (cars.isNotEmpty()) {
+                                carAdapter.submitList(cars)
+                            }
+                        }
+                    }
+                }
         }
 
         binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+            usersAdsViewModel.getUsersAds()
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
             usersAdsViewModel.getUsersAds()
         }
 
@@ -80,18 +89,25 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
                     shimmerLayout.startShimmer()
                     myAdsList.isVisible = false
                     noConnectionPlaceholder.root.isVisible = false
+                    emptyPlaceholder.root.isVisible = false
+                    swipeRefresh.isRefreshing = true
                 }
+
                 is Status.Success -> {
                     shimmerLayout.stopShimmer()
                     shimmerLayout.isVisible = false
                     myAdsList.isVisible = true
                     noConnectionPlaceholder.root.isVisible = false
+                    swipeRefresh.isRefreshing = true
                 }
+
                 is Status.Error -> {
                     shimmerLayout.stopShimmer()
                     shimmerLayout.isVisible = false
                     myAdsList.isVisible = false
                     noConnectionPlaceholder.root.isVisible = true
+                    emptyPlaceholder.root.isVisible = false
+                    swipeRefresh.isRefreshing = false
                 }
             }
         }

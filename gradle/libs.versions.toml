@@ -19,12 +19,13 @@ kotlinxSerializationJsonVersion = "1.7.3"
 navVersion = "2.8.9"
 retrofitVersion = "2.11.0"
 retrofitAdaptersResult = "1.0.13"
-roomVersion = "2.7.0"
+roomVersion = "2.7.1"
 daggerVersion = "2.55"
 kspVersion = "2.1.10-1.0.31"
 fragment-ktxVersion = "1.8.6"
 shimmerVersion = "0.5.0"
 splashScreenVersion = "1.0.1"
+swiperefreshlayoutVersion = "1.2.0-beta01"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,6 +60,7 @@ dagger-android-processor = { module = "com.google.dagger:dagger-android-processo
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktxVersion" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmerVersion" }
 splashScreen = { module = "androidx.core:core-splashscreen", version.ref = "splashScreenVersion" }
+swipeRefreshLayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayoutVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -70,7 +72,6 @@ navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref
 
 [bundles]
 lifecycle = ["androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-livedata-ktx"]
-retrofit = ["retrofit", "converter-gson"]
 navigation = ["androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx"]
 dataStore = ["androidx-datastore", "androidx-datastore-preferences"]
 dagger = ["dagger", "dagger-android", "dagger-android-support"]

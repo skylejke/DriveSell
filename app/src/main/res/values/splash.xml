@@ -1,15 +1,8 @@
 <resources>
     <style name="Theme.DriveSellSplash" parent="Theme.SplashScreen">
-        <!-- фон всего экрана -->
         <item name="windowSplashScreenBackground">@color/md_theme_surface</item>
-
-        <!-- ваш цветной логотип -->
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
-
-        <!-- подложка под иконкой (закрасит «кружок» в тот же цвет, что и фон) -->
         <item name="windowSplashScreenIconBackgroundColor">@color/md_theme_surface</item>
-
-        <!-- после сплэша применится основная тема -->
         <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 </resources>

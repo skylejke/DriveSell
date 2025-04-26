@@ -43,7 +43,10 @@ class CarEditorPhotosAdapter(
                 else -> false
             }
 
-        override fun areContentsTheSame(oldItem: CarEditorPhotosAdapterItem, newItem: CarEditorPhotosAdapterItem): Boolean {
+        override fun areContentsTheSame(
+            oldItem: CarEditorPhotosAdapterItem,
+            newItem: CarEditorPhotosAdapterItem
+        ): Boolean {
             return oldItem == newItem
         }
     }
@@ -53,52 +56,49 @@ class CarEditorPhotosAdapter(
         private const val VIEW_TYPE_PHOTO = 1
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)) {
+    override fun getItemViewType(position: Int) =
+        when (getItem(position)) {
             is CarEditorPhotosAdapterItem.ButtonEditor -> VIEW_TYPE_ADD
             is CarEditorPhotosAdapterItem.Photo -> VIEW_TYPE_PHOTO
         }
-    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder {
-        return when (viewType) {
-            VIEW_TYPE_ADD -> {
-                AddPhotoViewHolder(
-                    binding = ItemAddPhotoBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    ),
-                    onAddPhotoClick = onAddPhotoClick
-                )
-            }
-
-            VIEW_TYPE_PHOTO -> PhotoViewHolder(
-                ItemPhotoBinding.inflate(
+    ) = when (viewType) {
+        VIEW_TYPE_ADD -> {
+            AddPhotoViewHolder(
+                binding = ItemAddPhotoBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 ),
-                onDeletePhotoClick = onDeletePhotoClick
+                onAddPhotoClick = onAddPhotoClick
             )
-
-            else -> throw IllegalArgumentException("Unknown viewType: $viewType")
         }
+
+        VIEW_TYPE_PHOTO -> PhotoViewHolder(
+            ItemPhotoBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ),
+            onDeletePhotoClick = onDeletePhotoClick
+        )
+
+        else -> throw IllegalArgumentException("Unknown viewType: $viewType")
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         when (val item = getItem(position)) {
             is CarEditorPhotosAdapterItem.ButtonEditor -> (holder as AddPhotoViewHolder).bind()
             is CarEditorPhotosAdapterItem.Photo -> (holder as PhotoViewHolder).bind(item)
         }
-    }
 }
 
-sealed class CarEditorPhotosAdapterItem {
-    object ButtonEditor : CarEditorPhotosAdapterItem()
-    data class Photo(val uri: Uri, val photoId: String? = null) : CarEditorPhotosAdapterItem()
+sealed interface CarEditorPhotosAdapterItem {
+    data object ButtonEditor : CarEditorPhotosAdapterItem
+    data class Photo(val uri: Uri, val photoId: String? = null) : CarEditorPhotosAdapterItem
 }
 

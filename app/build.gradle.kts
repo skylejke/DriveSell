@@ -45,7 +45,6 @@ dependencies {
     implementation(project(":feature:profile"))
     implementation(project(":feature:search"))
     implementation(project(":feature:menu"))
-    implementation(project(":feature:settings"))
     implementation(project(":feature:car_details"))
     implementation(project(":feature:users_ads"))
     implementation(project(":feature:car_editor"))

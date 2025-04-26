@@ -8,7 +8,7 @@
         android:id="@+id/edit_car_tool_bar"
         layout="@layout/fragment_search_by_filters_tool_bar" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
@@ -80,6 +80,6 @@
                 layout="@layout/filters_fields" />
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

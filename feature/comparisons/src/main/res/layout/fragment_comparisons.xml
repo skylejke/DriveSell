@@ -9,7 +9,7 @@
         android:id="@+id/comparisons_tool_bar"
         layout="@layout/fragment_comparisons_tool_bar" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -93,5 +93,5 @@
                 tools:visibility="gone" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

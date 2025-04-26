@@ -43,7 +43,6 @@ dependencies {
     implementation(libs.bundles.navigation)
 
     implementation(libs.bundles.dataStore)
-
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.kotlinx.serialization)

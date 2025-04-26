@@ -7,7 +7,6 @@ interface Navigator {
     fun fromLoginFragmentToHomeFragment()
     fun fromRegisterFragmentToHomeFragment()
     fun fromMenuFragmentToProfileFragment()
-    fun fromMenuFragmentToSettingsFragment()
     fun fromMenuFragmentToLogInFragment()
     fun fromProfileFragmentToEditUserDataFragment()
     fun fromProfileFragmentToEditPasswordFragment()

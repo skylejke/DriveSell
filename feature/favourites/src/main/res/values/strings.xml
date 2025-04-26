@@ -1,4 +1,5 @@
 <resources>
     <string name="fragment_favourites_name">Favourites fragment</string>
     <string name="favourites">Favourites</string>
+    <string name="you_haven_t_added_any_ads_to_favourites">You haven\'t added any ads to favourites</string>
 </resources>
