@@ -14,20 +14,23 @@ import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.flow.filterNotNull
 import ru.point.car_editor.R
 import ru.point.car_editor.databinding.FragmentEditCarBinding
-import ru.point.car_editor.di.CarEditorComponentHolderVM
-import ru.point.car_editor.di.carEditorComponent
+import ru.point.car_editor.di.DaggerCarEditorComponent
 import ru.point.cars.BuildConfig
 import ru.point.cars.model.CarVo
 import ru.point.cars.model.EditCarRequest
 import ru.point.cars.ui.CarEditorPhotosAdapter
 import ru.point.cars.ui.CarEditorPhotosAdapterItem
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.NumberErrorConsts
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.ext.showSnackbar
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import javax.inject.Inject
 
-internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>() {
+private const val MAX_PHOTOS = 30
+
+internal class EditCarFragment : BaseFragment<FragmentEditCarBinding>() {
 
     @Inject
     lateinit var editCarViewModelFactory: EditCarViewModelFactory
@@ -40,7 +43,7 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
     private val args: EditCarFragmentArgs by navArgs()
 
     private val pickMultipleMedia =
-        registerForActivityResult(PickMultipleVisualMedia(30)) { uris ->
+        registerForActivityResult(PickMultipleVisualMedia(MAX_PHOTOS)) { uris ->
             if (uris.isNotEmpty()) {
                 val items = carEditorPhotosAdapter.currentList.toMutableList()
                 items.addAll(uris.map { CarEditorPhotosAdapterItem.Photo(it) })
@@ -52,8 +55,12 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<CarEditorComponentHolderVM>()
-        carEditorComponent.inject(this)
+        DaggerCarEditorComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .adId(args.adId)
+            .build()
+            .inject(this)
 
         _carEditorPhotosAdapter = CarEditorPhotosAdapter(
             onAddPhotoClick = {
@@ -95,7 +102,6 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
         carEditorPhotosAdapter.submitList(listOf(CarEditorPhotosAdapterItem.ButtonEditor))
 
         editCarViewModel.getBrands()
-        editCarViewModel.getCarData(args.adId)
 
         repeatOnLifecycleScope { editCarViewModel.status.collect { updatePlaceholder(it) } }
 
@@ -123,6 +129,13 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
             }
         }
 
+        repeatOnLifecycleScope {
+            editCarViewModel.editCarEvent.collect {
+                navigator.popBackStack()
+                showSnackbar(binding.root, getString(R.string.successfully_updated_car_ad))
+            }
+        }
+
         binding.editCarToolBar.checkIcon.setOnClickListener {
             editCarViewModel.editCar(
                 adId = args.adId,
@@ -132,8 +145,10 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
                         model = modelEt.text.toString(),
                         year = yearEt.text.toString().toShortOrNull() ?: NumberErrorConsts.ERROR_SHORT_VALUE,
                         price = priceEt.text.toString().toIntOrNull() ?: NumberErrorConsts.ERROR_INT_VALUE,
-                        enginePower = enginePowerEt.text.toString().toShortOrNull() ?: NumberErrorConsts.ERROR_SHORT_VALUE,
-                        engineCapacity = engineCapacityEt.text.toString().toDoubleOrNull() ?: NumberErrorConsts.ERROR_DOUBLE_VALUE,
+                        enginePower = enginePowerEt.text.toString().toShortOrNull()
+                            ?: NumberErrorConsts.ERROR_SHORT_VALUE,
+                        engineCapacity = engineCapacityEt.text.toString().toDoubleOrNull()
+                            ?: NumberErrorConsts.ERROR_DOUBLE_VALUE,
                         fuelType = fuelTypeEt.text.toString(),
                         mileage = mileageEt.text.toString().toIntOrNull() ?: NumberErrorConsts.ERROR_INT_VALUE,
                         bodyType = bodyTypeEt.text.toString(),
@@ -161,6 +176,7 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
         }
 
         binding.editCarToolBar.backIcon.setOnClickListener { navigator.popBackStack() }
+
         binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
             editCarViewModel.getCarData(args.adId)
             editCarViewModel.getBrands()
@@ -236,6 +252,7 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
                 carEditorFields.root.isVisible = false
                 noConnectionPlaceholder.root.isVisible = false
             }
+
             is Status.Success -> {
                 shimmerLayout.isVisible = false
                 shimmerLayout.stopShimmer()
@@ -245,6 +262,7 @@ internal class EditCarFragment : ComponentHolderFragment<FragmentEditCarBinding>
                 carEditorFields.root.isVisible = true
                 noConnectionPlaceholder.root.isVisible = false
             }
+
             is Status.Error -> {
                 shimmerLayout.isVisible = false
                 shimmerLayout.stopShimmer()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="my_ads">My ads</string>
-    <string name="back_button">Back button</string>
-    <string name="you_haven_t_added_any_car_ads">You haven\'t added any car ads</string>
+    <string name="my_ads">Мои объявления</string>
+    <string name="back_button">Кнопка назад</string>
+    <string name="you_haven_t_added_any_car_ads">Вы не добавляли объявлений о продаже автомобилей</string>
 </resources>

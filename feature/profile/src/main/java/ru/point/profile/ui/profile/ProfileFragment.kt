@@ -9,19 +9,19 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ext.showSnackbar
 import ru.point.common.ext.toFormattedRussianPhone
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.profile.R
 import ru.point.profile.databinding.FragmentProfileBinding
-import ru.point.profile.di.ProfileComponentHolderVM
-import ru.point.profile.di.profileComponent
+import ru.point.profile.di.DaggerProfileComponent
 import javax.inject.Inject
 
-internal class ProfileFragment : ComponentHolderFragment<FragmentProfileBinding>() {
+internal class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     @Inject
     lateinit var profileViewModelFactory: ProfileViewModelFactory
@@ -30,8 +30,11 @@ internal class ProfileFragment : ComponentHolderFragment<FragmentProfileBinding>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<ProfileComponentHolderVM>()
-        profileComponent.inject(this)
+        DaggerProfileComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =

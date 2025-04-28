@@ -8,18 +8,19 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.flow.combine
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.comparisons.databinding.FragmentComparisonsBinding
-import ru.point.comparisons.di.ComparisonsComponentHolderVM
-import ru.point.comparisons.di.comparisonsComponent
+import ru.point.comparisons.di.DaggerComparisonsComponent
 import ru.point.comparisons.ui.stateholder.ComparedCarsSpecsAdapter
 import ru.point.comparisons.ui.stateholder.ComparedCarsTitleAdapter
 import ru.point.comparisons.ui.stateholder.ComparisonsDecorator
 import javax.inject.Inject
 
-internal class ComparisonsFragment : ComponentHolderFragment<FragmentComparisonsBinding>() {
+internal class ComparisonsFragment : BaseFragment<FragmentComparisonsBinding>() {
 
     @Inject
     lateinit var comparisonsViewModelFactory: ComparisonsViewModelFactory
@@ -36,8 +37,12 @@ internal class ComparisonsFragment : ComponentHolderFragment<FragmentComparisons
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<ComparisonsComponentHolderVM>()
-        comparisonsComponent.inject(this)
+        DaggerComparisonsComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
+
         _comparedCarsSpecsAdapter = ComparedCarsSpecsAdapter()
         _comparedCarsTitlesAdapter =
             ComparedCarsTitleAdapter(
@@ -68,10 +73,21 @@ internal class ComparisonsFragment : ComponentHolderFragment<FragmentComparisons
         }
 
         repeatOnLifecycleScope {
-            comparisonsViewModel.comparedCars.collect {
-                comparedCarsTitleAdapter.submitList(it)
-                comparedCarsSpecsAdapter.submitList(it)
-            }
+            combine(comparisonsViewModel.status, comparisonsViewModel.comparedCars) { status, cars -> status to cars }
+                .collect { (status, cars) ->
+                    with(binding) {
+                        updatePlaceholder(status)
+                        if (status == Status.Success) {
+                            emptyPlaceholder.root.isVisible = cars.isEmpty()
+                            specsRv.isVisible = cars.isNotEmpty()
+                            titlesRv.isVisible = cars.isNotEmpty()
+                            if (cars.isNotEmpty()) {
+                                comparedCarsTitleAdapter.submitList(cars)
+                                comparedCarsSpecsAdapter.submitList(cars)
+                            }
+                        }
+                    }
+                }
         }
 
         binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
@@ -125,7 +141,6 @@ internal class ComparisonsFragment : ComponentHolderFragment<FragmentComparisons
             }
         }
     }
-
 
     fun setAdapters() {
         binding.titlesRv.apply {

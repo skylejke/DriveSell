@@ -14,17 +14,18 @@ import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.flow.filterNotNull
 import ru.point.car_details.R
 import ru.point.car_details.databinding.FragmentCarDetailsBinding
-import ru.point.car_details.di.CarDetailsComponentHolderVM
-import ru.point.car_details.di.carDetailsComponent
+import ru.point.car_details.di.DaggerCarDetailsComponent
+import ru.point.car_details.ui.stateholder.CarPhotoAdapter
 import ru.point.cars.model.AdVo
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ext.showSnackbar
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import javax.inject.Inject
 
-internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBinding>() {
+internal class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
 
     @Inject
     lateinit var carDetailsViewModelFactory: CarDetailsViewModelFactory
@@ -38,8 +39,14 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<CarDetailsComponentHolderVM>()
-        carDetailsComponent.inject(this)
+        DaggerCarDetailsComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .adId(args.adId)
+            .userId(args.userId)
+            .build()
+            .inject(this)
+
         _carPhotoAdapter = CarPhotoAdapter()
     }
 
@@ -52,8 +59,6 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         bottomBar.hide()
 
         binding.carPhotos.adapter = carPhotoAdapter
-
-       getCarDetails()
 
         repeatOnLifecycleScope {
             carDetailsViewModel.status.collect { status ->
@@ -80,7 +85,7 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         var currentFavouriteState: Boolean? = null
 
         binding.carDetailsToolBar.primaryIcon.setOnClickListener {
-            if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, "Please log in to use favourites")
+            if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, getString(R.string.pls_login_to_fav))
             if (carDetailsViewModel.isUsersAd.value!!) {
                 DeleteAdDialog { deleteAd() }.show(
                     childFragmentManager,
@@ -112,7 +117,7 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         var currentInComparisonsState: Boolean? = null
 
         binding.carDetailsToolBar.secondaryIcon.setOnClickListener {
-            if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, "Please log in to use car comparison")
+            if (carDetailsViewModel.isGuest.value!!) showSnackbar(binding.root, getString(R.string.pls_login_to_comp))
             if (carDetailsViewModel.isUsersAd.value!!) {
                 navigator.fromCarDetailsFragmentToEditCarFragment(args.adId, args.userId)
             } else {
@@ -208,48 +213,88 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
         }
     }
 
-
     private fun setCarSpecs(adVo: AdVo) {
         carPhotoAdapter.submitList(adVo.photos)
-        binding.carDetailsSpecs.creationDate.text = adVo.creationDate
-        binding.carDetailsSpecs.price.text =
-            resources.getString(R.string.car_details_car_price, adVo.car.price)
-                .replace(",", " ")
-        binding.carDetailsSpecs.brandModelYear.text = resources.getString(
-            R.string.car_details_brand_model_year,
-            adVo.car.brand,
-            adVo.car.model,
-            adVo.car.year
-        )
-        binding.carDetailsSpecs.yearTv.text =
-            resources.getString(R.string.year_of_release, adVo.car.year.toString())
-        binding.carDetailsSpecs.mileageTv.text =
-            resources.getString(R.string.car_details_mileage, adVo.car.mileage.toString())
-        binding.carDetailsSpecs.bodyTypeTv.text =
-            resources.getString(R.string.car_details_body_type, adVo.car.bodyType)
-        binding.carDetailsSpecs.colorTv.text =
-            resources.getString(R.string.car_details_color, adVo.car.color)
-        binding.carDetailsSpecs.engineTv.text = resources.getString(
-            R.string.car_details_engine,
-            adVo.car.engineCapacity.toString(),
-            adVo.car.enginePower.toString(),
-            adVo.car.fuelType
-        )
-        binding.carDetailsSpecs.transmissionTv.text =
-            resources.getString(R.string.car_details_transmission, adVo.car.transmission)
-        binding.carDetailsSpecs.drivetrainTv.text =
-            resources.getString(R.string.car_details_drivetrain, adVo.car.drivetrain)
-        binding.carDetailsSpecs.wheelTv.text =
-            resources.getString(R.string.car_details_wheel, adVo.car.wheel)
-        binding.carDetailsSpecs.conditionTv.text =
-            resources.getString(R.string.car_details_condition, adVo.car.condition)
-        binding.carDetailsSpecs.ownersTv.text =
-            resources.getString(R.string.car_details_owners, adVo.car.owners.toString())
-        binding.carDetailsSpecs.ownershipPeriodTv.text =
-            resources.getString(R.string.car_details_ownership_period, adVo.car.ownershipPeriod)
-        binding.carDetailsSpecs.vinTv.text =
-            resources.getString(R.string.car_details_vin, adVo.car.vin)
-        binding.carDetailsSpecs.sellerSCommentTvValue.text = adVo.car.description
+
+        with(binding.carDetailsSpecs) {
+            creationDate.text = adVo.creationDate
+
+            price.text = getString(
+                R.string.car_details_car_price,
+                adVo.car.price
+            ).replace(",", " ")
+
+            brandModelYear.text = getString(
+                R.string.car_details_brand_model_year,
+                adVo.car.brand,
+                adVo.car.model,
+                adVo.car.year
+            )
+
+            yearTv.text = getString(
+                R.string.year_of_release,
+                adVo.car.year.toString()
+            )
+
+            mileageTv.text = getString(
+                R.string.car_details_mileage,
+                adVo.car.mileage.toString()
+            )
+
+            bodyTypeTv.text = getString(
+                R.string.car_details_body_type,
+                adVo.car.bodyType
+            )
+
+            colorTv.text = getString(
+                R.string.car_details_color,
+                adVo.car.color
+            )
+
+            engineTv.text = getString(
+                R.string.car_details_engine,
+                adVo.car.engineCapacity.toString(),
+                adVo.car.enginePower.toString(),
+                adVo.car.fuelType
+            )
+
+            transmissionTv.text = getString(
+                R.string.car_details_transmission,
+                adVo.car.transmission
+            )
+
+            drivetrainTv.text = getString(
+                R.string.car_details_drivetrain,
+                adVo.car.drivetrain
+            )
+
+            wheelTv.text = getString(
+                R.string.car_details_wheel,
+                adVo.car.wheel
+            )
+
+            conditionTv.text = getString(
+                R.string.car_details_condition,
+                adVo.car.condition
+            )
+
+            ownersTv.text = getString(
+                R.string.car_details_owners,
+                adVo.car.owners.toString()
+            )
+
+            ownershipPeriodTv.text = getString(
+                R.string.car_details_ownership_period,
+                adVo.car.ownershipPeriod
+            )
+
+            vinTv.text = getString(
+                R.string.car_details_vin,
+                adVo.car.vin
+            )
+
+            sellerSCommentTvValue.text = adVo.car.description
+        }
     }
 
     class DeleteAdDialog(private val onPositiveClick: () -> Unit) : DialogFragment() {
@@ -275,7 +320,7 @@ internal class CarDetailsFragment : ComponentHolderFragment<FragmentCarDetailsBi
     private fun deleteAd() {
         carDetailsViewModel.deleteAd(args.adId)
         navigator.popBackStack()
-        showSnackbar(binding.root, "Deleted Ad")
+        showSnackbar(binding.root, getString(R.string.ad_deleted))
     }
 
 

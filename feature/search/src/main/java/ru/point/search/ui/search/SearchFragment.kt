@@ -10,14 +10,16 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.repeatOnLifecycleScope
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.search.databinding.FragmentSearchBinding
-import ru.point.search.di.SearchComponentHolderVM
-import ru.point.search.di.searchComponent
+import ru.point.search.di.DaggerSearchComponent
+import ru.point.search.ui.search.stateholder.SearchHistoryAdapter
+import ru.point.search.ui.search.stateholder.SearchHistoryAdapterDecorator
 import javax.inject.Inject
 
-internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>() {
+internal class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     @Inject
     lateinit var searchViewModelFactory: SearchViewModelFactory
@@ -29,8 +31,12 @@ internal class SearchFragment : ComponentHolderFragment<FragmentSearchBinding>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<SearchComponentHolderVM>()
-        searchComponent.inject(this)
+        DaggerSearchComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
+
         _searchHistoryAdapter = SearchHistoryAdapter { navigator.fromSearchFragmentToSearchResultsFragment(it.query) }
     }
 

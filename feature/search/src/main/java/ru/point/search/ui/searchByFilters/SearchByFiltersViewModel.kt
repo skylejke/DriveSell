@@ -25,8 +25,11 @@ internal class SearchByFiltersViewModel(
     private val _status = MutableStateFlow<Status>(Status.Loading)
     val status get() = _status.asStateFlow()
 
+    init {
+        getBrands()
+    }
+
     fun getBrands() {
-        _status.value = Status.Loading
         viewModelScope.launch {
             carsRepository.getBrands()
                 .onSuccess { brandList ->
@@ -41,7 +44,6 @@ internal class SearchByFiltersViewModel(
     }
 
     fun getModels(brandName: String) {
-        _status.value = Status.Loading
         viewModelScope.launch {
             carsRepository.getModelsByBrand(brandName)
                 .onSuccess { modelList ->

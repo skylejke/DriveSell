@@ -9,16 +9,16 @@ import androidx.fragment.app.viewModels
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.filterNotNull
 import ru.point.auth.databinding.FragmentLoginBinding
-import ru.point.auth.di.AuthComponentHolderVM
-import ru.point.auth.di.authComponent
+import ru.point.auth.di.DaggerAuthComponent
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.clearErrorOnTextChanged
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ext.showSnackbar
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 
-internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
+internal class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     @Inject
     lateinit var loginViewModelFactory: LoginViewModelFactory
@@ -27,8 +27,11 @@ internal class LoginFragment : ComponentHolderFragment<FragmentLoginBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<AuthComponentHolderVM>()
-        authComponent.inject(this)
+        DaggerAuthComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =

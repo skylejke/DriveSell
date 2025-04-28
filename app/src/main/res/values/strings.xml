@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Drive Sell</string>
-    <string name="home">Home</string>
-    <string name="favourites">Favourites</string>
-    <string name="profile">Profile</string>
-    <string name="add">Add</string>
-    <string name="search">Search</string>
-    <string name="menu">Menu</string>
+    <string name="home">Главная</string>
+    <string name="favourites">Избранное</string>
+    <string name="profile">Профиль</string>
+    <string name="add">Разместить</string>
+    <string name="search">Поиск</string>
+    <string name="menu">Меню</string>
 </resources>

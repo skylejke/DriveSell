@@ -17,17 +17,23 @@ internal class SearchViewModel(private val carsRepository: CarsRepository) : Vie
         getSearchHistory()
     }
 
-    fun insertSearchHistoryItem(query: String) = viewModelScope.launch {
-        carsRepository.insertSearchHistoryItem(query)
-    }
-
-    fun getSearchHistory() = viewModelScope.launch {
-        carsRepository.getSearchHistory().collect {
-            _searchHistoryList.value = it
+    fun insertSearchHistoryItem(query: String) {
+        viewModelScope.launch {
+            carsRepository.insertSearchHistoryItem(query)
         }
     }
 
-    fun clearSearchHistory() = viewModelScope.launch {
-        carsRepository.clearSearchHistory()
+    fun getSearchHistory() {
+        viewModelScope.launch {
+            carsRepository.getSearchHistory().collect {
+                _searchHistoryList.value = it
+            }
+        }
+    }
+
+    fun clearSearchHistory() {
+        viewModelScope.launch {
+            carsRepository.clearSearchHistory()
+        }
     }
 }

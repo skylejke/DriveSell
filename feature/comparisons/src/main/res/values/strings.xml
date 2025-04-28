@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="back_button">Back button</string>
-    <string name="engine_power">Engine power</string>
-    <string name="specifications">Specifications</string>
-    <string name="engine_capacity">Engine capacity</string>
-    <string name="fuel_type">Fuel type</string>
-    <string name="mileage">Mileage</string>
-    <string name="body_type">Body type</string>
-    <string name="color">Color</string>
-    <string name="transmission">Transmission</string>
-    <string name="drivetrain">Drivetrain</string>
-    <string name="wheel_position">Wheel position</string>
-    <string name="condition">Condition</string>
-    <string name="owners">Owners</string>
-    <string name="car_price">%1$,d $</string>
+    <string name="back_button">Кнопка назад</string>
+    <string name="engine_power">Мощность двигателя</string>
+    <string name="specifications">Характеристики</string>
+    <string name="engine_capacity">Объём двигателя</string>
+    <string name="fuel_type">Тип топлива</string>
+    <string name="mileage">Пробег</string>
+    <string name="body_type">Тип кузова</string>
+    <string name="color">Цвет</string>
+    <string name="transmission">Коробка передач</string>
+    <string name="drivetrain">Привод</string>
+    <string name="wheel_position">Расположение руля</string>
+    <string name="condition">Состояние</string>
+    <string name="owners">Владельцы</string>
+    <string name="car_price">%1$,d ₽</string>
     <string name="car_brand_model_year">%1$s %2$s, %3$d</string>
-    <string name="comparisons">Comparisons</string>
+    <string name="comparisons">Сравнения</string>
+    <string name="you_haven_t_added_any_ads_to_comparisons">Вы еще ничего не добавили в список сравнения</string>
 </resources>

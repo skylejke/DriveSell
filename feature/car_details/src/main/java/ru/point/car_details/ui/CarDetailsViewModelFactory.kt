@@ -8,12 +8,15 @@ import ru.point.user.repository.UserRepository
 @Suppress("UNCHECKED_CAST")
 class CarDetailsViewModelFactory(
     private val carsRepository: CarsRepository,
-    private val userRepository: UserRepository
-) :
-    ViewModelProvider.Factory {
+    private val userRepository: UserRepository,
+    private val adId: String,
+    private val userId: String
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>) =
         CarDetailsViewModel(
             carsRepository = carsRepository,
-            userRepository = userRepository
+            userRepository = userRepository,
+            adId = adId,
+            userId = userId
         ) as T
 }

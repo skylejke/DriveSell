@@ -15,12 +15,13 @@ import ru.point.cars.model.enums.OrderParams
 import ru.point.cars.model.enums.SortParams
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.model.Status
 import ru.point.common.ui.BaseFragment
 import ru.point.search.R
 import ru.point.search.databinding.FragmentSearchResultsBinding
-import ru.point.search.di.searchComponent
+import ru.point.search.di.DaggerSearchComponent
 import javax.inject.Inject
 
 internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding>() {
@@ -37,7 +38,12 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        searchComponent.inject(this)
+        DaggerSearchComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
+
         _carAdapter = CarAdapter { navigator.fromSearchResultsFragmentToCarDetailsFragment(it.id, it.userId) }
     }
 
@@ -102,6 +108,7 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
                     noConnectionPlaceholder.root.isVisible = false
                     nothingFoundPlaceHolder.root.isVisible = false
                     swipeRefresh.isRefreshing = true
+                    swipeRefresh.isVisible = true
                 }
 
                 is Status.Success -> {
@@ -110,6 +117,7 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
                     carList.isVisible = true
                     noConnectionPlaceholder.root.isVisible = false
                     swipeRefresh.isRefreshing = false
+                    swipeRefresh.isVisible = true
                 }
 
                 is Status.Error -> {
@@ -121,6 +129,7 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
                     noConnectionPlaceholder.root.isVisible = true
                     nothingFoundPlaceHolder.root.isVisible = false
                     swipeRefresh.isRefreshing = false
+                    swipeRefresh.isVisible = false
                 }
             }
         }

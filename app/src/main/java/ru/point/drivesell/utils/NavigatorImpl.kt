@@ -1,7 +1,6 @@
 package ru.point.drivesell.utils
 
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import ru.point.car_details.ui.CarDetailsFragmentDirections
 import ru.point.common.navigation.Navigator
 import ru.point.comparisons.ui.ComparisonsFragmentDirections
@@ -29,17 +28,11 @@ class NavigatorImpl(
     }
 
     override fun fromLoginFragmentToHomeFragment() {
-        val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.loginFragment, inclusive = true)
-            .build()
-        navController.navigate(R.id.action_loginFragment_to_homeFragment, null, navOptions)
+        navController.navigate(R.id.action_loginFragment_to_homeFragment)
     }
 
     override fun fromRegisterFragmentToHomeFragment() {
-        val navOptions = NavOptions.Builder()
-            .setPopUpTo(R.id.registerFragment, inclusive = true)
-            .build()
-        navController.navigate(R.id.action_registerFragment_to_homeFragment, null, navOptions)
+        navController.navigate(R.id.action_registerFragment_to_homeFragment)
     }
 
     override fun fromMenuFragmentToProfileFragment() {
@@ -47,6 +40,15 @@ class NavigatorImpl(
     }
 
     override fun fromMenuFragmentToLogInFragment() {
+        arrayOf(
+            R.id.homeFragment,
+            R.id.searchByFiltersFragment,
+            R.id.addCarFragment,
+            R.id.favouritesFragment,
+            R.id.menuFragment
+        ).forEach { id ->
+            navController.clearBackStack(id)
+        }
         navController.navigate(R.id.action_menuFragment_to_loginFragment)
     }
 
@@ -64,7 +66,10 @@ class NavigatorImpl(
 
     override fun fromHomeFragmentToCarDetailsFragment(adId: String, userId: String) {
         navController.navigate(
-            HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(adId, userId)
+            HomeFragmentDirections.actionHomeFragmentToCarDetailsFragment(
+                adId = adId,
+                userId = userId
+            )
         )
     }
 
@@ -74,21 +79,27 @@ class NavigatorImpl(
 
     override fun fromUsersAdsFragmentToCarDetailsFragment(adId: String, userId: String) {
         navController.navigate(
-            UsersAdsFragmentDirections.actionUsersAdsFragmentToCarDetailsFragment(adId, userId)
+            UsersAdsFragmentDirections.actionUsersAdsFragmentToCarDetailsFragment(
+                adId = adId,
+                userId = userId
+            )
         )
     }
 
     override fun fromFavouritesFragmentToCarDetailsFragment(adId: String, userId: String) {
         navController.navigate(
-            FavouritesFragmentDirections.actionFavouritesFragmentToCarDetailsFragment(adId, userId)
+            FavouritesFragmentDirections.actionFavouritesFragmentToCarDetailsFragment(
+                adId = adId,
+                userId = userId
+            )
         )
     }
 
     override fun fromSearchResultsFragmentToCarDetailsFragment(adId: String, userId: String) {
         navController.navigate(
             SearchResultsFragmentDirections.actionSearchResultsFragmentToCarDetailsFragment(
-                adId,
-                userId
+                adId = adId,
+                userId = userId
             )
         )
     }

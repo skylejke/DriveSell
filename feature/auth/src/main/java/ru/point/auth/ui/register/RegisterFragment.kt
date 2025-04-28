@@ -9,7 +9,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
 import ru.point.auth.databinding.FragmentRegisterBinding
-import ru.point.auth.di.authComponent
+import ru.point.auth.di.DaggerAuthComponent
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.clearErrorOnTextChanged
 import ru.point.common.ext.repeatOnLifecycleScope
@@ -28,13 +29,15 @@ internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authComponent.inject(this)
+        DaggerAuthComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
     }
 
-    override fun createView(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ) = FragmentRegisterBinding.inflate(inflater, container, false)
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentRegisterBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

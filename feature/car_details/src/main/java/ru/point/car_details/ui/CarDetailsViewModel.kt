@@ -13,7 +13,9 @@ import ru.point.user.repository.UserRepository
 
 class CarDetailsViewModel(
     private val carsRepository: CarsRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val adId: String,
+    private val userId: String
 ) : ViewModel() {
 
     private val _carDetails = MutableStateFlow<AdVo?>(null)
@@ -33,6 +35,13 @@ class CarDetailsViewModel(
 
     private val _status = MutableStateFlow<Status>(Status.Loading)
     val status get() = _status.asStateFlow()
+
+    init {
+        getCarAdById(adId = adId)
+        checkIsUsersAd(userId = userId)
+        checkIsUsersAd(userId = userId)
+        checkIsFavourite(adId = adId)
+    }
 
     fun getCarAdById(adId: String) {
         _status.value = Status.Loading

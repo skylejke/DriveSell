@@ -8,12 +8,15 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import ru.point.auth.R
 import ru.point.common.model.Status
+import ru.point.common.utils.ResourceProvider
 import ru.point.user.model.LoginRequest
 import ru.point.user.repository.UserRepository
 
 internal class LoginViewModel(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     private val _loginEvent = MutableSharedFlow<Unit>(replay = 1)
@@ -44,8 +47,8 @@ internal class LoginViewModel(
                     _status.value = Status.Error
                     if (error is HttpException) {
                         when (error.code()) {
-                            403 -> _passwordError.value = "Password is incorrect"
-                            404 -> _usernameError.value = "User does not exist"
+                            403 -> _passwordError.value = resourceProvider.getString(R.string.error_incorrect_password)
+                            404 -> _usernameError.value = resourceProvider.getString(R.string.error_user_not_found)
                         }
                     }
                 }
@@ -53,10 +56,7 @@ internal class LoginViewModel(
         }
     }
 
-    private fun validateLoginFields(
-        username: String,
-        password: String
-    ): Boolean {
+    private fun validateLoginFields(username: String, password: String): Boolean {
 
         _usernameError.value = null
         _passwordError.value = null
@@ -64,12 +64,12 @@ internal class LoginViewModel(
         var valid = true
 
         if (username.isBlank()) {
-            _usernameError.value = "Username must be provided"
+            _usernameError.value =  resourceProvider.getString(R.string.error_username_required)
             valid = false
         }
 
         if (password.isBlank()) {
-            _passwordError.value = "Password must be provided"
+            _passwordError.value = resourceProvider.getString(R.string.error_password_required)
             valid = false
         }
 

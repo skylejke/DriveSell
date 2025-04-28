@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.clearErrorOnTextChanged
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.model.Status
 import ru.point.common.ui.BaseFragment
 import ru.point.profile.databinding.FragmentEditUserDataBinding
-import ru.point.profile.di.profileComponent
+import ru.point.profile.di.DaggerProfileComponent
 import javax.inject.Inject
 
 internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>() {
@@ -25,7 +26,11 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        profileComponent.inject(this)
+        DaggerProfileComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =

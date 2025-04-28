@@ -24,10 +24,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         navigator = (requireActivity() as NavigatorProvider).getNavigator(findNavController())
     }
 
-    abstract fun createView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-    ): T
+    abstract fun createView(inflater: LayoutInflater, container: ViewGroup?): T
 
     override fun onCreateView(
         inflater: LayoutInflater,

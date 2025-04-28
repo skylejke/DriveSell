@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.search.R
 import ru.point.search.databinding.FragmentSearchByFiltersBinding
-import ru.point.search.di.SearchComponentHolderVM
-import ru.point.search.di.searchComponent
+import ru.point.search.di.DaggerSearchComponent
 import javax.inject.Inject
 
-internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchByFiltersBinding>() {
+internal class SearchByFiltersFragment : BaseFragment<FragmentSearchByFiltersBinding>() {
 
     @Inject
     lateinit var searchByFiltersViewModelFactory: SearchByFiltersViewModelFactory
@@ -24,8 +24,11 @@ internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<SearchComponentHolderVM>()
-        searchComponent.inject(this)
+        DaggerSearchComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
@@ -33,8 +36,6 @@ internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        clearFields()
 
         with(binding.filtersFields) {
             fuelTypeListTv.setSimpleItems(resources.getStringArray(R.array.fuel_types))
@@ -46,8 +47,6 @@ internal class SearchByFiltersFragment : ComponentHolderFragment<FragmentSearchB
             conditionListTv.setSimpleItems(resources.getStringArray(R.array.conditions))
             ownersTv.setSimpleItems(resources.getStringArray(R.array.owners))
         }
-
-        searchByFiltersViewModel.getBrands()
 
         repeatOnLifecycleScope {
             searchByFiltersViewModel.status.collect { updatePlaceholder(it) }

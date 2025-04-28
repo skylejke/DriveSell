@@ -1,12 +1,24 @@
 <resources>
     <string name="app_name">Drive Sell</string>
-    <string name="sign_in">Sign in</string>
-    <string name="phone_number">Phone number</string>
-    <string name="password">Password</string>
-    <string name="or">or</string>
-    <string name="sign_up">Sign up</string>
-    <string name="email">Email</string>
-    <string name="continue_as_a_guest">Continue as a guest</string>
-    <string name="login">Login</string>
-    <string name="username">Username</string>
+    <string name="sign_in">Вход</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="password">Пароль</string>
+    <string name="or">или</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="email">Адрес электронной почты</string>
+    <string name="continue_as_a_guest">Продолжить в качестве гостя</string>
+    <string name="username">Имя пользователя</string>
+    <string name="error_username_required">Необходимо указать имя пользователя</string>
+    <string name="error_password_required">Необходимо указать пароль</string>
+    <string name="error_incorrect_password">Введен неверный пароль</string>
+    <string name="error_user_not_found">Пользователь не существует</string>
+    <string name="error_username_invalid">Некорректное имя пользователя</string>
+    <string name="error_email_required">Необходимо указать адрес электронной почты</string>
+    <string name="error_email_invalid">Некорректный адрес электронной почты</string>
+    <string name="error_phone_required">Необходимо указать номер телефона</string>
+    <string name="error_phone_invalid">Некорректный номер телефона</string>
+    <string name="error_password_invalid">Некорректный пароль</string>
+    <string name="error_username_taken">Имя пользователя уже занято</string>
+    <string name="error_email_taken">Адрес электронной почты уже используется</string>
+    <string name="error_phone_taken">Номер телефона уже используется</string>
 </resources>

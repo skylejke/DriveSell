@@ -39,7 +39,7 @@ class CarAdapter(private val onAdapterItemClick: OnAdapterItemClick<AdVo>) :
                 adVo.car.transmission
             )
 
-            photo.load("${BuildConfig.BASE_URL}/photos/${adVo.photos.first()}") {
+            photo.load("${BuildConfig.BASE_URL}/photos/${adVo.photos.first().ifEmpty {  error(R.drawable.error_photo_placeholder) }}") {
                 transformations(
                     coil.transform.RoundedCornersTransformation(
                         8 * binding.root.context.resources.displayMetrics.density

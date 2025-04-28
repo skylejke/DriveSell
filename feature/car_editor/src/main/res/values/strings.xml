@@ -1,226 +1,250 @@
 <resources>
-    <string name="fragment_add_car_name">Add car fragment</string>
-    <string name="create_car_ad">Create car ad</string>
-    <string name="brand">Brand</string>
-    <string name="model">Model</string>
-    <string name="mileage">Mileage</string>
-    <string name="km">km</string>
-    <string name="enter_car_mileage">Enter car mileage in kilometers</string>
-    <string name="hp">HP</string>
-    <string name="enter_car_engine_power">Enter engine power in horsepower</string>
-    <string name="engine_power">Engine power</string>
-    <string name="L">L</string>
-    <string name="engine_capacity">Engine capacity</string>
-    <string name="enter_car_engine_capacity">Enter engine capacity in liters</string>
-    <string name="fuel_type">Fuel type</string>
-    <string name="body_type">Body type</string>
-    <string name="color">Color</string>
-    <string name="transmission">Transmission</string>
-    <string name="drivetrain">Drivetrain</string>
-    <string name="wheel">Wheel position</string>
-    <string name="condition">Condition</string>
-    <string name="owners">Number of owners</string>
-    <string name="ownership_period">Ownership period</string>
-    <string name="number_of_years">Number of years</string>
-    <string name="number_of_months">Number of months</string>
-    <string name="price">Price</string>
-    <string name="enter_car_price">Enter car price in US dollars</string>
-    <string name="dollar_sign">$</string>
+    <string name="create_car_ad">Опубликовать объявление</string>
+    <string name="brand">Марка</string>
+    <string name="model">Модель</string>
+    <string name="mileage">Пробег</string>
+    <string name="km">км</string>
+    <string name="enter_car_mileage">Введите пробег автомобиля в км.</string>
+    <string name="hp">л.с.</string>
+    <string name="enter_car_engine_power">Введите мощность двигателя в л.с.</string>
+    <string name="engine_power">Мощность двигателя</string>
+    <string name="L">л</string>
+    <string name="engine_capacity">Объём двигателя</string>
+    <string name="enter_car_engine_capacity">Введите объём двигателя в л.</string>
+    <string name="fuel_type">Тип топлива</string>
+    <string name="body_type">Тип кузова</string>
+    <string name="color">Цвет</string>
+    <string name="transmission">Коробка передач</string>
+    <string name="drivetrain">Привод</string>
+    <string name="wheel">Расположение руля</string>
+    <string name="condition">Состояние</string>
+    <string name="owners">Количество владельцев</string>
+    <string name="ownership_period">Период владения</string>
+    <string name="number_of_years">Количество лет</string>
+    <string name="number_of_months">Количество месяцев</string>
+    <string name="price">Цена</string>
+    <string name="enter_car_price">Введите цену автомобиля</string>
     <string name="vin">VIN</string>
     <string name="enter_car_vin">VIN</string>
-    <string name="year">Year</string>
-    <string name="description">Description</string>
-    <string name="description_et">Tell in detail about the car you are selling</string>
-    <string name="create_ad">Create ad</string>
-    <string name="photos">Photos</string>
-    <string name="log_in_to_be_able_to_post_car_ads">Log in to be able to post car ads</string>
-    <string name="edit_car_ad">Edit car ad</string>
-    <string name="back_button">Back button</string>
-    <string name="edit_ad">Edit ad</string>
-    <string name="check_button">Check icon</string>
+    <string name="year">Год</string>
+    <string name="description">Описание</string>
+    <string name="description_et">Расскажите подробно об автомобиле</string>
+    <string name="create_ad">Опубликовать объявление</string>
+    <string name="photos">Фотографии</string>
+    <string name="log_in_to_be_able_to_post_car_ads">Войдите в аккаунт, чтобы размещать объявления о продаже автомобилей</string>
+    <string name="edit_car_ad">Редактировать объявление</string>
+    <string name="back_button">Кнопка назад</string>
+    <string name="edit_ad">Редактировать объявление</string>
+    <string name="check_button">Иконка проверки</string>
+    <string name="successfully_created_new_car_ad">Объявление успешно опубликовано!</string>
+    <string name="successfully_updated_car_ad">Объявление успешно обновлено!</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
+
+    <string name="error_photos_required">Необходимо добавить хотя бы одно фото автомобиля</string>
+    <string name="error_vin_invalid">Номер VIN некорректен</string>
+    <string name="error_vin_required">VIN должен быть указан</string>
+    <string name="error_brand_required">Марка должна быть указана</string>
+    <string name="error_model_required">Модель должна быть указана</string>
+    <string name="error_year_required">Год должен быть указан</string>
+    <string name="error_price_required">Цена должна быть указана</string>
+    <string name="error_engine_power_invalid">Неверное значение мощности двигателя</string>
+    <string name="error_engine_power_required">Мощность двигателя должна быть указана</string>
+    <string name="error_engine_capacity_invalid">Неверное значение объёма двигателя</string>
+    <string name="error_engine_capacity_required">Объём двигателя должен быть указан</string>
+    <string name="error_fuel_type_required">Тип топлива должен быть указан</string>
+    <string name="error_mileage_required">Пробег должен быть указан</string>
+    <string name="error_body_type_required">Тип кузова должен быть указан</string>
+    <string name="error_color_required">Цвет должен быть указан</string>
+    <string name="error_transmission_required">Коробка передач должна быть указана</string>
+    <string name="error_drivetrain_required">Привод должен быть указан</string>
+    <string name="error_wheel_required">Расположение руля должно быть указано</string>
+    <string name="error_condition_required">Состояние должно быть указано</string>
+    <string name="error_owners_required">Количество владельцев должно быть указано</string>
+    <string name="error_ownership_period_required">Период владения должен быть указан</string>
+
 
     <string-array name="body_types">
-        <item>Sedan</item>
-        <item>Coupe</item>
-        <item>Station Wagon (Estate)</item>
-        <item>Hatchback</item>
-        <item>Minivan</item>
-        <item>Pickup Truck</item>
-        <item>Limousine</item>
-        <item>Van</item>
-        <item>Convertible</item>
-        <item>Liftback</item>
-        <item>Suv</item>
-        <item>Truck</item>
+        <item>Седан</item>
+        <item>Купе</item>
+        <item>Универсал</item>
+        <item>Хэтчбек</item>
+        <item>Минивэн</item>
+        <item>Пикап</item>
+        <item>Лимузин</item>
+        <item>Фургон</item>
+        <item>Кабриолет</item>
+        <item>Лифтбек</item>
+        <item>Внедорожник</item>
+        <item>Грузовик</item>
     </string-array>
 
     <string-array name="conditions">
-        <item>Not broken</item>
-        <item>Broken</item>
-        <item>Requires repair</item>
+        <item>Не битый</item>
+        <item>Битый</item>
+        <item>Требует ремонта</item>
     </string-array>
 
     <string-array name="drivetrains">
-        <item>AWD</item>
-        <item>FWD</item>
-        <item>RWD</item>
+        <item>Полный привод (AWD)</item>
+        <item>Передний привод (FWD)</item>
+        <item>Задний привод (RWD)</item>
     </string-array>
 
     <string-array name="fuel_types">
-        <item>Petrol</item>
-        <item>Diesel</item>
-        <item>Hybrid</item>
-        <item>Electric</item>
+        <item>Бензин</item>
+        <item>Дизель</item>
+        <item>Гибрид</item>
+        <item>Электро</item>
     </string-array>
 
     <string-array name="transmissions">
-        <item>Automatic</item>
-        <item>Robotized</item>
-        <item>Continuously variable</item>
-        <item>Manual</item>
+        <item>Автоматическая</item>
+        <item>Роботизированная</item>
+        <item>Вариатор</item>
+        <item>Механическая</item>
     </string-array>
 
     <string-array name="wheels">
-        <item>Right</item>
-        <item>Left</item>
+        <item>Правый руль</item>
+        <item>Левый руль</item>
     </string-array>
 
     <string-array name="colors">
-        <item>Black</item>
-        <item>Gray</item>
-        <item>Silver</item>
-        <item>White</item>
-        <item>Red</item>
-        <item>Pink</item>
-        <item>Orange</item>
-        <item>Gold</item>
-        <item>Yellow</item>
-        <item>Green</item>
-        <item>Light Blue</item>
-        <item>Blue</item>
-        <item>Violet</item>
-        <item>Purple</item>
-        <item>Brown</item>
-        <item>Beige</item>
+        <item>Чёрный</item>
+        <item>Серый</item>
+        <item>Серебристый</item>
+        <item>Белый</item>
+        <item>Красный</item>
+        <item>Розовый</item>
+        <item>Оранжевый</item>
+        <item>Золотой</item>
+        <item>Жёлтый</item>
+        <item>Зелёный</item>
+        <item>Голубой</item>
+        <item>Синий</item>
+        <item>Фиолетовый</item>
+        <item>Пурпурный</item>
+        <item>Коричневый</item>
+        <item>Бежевый</item>
     </string-array>
 
     <string-array name="number_of_years">
-        <item>0 years</item>
-        <item>1 year</item>
-        <item>2 years</item>
-        <item>3 years</item>
-        <item>4 years</item>
-        <item>5 years</item>
-        <item>6 years</item>
-        <item>7 years</item>
-        <item>8 years</item>
-        <item>9 years</item>
-        <item>10 years</item>
-        <item>11 years</item>
-        <item>12 years</item>
-        <item>13 years</item>
-        <item>14 years</item>
-        <item>15 years</item>
-        <item>16 years</item>
-        <item>17 years</item>
-        <item>18 years</item>
-        <item>19 years</item>
-        <item>20 years</item>
-        <item>21 years</item>
-        <item>22 years</item>
-        <item>23 years</item>
-        <item>24 years</item>
-        <item>25 years</item>
-        <item>26 years</item>
-        <item>27 years</item>
-        <item>28 years</item>
-        <item>29 years</item>
-        <item>30 years</item>
-        <item>31 years</item>
-        <item>32 years</item>
-        <item>33 years</item>
-        <item>34 years</item>
-        <item>35 years</item>
-        <item>36 years</item>
-        <item>37 years</item>
-        <item>38 years</item>
-        <item>39 years</item>
-        <item>40 years</item>
-        <item>41 years</item>
-        <item>42 years</item>
-        <item>43 years</item>
-        <item>44 years</item>
-        <item>45 years</item>
-        <item>46 years</item>
-        <item>47 years</item>
-        <item>48 years</item>
-        <item>49 years</item>
-        <item>50 years</item>
-        <item>51 years</item>
-        <item>52 years</item>
-        <item>53 years</item>
-        <item>54 years</item>
-        <item>55 years</item>
-        <item>56 years</item>
-        <item>57 years</item>
-        <item>58 years</item>
-        <item>59 years</item>
-        <item>60 years</item>
-        <item>61 years</item>
-        <item>62 years</item>
-        <item>63 years</item>
-        <item>64 years</item>
-        <item>65 years</item>
-        <item>66 years</item>
-        <item>67 years</item>
-        <item>68 years</item>
-        <item>69 years</item>
-        <item>70 years</item>
-        <item>71 years</item>
-        <item>72 years</item>
-        <item>73 years</item>
-        <item>74 years</item>
-        <item>75 years</item>
-        <item>76 years</item>
-        <item>77 years</item>
-        <item>78 years</item>
-        <item>79 years</item>
-        <item>80 years</item>
-        <item>81 years</item>
-        <item>82 years</item>
-        <item>83 years</item>
-        <item>84 years</item>
-        <item>85 years</item>
-        <item>86 years</item>
-        <item>87 years</item>
-        <item>88 years</item>
-        <item>89 years</item>
-        <item>90 years</item>
-        <item>91 years</item>
-        <item>92 years</item>
-        <item>93 years</item>
-        <item>94 years</item>
-        <item>95 years</item>
-        <item>96 years</item>
-        <item>97 years</item>
-        <item>98 years</item>
-        <item>99 years</item>
-        <item>100 years</item>
+        <item>0 лет</item>
+        <item>1 год</item>
+        <item>2 года</item>
+        <item>3 года</item>
+        <item>4 года</item>
+        <item>5 лет</item>
+        <item>6 лет</item>
+        <item>7 лет</item>
+        <item>8 лет</item>
+        <item>9 лет</item>
+        <item>10 лет</item>
+        <item>11 лет</item>
+        <item>12 лет</item>
+        <item>13 лет</item>
+        <item>14 лет</item>
+        <item>15 лет</item>
+        <item>16 лет</item>
+        <item>17 лет</item>
+        <item>18 лет</item>
+        <item>19 лет</item>
+        <item>20 лет</item>
+        <item>21 год</item>
+        <item>22 года</item>
+        <item>23 года</item>
+        <item>24 года</item>
+        <item>25 лет</item>
+        <item>26 лет</item>
+        <item>27 лет</item>
+        <item>28 лет</item>
+        <item>29 лет</item>
+        <item>30 лет</item>
+        <item>31 год</item>
+        <item>32 года</item>
+        <item>33 года</item>
+        <item>34 года</item>
+        <item>35 лет</item>
+        <item>36 лет</item>
+        <item>37 лет</item>
+        <item>38 лет</item>
+        <item>39 лет</item>
+        <item>40 лет</item>
+        <item>41 год</item>
+        <item>42 года</item>
+        <item>43 года</item>
+        <item>44 года</item>
+        <item>45 лет</item>
+        <item>46 лет</item>
+        <item>47 лет</item>
+        <item>48 лет</item>
+        <item>49 лет</item>
+        <item>50 лет</item>
+        <item>51 год</item>
+        <item>52 года</item>
+        <item>53 года</item>
+        <item>54 года</item>
+        <item>55 лет</item>
+        <item>56 лет</item>
+        <item>57 лет</item>
+        <item>58 лет</item>
+        <item>59 лет</item>
+        <item>60 лет</item>
+        <item>61 год</item>
+        <item>62 года</item>
+        <item>63 года</item>
+        <item>64 года</item>
+        <item>65 лет</item>
+        <item>66 лет</item>
+        <item>67 лет</item>
+        <item>68 лет</item>
+        <item>69 лет</item>
+        <item>70 лет</item>
+        <item>71 год</item>
+        <item>72 года</item>
+        <item>73 года</item>
+        <item>74 года</item>
+        <item>75 лет</item>
+        <item>76 лет</item>
+        <item>77 лет</item>
+        <item>78 лет</item>
+        <item>79 лет</item>
+        <item>80 лет</item>
+        <item>81 год</item>
+        <item>82 года</item>
+        <item>83 года</item>
+        <item>84 года</item>
+        <item>85 лет</item>
+        <item>86 лет</item>
+        <item>87 лет</item>
+        <item>88 лет</item>
+        <item>89 лет</item>
+        <item>90 лет</item>
+        <item>91 год</item>
+        <item>92 года</item>
+        <item>93 года</item>
+        <item>94 года</item>
+        <item>95 лет</item>
+        <item>96 лет</item>
+        <item>97 лет</item>
+        <item>98 лет</item>
+        <item>99 лет</item>
+        <item>100 лет</item>
     </string-array>
 
     <string-array name="number_of_months">
-        <item>1 month</item>
-        <item>2 months</item>
-        <item>3 months</item>
-        <item>4 months</item>
-        <item>5 months</item>
-        <item>6 months</item>
-        <item>7 months</item>
-        <item>8 months</item>
-        <item>9 months</item>
-        <item>10 months</item>
-        <item>11 months</item>
-        <item>12 months</item>
+        <item>1 месяц</item>
+        <item>2 месяца</item>
+        <item>3 месяца</item>
+        <item>4 месяца</item>
+        <item>5 месяцев</item>
+        <item>6 месяцев</item>
+        <item>7 месяцев</item>
+        <item>8 месяцев</item>
+        <item>9 месяцев</item>
+        <item>10 месяцев</item>
+        <item>11 месяцев</item>
+        <item>12 месяцев</item>
     </string-array>
 
     <string-array name="years">

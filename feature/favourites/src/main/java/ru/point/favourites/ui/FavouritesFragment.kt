@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.combine
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.favourites.databinding.FragmentFavouritesBinding
-import ru.point.favourites.di.FavouritesComponentHolderVM
-import ru.point.favourites.di.favouritesComponent
+import ru.point.favourites.di.DaggerFavouritesComponent
 import javax.inject.Inject
 
-internal class FavouritesFragment : ComponentHolderFragment<FragmentFavouritesBinding>() {
+internal class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
 
     @Inject
     lateinit var favouritesViewModelFactory: FavouritesViewModelFactory
@@ -30,11 +30,14 @@ internal class FavouritesFragment : ComponentHolderFragment<FragmentFavouritesBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<FavouritesComponentHolderVM>()
-        favouritesComponent.inject(this)
+        DaggerFavouritesComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
+
         _carAdapter =
             CarAdapter { navigator.fromFavouritesFragmentToCarDetailsFragment(it.id, it.userId) }
-        favouritesViewModel.getFavourites()
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
@@ -85,6 +88,7 @@ internal class FavouritesFragment : ComponentHolderFragment<FragmentFavouritesBi
                     favouriteList.isVisible = false
                     noConnectionPlaceholder.root.isVisible = false
                     swipeRefresh.isRefreshing = true
+                    swipeRefresh.isVisible = true
                 }
 
                 is Status.Success -> {
@@ -93,6 +97,7 @@ internal class FavouritesFragment : ComponentHolderFragment<FragmentFavouritesBi
                     favouriteList.isVisible = true
                     noConnectionPlaceholder.root.isVisible = false
                     swipeRefresh.isRefreshing = false
+                    swipeRefresh.isVisible = true
                 }
 
                 is Status.Error -> {
@@ -101,6 +106,7 @@ internal class FavouritesFragment : ComponentHolderFragment<FragmentFavouritesBi
                     favouriteList.isVisible = false
                     noConnectionPlaceholder.root.isVisible = true
                     swipeRefresh.isRefreshing = false
+                    swipeRefresh.isVisible = false
                 }
             }
         }

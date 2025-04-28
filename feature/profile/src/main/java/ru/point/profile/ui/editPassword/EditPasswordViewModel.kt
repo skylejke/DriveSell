@@ -10,11 +10,14 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import ru.point.common.ext.isValidPassword
 import ru.point.common.model.Status
+import ru.point.common.utils.ResourceProvider
+import ru.point.profile.R
 import ru.point.user.model.EditUserPasswordRequest
 import ru.point.user.repository.UserRepository
 
 internal class EditPasswordViewModel(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     private val _oldPasswordError = MutableStateFlow<String?>(null)
@@ -58,7 +61,8 @@ internal class EditPasswordViewModel(
                     _status.value = Status.Error
                     if (error is HttpException) {
                         when (error.code()) {
-                            403 -> _oldPasswordError.value = "Current password is incorrect"
+                            403 -> _oldPasswordError.value =
+                                resourceProvider.getString(R.string.error_current_password_incorrect)
                         }
                     }
                 }
@@ -78,23 +82,23 @@ internal class EditPasswordViewModel(
         var valid = true
 
         if (oldPassword.isBlank()) {
-            _oldPasswordError.value = "Old password must be provided"
+            _oldPasswordError.value = resourceProvider.getString(R.string.error_old_password_required)
             valid = false
         }
 
         if (newPassword.isBlank()) {
-            _newPasswordError.value = "New password must be provided"
+            _newPasswordError.value = resourceProvider.getString(R.string.error_new_password_required)
             valid = false
         } else if (!newPassword.isValidPassword()) {
-            _newPasswordError.value = "New password is invalid"
+            _newPasswordError.value = resourceProvider.getString(R.string.error_new_password_invalid)
             valid = false
         }
 
         if (confirmNewPassword.isBlank()) {
-            _confirmNewPasswordError.value = "Confirm new password must be provided"
+            _confirmNewPasswordError.value = resourceProvider.getString(R.string.error_confirm_new_password_required)
             valid = false
         } else if (newPassword != confirmNewPassword) {
-            _confirmNewPasswordError.value = "New password and confirmation do not match"
+            _confirmNewPasswordError.value = resourceProvider.getString(R.string.error_passwords_do_not_match)
             valid = false
         }
 

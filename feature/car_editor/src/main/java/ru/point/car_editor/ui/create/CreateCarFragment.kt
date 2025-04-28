@@ -9,58 +9,64 @@ import androidx.activity.result.contract.ActivityResultContracts.PickMultipleVis
 import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import kotlinx.coroutines.flow.filterNotNull
 import ru.point.car_editor.R
 import ru.point.car_editor.databinding.FragmentCreateCarBinding
-import ru.point.car_editor.di.CarEditorComponentHolderVM
-import ru.point.car_editor.di.carEditorComponent
+import ru.point.car_editor.di.DaggerCarEditorComponent
 import ru.point.cars.model.CreateCarRequest
 import ru.point.cars.ui.CarEditorPhotosAdapter
 import ru.point.cars.ui.CarEditorPhotosAdapterItem
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.NumberErrorConsts
 import ru.point.common.ext.clearErrorOnTextChanged
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.ext.showSnackbar
+import ru.point.common.model.EventState
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import javax.inject.Inject
 
-internal class CreateCarFragment : ComponentHolderFragment<FragmentCreateCarBinding>() {
+private const val MAX_PHOTOS = 30
+
+internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
 
     @Inject
-    lateinit var createCarViewModelFactory: CreateCarViewModelFactory
-
-    private val createCarViewModel by viewModels<CreateCarViewModel> { createCarViewModelFactory }
-
-    val pickMultipleMedia =
-        registerForActivityResult(PickMultipleVisualMedia(30)) { uris ->
-            if (uris.isNotEmpty()) {
-                val currentItems = carEditorPhotosAdapter.currentList.toMutableList()
-                currentItems.addAll(uris.map { CarEditorPhotosAdapterItem.Photo(it) })
-                carEditorPhotosAdapter.submitList(currentItems)
-            }
-        }
+    lateinit var factory: CreateCarViewModelFactory
+    private val createCarViewModel: CreateCarViewModel by viewModels { factory }
 
     private var _carEditorPhotosAdapter: CarEditorPhotosAdapter? = null
     private val carEditorPhotosAdapter get() = requireNotNull(_carEditorPhotosAdapter)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initHolder<CarEditorComponentHolderVM>()
-        carEditorComponent.inject(this)
-        _carEditorPhotosAdapter = CarEditorPhotosAdapter(
-            onAddPhotoClick = {
-                pickMultipleMedia.launch(PickVisualMediaRequest(PickVisualMedia.ImageAndVideo))
-            },
-            onDeletePhotoClick = { photo ->
-                carEditorPhotosAdapter.submitList(
-                    carEditorPhotosAdapter.currentList.filter { it != photo }
-                )
+    private val pickMedia = registerForActivityResult(PickMultipleVisualMedia(MAX_PHOTOS)) { uris ->
+        if (uris.isNotEmpty()) {
+            val list = carEditorPhotosAdapter.currentList.toMutableList().apply {
+                addAll(uris.map { CarEditorPhotosAdapterItem.Photo(it) })
             }
-        )
+            carEditorPhotosAdapter.submitList(list)
+        }
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
         FragmentCreateCarBinding.inflate(inflater, container, false)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        DaggerCarEditorComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .adId()
+            .build()
+            .inject(this)
+
+        _carEditorPhotosAdapter = CarEditorPhotosAdapter(
+            onAddPhotoClick = {
+                pickMedia.launch(PickVisualMediaRequest(PickVisualMedia.ImageAndVideo))
+            },
+            onDeletePhotoClick = { item ->
+                carEditorPhotosAdapter.submitList(carEditorPhotosAdapter.currentList - item)
+            }
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -88,6 +94,13 @@ internal class CreateCarFragment : ComponentHolderFragment<FragmentCreateCarBind
 
         observeErrors()
 
+        repeatOnLifecycleScope {
+            createCarViewModel.isGuest.filterNotNull().collect {
+                binding.mainContainer.isVisible = !it
+                binding.guestContainer.root.isVisible = it
+            }
+        }
+
         repeatOnLifecycleScope { createCarViewModel.status.collect { updatePlaceholder(it) } }
 
         repeatOnLifecycleScope {
@@ -104,6 +117,23 @@ internal class CreateCarFragment : ComponentHolderFragment<FragmentCreateCarBind
                     models.map { it.name }.toTypedArray()
                 )
                 binding.carEditorFields.modelTil.isVisible = models.isNotEmpty()
+            }
+        }
+
+        repeatOnLifecycleScope {
+            createCarViewModel.addCarEvent.collect {
+                when (it) {
+                    is EventState.Success -> {
+                        navigator.fromAddCarFragmentToHomeFragment()
+                        clearFields()
+                        showSnackbar(binding.root, getString(R.string.successfully_created_new_car_ad))
+                    }
+
+                    is EventState.Failure -> showSnackbar(
+                        binding.root,
+                        getString(R.string.something_went_wrong)
+                    )
+                }
             }
         }
 

@@ -6,16 +6,26 @@ import ru.point.car_editor.ui.create.CreateCarViewModelFactory
 import ru.point.car_editor.ui.edit.EditCarViewModelFactory
 import ru.point.cars.repository.CarsRepository
 import ru.point.common.di.FeatureScope
+import ru.point.common.utils.ResourceProvider
 import ru.point.user.repository.UserRepository
+import javax.inject.Named
 
 @Module
 internal class CarEditorViewModelFactoryModule {
 
     @[Provides FeatureScope]
-    fun provideCreateCarViewModelFactory(carsRepository: CarsRepository, userRepository: UserRepository) =
-        CreateCarViewModelFactory(carsRepository = carsRepository, userRepository = userRepository)
+    fun provideCreateCarViewModelFactory(
+        carsRepository: CarsRepository,
+        userRepository: UserRepository,
+        resourceProvider: ResourceProvider
+    ) =
+        CreateCarViewModelFactory(
+            carsRepository = carsRepository,
+            userRepository = userRepository,
+            resourceProvider = resourceProvider
+        )
 
     @[Provides FeatureScope]
-    fun provideEditCarViewModelFactory(carsRepository: CarsRepository) =
-        EditCarViewModelFactory(carsRepository = carsRepository)
+    fun provideEditCarViewModelFactory(carsRepository: CarsRepository, @Named("adId") adId: String) =
+        EditCarViewModelFactory(carsRepository = carsRepository, adId = adId)
 }

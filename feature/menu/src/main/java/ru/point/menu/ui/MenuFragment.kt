@@ -13,15 +13,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.showSnackbar
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.menu.R
 import ru.point.menu.databinding.FragmentMenuBinding
-import ru.point.menu.di.MenuComponentHolderVM
-import ru.point.menu.di.menuComponent
+import ru.point.menu.di.DaggerMenuComponent
+import ru.point.menu.ui.stateholder.MenuAdapter
+import ru.point.menu.ui.stateholder.MenuDecorator
+import ru.point.menu.ui.stateholder.MenuItem
+import ru.point.menu.ui.stateholder.NonScrollableLinearLayoutManager
 import javax.inject.Inject
 
-internal class MenuFragment : ComponentHolderFragment<FragmentMenuBinding>() {
+internal class MenuFragment : BaseFragment<FragmentMenuBinding>() {
 
     @Inject
     lateinit var menuViewModelFactory: MenuViewModelFactory
@@ -33,8 +37,12 @@ internal class MenuFragment : ComponentHolderFragment<FragmentMenuBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initHolder<MenuComponentHolderVM>()
-        menuComponent.inject(this)
+        DaggerMenuComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
+
         _menuAdapter = MenuAdapter(
             onProfileClick = { navigator.fromMenuFragmentToProfileFragment() },
             onUsersAdsClick = { navigator.fromMenuFragmentToUsersAdsFragment() },
@@ -104,7 +112,7 @@ internal class MenuFragment : ComponentHolderFragment<FragmentMenuBinding>() {
     private fun logOut() {
         menuViewModel.logOut()
         navigator.fromMenuFragmentToLogInFragment()
-        showSnackbar(binding.root, "Log out")
+        showSnackbar(binding.root, getString(R.string.you_logged_out))
     }
 
     override fun onDestroy() {

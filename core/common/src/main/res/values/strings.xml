@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="please_check_your_internet_connection_and_try_again">Please check your internet connection and try again</string>
-    <string name="try_again">Try again</string>
-    <string name="nothing_found">Nothing found</string>
+    <string name="please_check_your_internet_connection_and_try_again">Пожалуйста, проверьте ваше интернет-соединение и повторите попытку</string>
+    <string name="try_again">Попробовать снова</string>
+    <string name="nothing_found">Ничего не найдено</string>
 </resources>

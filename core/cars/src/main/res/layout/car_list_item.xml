@@ -32,7 +32,7 @@
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/photo"
-            tools:text="300 000 $" />
+            tools:text="300 000 ₽" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/brand_model_year"

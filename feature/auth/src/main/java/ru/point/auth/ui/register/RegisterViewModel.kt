@@ -9,17 +9,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import retrofit2.HttpException
+import ru.point.auth.R
 import ru.point.common.ext.isValidEmail
 import ru.point.common.ext.isValidPassword
 import ru.point.common.ext.isValidPhoneNumber
 import ru.point.common.ext.isValidUserName
 import ru.point.common.model.Status
+import ru.point.common.utils.ResourceProvider
 import ru.point.user.model.AuthResponse
 import ru.point.user.model.RegisterRequest
 import ru.point.user.repository.UserRepository
 
 internal class RegisterViewModel(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     private val _registerEvent = MutableSharedFlow<Unit>(replay = 1)
@@ -95,36 +98,35 @@ internal class RegisterViewModel(
 
         var valid = true
 
-
         if (username.isBlank()) {
-            _usernameError.value = "Username must be provided"
+            _usernameError.value = resourceProvider.getString(R.string.error_username_required)
             valid = false
         } else if (!username.isValidUserName()) {
-            _usernameError.value = "Username is invalid"
+            _usernameError.value = resourceProvider.getString(R.string.error_username_invalid)
             valid = false
         }
 
         if (email.isBlank()) {
-            _emailError.value = "Email must be provided"
+            _emailError.value = resourceProvider.getString(R.string.error_email_required)
             valid = false
         } else if (!email.isValidEmail()) {
-            _emailError.value = "Email is invalid"
+            _emailError.value = resourceProvider.getString(R.string.error_email_invalid)
             valid = false
         }
 
         if (phoneNumber.isBlank()) {
-            _phoneNumberError.value = "Phone number must be provided"
+            _phoneNumberError.value = resourceProvider.getString(R.string.error_phone_required)
             valid = false
         } else if (!phoneNumber.isValidPhoneNumber()) {
-            _phoneNumberError.value = "Phone number is invalid"
+            _phoneNumberError.value = resourceProvider.getString(R.string.error_phone_invalid)
             valid = false
         }
 
         if (password.isBlank()) {
-            _passwordError.value = "Password must be provided"
+            _passwordError.value = resourceProvider.getString(R.string.error_password_required)
             valid = false
         } else if (!password.isValidPassword()) {
-            _passwordError.value = "Password is invalid"
+            _passwordError.value = resourceProvider.getString(R.string.error_password_invalid)
             valid = false
         }
 

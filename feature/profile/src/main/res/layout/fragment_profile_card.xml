@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    app:cardBackgroundColor="@color/md_theme_surfaceContainer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_theme_primaryContainer"
         android:padding="16dp">
 
         <com.google.android.material.textview.MaterialTextView
@@ -18,7 +18,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/username"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="12sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="16sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/md_theme_onPrimaryContainer"
+            android:background="@color/md_theme_outline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/username" />
 
@@ -51,7 +49,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/email"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="12sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="16sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/md_theme_onPrimaryContainer"
+            android:background="@color/md_theme_outline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email" />
 
@@ -84,7 +80,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/phone_number"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="12sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +90,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textSize="16sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"

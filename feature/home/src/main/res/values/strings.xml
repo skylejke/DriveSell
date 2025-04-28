@@ -1,19 +1,20 @@
 <resources>
-    <string name="fragment_name">Home fragment</string>
     <string name="app_name">Drive Sell</string>
-    <string name="offers">offers</string>
-    <string name="search_button">Search button</string>
-    <string name="lowest_price">Lowest price</string>
-    <string name="highest_price">Highest price</string>
-    <string name="lowest_mileage">Lowest mileage</string>
-    <string name="highest_mileage">Highest mileage</string>
-    <string name="newest_year">Newest year</string>
-    <string name="oldest_year">Oldest year</string>
-    <string name="newest_listed">Newest listed</string>
-    <string name="oldest_listed">Oldest listed</string>
+    <string name="offers">предложения</string>
+    <string name="search_button">Кнопка поиска</string>
+    <string name="lowest_price">Минимальная цена</string>
+    <string name="highest_price">Максимальная цена</string>
+    <string name="lowest_mileage">Минимальный пробег</string>
+    <string name="highest_mileage">Максимальный пробег</string>
+    <string name="newest_year">Самый новый год выпуска</string>
+    <string name="oldest_year">Самый старый год выпуска</string>
+    <string name="newest_listed">Новейшее объявление</string>
+    <string name="oldest_listed">Самое старое объявление</string>
 
     <plurals name="car_ads_counter">
-        <item quantity="one">%1$d offer</item>
-        <item quantity="other">%1$d offers</item>
+        <item quantity="one">%1$d предложение</item>
+        <item quantity="few">%1$d предложения</item>
+        <item quantity="many">%1$d предложений</item>
+        <item quantity="other">%1$d предложений</item>
     </plurals>
 </resources>

@@ -18,7 +18,10 @@ import ru.point.cars.model.asModelVo
 import ru.point.cars.repository.CarsRepository
 import ru.point.common.model.Status
 
-internal class EditCarViewModel(private val carsRepository: CarsRepository) : ViewModel() {
+internal class EditCarViewModel(
+    private val carsRepository: CarsRepository,
+    private val adId: String
+) : ViewModel() {
 
     private val _carData = MutableStateFlow<AdVo?>(null)
     val carData get() = _carData.asStateFlow()
@@ -34,6 +37,10 @@ internal class EditCarViewModel(private val carsRepository: CarsRepository) : Vi
 
     private val _status = MutableStateFlow<Status>(Status.Loading)
     val status get() = _status.asStateFlow()
+
+    init {
+        getCarData(adId = adId)
+    }
 
     fun getBrands() {
         _status.value = Status.Loading

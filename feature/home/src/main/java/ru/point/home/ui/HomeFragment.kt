@@ -14,17 +14,17 @@ import ru.point.cars.model.enums.OrderParams
 import ru.point.cars.model.enums.SortParams
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.home.R
 import ru.point.home.databinding.FragmentHomeBinding
-import ru.point.home.di.HomeComponentHolderVM
-import ru.point.home.di.homeComponent
+import ru.point.home.di.DaggerHomeComponent
 import javax.inject.Inject
 
 
-internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
+internal class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     @Inject
     lateinit var homeViewModelFactory: HomeViewModelFactory
@@ -36,9 +36,13 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DaggerHomeComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
+
         _carAdapter = CarAdapter { navigator.fromHomeFragmentToCarDetailsFragment(it.id, it.userId) }
-        initHolder<HomeComponentHolderVM>()
-        homeComponent.inject(this)
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
@@ -102,6 +106,7 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
                     noConnectionPlaceholder.root.isVisible = false
                     nothingFoundPlaceHolder.root.isVisible = false
                     swipeRefresh.isRefreshing = true
+                    swipeRefresh.isVisible = true
                 }
 
                 is Status.Success -> {
@@ -110,6 +115,7 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
                     carList.isVisible = true
                     noConnectionPlaceholder.root.isVisible = false
                     swipeRefresh.isRefreshing = false
+                    swipeRefresh.isVisible = true
                 }
 
                 is Status.Error -> {
@@ -119,6 +125,7 @@ internal class HomeFragment : ComponentHolderFragment<FragmentHomeBinding>() {
                     noConnectionPlaceholder.root.isVisible = true
                     nothingFoundPlaceHolder.root.isVisible = false
                     swipeRefresh.isRefreshing = false
+                    swipeRefresh.isVisible = false
                 }
             }
         }

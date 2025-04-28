@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.combine
 import ru.point.cars.ui.CarAdapter
 import ru.point.cars.ui.CarAdapterDecorator
+import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.bottomBar
 import ru.point.common.ext.repeatOnLifecycleScope
 import ru.point.common.model.Status
-import ru.point.common.ui.ComponentHolderFragment
+import ru.point.common.ui.BaseFragment
 import ru.point.users_ads.databinding.FragmentUsersAdsBinding
-import ru.point.users_ads.di.UsersAdsComponentHolderVM
-import ru.point.users_ads.di.usersAdsComponent
+import ru.point.users_ads.di.DaggerUsersAdsComponent
 import javax.inject.Inject
 
-internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBinding>() {
+internal class UsersAdsFragment : BaseFragment<FragmentUsersAdsBinding>() {
 
     @Inject
     lateinit var usersAdsViewModelFactory: UsersAdsViewModelFactory
@@ -31,9 +31,13 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DaggerUsersAdsComponent
+            .builder()
+            .deps(FeatureDepsProvider.featureDeps)
+            .build()
+            .inject(this)
+
         _carAdapter = CarAdapter { navigator.fromUsersAdsFragmentToCarDetailsFragment(it.id, it.userId) }
-        initHolder<UsersAdsComponentHolderVM>()
-        usersAdsComponent.inject(this)
     }
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?) =
@@ -91,6 +95,7 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
                     noConnectionPlaceholder.root.isVisible = false
                     emptyPlaceholder.root.isVisible = false
                     swipeRefresh.isRefreshing = true
+                    swipeRefresh.isVisible = true
                 }
 
                 is Status.Success -> {
@@ -98,7 +103,8 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
                     shimmerLayout.isVisible = false
                     myAdsList.isVisible = true
                     noConnectionPlaceholder.root.isVisible = false
-                    swipeRefresh.isRefreshing = true
+                    swipeRefresh.isRefreshing = false
+                    swipeRefresh.isVisible = true
                 }
 
                 is Status.Error -> {
@@ -108,6 +114,7 @@ internal class UsersAdsFragment : ComponentHolderFragment<FragmentUsersAdsBindin
                     noConnectionPlaceholder.root.isVisible = true
                     emptyPlaceholder.root.isVisible = false
                     swipeRefresh.isRefreshing = false
+                    swipeRefresh.isVisible = false
                 }
             }
         }

@@ -91,4 +91,8 @@ internal class SearchResultsViewModel(private val carsRepository: CarsRepository
                 .onFailure { _status.value = Status.Error }
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+    }
 }

@@ -1,112 +1,113 @@
 <resources>
-    <string name="fragment_search_name">Search fragment</string>
-    <string name="search_by_filters">Search by filters</string>
-    <string name="brand">Brand</string>
-    <string name="model">Model</string>
-    <string name="year">Year</string>
-    <string name="min">Min</string>
-    <string name="max">Max</string>
-    <string name="price">Price</string>
-    <string name="mileage">Mileage</string>
-    <string name="engine_power">Engine power</string>
-    <string name="engine_capacity">Engine capacity</string>
-    <string name="fuel_type">Fuel type</string>
-    <string name="body_type">Body type</string>
-    <string name="color">Color</string>
-    <string name="transmission">Transmission</string>
-    <string name="drivetrain">Drivetrain</string>
-    <string name="wheel">Wheel</string>
-    <string name="condition">Condition</string>
-    <string name="owners">Owners</string>
-    <string name="show_ads">Show ads</string>
-    <string name="back_button">Back button</string>
-    <string name="ad_search">Ad Search</string>
-    <string name="you_searched">You searched</string>
-    <string name="clear_search_history">Clear search history</string>
-    <string name="lowest_price">Lowest price</string>
-    <string name="highest_price">Highest price</string>
-    <string name="lowest_mileage">Lowest mileage</string>
-    <string name="highest_mileage">Highest mileage</string>
-    <string name="newest_year">Newest year</string>
-    <string name="oldest_year">Oldest year</string>
-    <string name="newest_listed">Newest listed</string>
-    <string name="oldest_listed">Oldest listed</string>
-    <string name="nothing_found">Nothing found</string>
+    <string name="search_by_filters">Поиск по фильтрам</string>
+    <string name="brand">Марка</string>
+    <string name="model">Модель</string>
+    <string name="year">Год</string>
+    <string name="min">Минимум</string>
+    <string name="max">Максимум</string>
+    <string name="price">Цена</string>
+    <string name="mileage">Пробег</string>
+    <string name="engine_power">Мощность двигателя</string>
+    <string name="engine_capacity">Объём двигателя</string>
+    <string name="fuel_type">Тип топлива</string>
+    <string name="body_type">Тип кузова</string>
+    <string name="color">Цвет</string>
+    <string name="transmission">Коробка передач</string>
+    <string name="drivetrain">Привод</string>
+    <string name="wheel">Расположение руля</string>
+    <string name="condition">Состояние</string>
+    <string name="owners">Количество владельцев</string>
+    <string name="show_ads">Показать объявления</string>
+    <string name="back_button">Кнопка назад</string>
+    <string name="ad_search">Поиск объявлений</string>
+    <string name="you_searched">Вы искали</string>
+    <string name="clear_search_history">Очистить историю поиска</string>
+    <string name="lowest_price">Минимальная цена</string>
+    <string name="highest_price">Максимальная цена</string>
+    <string name="lowest_mileage">Минимальный пробег</string>
+    <string name="highest_mileage">Максимальный пробег</string>
+    <string name="newest_year">Самый новый год выпуска</string>
+    <string name="oldest_year">Самый старый год выпуска</string>
+    <string name="newest_listed">Новейшее объявление</string>
+    <string name="oldest_listed">Самое старое объявление</string>
+    <string name="nothing_found">Ничего не найдено</string>
 
     <string-array name="body_types">
-        <item>Sedan</item>
-        <item>Coupe</item>
-        <item>Station Wagon (Estate)</item>
-        <item>Hatchback</item>
-        <item>Minivan</item>
-        <item>Pickup Truck</item>
-        <item>Limousine</item>
-        <item>Van</item>
-        <item>Convertible</item>
-        <item>Liftback</item>
-        <item>Suv</item>
-        <item>Truck</item>
+        <item>Седан</item>
+        <item>Купе</item>
+        <item>Универсал</item>
+        <item>Хэтчбек</item>
+        <item>Минивэн</item>
+        <item>Пикап</item>
+        <item>Лимузин</item>
+        <item>Фургон</item>
+        <item>Кабриолет</item>
+        <item>Лифтбек</item>
+        <item>Внедорожник</item>
+        <item>Грузовик</item>
     </string-array>
 
     <string-array name="conditions">
-        <item>Not broken</item>
-        <item>Broken</item>
-        <item>Requires repair</item>
+        <item>Не битый</item>
+        <item>Битый</item>
+        <item>Требует ремонта</item>
     </string-array>
 
     <string-array name="drivetrains">
-        <item>AWD</item>
-        <item>FWD</item>
-        <item>RWD</item>
+        <item>Полный привод (AWD)</item>
+        <item>Передний привод (FWD)</item>
+        <item>Задний привод (RWD)</item>
     </string-array>
 
     <string-array name="fuel_types">
-        <item>Petrol</item>
-        <item>Diesel</item>
-        <item>Hybrid</item>
-        <item>Electric</item>
+        <item>Бензин</item>
+        <item>Дизель</item>
+        <item>Гибрид</item>
+        <item>Электро</item>
     </string-array>
 
     <string-array name="transmissions">
-        <item>Automatic</item>
-        <item>Robotized</item>
-        <item>Continuously variable</item>
-        <item>Manual</item>
+        <item>Автоматическая</item>
+        <item>Роботизированная</item>
+        <item>Вариатор</item>
+        <item>Механическая</item>
     </string-array>
 
     <string-array name="wheels">
-        <item>Right</item>
-        <item>Left</item>
+        <item>Правый руль</item>
+        <item>Левый руль</item>
     </string-array>
 
     <string-array name="owners">
-        <item>Zero</item>
-        <item>One</item>
-        <item>No more than two</item>
-        <item>No more than three</item>
+        <item>Без владельцев</item>
+        <item>Один владелец</item>
+        <item>Не более двух владельцев</item>
+        <item>Не более трёх владельцев</item>
     </string-array>
 
     <string-array name="colors">
-        <item>Black</item>
-        <item>Gray</item>
-        <item>Silver</item>
-        <item>White</item>
-        <item>Red</item>
-        <item>Pink</item>
-        <item>Orange</item>
-        <item>Gold</item>
-        <item>Yellow</item>
-        <item>Green</item>
-        <item>Light Blue</item>
-        <item>Blue</item>
-        <item>Violet</item>
-        <item>Purple</item>
-        <item>Brown</item>
-        <item>Beige</item>
+        <item>Чёрный</item>
+        <item>Серый</item>
+        <item>Серебристый</item>
+        <item>Белый</item>
+        <item>Красный</item>
+        <item>Розовый</item>
+        <item>Оранжевый</item>
+        <item>Золотой</item>
+        <item>Жёлтый</item>
+        <item>Зелёный</item>
+        <item>Голубой</item>
+        <item>Синий</item>
+        <item>Фиолетовый</item>
+        <item>Пурпурный</item>
+        <item>Коричневый</item>
+        <item>Бежевый</item>
     </string-array>
 
     <plurals name="car_ads_counter">
-        <item quantity="one">%1$d offer</item>
-        <item quantity="other">%1$d offers</item>
+        <item quantity="one">%1$d предложение</item>
+        <item quantity="few">%1$d предложения</item>
+        <item quantity="many">%1$d предложений</item>
+        <item quantity="other">%1$d предложений</item>
     </plurals>
 </resources>

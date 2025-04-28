@@ -14,12 +14,15 @@ import ru.point.common.ext.isValidPhoneNumber
 import ru.point.common.ext.isValidUserName
 import ru.point.common.model.ResponseMessage
 import ru.point.common.model.Status
+import ru.point.common.utils.ResourceProvider
+import ru.point.profile.R
 import ru.point.user.model.EditUserDataRequest
 import ru.point.user.model.UserData
 import ru.point.user.repository.UserRepository
 
 internal class EditUserDataViewModel(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     private val _userData = MutableStateFlow<UserData?>(null)
@@ -123,22 +126,25 @@ internal class EditUserDataViewModel(
 
         username?.let {
             if (!it.isValidUserName()) {
-                _usernameError.value = "Username is invalid"
+                _usernameError.value = resourceProvider.getString(R.string.error_username_invalid)
                 valid = false
             }
         }
+
         email?.let {
             if (!it.isValidEmail()) {
-                _emailError.value = "Email is invalid"
+                _emailError.value = resourceProvider.getString(R.string.error_email_invalid)
                 valid = false
             }
         }
+
         phoneNumber?.let {
             if (!it.isValidPhoneNumber()) {
-                _phoneNumberError.value = "Phone number is invalid"
+                _phoneNumberError.value = resourceProvider.getString(R.string.error_phone_invalid)
                 valid = false
             }
         }
+
         return valid
     }
 }

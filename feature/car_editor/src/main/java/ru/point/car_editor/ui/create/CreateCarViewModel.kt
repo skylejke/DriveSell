@@ -1,7 +1,6 @@
 package ru.point.car_editor.ui.create
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -9,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import ru.point.car_editor.R
 import ru.point.cars.model.BrandVo
 import ru.point.cars.model.CreateCarRequest
 import ru.point.cars.model.ModelVo
@@ -19,12 +19,15 @@ import ru.point.common.ext.NumberErrorConsts
 import ru.point.common.ext.isValidCapacity
 import ru.point.common.ext.isValidPower
 import ru.point.common.ext.isValidVIN
+import ru.point.common.model.EventState
 import ru.point.common.model.Status
+import ru.point.common.utils.ResourceProvider
 import ru.point.user.repository.UserRepository
 
 internal class CreateCarViewModel(
     private val carsRepository: CarsRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     private val _isGuest = MutableStateFlow<Boolean?>(null)
@@ -36,7 +39,7 @@ internal class CreateCarViewModel(
     private val _models = MutableStateFlow<List<ModelVo>>(emptyList())
     val models get() = _models.asStateFlow()
 
-    private val _addCarEvent = MutableSharedFlow<Unit>()
+    private val _addCarEvent = MutableSharedFlow<EventState>()
     val addCarEvent get() = _addCarEvent.asSharedFlow()
 
     private val _vinError = MutableStateFlow<String?>(null)
@@ -103,7 +106,6 @@ internal class CreateCarViewModel(
     }
 
     fun getBrands() {
-        _status.value = Status.Loading
         viewModelScope.launch {
             carsRepository.getBrands()
                 .onSuccess { brandList ->
@@ -117,7 +119,6 @@ internal class CreateCarViewModel(
     }
 
     fun getModels(brandName: String) {
-        _status.value = Status.Loading
         viewModelScope.launch {
             carsRepository.getModelsByBrand(brandName)
                 .onSuccess { modelList ->
@@ -137,8 +138,8 @@ internal class CreateCarViewModel(
                 car = car,
                 photos = photos
             ).fold(
-                onSuccess = { _addCarEvent.emit(Unit) },
-                onFailure = { Log.d("govno", "createNewAd: ${it.localizedMessage}") }
+                onSuccess = { _addCarEvent.emit(EventState.Success) },
+                onFailure = { _addCarEvent.emit(EventState.Failure) }
             )
         }
     }
@@ -167,101 +168,101 @@ internal class CreateCarViewModel(
         var valid = true
 
         if (photos.isEmpty()) {
-            _photosError.value = "At least one photo of car must be provided"
+            _photosError.value = resourceProvider.getString(R.string.error_photos_required)
             valid = false
         }
 
         if (!car.vin.isValidVIN()) {
-            _vinError.value = "VIN number is invalid"
+            _vinError.value = resourceProvider.getString(R.string.error_vin_invalid)
             valid = false
         } else if (car.vin.isBlank()) {
-            _vinError.value = "VIN must be provided"
+            _vinError.value = resourceProvider.getString(R.string.error_vin_required)
             valid = false
         }
 
         if (car.brand.isBlank()) {
-            _brandError.value = "Brand must be provided"
+            _brandError.value = resourceProvider.getString(R.string.error_brand_required)
             valid = false
         }
 
         if (car.model.isBlank()) {
-            _modelError.value = "Model must be provided"
+            _modelError.value = resourceProvider.getString(R.string.error_model_required)
             valid = false
         }
 
         if (car.year == NumberErrorConsts.ERROR_SHORT_VALUE) {
-            _yearError.value = "Year must be provided"
+            _yearError.value = resourceProvider.getString(R.string.error_year_required)
             valid = false
         }
 
         if (car.price == NumberErrorConsts.ERROR_INT_VALUE) {
-            _priceError.value = "Price must be provided"
+            _priceError.value = resourceProvider.getString(R.string.error_price_required)
             valid = false
         }
 
         if (!car.enginePower.isValidPower()) {
-            _enginePowerError.value = "Invalid value of engine power"
+            _enginePowerError.value = resourceProvider.getString(R.string.error_engine_power_invalid)
             valid = false
         } else if (car.enginePower == NumberErrorConsts.ERROR_SHORT_VALUE) {
-            _enginePowerError.value = "Engine power must be provided"
+            _enginePowerError.value = resourceProvider.getString(R.string.error_engine_power_required)
             valid = false
         }
 
         if (!car.engineCapacity.isValidCapacity()) {
-            _engineCapacityError.value = "Invalid value of engine capacity"
+            _engineCapacityError.value = resourceProvider.getString(R.string.error_engine_capacity_invalid)
             valid = false
         } else if (car.engineCapacity == NumberErrorConsts.ERROR_DOUBLE_VALUE) {
-            _engineCapacityError.value = "Engine capacity must be provided"
+            _engineCapacityError.value = resourceProvider.getString(R.string.error_engine_capacity_required)
             valid = false
         }
 
         if (car.fuelType.isBlank()) {
-            _fuelTypeError.value = "Fuel type must be provided"
+            _fuelTypeError.value = resourceProvider.getString(R.string.error_fuel_type_required)
             valid = false
         }
 
         if (car.mileage == NumberErrorConsts.ERROR_INT_VALUE) {
-            _mileageError.value = "Mileage must be provided"
+            _mileageError.value = resourceProvider.getString(R.string.error_mileage_required)
             valid = false
         }
 
         if (car.bodyType.isBlank()) {
-            _bodyTypeError.value = "Body type must be provided"
+            _bodyTypeError.value = resourceProvider.getString(R.string.error_body_type_required)
             valid = false
         }
 
         if (car.color.isBlank()) {
-            _colorError.value = "Color must be provided"
+            _colorError.value = resourceProvider.getString(R.string.error_color_required)
             valid = false
         }
 
         if (car.transmission.isBlank()) {
-            _transmissionError.value = "Transmission must be provided"
+            _transmissionError.value = resourceProvider.getString(R.string.error_transmission_required)
             valid = false
         }
 
         if (car.drivetrain.isBlank()) {
-            _drivetrainError.value = "Drivetrain must be provided"
+            _drivetrainError.value = resourceProvider.getString(R.string.error_drivetrain_required)
             valid = false
         }
 
         if (car.wheel.isBlank()) {
-            _wheelError.value = "Wheel must be provided"
+            _wheelError.value = resourceProvider.getString(R.string.error_wheel_required)
             valid = false
         }
 
         if (car.condition.isBlank()) {
-            _conditionError.value = "Condition must be provided"
+            _conditionError.value = resourceProvider.getString(R.string.error_condition_required)
             valid = false
         }
 
         if (car.owners == NumberErrorConsts.ERROR_BYTE_VALUE) {
-            _ownersError.value = "Owners must be provided"
+            _ownersError.value = resourceProvider.getString(R.string.error_owners_required)
             valid = false
         }
 
         if (car.ownershipPeriod.isBlank()) {
-            _ownershipPeriodError.value = "Ownership period must be provided"
+            _ownershipPeriodError.value = resourceProvider.getString(R.string.error_ownership_period_required)
             valid = false
         }
 

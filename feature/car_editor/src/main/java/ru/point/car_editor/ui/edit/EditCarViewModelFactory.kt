@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import ru.point.cars.repository.CarsRepository
 
 @Suppress("UNCHECKED_CAST")
-internal class EditCarViewModelFactory(private val carsRepository: CarsRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>) = EditCarViewModel(carsRepository = carsRepository) as T
+internal class EditCarViewModelFactory(
+    private val carsRepository: CarsRepository,
+    private val adId: String
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>) =
+        EditCarViewModel(carsRepository = carsRepository, adId = adId) as T
 }
