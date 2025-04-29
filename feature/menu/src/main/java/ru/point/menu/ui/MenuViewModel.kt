@@ -7,9 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.point.user.repository.UserRepository
 
-internal class MenuViewModel(
-    private val userRepository: UserRepository
-) : ViewModel() {
+internal class MenuViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _isAuthorized = MutableStateFlow<Boolean?>(null)
     val isAuthorized get() = _isAuthorized.asStateFlow()

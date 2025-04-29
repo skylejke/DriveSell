@@ -10,8 +10,7 @@ import ru.point.user.di.UserRepositoryModule
 @[FeatureScope Component(
     modules = [
         TokenStorageModule::class,
-        UserRepositoryModule::class,
-        MenuViewModelFactoryModule::class
+        UserRepositoryModule::class
     ],
     dependencies = [FeatureDeps::class]
 )]

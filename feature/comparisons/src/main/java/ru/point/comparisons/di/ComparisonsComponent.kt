@@ -10,8 +10,7 @@ import ru.point.comparisons.ui.ComparisonsFragment
 @[FeatureScope Component(
     modules = [
         TokenStorageModule::class,
-        CarsRepositoryModule::class,
-        ComparisonsViewModelFactoryModule::class
+        CarsRepositoryModule::class
     ],
     dependencies = [FeatureDeps::class]
 )]

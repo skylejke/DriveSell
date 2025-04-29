@@ -17,8 +17,7 @@ import javax.inject.Named
         ResourceModule::class,
         TokenStorageModule::class,
         UserRepositoryModule::class,
-        CarsRepositoryModule::class,
-        CarEditorViewModelFactoryModule::class
+        CarsRepositoryModule::class
     ],
     dependencies = [FeatureDeps::class]
 )]

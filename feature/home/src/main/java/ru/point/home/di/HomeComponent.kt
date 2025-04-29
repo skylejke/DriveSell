@@ -10,8 +10,7 @@ import ru.point.home.ui.HomeFragment
 @[FeatureScope Component(
     modules = [
         TokenStorageModule::class,
-        CarsRepositoryModule::class,
-        HomeViewModelFactoryModule::class
+        CarsRepositoryModule::class
     ],
     dependencies = [FeatureDeps::class]
 )]

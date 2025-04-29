@@ -8,7 +8,7 @@ import ru.point.common.di.TokenStorageModule
 import ru.point.users_ads.ui.UsersAdsFragment
 
 @[FeatureScope Component(
-    modules = [TokenStorageModule::class, CarsRepositoryModule::class, UsersAdsViewModelFactoryModule::class],
+    modules = [TokenStorageModule::class, CarsRepositoryModule::class],
     dependencies = [FeatureDeps::class]
 )]
 internal interface UsersAdsComponent {

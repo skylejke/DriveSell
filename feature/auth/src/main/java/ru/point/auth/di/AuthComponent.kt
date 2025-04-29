@@ -13,8 +13,8 @@ import ru.point.user.di.UserRepositoryModule
     modules = [
         ResourceModule::class,
         TokenStorageModule::class,
-        UserRepositoryModule::class,
-        AuthViewModelFactoryModule::class],
+        UserRepositoryModule::class
+    ],
     dependencies = [FeatureDeps::class]
 )]
 internal interface AuthComponent {

@@ -12,8 +12,7 @@ import ru.point.search.ui.searchResults.SearchResultsFragment
 @[FeatureScope Component(
     modules = [
         TokenStorageModule::class,
-        CarsRepositoryModule::class,
-        SearchViewModelFactoryModule::class
+        CarsRepositoryModule::class
     ],
     dependencies = [FeatureDeps::class]
 )]

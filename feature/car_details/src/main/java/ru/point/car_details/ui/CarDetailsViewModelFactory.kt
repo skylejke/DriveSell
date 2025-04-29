@@ -4,13 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.point.cars.repository.CarsRepository
 import ru.point.user.repository.UserRepository
+import javax.inject.Inject
+import javax.inject.Named
 
 @Suppress("UNCHECKED_CAST")
-class CarDetailsViewModelFactory(
+class CarDetailsViewModelFactory @Inject constructor(
     private val carsRepository: CarsRepository,
     private val userRepository: UserRepository,
-    private val adId: String,
-    private val userId: String
+    @Named("adId") private val adId: String,
+    @Named("userId")private val userId: String
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>) =
         CarDetailsViewModel(

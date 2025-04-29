@@ -8,7 +8,7 @@ import ru.point.common.di.TokenStorageModule
 import ru.point.favourites.ui.FavouritesFragment
 
 @[FeatureScope Component(
-    modules = [TokenStorageModule::class, CarsRepositoryModule::class, FavouritesViewModelFactoryModule::class],
+    modules = [TokenStorageModule::class, CarsRepositoryModule::class],
     dependencies = [FeatureDeps::class]
 )]
 internal interface FavouritesComponent {

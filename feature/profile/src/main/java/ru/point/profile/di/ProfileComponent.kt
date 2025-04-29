@@ -14,8 +14,7 @@ import ru.point.user.di.UserRepositoryModule
     modules = [
         ResourceModule::class,
         TokenStorageModule::class,
-        UserRepositoryModule::class,
-        ProfileViewModelFactoryModule::class
+        UserRepositoryModule::class
     ],
     dependencies = [FeatureDeps::class]
 )]

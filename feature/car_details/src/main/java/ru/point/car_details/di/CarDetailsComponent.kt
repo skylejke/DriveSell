@@ -14,8 +14,7 @@ import javax.inject.Named
     modules = [
         TokenStorageModule::class,
         CarsRepositoryModule::class,
-        UserRepositoryModule::class,
-        CarDetailsViewModelFactoryModule::class
+        UserRepositoryModule::class
     ],
     dependencies = [FeatureDeps::class]
 )]
