@@ -55,9 +55,9 @@ internal class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         repeatOnLifecycleScope {
             profileViewModel.userData.collect { userData ->
                 with(binding.profileCard) {
-                    username.text = userData?.username.toString()
-                    email.text = userData?.email.toString()
-                    phoneNumber.text = userData?.phoneNumber.orEmpty().toFormattedRussianPhone()
+                    profileUsernameTv.text = userData?.username.toString()
+                    profileEmailTv.text = userData?.email.toString()
+                    profilePhoneNumberTv.text = userData?.phoneNumber.orEmpty().toFormattedRussianPhone()
                 }
             }
         }
@@ -88,7 +88,7 @@ internal class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             navigator.fromProfileFragmentToEditPasswordFragment()
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.profileNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             profileViewModel.refreshUserData()
         }
     }
@@ -96,30 +96,30 @@ internal class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun updatePlaceholder(status: Status) = with(binding) {
         when (status) {
             is Status.Loading -> {
-                shimmerLayout.isVisible = true
-                shimmerLayout.startShimmer()
+                profileShimmerLayout.isVisible = true
+                profileShimmerLayout.startShimmer()
                 profileCard.root.isVisible = false
                 deleteProfileBtn.isVisible = false
                 changePasswordBtn.isVisible = false
-                noConnectionPlaceholder.root.isVisible = false
+                profileNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Success -> {
-                shimmerLayout.isVisible = false
-                shimmerLayout.stopShimmer()
+                profileShimmerLayout.isVisible = false
+                profileShimmerLayout.stopShimmer()
                 profileCard.root.isVisible = true
                 deleteProfileBtn.isVisible = true
                 changePasswordBtn.isVisible = true
-                noConnectionPlaceholder.root.isVisible = false
+                profileNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Error -> {
-                shimmerLayout.isVisible = false
-                shimmerLayout.stopShimmer()
+                profileShimmerLayout.isVisible = false
+                profileShimmerLayout.stopShimmer()
                 profileCard.root.isVisible = false
                 deleteProfileBtn.isVisible = false
                 changePasswordBtn.isVisible = false
-                noConnectionPlaceholder.root.isVisible = true
+                profileNoConnectionPlaceholder.root.isVisible = true
             }
         }
     }
@@ -147,6 +147,6 @@ internal class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun deleteProfile() {
         profileViewModel.deleteUser()
         navigator.fromProfileFragmentToLoginFragment()
-        showSnackbar(binding.root, "Deleted Profile")
+        showSnackbar(binding.root, getString(R.string.deleted_profile))
     }
 }

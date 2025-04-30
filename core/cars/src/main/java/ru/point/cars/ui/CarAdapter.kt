@@ -19,27 +19,30 @@ class CarAdapter(private val onAdapterItemClick: OnAdapterItemClick<AdVo>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(adVo: AdVo) = with(binding) {
 
-            price.text = root.context.getString(R.string.car_price, adVo.car.price)
+            carListItemPriceTv.text = root.context.getString(R.string.car_price, adVo.car.price)
                 .replace(",", " ")
 
-            brandModelYear.text = root.context.getString(
+            carListItemBrandModelYear.text = root.context.getString(
                 R.string.car_brand_model_year,
                 adVo.car.brand,
                 adVo.car.model,
                 adVo.car.year
             )
 
-            specs.text = root.context.getString(
+            carListItemSpecs.text = root.context.getString(
                 R.string.car_specs,
                 adVo.car.mileage.toString(),
                 adVo.car.engineCapacity.toString(),
                 adVo.car.enginePower.toString(),
                 adVo.car.fuelType,
                 adVo.car.drivetrain,
-                adVo.car.transmission
             )
 
-            photo.load("${BuildConfig.BASE_URL}/photos/${adVo.photos.first().ifEmpty {  error(R.drawable.error_photo_placeholder) }}") {
+            carListItemPhoto.load(
+                "${BuildConfig.BASE_URL}/photos/${
+                    adVo.photos.first().ifEmpty { error(R.drawable.error_photo_placeholder) }
+                }"
+            ) {
                 transformations(
                     coil.transform.RoundedCornersTransformation(
                         8 * binding.root.context.resources.displayMetrics.density

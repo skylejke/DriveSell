@@ -7,16 +7,16 @@
     tools:context=".ui.editUserData.EditUserDataFragment">
 
     <include
-        android:id="@+id/fragment_edit_user_data_tool_bar"
+        android:id="@+id/edit_user_data_tool_bar"
         layout="@layout/fragment_edit_user_data_tool_bar" />
 
     <include
-        android:id="@+id/no_connection_placeholder"
+        android:id="@+id/edit_user_data_no_connection_placeholder"
         layout="@layout/no_connection_placeholder"
         android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_layout"
+        android:id="@+id/edit_user_data_shimmer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:visibility="gone">
@@ -25,40 +25,40 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_til"
+        android:id="@+id/edit_user_data_username_til"
         style="@style/TextInputLayout"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="20dp"
         android:hint="@string/username">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_et"
+            android:id="@+id/edit_user_data_username_et"
             style="@style/EditTextStyle"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_til"
+        android:id="@+id/edit_user_data_email_til"
         style="@style/TextInputLayout"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="20dp"
         android:hint="@string/email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_et"
+            android:id="@+id/edit_user_data_email_et"
             style="@style/EditTextStyle"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_number_til"
+        android:id="@+id/edit_user_data_phone_number_til"
         style="@style/TextInputLayout"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="20dp"
         android:hint="@string/phone_number">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phone_number_et"
+            android:id="@+id/edit_user_data_phone_number_et"
             style="@style/EditTextStyle"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>

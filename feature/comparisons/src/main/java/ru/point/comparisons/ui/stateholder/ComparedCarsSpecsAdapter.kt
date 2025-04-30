@@ -14,27 +14,27 @@ internal class ComparedCarsSpecsAdapter :
 
     class ComparedCarViewHolder(val binding: ComparedCarSpecsItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(adVo: AdVo) = with(binding) {
-            enginePowerValue.text = adVo.car.enginePower.toString()
+            comparedCarEnginePowerValue.text = adVo.car.enginePower.toString()
 
-            engineCapacityValue.text = adVo.car.engineCapacity.toString()
+            comparedCarEngineCapacityValue.text = adVo.car.engineCapacity.toString()
 
-            fuelTypeValue.text = adVo.car.fuelType
+            comparedCarFuelTypeValue.text = adVo.car.fuelType
 
-            mileageValue.text = adVo.car.mileage.toString()
+            comparedCarMileageValue.text = adVo.car.mileage.toString()
 
-            bodyTypeValue.text = adVo.car.bodyType
+            comparedCarBodyTypeValue.text = adVo.car.bodyType
 
-            colorValue.text = adVo.car.color
+            comparedCarColorValue.text = adVo.car.color
 
-            transmissionValue.text = adVo.car.transmission
+            comparedCarTransmissionValue.text = adVo.car.transmission
 
-            drivetrainValue.text = adVo.car.drivetrain
+            comparedCarDrivetrainValue.text = adVo.car.drivetrain
 
-            wheelValue.text = adVo.car.wheel
+            comparedCarWheelValue.text = adVo.car.wheel
 
-            conditionValue.text = adVo.car.condition
+            comparedCarConditionValue.text = adVo.car.condition
 
-            ownersValue.text = adVo.car.owners.toString()
+            comparedCarOwnersValue.text = adVo.car.owners.toString()
         }
     }
 

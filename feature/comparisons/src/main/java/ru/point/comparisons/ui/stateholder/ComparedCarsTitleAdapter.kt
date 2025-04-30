@@ -26,7 +26,7 @@ internal class ComparedCarsTitleAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(adVo: AdVo) {
             with(binding) {
-                photo.load("${BuildConfig.BASE_URL}/photos/${adVo.photos.first()}") {
+                comparedCarPhoto.load("${BuildConfig.BASE_URL}/photos/${adVo.photos.first()}") {
                     transformations(
                         RoundedCornersTransformation(
                             8 * binding.root.context.resources.displayMetrics.density
@@ -34,14 +34,14 @@ internal class ComparedCarsTitleAdapter(
                     )
                 }
 
-                photo.setOnClickListener {
+                comparedCarPhoto.setOnClickListener {
                     onCarPhotoClick(adVo)
                 }
 
-                price.text = root.context.getString(R.string.car_price, adVo.car.price)
+                comparedCarPriceTv.text = root.context.getString(R.string.car_price, adVo.car.price)
                     .replace(",", " ")
 
-                title.text = root.context.getString(
+                comparedCarTitleTv.text = root.context.getString(
                     R.string.car_brand_model_year,
                     adVo.car.brand,
                     adVo.car.model,

@@ -58,7 +58,7 @@ internal class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
 
         bottomBar.hide()
 
-        binding.carPhotos.adapter = carPhotoAdapter
+        binding.photosVp.adapter = carPhotoAdapter
 
         repeatOnLifecycleScope {
             carDetailsViewModel.status.collect { status ->
@@ -176,7 +176,7 @@ internal class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
                 shimmerSpecs.isVisible = true
                 shimmerSpecs.startShimmer()
 
-                carPhotos.isVisible = false
+                photosVp.isVisible = false
                 carDetailsSpecs.root.isVisible = false
                 carDetailsToolBar.secondaryIcon.isVisible = false
                 carDetailsToolBar.primaryIcon.isVisible = false
@@ -190,7 +190,7 @@ internal class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
                 shimmerSpecs.isVisible = false
                 shimmerSpecs.stopShimmer()
 
-                carPhotos.isVisible = true
+                photosVp.isVisible = true
                 carDetailsSpecs.root.isVisible = true
                 carDetailsToolBar.secondaryIcon.isVisible = true
                 carDetailsToolBar.primaryIcon.isVisible = true
@@ -204,7 +204,7 @@ internal class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
                 shimmerSpecs.isVisible = false
                 shimmerSpecs.stopShimmer()
 
-                carPhotos.isVisible = false
+                photosVp.isVisible = false
                 carDetailsSpecs.root.isVisible = false
                 carDetailsToolBar.secondaryIcon.isVisible = false
                 carDetailsToolBar.primaryIcon.isVisible = false
@@ -217,83 +217,83 @@ internal class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
         carPhotoAdapter.submitList(adVo.photos)
 
         with(binding.carDetailsSpecs) {
-            creationDate.text = adVo.creationDate
+            creationDateTv.text = adVo.creationDate
 
-            price.text = getString(
+            carDetailsPriceTv.text = getString(
                 R.string.car_details_car_price,
                 adVo.car.price
             ).replace(",", " ")
 
-            brandModelYear.text = getString(
+            carDetailsBrandModelYear.text = getString(
                 R.string.car_details_brand_model_year,
                 adVo.car.brand,
                 adVo.car.model,
                 adVo.car.year
             )
 
-            yearTv.text = getString(
+            carDetailsYearTv.text = getString(
                 R.string.year_of_release,
                 adVo.car.year.toString()
             )
 
-            mileageTv.text = getString(
+            carDetailsMileageTv.text = getString(
                 R.string.car_details_mileage,
                 adVo.car.mileage.toString()
             )
 
-            bodyTypeTv.text = getString(
+            carDetailsBodyTypeTv.text = getString(
                 R.string.car_details_body_type,
                 adVo.car.bodyType
             )
 
-            colorTv.text = getString(
+            carDetailsColorTv.text = getString(
                 R.string.car_details_color,
                 adVo.car.color
             )
 
-            engineTv.text = getString(
+            carDetailsEngineTv.text = getString(
                 R.string.car_details_engine,
                 adVo.car.engineCapacity.toString(),
                 adVo.car.enginePower.toString(),
                 adVo.car.fuelType
             )
 
-            transmissionTv.text = getString(
+            carDetailsTransmissionTv.text = getString(
                 R.string.car_details_transmission,
                 adVo.car.transmission
             )
 
-            drivetrainTv.text = getString(
+            carDetailsDrivetrainTv.text = getString(
                 R.string.car_details_drivetrain,
                 adVo.car.drivetrain
             )
 
-            wheelTv.text = getString(
+            carDetailsWheelTv.text = getString(
                 R.string.car_details_wheel,
                 adVo.car.wheel
             )
 
-            conditionTv.text = getString(
+            carDetailsConditionTv.text = getString(
                 R.string.car_details_condition,
                 adVo.car.condition
             )
 
-            ownersTv.text = getString(
+            carDetailsOwnersTv.text = getString(
                 R.string.car_details_owners,
                 adVo.car.owners.toString()
             )
 
-            ownershipPeriodTv.text = getString(
+            carDetailsOwnershipPeriodTv.text = getString(
                 R.string.car_details_ownership_period,
                 adVo.car.ownershipPeriod
             )
 
-            vinTv.text = getString(
+            carDetailsVinTv.text = getString(
                 R.string.car_details_vin,
                 adVo.car.vin
             )
 
-            sellerSCommentTvValue.text = adVo.car.description
+            carDetailsSellerSCommentTvValue.text = adVo.car.description
         }
     }
 

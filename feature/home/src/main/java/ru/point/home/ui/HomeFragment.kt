@@ -53,7 +53,7 @@ internal class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         homeViewModel.getCars()
 
-        binding.carList.apply {
+        binding.homeCarsRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter
             addItemDecoration(CarAdapterDecorator())
@@ -65,13 +65,13 @@ internal class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     with(binding) {
                         updatePlaceholder(status)
                         if (status == Status.Success) {
-                            nothingFoundPlaceHolder.root.isVisible = cars.isEmpty()
-                            sortBtn.isVisible = cars.isNotEmpty()
-                            carAdsCounter.isVisible = cars.isNotEmpty()
-                            carList.isVisible = cars.isNotEmpty()
+                            homeNothingFoundPlaceHolder.root.isVisible = cars.isEmpty()
+                            homeSortBtn.isVisible = cars.isNotEmpty()
+                            homeCarsCounter.isVisible = cars.isNotEmpty()
+                            homeCarsRv.isVisible = cars.isNotEmpty()
                             if (cars.isNotEmpty()) {
-                                carAdapter.submitList(cars) { carList.scrollToPosition(0) }
-                                carAdsCounter.text =
+                                carAdapter.submitList(cars) { homeCarsRv.scrollToPosition(0) }
+                                homeCarsCounter.text =
                                     resources.getQuantityString(R.plurals.car_ads_counter, cars.size, cars.size)
                             }
                         }
@@ -79,7 +79,7 @@ internal class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.homeNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             homeViewModel.getCars()
         }
 
@@ -87,11 +87,11 @@ internal class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             navigator.fromHomeFragmentToSearchFragment()
         }
 
-        binding.swipeRefresh.setOnRefreshListener {
+        binding.homeSwipeRefresh.setOnRefreshListener {
             homeViewModel.getCars()
         }
 
-        binding.sortBtn.setOnClickListener {
+        binding.homeSortBtn.setOnClickListener {
             showSortMenu()
         }
     }
@@ -100,39 +100,39 @@ internal class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         with(binding) {
             when (status) {
                 is Status.Loading -> {
-                    shimmerLayout.isVisible = true
-                    shimmerLayout.startShimmer()
-                    carList.isVisible = false
-                    noConnectionPlaceholder.root.isVisible = false
-                    nothingFoundPlaceHolder.root.isVisible = false
-                    swipeRefresh.isRefreshing = true
-                    swipeRefresh.isVisible = true
+                    homeShimmerLayout.isVisible = true
+                    homeShimmerLayout.startShimmer()
+                    homeCarsRv.isVisible = false
+                    homeNoConnectionPlaceholder.root.isVisible = false
+                    homeNothingFoundPlaceHolder.root.isVisible = false
+                    homeSwipeRefresh.isRefreshing = true
+                    homeSwipeRefresh.isVisible = true
                 }
 
                 is Status.Success -> {
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.isVisible = false
-                    carList.isVisible = true
-                    noConnectionPlaceholder.root.isVisible = false
-                    swipeRefresh.isRefreshing = false
-                    swipeRefresh.isVisible = true
+                    homeShimmerLayout.stopShimmer()
+                    homeShimmerLayout.isVisible = false
+                    homeCarsRv.isVisible = true
+                    homeNoConnectionPlaceholder.root.isVisible = false
+                    homeSwipeRefresh.isRefreshing = false
+                    homeSwipeRefresh.isVisible = true
                 }
 
                 is Status.Error -> {
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.isVisible = false
-                    carList.isVisible = false
-                    noConnectionPlaceholder.root.isVisible = true
-                    nothingFoundPlaceHolder.root.isVisible = false
-                    swipeRefresh.isRefreshing = false
-                    swipeRefresh.isVisible = false
+                    homeShimmerLayout.stopShimmer()
+                    homeShimmerLayout.isVisible = false
+                    homeCarsRv.isVisible = false
+                    homeNoConnectionPlaceholder.root.isVisible = true
+                    homeNothingFoundPlaceHolder.root.isVisible = false
+                    homeSwipeRefresh.isRefreshing = false
+                    homeSwipeRefresh.isVisible = false
                 }
             }
         }
     }
 
     private fun showSortMenu() {
-        val sortMenu = PopupMenu(requireContext(), binding.sortBtn)
+        val sortMenu = PopupMenu(requireContext(), binding.homeSortBtn)
         sortMenu.menuInflater.inflate(R.menu.sort_menu, sortMenu.menu)
 
         sortMenu.setOnMenuItemClickListener { sortItem: MenuItem ->

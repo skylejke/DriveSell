@@ -50,7 +50,7 @@ internal class UsersAdsFragment : BaseFragment<FragmentUsersAdsBinding>() {
 
         usersAdsViewModel.getUsersAds()
 
-        binding.myAdsList.apply {
+        binding.usersAdsRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter
             addItemDecoration(CarAdapterDecorator())
@@ -62,8 +62,8 @@ internal class UsersAdsFragment : BaseFragment<FragmentUsersAdsBinding>() {
                     with(binding) {
                         updatePlaceholder(status)
                         if (status == Status.Success) {
-                            emptyPlaceholder.root.isVisible = cars.isEmpty()
-                            myAdsList.isVisible = cars.isNotEmpty()
+                            usersAdsEmptyPlaceholder.root.isVisible = cars.isEmpty()
+                            usersAdsRv.isVisible = cars.isNotEmpty()
                             if (cars.isNotEmpty()) {
                                 carAdapter.submitList(cars)
                             }
@@ -72,11 +72,11 @@ internal class UsersAdsFragment : BaseFragment<FragmentUsersAdsBinding>() {
                 }
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.usersAdsNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             usersAdsViewModel.getUsersAds()
         }
 
-        binding.swipeRefresh.setOnRefreshListener {
+        binding.usersAdsSwipeRefresh.setOnRefreshListener {
             usersAdsViewModel.getUsersAds()
         }
 
@@ -89,32 +89,32 @@ internal class UsersAdsFragment : BaseFragment<FragmentUsersAdsBinding>() {
         with(binding) {
             when (status) {
                 is Status.Loading -> {
-                    shimmerLayout.isVisible = true
-                    shimmerLayout.startShimmer()
-                    myAdsList.isVisible = false
-                    noConnectionPlaceholder.root.isVisible = false
-                    emptyPlaceholder.root.isVisible = false
-                    swipeRefresh.isRefreshing = true
-                    swipeRefresh.isVisible = true
+                    usersAdsShimmerLayout.isVisible = true
+                    usersAdsShimmerLayout.startShimmer()
+                    usersAdsRv.isVisible = false
+                    usersAdsNoConnectionPlaceholder.root.isVisible = false
+                    usersAdsEmptyPlaceholder.root.isVisible = false
+                    usersAdsSwipeRefresh.isRefreshing = true
+                    usersAdsSwipeRefresh.isVisible = true
                 }
 
                 is Status.Success -> {
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.isVisible = false
-                    myAdsList.isVisible = true
-                    noConnectionPlaceholder.root.isVisible = false
-                    swipeRefresh.isRefreshing = false
-                    swipeRefresh.isVisible = true
+                    usersAdsShimmerLayout.stopShimmer()
+                    usersAdsShimmerLayout.isVisible = false
+                    usersAdsRv.isVisible = true
+                    usersAdsNoConnectionPlaceholder.root.isVisible = false
+                    usersAdsSwipeRefresh.isRefreshing = false
+                    usersAdsSwipeRefresh.isVisible = true
                 }
 
                 is Status.Error -> {
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.isVisible = false
-                    myAdsList.isVisible = false
-                    noConnectionPlaceholder.root.isVisible = true
-                    emptyPlaceholder.root.isVisible = false
-                    swipeRefresh.isRefreshing = false
-                    swipeRefresh.isVisible = false
+                    usersAdsShimmerLayout.stopShimmer()
+                    usersAdsShimmerLayout.isVisible = false
+                    usersAdsRv.isVisible = false
+                    usersAdsNoConnectionPlaceholder.root.isVisible = true
+                    usersAdsEmptyPlaceholder.root.isVisible = false
+                    usersAdsSwipeRefresh.isRefreshing = false
+                    usersAdsSwipeRefresh.isVisible = false
                 }
             }
         }

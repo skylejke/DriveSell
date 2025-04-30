@@ -7,12 +7,12 @@
     android:padding="16dp">
 
     <include
-        android:id="@+id/loading_placeholder"
+        android:id="@+id/login_loading_placeholder"
         layout="@layout/loading_placeholder"
         android:visibility="gone" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/app_name"
+        android:id="@+id/login_app_name_tv"
         style="@style/AppNameTextViewStyle"
         android:text="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,80 +20,80 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/sign_in_tv"
+        android:id="@+id/login_tv"
         style="@style/BigTextViewStyle"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_name" />
+        app:layout_constraintTop_toBottomOf="@id/login_app_name_tv" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_til"
+        android:id="@+id/login_username_til"
         style="@style/AuthTextInputLayout"
         android:hint="@string/username"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_tv">
+        app:layout_constraintTop_toBottomOf="@id/login_tv">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_et"
+            android:id="@+id/login_username_et"
             style="@style/EditTextStyle"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_til"
+        android:id="@+id/login_password_til"
         style="@style/AuthTextInputLayout"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username_til">
+        app:layout_constraintTop_toBottomOf="@id/login_username_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_et"
+            android:id="@+id/login_password_et"
             style="@style/EditTextStyle"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_in_btn"
+        android:id="@+id/login_btn"
         style="@style/ButtonStyle"
         android:layout_marginTop="30dp"
         android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_til" />
+        app:layout_constraintTop_toBottomOf="@id/login_password_til" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/or_tv"
+        android:id="@+id/login_or_tv"
         style="@style/MediumTextViewStyle"
         android:layout_marginTop="20dp"
         android:text="@string/or"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_btn" />
+        app:layout_constraintTop_toBottomOf="@id/login_btn" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_up_btn"
+        android:id="@+id/navigate_to_register_btn"
         style="@style/ButtonStyle"
         android:layout_marginTop="20dp"
         android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/or_tv" />
+        app:layout_constraintTop_toBottomOf="@id/login_or_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/continue_as_a_guest_btn"
+        android:id="@+id/login_continue_as_a_guest_tv"
         style="@style/BigTextViewStyle"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:text="@string/continue_as_a_guest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_btn" />
+        app:layout_constraintTop_toBottomOf="@id/navigate_to_register_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

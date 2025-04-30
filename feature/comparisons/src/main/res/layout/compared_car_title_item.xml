@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/photo"
+        android:id="@+id/compared_car_photo"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:scaleType="centerCrop"
@@ -23,21 +23,21 @@
         android:contentDescription="@string/delete_photo"
         android:src="@drawable/close_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/photo" />
+        app:layout_constraintTop_toTopOf="@id/compared_car_photo" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/price"
+        android:id="@+id/compared_car_price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_bold"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/photo"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_photo"
         tools:text="2 000 000 $" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
+        android:id="@+id/compared_car_title_tv"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -45,7 +45,7 @@
         android:maxLines="3"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_price_tv"
         tools:text="Mercedes-Benz E-class AMG, 2024" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

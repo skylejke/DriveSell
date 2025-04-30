@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/specs_tv"
+        android:id="@+id/compared_car_specs_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/engine_power_tv"
+        android:id="@+id/compared_car_engine_power_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -25,21 +25,21 @@
         android:text="@string/engine_power"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/specs_tv" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_specs_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/engine_power_value"
+        android:id="@+id/compared_car_engine_power_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_power_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_engine_power_tv"
         tools:text="10000 HP" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/engine_capacity_tv"
+        android:id="@+id/compared_car_engine_capacity_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -47,21 +47,21 @@
         android:text="@string/engine_capacity"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_power_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_engine_power_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/engine_capacity_value"
+        android:id="@+id/compared_car_engine_capacity_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_capacity_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_engine_capacity_tv"
         tools:text="100.0 L" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/fuel_type_tv"
+        android:id="@+id/compared_car_fuel_type_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -69,21 +69,21 @@
         android:text="@string/fuel_type"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_capacity_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_engine_capacity_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/fuel_type_value"
+        android:id="@+id/compared_car_fuel_type_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fuel_type_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_fuel_type_tv"
         tools:text="Diesel" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mileage_tv"
+        android:id="@+id/compared_car_mileage_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -91,21 +91,21 @@
         android:text="@string/mileage"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fuel_type_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_fuel_type_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mileage_value"
+        android:id="@+id/compared_car_mileage_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mileage_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_mileage_tv"
         tools:text="51 400 km" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/body_type_tv"
+        android:id="@+id/compared_car_body_type_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -113,21 +113,21 @@
         android:text="@string/body_type"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mileage_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_mileage_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/body_type_value"
+        android:id="@+id/compared_car_body_type_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/body_type_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_body_type_tv"
         tools:text="Station wagon (Estate)" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/color_tv"
+        android:id="@+id/compared_car_color_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -135,21 +135,21 @@
         android:text="@string/color"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/body_type_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_body_type_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/color_value"
+        android:id="@+id/compared_car_color_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/color_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_color_tv"
         tools:text="Green" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/transmission_tv"
+        android:id="@+id/compared_car_transmission_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -157,21 +157,21 @@
         android:text="@string/transmission"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/color_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_color_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/transmission_value"
+        android:id="@+id/compared_car_transmission_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transmission_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_transmission_tv"
         tools:text="Automatic" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/drivetrain_tv"
+        android:id="@+id/compared_car_drivetrain_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -179,21 +179,21 @@
         android:text="@string/drivetrain"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transmission_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_transmission_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/drivetrain_value"
+        android:id="@+id/compared_car_drivetrain_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drivetrain_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_drivetrain_tv"
         tools:text="AWD" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/wheel_tv"
+        android:id="@+id/compared_car_wheel_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -201,21 +201,21 @@
         android:text="@string/wheel_position"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drivetrain_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_drivetrain_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/wheel_value"
+        android:id="@+id/compared_car_wheel_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheel_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_wheel_tv"
         tools:text="Left" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/condition_tv"
+        android:id="@+id/compared_car_condition_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -223,21 +223,21 @@
         android:text="@string/condition"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheel_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_wheel_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/condition_value"
+        android:id="@+id/compared_car_condition_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_condition_tv"
         tools:text="Requires repair" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/owners_tv"
+        android:id="@+id/compared_car_owners_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -245,23 +245,23 @@
         android:text="@string/owners"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_value" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_condition_value" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/owners_value"
+        android:id="@+id/compared_car_owners_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/owners_tv"
+        app:layout_constraintTop_toBottomOf="@id/compared_car_owners_tv"
         tools:text="2" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/title_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="specs_tv, engine_power_tv, engine_capacity_tv, fuel_type_tv, mileage_tv, body_type_tv, color_tv, transmission_tv, drivetrain_tv, wheel_tv, condition_tv, owners_tv" />
+        app:constraint_referenced_ids="compared_car_specs_tv, compared_car_engine_power_tv, compared_car_engine_capacity_tv, compared_car_fuel_type_tv, compared_car_mileage_tv, compared_car_body_type_tv, compared_car_color_tv, compared_car_transmission_tv, compared_car_drivetrain_tv, compared_car_wheel_tv, compared_car_condition_tv, compared_car_owners_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

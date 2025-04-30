@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/brand_list"
+        android:id="@+id/filter_brand_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,14 +14,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/brand_list_tv"
+            android:id="@+id/filter_brand_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/model_list"
+        android:id="@+id/filter_model_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,17 +29,17 @@
         android:hint="@string/model"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/brand_list">
+        app:layout_constraintTop_toBottomOf="@id/filter_brand_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/model_list_tv"
+            android:id="@+id/filter_model_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/year_tv"
+        android:id="@+id/filter_year_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -47,23 +47,23 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/model_list" />
+        app:layout_constraintTop_toBottomOf="@id/filter_model_til" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/year_et_min"
+        android:id="@+id/filter_year_et_min"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/min"
         android:inputType="number"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/year_et_max"
+        app:layout_constraintEnd_toStartOf="@id/filter_year_et_max"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/year_tv" />
+        app:layout_constraintTop_toBottomOf="@id/filter_year_tv" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/year_et_max"
+        android:id="@+id/filter_year_et_max"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -72,11 +72,11 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/year_et_min"
-        app:layout_constraintTop_toBottomOf="@id/year_tv" />
+        app:layout_constraintStart_toEndOf="@id/filter_year_et_min"
+        app:layout_constraintTop_toBottomOf="@id/filter_year_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/price_tv"
+        android:id="@+id/filter_price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -84,23 +84,23 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/year_et_min" />
+        app:layout_constraintTop_toBottomOf="@id/filter_year_et_min" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/price_et_min"
+        android:id="@+id/filter_price_et_min"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/min"
         android:inputType="number"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/price_et_max"
+        app:layout_constraintEnd_toStartOf="@id/filter_price_et_max"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price_tv" />
+        app:layout_constraintTop_toBottomOf="@id/filter_price_tv" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/price_et_max"
+        android:id="@+id/filter_price_et_max"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -109,12 +109,11 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/price_et_min"
-        app:layout_constraintTop_toBottomOf="@id/price_tv" />
-
+        app:layout_constraintStart_toEndOf="@id/filter_price_et_min"
+        app:layout_constraintTop_toBottomOf="@id/filter_price_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mileage_tv"
+        android:id="@+id/filter_mileage_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -122,23 +121,23 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price_et_min" />
+        app:layout_constraintTop_toBottomOf="@id/filter_price_et_min" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/mileage_et_min"
+        android:id="@+id/filter_mileage_et_min"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/min"
         android:inputType="number"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/mileage_et_max"
+        app:layout_constraintEnd_toStartOf="@id/filter_mileage_et_max"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mileage_tv" />
+        app:layout_constraintTop_toBottomOf="@id/filter_mileage_tv" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/mileage_et_max"
+        android:id="@+id/filter_mileage_et_max"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -147,11 +146,11 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/mileage_et_min"
-        app:layout_constraintTop_toBottomOf="@id/mileage_tv" />
+        app:layout_constraintStart_toEndOf="@id/filter_mileage_et_min"
+        app:layout_constraintTop_toBottomOf="@id/filter_mileage_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/engine_power_tv"
+        android:id="@+id/filter_engine_power_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -159,23 +158,23 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mileage_et_min" />
+        app:layout_constraintTop_toBottomOf="@id/filter_mileage_et_min" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/engine_power_min"
+        android:id="@+id/filter_engine_power_min"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/min"
         android:inputType="numberDecimal"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/engine_power_max"
+        app:layout_constraintEnd_toStartOf="@id/filter_engine_power_max"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_power_tv" />
+        app:layout_constraintTop_toBottomOf="@id/filter_engine_power_tv" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/engine_power_max"
+        android:id="@+id/filter_engine_power_max"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -184,11 +183,11 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/engine_power_min"
-        app:layout_constraintTop_toBottomOf="@id/engine_power_tv" />
+        app:layout_constraintStart_toEndOf="@id/filter_engine_power_min"
+        app:layout_constraintTop_toBottomOf="@id/filter_engine_power_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/engine_capacity_tv"
+        android:id="@+id/filter_engine_capacity_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -196,23 +195,23 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_power_min" />
+        app:layout_constraintTop_toBottomOf="@id/filter_engine_power_min" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/engine_capacity_min"
+        android:id="@+id/filter_engine_capacity_min"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/min"
         android:inputType="numberDecimal"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/engine_capacity_max"
+        app:layout_constraintEnd_toStartOf="@id/filter_engine_capacity_max"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_capacity_tv" />
+        app:layout_constraintTop_toBottomOf="@id/filter_engine_capacity_tv" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/engine_capacity_max"
+        android:id="@+id/filter_engine_capacity_max"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -221,147 +220,147 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/engine_capacity_min"
-        app:layout_constraintTop_toBottomOf="@id/engine_capacity_tv" />
+        app:layout_constraintStart_toEndOf="@id/filter_engine_capacity_min"
+        app:layout_constraintTop_toBottomOf="@id/filter_engine_capacity_tv" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fuel_type_list"
+        android:id="@+id/filter_fuel_type_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/fuel_type"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_capacity_max">
+        app:layout_constraintTop_toBottomOf="@id/filter_engine_capacity_max">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/fuel_type_list_tv"
+            android:id="@+id/filter_fuel_type_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/body_type_list"
+        android:id="@+id/filter_body_type_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/body_type"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fuel_type_list">
+        app:layout_constraintTop_toBottomOf="@id/filter_fuel_type_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/body_type_list_tv"
+            android:id="@+id/filter_body_type_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/color_list"
+        android:id="@+id/filter_color_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/body_type_list">
+        app:layout_constraintTop_toBottomOf="@id/filter_body_type_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/color_tv"
+            android:id="@+id/filter_color_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/transmission_list"
+        android:id="@+id/filter_transmission_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/transmission"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/color_list">
+        app:layout_constraintTop_toBottomOf="@id/filter_color_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/transmission_list_tv"
+            android:id="@+id/filter_transmission_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/drivetrain_list"
+        android:id="@+id/filter_drivetrain_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/drivetrain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transmission_list">
+        app:layout_constraintTop_toBottomOf="@id/filter_transmission_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/drivetrain_list_tv"
+            android:id="@+id/filter_drivetrain_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/wheel_list"
+        android:id="@+id/filter_wheel_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/wheel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drivetrain_list">
+        app:layout_constraintTop_toBottomOf="@id/filter_drivetrain_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/wheel_list_tv"
+            android:id="@+id/filter_wheel_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/condition_list"
+        android:id="@+id/filter_condition_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/condition"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheel_list">
+        app:layout_constraintTop_toBottomOf="@id/filter_wheel_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/condition_list_tv"
+            android:id="@+id/filter_condition_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/owners_list"
+        android:id="@+id/filter_owners_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/owners"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_list">
+        app:layout_constraintTop_toBottomOf="@id/filter_condition_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/owners_tv"
+            android:id="@+id/filter_owners_atv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/search_btn"
+        android:id="@+id/filter_search_btn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
@@ -369,6 +368,6 @@
         android:text="@string/show_ads"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/owners_list" />
+        app:layout_constraintTop_toBottomOf="@id/filter_owners_til" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

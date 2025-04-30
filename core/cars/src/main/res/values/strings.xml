@@ -3,6 +3,6 @@
     <string name="car_primary_photo">Car primary photo</string>
     <string name="car_price">%1$,d ₽</string>
     <string name="car_brand_model_year">%1$s %2$s, %3$d</string>
-    <string name="car_specs">%1$s км • %2$s л • %3$s л.с. • %4$s • %5$s • %6$s</string>
+    <string name="car_specs">%1$s км • %2$s л • %3$s л.с. • %4$s • %5$s</string>
     <string name="delete_photo">Удалить фото</string>
 </resources>

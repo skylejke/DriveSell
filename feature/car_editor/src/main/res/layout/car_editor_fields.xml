@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/brand_til"
+        android:id="@+id/car_editor_brand_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,14 +15,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/brand_et"
+            android:id="@+id/car_editor_brand_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/model_til"
+        android:id="@+id/car_editor_model_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,34 +30,34 @@
         android:hint="@string/model"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/brand_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_brand_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/model_et"
+            android:id="@+id/car_editor_model_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/year_til"
+        android:id="@+id/car_editor_year_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/year"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/model_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_model_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/year_et"
+            android:id="@+id/car_editor_year_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/vin_til"
+        android:id="@+id/car_editor_vin_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -66,10 +66,10 @@
         app:boxBackgroundMode="outline"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/year_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_year_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/vin_et"
+            android:id="@+id/car_editor_vin_et"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:inputType="text"
@@ -78,7 +78,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/price_til"
+        android:id="@+id/car_editor_price_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -86,10 +86,10 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vin_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_vin_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/price_et"
+            android:id="@+id/car_editor_price_et"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:inputType="number"
@@ -99,7 +99,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mileage_til"
+        android:id="@+id/car_editor_mileage_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -107,10 +107,10 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_price_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/mileage_et"
+            android:id="@+id/car_editor_mileage_et"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:inputType="number"
@@ -119,7 +119,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/engine_power_til"
+        android:id="@+id/car_editor_engine_power_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -127,10 +127,10 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mileage_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_mileage_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/engine_power_et"
+            android:id="@+id/car_editor_engine_power_et"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:inputType="number"
@@ -139,7 +139,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/engine_capacity_til"
+        android:id="@+id/car_editor_engine_capacity_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -147,10 +147,10 @@
         android:textSize="16sp"
         app:fontFamily="@font/roboto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_power_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_engine_power_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/engine_capacity_et"
+            android:id="@+id/car_editor_engine_capacity_et"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:inputType="numberDecimal"
@@ -159,126 +159,126 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fuel_type_til"
+        android:id="@+id/car_editor_fuel_type_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/fuel_type"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_capacity_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_engine_capacity_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/fuel_type_et"
+            android:id="@+id/car_editor_fuel_type_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/body_type_til"
+        android:id="@+id/car_editor_body_type_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/body_type"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fuel_type_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_fuel_type_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/body_type_et"
+            android:id="@+id/car_editor_body_type_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/color_til"
+        android:id="@+id/car_editor_color_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/body_type_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_body_type_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/color_et"
+            android:id="@+id/car_editor_color_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/transmission_til"
+        android:id="@+id/car_editor_transmission_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/transmission"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/color_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_color_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/transmission_et"
+            android:id="@+id/car_editor_transmission_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/drivetrain_til"
+        android:id="@+id/car_editor_drivetrain_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/drivetrain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transmission_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_transmission_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/drivetrain_et"
+            android:id="@+id/car_editor_drivetrain_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/wheel_til"
+        android:id="@+id/car_editor_wheel_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/wheel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drivetrain_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_drivetrain_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/wheel_et"
+            android:id="@+id/car_editor_wheel_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/condition_til"
+        android:id="@+id/car_editor_condition_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="@string/condition"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheel_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_wheel_til">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/condition_et"
+            android:id="@+id/car_editor_condition_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/number_of_owners_til"
+        android:id="@+id/car_editor_number_of_owners_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -286,10 +286,10 @@
         android:hint="@string/owners"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_condition_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/number_of_owners_et"
+            android:id="@+id/car_editor_number_of_owners_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -298,7 +298,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/ownership_period_tv"
+        android:id="@+id/car_editor_ownership_period_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -306,23 +306,23 @@
         android:text="@string/ownership_period"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/number_of_owners_til" />
+        app:layout_constraintTop_toBottomOf="@id/car_editor_number_of_owners_til" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ownership_period_years_til"
+        android:id="@+id/car_editor_ownership_period_years_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/number_of_years"
-        app:layout_constraintEnd_toStartOf="@id/ownership_period_months_til"
+        app:layout_constraintEnd_toStartOf="@id/car_editor_ownership_period_months_til"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ownership_period_tv">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_ownership_period_tv">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/ownership_period_years_et"
+            android:id="@+id/car_editor_ownership_period_years_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
@@ -330,7 +330,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ownership_period_months_til"
+        android:id="@+id/car_editor_ownership_period_months_til"
         style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -338,11 +338,11 @@
         android:layout_marginTop="20dp"
         android:hint="@string/number_of_months"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ownership_period_years_til"
-        app:layout_constraintTop_toBottomOf="@id/ownership_period_tv">
+        app:layout_constraintStart_toEndOf="@id/car_editor_ownership_period_years_til"
+        app:layout_constraintTop_toBottomOf="@id/car_editor_ownership_period_tv">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/ownership_period_months_et"
+            android:id="@+id/car_editor_ownership_period_months_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
@@ -350,7 +350,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/description_til"
+        android:id="@+id/car_editor_description_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -358,10 +358,10 @@
         android:hint="@string/description_et"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ownership_period_years_til">
+        app:layout_constraintTop_toBottomOf="@id/car_editor_ownership_period_years_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/description_et"
+            android:id="@+id/car_editor_description_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"

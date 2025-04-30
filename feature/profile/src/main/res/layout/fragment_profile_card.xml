@@ -14,7 +14,7 @@
         android:padding="16dp">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/username_title"
+            android:id="@+id/profile_username_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/username"
@@ -24,27 +24,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/username"
+            android:id="@+id/profile_username_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/username_title"
+            app:layout_constraintTop_toBottomOf="@id/profile_username_title_tv"
             tools:text="skyle" />
 
         <View
-            android:id="@+id/line1"
+            android:id="@+id/profile_line1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="@color/md_theme_outline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/username" />
+            app:layout_constraintTop_toBottomOf="@id/profile_username_tv" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/email_title"
+            android:id="@+id/profile_email_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -52,30 +52,30 @@
             android:textSize="12sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line1" />
+            app:layout_constraintTop_toBottomOf="@id/profile_line1" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/email"
+            android:id="@+id/profile_email_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_title"
+            app:layout_constraintTop_toBottomOf="@id/profile_email_title_tv"
             tools:text="example@gmail.com" />
 
         <View
-            android:id="@+id/line2"
+            android:id="@+id/profile_line2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="@color/md_theme_outline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email" />
+            app:layout_constraintTop_toBottomOf="@id/profile_email_tv" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/phone_number_title"
+            android:id="@+id/profile_phone_number_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -83,17 +83,17 @@
             android:textSize="12sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line2" />
+            app:layout_constraintTop_toBottomOf="@id/profile_line2" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/phone_number"
+            android:id="@+id/profile_phone_number_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
             app:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/phone_number_title"
+            app:layout_constraintTop_toBottomOf="@id/profile_phone_number_title_tv"
             tools:text="88005553555" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.filterNotNull
+import ru.point.auth.R
 import ru.point.auth.databinding.FragmentLoginBinding
 import ru.point.auth.di.DaggerAuthComponent
 import ru.point.common.di.FeatureDepsProvider
@@ -50,12 +51,12 @@ internal class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         repeatOnLifecycleScope {
             loginViewModel.usernameError.filterNotNull().collect {
-                binding.usernameTil.error = it
+                binding.loginPasswordTil.error = it
             }
         }
         repeatOnLifecycleScope {
             loginViewModel.passwordError.filterNotNull().collect {
-                binding.passwordTil.error = it
+                binding.loginPasswordTil.error = it
             }
         }
 
@@ -65,22 +66,22 @@ internal class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
         }
 
-        binding.usernameEt.clearErrorOnTextChanged(binding.usernameTil)
+        binding.loginUsernameEt.clearErrorOnTextChanged(binding.loginPasswordTil)
 
-        binding.passwordEt.clearErrorOnTextChanged(binding.passwordTil)
+        binding.loginPasswordEt.clearErrorOnTextChanged(binding.loginPasswordTil)
 
-        binding.signInBtn.setOnClickListener {
+        binding.loginBtn.setOnClickListener {
             loginViewModel.login(
-                username = binding.usernameEt.text.toString(),
-                password = binding.passwordEt.text.toString()
+                username = binding.loginUsernameEt.text.toString(),
+                password = binding.loginPasswordEt.text.toString()
             )
         }
 
-        binding.signUpBtn.setOnClickListener {
+        binding.navigateToRegisterBtn.setOnClickListener {
             navigator.fromLoginFragmentToRegisterFragment()
         }
 
-        binding.continueAsAGuestBtn.setOnClickListener {
+        binding.loginContinueAsAGuestTv.setOnClickListener {
             navigator.fromLoginFragmentToHomeFragment()
         }
     }
@@ -88,17 +89,17 @@ internal class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private fun updatePlaceholder(status: Status) = with(binding) {
         when (status) {
             is Status.Loading -> {
-                loadingPlaceholder.root.isVisible = true
+                loginLoadingPlaceholder.root.isVisible = true
             }
 
             is Status.Success -> {
-                loadingPlaceholder.root.isVisible = false
-                showSnackbar(root, "Successfully logged in")
+                loginLoadingPlaceholder.root.isVisible = false
+                showSnackbar(root, getString(R.string.success_sign_in))
             }
 
             is Status.Error -> {
-                loadingPlaceholder.root.isVisible = false
-                showSnackbar(root, "Something went wrong")
+                loginLoadingPlaceholder.root.isVisible = false
+                showSnackbar(root, getString(R.string.something_went_wrong))
             }
         }
     }

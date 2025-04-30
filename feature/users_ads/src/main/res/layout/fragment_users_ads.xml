@@ -12,17 +12,17 @@
         layout="@layout/fragment_users_ads_tool_bar" />
 
     <include
-        android:id="@+id/no_connection_placeholder"
+        android:id="@+id/users_ads_no_connection_placeholder"
         layout="@layout/no_connection_placeholder"
         tools:visibility="gone" />
 
     <include
-        android:id="@+id/empty_placeholder"
+        android:id="@+id/users_ads_empty_placeholder"
         layout="@layout/users_ads_empty_placeholder"
         tools:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_layout"
+        android:id="@+id/users_ads_shimmer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="16dp"
@@ -46,14 +46,14 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+        android:id="@+id/users_ads_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:paddingHorizontal="16dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_ads_list"
+            android:id="@+id/users_ads_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

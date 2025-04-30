@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.filterNotNull
+import ru.point.auth.R
 import ru.point.auth.databinding.FragmentRegisterBinding
 import ru.point.auth.di.DaggerAuthComponent
 import ru.point.common.di.FeatureDepsProvider
@@ -52,25 +53,25 @@ internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         repeatOnLifecycleScope {
             registerViewModel.usernameError.filterNotNull().collect {
-                binding.usernameTil.error = it
+                binding.registerUsernameTil.error = it
             }
         }
 
         repeatOnLifecycleScope {
             registerViewModel.emailError.filterNotNull().collect {
-                binding.emailTil.error = it
+                binding.registerEmailTil.error = it
             }
         }
 
         repeatOnLifecycleScope {
             registerViewModel.phoneNumberError.filterNotNull().collect {
-                binding.phoneNumberTil.error = it
+                binding.registerPhoneNumberTil.error = it
             }
         }
 
         repeatOnLifecycleScope {
             registerViewModel.passwordError.filterNotNull().collect {
-                binding.passwordTil.error = it
+                binding.registerPasswordTil.error = it
             }
         }
 
@@ -80,28 +81,28 @@ internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             }
         }
 
-        binding.usernameEt.clearErrorOnTextChanged(binding.usernameTil)
+        binding.registerUsernameEt.clearErrorOnTextChanged(binding.registerUsernameTil)
 
-        binding.phoneNumberEt.clearErrorOnTextChanged(binding.phoneNumberTil)
+        binding.registerEmailEt.clearErrorOnTextChanged(binding.registerEmailTil)
 
-        binding.emailEt.clearErrorOnTextChanged(binding.emailTil)
+        binding.registerPhoneNumberEt.clearErrorOnTextChanged(binding.registerPhoneNumberTil)
 
-        binding.passwordEt.clearErrorOnTextChanged(binding.passwordTil)
+        binding.registerPasswordEt.clearErrorOnTextChanged(binding.registerPasswordTil)
 
-        binding.signUpBtn.setOnClickListener {
+        binding.registerBtn.setOnClickListener {
             registerViewModel.register(
-                username = binding.usernameEt.text.toString(),
-                email = binding.emailEt.text.toString(),
-                phoneNumber = binding.phoneNumberEt.text.toString(),
-                password = binding.passwordEt.text.toString()
+                username = binding.registerUsernameEt.text.toString(),
+                email = binding.registerEmailEt.text.toString(),
+                phoneNumber = binding.registerPhoneNumberEt.text.toString(),
+                password = binding.registerPasswordEt.text.toString()
             )
         }
 
-        binding.signInBtn.setOnClickListener {
+        binding.navigateToLoginBtn.setOnClickListener {
             navigator.fromRegisterFragmentToLoginFragment()
         }
 
-        binding.continueAsAGuestBtn.setOnClickListener {
+        binding.registerContinueAsAGuestTv.setOnClickListener {
             navigator.fromRegisterFragmentToHomeFragment()
         }
     }
@@ -109,17 +110,17 @@ internal class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     private fun updatePlaceholder(status: Status) = with(binding) {
         when (status) {
             is Status.Loading -> {
-                loadingPlaceholder.root.isVisible = true
+                registerLoadingPlaceholder.root.isVisible = true
             }
 
             is Status.Success -> {
-                loadingPlaceholder.root.isVisible = false
-                showSnackbar(root, "Successful registration")
+                registerLoadingPlaceholder.root.isVisible = false
+                showSnackbar(root, getString(R.string.success_sign_up))
             }
 
             is Status.Error -> {
-                loadingPlaceholder.root.isVisible = false
-                showSnackbar(root, "Something went wrong")
+                registerLoadingPlaceholder.root.isVisible = false
+                showSnackbar(root, getString(R.string.something_went_wrong))
             }
         }
     }

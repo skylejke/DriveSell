@@ -96,16 +96,16 @@ internal class EditPasswordFragment : BaseFragment<FragmentEditPasswordBinding>(
     private fun updatePlaceholder(status: Status) = with(binding) {
         when (status) {
             is Status.Loading -> {
-                loadingPlaceholder.root.isVisible = true
+                editPasswordLoadingPlaceholder.root.isVisible = true
             }
 
             is Status.Success -> {
-                loadingPlaceholder.root.isVisible = false
+                editPasswordLoadingPlaceholder.root.isVisible = false
                 showSnackbar(binding.root, getString(R.string.successfully_updated_password))
             }
 
             is Status.Error -> {
-                loadingPlaceholder.root.isVisible = false
+                editPasswordLoadingPlaceholder.root.isVisible = false
                 showSnackbar(binding.root, getString(R.string.something_went_wrong))
             }
         }

@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/edit_car_tool_bar"
+        android:id="@+id/filters_edit_car_tool_bar"
         layout="@layout/fragment_search_by_filters_tool_bar" />
 
     <androidx.core.widget.NestedScrollView
@@ -19,12 +19,12 @@
             android:orientation="vertical">
 
             <include
-                android:id="@+id/no_connection_placeholder"
+                android:id="@+id/filters_no_connection_placeholder"
                 layout="@layout/no_connection_placeholder"
                 android:visibility="gone" />
 
             <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmerLayout"
+                android:id="@+id/filters_shimmer_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

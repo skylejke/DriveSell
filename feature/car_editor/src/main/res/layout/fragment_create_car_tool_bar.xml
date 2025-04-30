@@ -5,7 +5,7 @@
     android:background="@color/md_theme_background">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/edit_ad_tv"
+        android:id="@+id/create_ad_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

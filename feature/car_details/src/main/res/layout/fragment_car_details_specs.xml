@@ -8,7 +8,7 @@
     android:paddingBottom="16dp">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/price"
+        android:id="@+id/car_details_price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -20,7 +20,7 @@
         tools:text="200 000 $" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/creation_date"
+        android:id="@+id/creation_date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -31,7 +31,7 @@
         tools:text="2025-03-29" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/brand_model_year"
+        android:id="@+id/car_details_brand_model_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -39,7 +39,7 @@
         android:textSize="24sp"
         app:fontFamily="@font/roboto_bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price"
+        app:layout_constraintTop_toBottomOf="@id/car_details_price_tv"
         tools:text="Audi RS 6, 2020" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -51,10 +51,10 @@
         android:text="@string/specifications"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/brand_model_year" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_brand_model_year" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/year_tv"
+        android:id="@+id/car_details_year_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@id/specifications_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mileage_tv"
+        android:id="@+id/car_details_mileage_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -73,10 +73,10 @@
         android:text="@string/car_details_mileage"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/year_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_year_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/body_type_tv"
+        android:id="@+id/car_details_body_type_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -84,10 +84,10 @@
         android:text="@string/car_details_body_type"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mileage_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_mileage_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/color_tv"
+        android:id="@+id/car_details_color_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -95,10 +95,10 @@
         android:text="@string/car_details_color"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/body_type_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_body_type_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/engine_tv"
+        android:id="@+id/car_details_engine_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -106,10 +106,10 @@
         android:text="@string/car_details_engine"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/color_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_color_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/transmission_tv"
+        android:id="@+id/car_details_transmission_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -117,10 +117,10 @@
         android:text="@string/car_details_transmission"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_engine_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/drivetrain_tv"
+        android:id="@+id/car_details_drivetrain_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -128,10 +128,10 @@
         android:text="@string/car_details_drivetrain"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transmission_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_transmission_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/wheel_tv"
+        android:id="@+id/car_details_wheel_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -139,10 +139,10 @@
         android:text="@string/car_details_wheel"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drivetrain_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_drivetrain_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/condition_tv"
+        android:id="@+id/car_details_condition_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -150,10 +150,10 @@
         android:text="@string/car_details_condition"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheel_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_wheel_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/owners_tv"
+        android:id="@+id/car_details_owners_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -161,10 +161,10 @@
         android:text="@string/car_details_owners"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_condition_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/ownership_period_tv"
+        android:id="@+id/car_details_ownership_period_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -172,10 +172,10 @@
         android:text="@string/car_details_ownership_period"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/owners_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_owners_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/vin_tv"
+        android:id="@+id/car_details_vin_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -183,10 +183,10 @@
         android:text="@string/car_details_vin"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ownership_period_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_ownership_period_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/seller_s_comment_tv"
+        android:id="@+id/car_details_seller_s_comment_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -194,17 +194,17 @@
         android:text="@string/seller_s_comment"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vin_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_vin_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/seller_s_comment_tv_value"
+        android:id="@+id/car_details_seller_s_comment_tv_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/seller_s_comment_tv"
+        app:layout_constraintTop_toBottomOf="@id/car_details_seller_s_comment_tv"
         tools:text="The Audi RS6 is a high-performance sports station Wagon (Estate) with a twin-turbo V8 engine, delivering an exhilarating driving experience." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

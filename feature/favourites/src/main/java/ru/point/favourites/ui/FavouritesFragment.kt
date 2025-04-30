@@ -48,7 +48,7 @@ internal class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
 
         favouritesViewModel.getFavourites()
 
-        binding.favouriteList.apply {
+        binding.favouritesRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = carAdapter
             addItemDecoration(CarAdapterDecorator())
@@ -60,8 +60,8 @@ internal class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
                     with(binding) {
                         updatePlaceholder(status)
                         if (status == Status.Success) {
-                            emptyPlaceholder.root.isVisible = cars.isEmpty()
-                            favouriteList.isVisible = cars.isNotEmpty()
+                            favouritesEmptyPlaceholder.root.isVisible = cars.isEmpty()
+                            favouritesRv.isVisible = cars.isNotEmpty()
                             if (cars.isNotEmpty()) {
                                 carAdapter.submitList(cars)
                             }
@@ -70,11 +70,11 @@ internal class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
                 }
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.favouritesNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             favouritesViewModel.getFavourites()
         }
 
-        binding.swipeRefresh.setOnRefreshListener {
+        binding.favouritesSwipeRefresh.setOnRefreshListener {
             favouritesViewModel.getFavourites()
         }
     }
@@ -83,30 +83,30 @@ internal class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
         with(binding) {
             when (status) {
                 is Status.Loading -> {
-                    shimmerLayout.isVisible = true
-                    shimmerLayout.startShimmer()
-                    favouriteList.isVisible = false
-                    noConnectionPlaceholder.root.isVisible = false
-                    swipeRefresh.isRefreshing = true
-                    swipeRefresh.isVisible = true
+                    favouritesShimmerLayout.isVisible = true
+                    favouritesShimmerLayout.startShimmer()
+                    favouritesRv.isVisible = false
+                    favouritesNoConnectionPlaceholder.root.isVisible = false
+                    favouritesSwipeRefresh.isRefreshing = true
+                    favouritesSwipeRefresh.isVisible = true
                 }
 
                 is Status.Success -> {
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.isVisible = false
-                    favouriteList.isVisible = true
-                    noConnectionPlaceholder.root.isVisible = false
-                    swipeRefresh.isRefreshing = false
-                    swipeRefresh.isVisible = true
+                    favouritesShimmerLayout.stopShimmer()
+                    favouritesShimmerLayout.isVisible = false
+                    favouritesRv.isVisible = true
+                    favouritesNoConnectionPlaceholder.root.isVisible = false
+                    favouritesSwipeRefresh.isRefreshing = false
+                    favouritesSwipeRefresh.isVisible = true
                 }
 
                 is Status.Error -> {
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.isVisible = false
-                    favouriteList.isVisible = false
-                    noConnectionPlaceholder.root.isVisible = true
-                    swipeRefresh.isRefreshing = false
-                    swipeRefresh.isVisible = false
+                    favouritesShimmerLayout.stopShimmer()
+                    favouritesShimmerLayout.isVisible = false
+                    favouritesRv.isVisible = false
+                    favouritesNoConnectionPlaceholder.root.isVisible = true
+                    favouritesSwipeRefresh.isRefreshing = false
+                    favouritesSwipeRefresh.isVisible = false
                 }
             }
         }

@@ -10,12 +10,12 @@
         layout="@layout/fragment_comparisons_tool_bar" />
 
     <include
-        android:id="@+id/no_connection_placeholder"
+        android:id="@+id/comparisons_no_connection_placeholder"
         android:visibility="gone"
         layout="@layout/no_connection_placeholder" />
 
     <include
-        android:id="@+id/empty_placeholder"
+        android:id="@+id/comparisons_empty_placeholder"
         layout="@layout/comparisons_empty_placeholder"
         android:visibility="gone" />
 
@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_layout_titles"
+                android:id="@+id/comparisons_shimmer_layout_titles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -55,7 +55,7 @@
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/titles_rv"
+                android:id="@+id/comparisons_titles_rv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
@@ -64,7 +64,7 @@
                 tools:visibility="gone" />
 
             <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_layout_specs"
+                android:id="@+id/comparisons_shimmer_layout_specs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -89,7 +89,7 @@
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/specs_rv"
+                android:id="@+id/comparisons_specs_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"

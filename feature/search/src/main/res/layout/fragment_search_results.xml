@@ -10,12 +10,12 @@
         layout="@layout/fragment_search_results_tool_bar" />
 
     <include
-        android:id="@+id/nothing_found_place_holder"
+        android:id="@+id/search_results_nothing_found_place_holder"
         layout="@layout/nothing_found_placeholder"
         android:visibility="gone" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/car_ads_counter"
+        android:id="@+id/search_results_car_ads_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -27,13 +27,13 @@
         tools:text="1337 offers" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/sort_btn"
+        android:id="@+id/search_results_sort_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@drawable/sort_icon"
         android:backgroundTint="@color/md_theme_onBackground"
-        app:layout_constraintBottom_toBottomOf="@id/car_ads_counter"
+        app:layout_constraintBottom_toBottomOf="@id/search_results_car_ads_counter"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <FrameLayout
@@ -45,14 +45,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <include
-            android:id="@+id/no_connection_placeholder"
+            android:id="@+id/search_results_no_connection_placeholder"
             layout="@layout/no_connection_placeholder"
             android:visibility="gone" />
 
     </FrameLayout>
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_layout"
+        android:id="@+id/search_results_shimmer_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -61,7 +61,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_ads_counter">
+        app:layout_constraintTop_toBottomOf="@id/search_results_car_ads_counter">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,7 +81,7 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+        android:id="@+id/search_results_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -89,10 +89,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_ads_counter">
+        app:layout_constraintTop_toBottomOf="@id/search_results_car_ads_counter">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/car_list"
+            android:id="@+id/search_results_cars_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

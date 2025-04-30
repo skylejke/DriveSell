@@ -78,9 +78,9 @@ internal class ComparisonsFragment : BaseFragment<FragmentComparisonsBinding>() 
                     with(binding) {
                         updatePlaceholder(status)
                         if (status == Status.Success) {
-                            emptyPlaceholder.root.isVisible = cars.isEmpty()
-                            specsRv.isVisible = cars.isNotEmpty()
-                            titlesRv.isVisible = cars.isNotEmpty()
+                            comparisonsEmptyPlaceholder.root.isVisible = cars.isEmpty()
+                            comparisonsSpecsRv.isVisible = cars.isNotEmpty()
+                            comparisonsTitlesRv.isVisible = cars.isNotEmpty()
                             if (cars.isNotEmpty()) {
                                 comparedCarsTitleAdapter.submitList(cars)
                                 comparedCarsSpecsAdapter.submitList(cars)
@@ -90,7 +90,7 @@ internal class ComparisonsFragment : BaseFragment<FragmentComparisonsBinding>() 
                 }
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.comparisonsNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             comparisonsViewModel.getComparedCars()
         }
 
@@ -102,54 +102,54 @@ internal class ComparisonsFragment : BaseFragment<FragmentComparisonsBinding>() 
     private fun updatePlaceholder(status: Status) = with(binding) {
         when (status) {
             is Status.Loading -> {
-                shimmerLayoutTitles.isVisible = true
-                shimmerLayoutTitles.startShimmer()
+                comparisonsShimmerLayoutTitles.isVisible = true
+                comparisonsShimmerLayoutTitles.startShimmer()
 
-                shimmerLayoutSpecs.isVisible = true
-                shimmerLayoutTitles.startShimmer()
+                comparisonsShimmerLayoutSpecs.isVisible = true
+                comparisonsShimmerLayoutSpecs.startShimmer()
 
-                titlesRv.isVisible = false
-                specsRv.isVisible = false
+                comparisonsTitlesRv.isVisible = false
+                comparisonsSpecsRv.isVisible = false
 
-                noConnectionPlaceholder.root.isVisible = false
+                comparisonsNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Success -> {
-                shimmerLayoutTitles.isVisible = false
-                shimmerLayoutTitles.stopShimmer()
+                comparisonsShimmerLayoutTitles.isVisible = false
+                comparisonsShimmerLayoutTitles.stopShimmer()
 
-                shimmerLayoutSpecs.isVisible = false
-                shimmerLayoutSpecs.stopShimmer()
+                comparisonsShimmerLayoutSpecs.isVisible = false
+                comparisonsShimmerLayoutSpecs.stopShimmer()
 
-                titlesRv.isVisible = true
-                specsRv.isVisible = true
+                comparisonsTitlesRv.isVisible = true
+                comparisonsSpecsRv.isVisible = true
 
-                noConnectionPlaceholder.root.isVisible = false
+                comparisonsNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Error -> {
-                shimmerLayoutTitles.isVisible = false
-                shimmerLayoutTitles.stopShimmer()
+                comparisonsShimmerLayoutTitles.isVisible = false
+                comparisonsShimmerLayoutTitles.stopShimmer()
 
-                shimmerLayoutSpecs.isVisible = false
-                shimmerLayoutSpecs.stopShimmer()
+                comparisonsShimmerLayoutSpecs.isVisible = false
+                comparisonsShimmerLayoutSpecs.stopShimmer()
 
-                titlesRv.isVisible = false
-                specsRv.isVisible = false
+                comparisonsTitlesRv.isVisible = false
+                comparisonsSpecsRv.isVisible = false
 
-                noConnectionPlaceholder.root.isVisible = true
+                comparisonsNoConnectionPlaceholder.root.isVisible = true
             }
         }
     }
 
     fun setAdapters() {
-        binding.titlesRv.apply {
+        binding.comparisonsTitlesRv.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = comparedCarsTitleAdapter
             addItemDecoration(ComparisonsDecorator())
         }
 
-        binding.specsRv.apply {
+        binding.comparisonsSpecsRv.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = comparedCarsSpecsAdapter
             addItemDecoration(ComparisonsDecorator())
@@ -159,17 +159,17 @@ internal class ComparisonsFragment : BaseFragment<FragmentComparisonsBinding>() 
             override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
                 if (isSyncedScroll) return
                 isSyncedScroll = true
-                if (rv === binding.titlesRv) {
-                    binding.specsRv.scrollBy(dx, dy)
+                if (rv === binding.comparisonsTitlesRv) {
+                    binding.comparisonsSpecsRv.scrollBy(dx, dy)
                 } else {
-                    binding.titlesRv.scrollBy(dx, dy)
+                    binding.comparisonsTitlesRv.scrollBy(dx, dy)
                 }
                 isSyncedScroll = false
             }
         }
 
-        binding.titlesRv.addOnScrollListener(syncer)
-        binding.specsRv.addOnScrollListener(syncer)
+        binding.comparisonsTitlesRv.addOnScrollListener(syncer)
+        binding.comparisonsSpecsRv.addOnScrollListener(syncer)
     }
 
     override fun onDestroy() {

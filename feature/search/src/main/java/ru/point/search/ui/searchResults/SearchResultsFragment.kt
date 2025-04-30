@@ -55,7 +55,7 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
 
         getSearchedCars()
 
-        binding.carList.apply {
+        binding.searchResultsCarsRv.apply {
             adapter = carAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(CarAdapterDecorator())
@@ -67,13 +67,13 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
                     with(binding) {
                         updatePlaceholder(status)
                         if (status == Status.Success) {
-                            nothingFoundPlaceHolder.root.isVisible = cars.isEmpty()
-                            sortBtn.isVisible = cars.isNotEmpty()
-                            carAdsCounter.isVisible = cars.isNotEmpty()
-                            carList.isVisible = cars.isNotEmpty()
+                            searchResultsNothingFoundPlaceHolder.root.isVisible = cars.isEmpty()
+                            searchResultsSortBtn.isVisible = cars.isNotEmpty()
+                            searchResultsCarAdsCounter.isVisible = cars.isNotEmpty()
+                            searchResultsCarsRv.isVisible = cars.isNotEmpty()
                             if (cars.isNotEmpty()) {
-                                carAdapter.submitList(cars) { carList.scrollToPosition(0) }
-                                carAdsCounter.text =
+                                carAdapter.submitList(cars) { searchResultsCarsRv.scrollToPosition(0) }
+                                searchResultsCarAdsCounter.text =
                                     resources.getQuantityString(R.plurals.car_ads_counter, cars.size, cars.size)
                             }
                         }
@@ -81,15 +81,15 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
                 }
         }
 
-        binding.sortBtn.setOnClickListener {
+        binding.searchResultsSortBtn.setOnClickListener {
             showSortMenu()
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.searchResultsNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             getSearchedCars()
         }
 
-        binding.swipeRefresh.setOnRefreshListener {
+        binding.searchResultsSwipeRefresh.setOnRefreshListener {
             getSearchedCars()
         }
 
@@ -102,41 +102,41 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
         with(binding) {
             when (status) {
                 is Status.Loading -> {
-                    shimmerLayout.isVisible = true
-                    shimmerLayout.startShimmer()
-                    carList.isVisible = false
-                    noConnectionPlaceholder.root.isVisible = false
-                    nothingFoundPlaceHolder.root.isVisible = false
-                    swipeRefresh.isRefreshing = true
-                    swipeRefresh.isVisible = true
+                    searchResultsShimmerLayout.isVisible = true
+                    searchResultsShimmerLayout.startShimmer()
+                    searchResultsCarsRv.isVisible = false
+                    searchResultsNoConnectionPlaceholder.root.isVisible = false
+                    searchResultsNothingFoundPlaceHolder.root.isVisible = false
+                    searchResultsSwipeRefresh.isRefreshing = true
+                    searchResultsSwipeRefresh.isVisible = true
                 }
 
                 is Status.Success -> {
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.isVisible = false
-                    carList.isVisible = true
-                    noConnectionPlaceholder.root.isVisible = false
-                    swipeRefresh.isRefreshing = false
-                    swipeRefresh.isVisible = true
+                    searchResultsShimmerLayout.stopShimmer()
+                    searchResultsShimmerLayout.isVisible = false
+                    searchResultsCarsRv.isVisible = true
+                    searchResultsNoConnectionPlaceholder.root.isVisible = false
+                    searchResultsSwipeRefresh.isRefreshing = false
+                    searchResultsSwipeRefresh.isVisible = true
                 }
 
                 is Status.Error -> {
-                    shimmerLayout.isVisible = false
-                    shimmerLayout.stopShimmer()
-                    sortBtn.isVisible = false
-                    carAdsCounter.isVisible = false
-                    carList.isVisible = false
-                    noConnectionPlaceholder.root.isVisible = true
-                    nothingFoundPlaceHolder.root.isVisible = false
-                    swipeRefresh.isRefreshing = false
-                    swipeRefresh.isVisible = false
+                    searchResultsShimmerLayout.isVisible = false
+                    searchResultsShimmerLayout.stopShimmer()
+                    searchResultsSortBtn.isVisible = false
+                    searchResultsCarAdsCounter.isVisible = false
+                    searchResultsCarsRv.isVisible = false
+                    searchResultsNoConnectionPlaceholder.root.isVisible = true
+                    searchResultsNothingFoundPlaceHolder.root.isVisible = false
+                    searchResultsSwipeRefresh.isRefreshing = false
+                    searchResultsSwipeRefresh.isVisible = false
                 }
             }
         }
     }
 
     private fun showSortMenu() {
-        val sortMenu = PopupMenu(requireContext(), binding.sortBtn)
+        val sortMenu = PopupMenu(requireContext(), binding.searchResultsSortBtn)
         sortMenu.menuInflater.inflate(R.menu.sort_menu, sortMenu.menu)
 
         sortMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
@@ -224,11 +224,6 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
                 orderParam = orderParam
             )
         }
-    }
-
-    override fun onDestroyView() {
-        binding.carList.adapter = null
-        super.onDestroyView()
     }
 
     override fun onDestroy() {

@@ -21,4 +21,7 @@
     <string name="error_username_taken">Имя пользователя уже занято</string>
     <string name="error_email_taken">Адрес электронной почты уже используется</string>
     <string name="error_phone_taken">Номер телефона уже используется</string>
+    <string name="success_sign_in">Успешный вход в аккаунт</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
+    <string name="success_sign_up">Вы успешно зарегистрировались</string>
 </resources>

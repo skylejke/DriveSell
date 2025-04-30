@@ -35,4 +35,5 @@
     <string name="error_username_taken">Имя пользователя уже занято</string>
     <string name="error_email_taken">Адрес электронной почты уже используется</string>
     <string name="error_phone_taken">Номер телефона уже используется</string>
+    <string name="deleted_profile">Профиль удален</string>
 </resources>

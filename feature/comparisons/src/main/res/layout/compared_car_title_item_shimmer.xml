@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/photo"
+        android:id="@+id/compared_car_photo_shimmer"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:background="@color/shimmerColor"
@@ -14,21 +14,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/price"
+        android:id="@+id/compared_car_price_shimmer"
         android:layout_width="100dp"
         android:layout_height="16dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/photo" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_photo_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
+        android:id="@+id/compared_car_title_shimmer"
         android:layout_width="140dp"
         android:layout_height="14dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price" />
+        app:layout_constraintTop_toBottomOf="@id/compared_car_price_shimmer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

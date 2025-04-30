@@ -55,7 +55,7 @@ internal class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.searchHistoryList.apply {
+        binding.searchHistoryRv.apply {
             adapter = searchHistoryAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(SearchHistoryAdapterDecorator(requireContext()))
@@ -65,7 +65,7 @@ internal class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             searchViewModel.searchHistory.collect {
                 searchHistoryAdapter.submitList(it)
                 binding.youSearchedTv.isVisible = it.isNotEmpty()
-                binding.clearSearchHistoryButton.isVisible = it.isNotEmpty()
+                binding.clearSearchHistoryBtn.isVisible = it.isNotEmpty()
             }
         }
 
@@ -81,7 +81,7 @@ internal class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
         }
 
-        binding.clearSearchHistoryButton.setOnClickListener {
+        binding.clearSearchHistoryBtn.setOnClickListener {
             searchViewModel.clearSearchHistory()
         }
 

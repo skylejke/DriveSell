@@ -50,28 +50,28 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
         repeatOnLifecycleScope {
             editUserDataViewModel.userData.filterNotNull().collect { userData ->
                 with(binding) {
-                    usernameEt.setText(userData.username.toString())
-                    emailEt.setText(userData.email.toString())
-                    phoneNumberEt.setText(userData.phoneNumber.toString())
+                    editUserDataUsernameEt.setText(userData.username.toString())
+                    editUserDataEmailEt.setText(userData.email.toString())
+                    editUserDataPhoneNumberEt.setText(userData.phoneNumber.toString())
                 }
             }
         }
 
         repeatOnLifecycleScope {
             editUserDataViewModel.usernameError.filterNotNull().collect {
-                binding.usernameTil.error = it
+                binding.editUserDataUsernameTil.error = it
             }
         }
 
         repeatOnLifecycleScope {
             editUserDataViewModel.emailError.filterNotNull().collect {
-                binding.emailTil.error = it
+                binding.editUserDataEmailTil.error = it
             }
         }
 
         repeatOnLifecycleScope {
             editUserDataViewModel.phoneNumberError.filterNotNull().collect {
-                binding.phoneNumberTil.error = it
+                binding.editUserDataPhoneNumberTil.error = it
             }
         }
 
@@ -81,25 +81,25 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
             }
         }
 
-        binding.usernameEt.clearErrorOnTextChanged(binding.usernameTil)
+        binding.editUserDataUsernameEt.clearErrorOnTextChanged(binding.editUserDataUsernameTil)
 
-        binding.emailEt.clearErrorOnTextChanged(binding.emailTil)
+        binding.editUserDataEmailEt.clearErrorOnTextChanged(binding.editUserDataEmailTil)
 
-        binding.phoneNumberEt.clearErrorOnTextChanged(binding.phoneNumberTil)
+        binding.editUserDataPhoneNumberEt.clearErrorOnTextChanged(binding.editUserDataPhoneNumberTil)
 
-        binding.fragmentEditUserDataToolBar.checkIcon.setOnClickListener {
+        binding.editUserDataToolBar.checkIcon.setOnClickListener {
             editUserDataViewModel.editUserData(
-                username = binding.usernameEt.text.toString().takeIf { it.isNotBlank() },
-                email = binding.emailEt.text.toString().takeIf { it.isNotBlank() },
-                phoneNumber = binding.phoneNumberEt.text.toString().takeIf { it.isNotBlank() }
+                username = binding.editUserDataUsernameEt.text.toString().takeIf { it.isNotBlank() },
+                email = binding.editUserDataEmailEt.text.toString().takeIf { it.isNotBlank() },
+                phoneNumber = binding.editUserDataPhoneNumberEt.text.toString().takeIf { it.isNotBlank() }
             )
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.editUserDataNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             editUserDataViewModel.getUserData()
         }
 
-        binding.fragmentEditUserDataToolBar.closeIcon.setOnClickListener {
+        binding.editUserDataToolBar.closeIcon.setOnClickListener {
             navigator.popBackStack()
         }
     }
@@ -107,33 +107,33 @@ internal class EditUserDataFragment : BaseFragment<FragmentEditUserDataBinding>(
     private fun updatePlaceholder(status: Status) = with(binding) {
         when (status) {
             is Status.Loading -> {
-                shimmerLayout.isVisible = true
-                shimmerLayout.startShimmer()
-                fragmentEditUserDataToolBar.checkIcon.isVisible = false
-                usernameTil.isVisible = false
-                emailTil.isVisible = false
-                phoneNumberTil.isVisible = false
-                noConnectionPlaceholder.root.isVisible = false
+                editUserDataShimmerLayout.isVisible = true
+                editUserDataShimmerLayout.startShimmer()
+                editUserDataToolBar.checkIcon.isVisible = false
+                editUserDataUsernameTil.isVisible = false
+                editUserDataEmailTil.isVisible = false
+                editUserDataPhoneNumberTil.isVisible = false
+                editUserDataNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Success -> {
-                shimmerLayout.isVisible = false
-                shimmerLayout.stopShimmer()
-                fragmentEditUserDataToolBar.checkIcon.isVisible = true
-                usernameTil.isVisible = true
-                emailTil.isVisible = true
-                phoneNumberTil.isVisible = true
-                noConnectionPlaceholder.root.isVisible = false
+                editUserDataShimmerLayout.isVisible = false
+                editUserDataShimmerLayout.stopShimmer()
+                editUserDataToolBar.checkIcon.isVisible = true
+                editUserDataUsernameTil.isVisible = true
+                editUserDataEmailTil.isVisible = true
+                editUserDataPhoneNumberTil.isVisible = true
+                editUserDataNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Error -> {
-                shimmerLayout.isVisible = false
-                shimmerLayout.stopShimmer()
-                fragmentEditUserDataToolBar.checkIcon.isVisible = false
-                usernameTil.isVisible = false
-                emailTil.isVisible = false
-                phoneNumberTil.isVisible = false
-                noConnectionPlaceholder.root.isVisible = true
+                editUserDataShimmerLayout.isVisible = false
+                editUserDataShimmerLayout.stopShimmer()
+                editUserDataToolBar.checkIcon.isVisible = false
+                editUserDataUsernameTil.isVisible = false
+                editUserDataEmailTil.isVisible = false
+                editUserDataPhoneNumberTil.isVisible = false
+                editUserDataNoConnectionPlaceholder.root.isVisible = true
             }
         }
     }

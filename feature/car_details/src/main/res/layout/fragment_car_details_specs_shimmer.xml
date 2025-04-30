@@ -7,7 +7,7 @@
     android:paddingBottom="16dp">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/price"
+        android:id="@+id/car_details_price_shimmer"
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/creation_date"
+        android:id="@+id/creation_date_shimmer"
         android:layout_width="70dp"
         android:layout_height="12dp"
         android:layout_marginTop="20dp"
@@ -25,16 +25,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/brand_model_year"
+        android:id="@+id/car_details_brand_model_year"
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_price_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/specifications_tv"
+        android:id="@+id/shimmer_specifications_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -42,118 +42,118 @@
         android:text="@string/specifications"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/brand_model_year" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_brand_model_year" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/year_tv"
+        android:id="@+id/car_details_year_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/specifications_tv" />
+        app:layout_constraintTop_toBottomOf="@id/shimmer_specifications_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mileage_tv"
+        android:id="@+id/car_details_mileage_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/year_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_year_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/body_type_tv"
+        android:id="@+id/car_details_body_type_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mileage_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_mileage_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/color_tv"
+        android:id="@+id/car_details_color_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/body_type_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_body_type_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/engine_tv"
+        android:id="@+id/car_details_engine_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/color_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_color_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/transmission_tv"
+        android:id="@+id/car_details_transmission_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/engine_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_engine_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/drivetrain_tv"
+        android:id="@+id/car_details_drivetrain_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transmission_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_transmission_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/wheel_tv"
+        android:id="@+id/car_details_wheel_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drivetrain_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_drivetrain_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/condition_tv"
+        android:id="@+id/car_details_condition_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wheel_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_wheel_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/owners_tv"
+        android:id="@+id/car_details_owners_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/condition_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_condition_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/ownership_period_tv"
+        android:id="@+id/car_details_ownership_period_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/owners_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_owners_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/vin_tv"
+        android:id="@+id/car_details_vin_shimmer"
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ownership_period_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_ownership_period_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/seller_s_comment_tv"
+        android:id="@+id/shimmer_seller_s_comment_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -161,15 +161,15 @@
         android:text="@string/seller_s_comment"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vin_tv" />
+        app:layout_constraintTop_toBottomOf="@id/car_details_vin_shimmer" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/seller_s_comment_tv_value"
+        android:id="@+id/car_details_seller_s_comment_shimmer"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
         android:background="@color/shimmerColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/seller_s_comment_tv" />
+        app:layout_constraintTop_toBottomOf="@id/shimmer_seller_s_comment_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

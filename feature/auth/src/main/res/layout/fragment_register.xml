@@ -6,12 +6,12 @@
     android:padding="16dp">
 
     <include
-        android:id="@+id/loading_placeholder"
+        android:id="@+id/register_loading_placeholder"
         layout="@layout/loading_placeholder"
         android:visibility="gone" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/app_name"
+        android:id="@+id/register_app_name_tv"
         style="@style/AppNameTextViewStyle"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/sign_up_tv"
+        android:id="@+id/register_tv"
         style="@style/BigTextViewStyle"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -29,20 +29,20 @@
         app:fontFamily="@font/roboto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_name" />
+        app:layout_constraintTop_toBottomOf="@id/register_app_name_tv" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_til"
+        android:id="@+id/register_username_til"
         style="@style/AuthTextInputLayout"
         android:layout_height="wrap_content"
         android:hint="@string/username"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_tv">
+        app:layout_constraintTop_toBottomOf="@id/register_tv">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_et"
+            android:id="@+id/register_username_et"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,17 +50,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_til"
+        android:id="@+id/register_email_til"
         style="@style/AuthTextInputLayout"
         android:layout_height="wrap_content"
         android:hint="@string/email"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username_til">
+        app:layout_constraintTop_toBottomOf="@id/register_username_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_et"
+            android:id="@+id/register_email_et"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,17 +68,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_number_til"
+        android:id="@+id/register_phone_number_til"
         style="@style/AuthTextInputLayout"
         android:layout_height="wrap_content"
         android:hint="@string/phone_number"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_til">
+        app:layout_constraintTop_toBottomOf="@id/register_email_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phone_number_et"
+            android:id="@+id/register_phone_number_et"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,17 +86,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_til"
+        android:id="@+id/register_password_til"
         style="@style/AuthTextInputLayout"
         android:layout_height="wrap_content"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone_number_til">
+        app:layout_constraintTop_toBottomOf="@id/register_phone_number_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_et"
+            android:id="@+id/register_password_et"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,39 +104,39 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_up_btn"
+        android:id="@+id/register_btn"
         style="@style/ButtonStyle"
         android:layout_marginTop="30dp"
         android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_til" />
+        app:layout_constraintTop_toBottomOf="@id/register_password_til" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/or"
+        android:id="@+id/register_btn_or_tv"
         style="@style/MediumTextViewStyle"
         android:layout_marginTop="20dp"
         android:text="@string/or"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_btn" />
+        app:layout_constraintTop_toBottomOf="@id/register_btn" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_in_btn"
+        android:id="@+id/navigate_to_login_btn"
         style="@style/ButtonStyle"
         android:layout_marginTop="20dp"
         android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/or" />
+        app:layout_constraintTop_toBottomOf="@id/register_btn_or_tv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/continue_as_a_guest_btn"
+        android:id="@+id/register_continue_as_a_guest_tv"
         style="@style/BigTextViewStyle"
         android:layout_marginTop="20dp"
         android:text="@string/continue_as_a_guest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_btn" />
+        app:layout_constraintTop_toBottomOf="@id/navigate_to_login_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

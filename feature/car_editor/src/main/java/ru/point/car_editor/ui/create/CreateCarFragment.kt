@@ -74,20 +74,19 @@ internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
         clearFields()
 
         with(binding.carEditorFields) {
-            yearEt.setSimpleItems(resources.getStringArray(R.array.years))
-            fuelTypeEt.setSimpleItems(resources.getStringArray(R.array.fuel_types))
-            bodyTypeEt.setSimpleItems(resources.getStringArray(R.array.body_types))
-            colorEt.setSimpleItems(resources.getStringArray(R.array.colors))
-            transmissionEt.setSimpleItems(resources.getStringArray(R.array.transmissions))
-            drivetrainEt.setSimpleItems(resources.getStringArray(R.array.drivetrains))
-            wheelEt.setSimpleItems(resources.getStringArray(R.array.wheels))
-            conditionEt.setSimpleItems(resources.getStringArray(R.array.conditions))
-            ownershipPeriodYearsEt.setSimpleItems(resources.getStringArray(R.array.number_of_years))
-            ownershipPeriodMonthsEt.setSimpleItems(resources.getStringArray(R.array.number_of_months))
+            carEditorYearEt.setSimpleItems(resources.getStringArray(R.array.years))
+            carEditorBodyTypeEt.setSimpleItems(resources.getStringArray(R.array.fuel_types))
+            carEditorBodyTypeEt.setSimpleItems(resources.getStringArray(R.array.body_types))
+            carEditorColorEt.setSimpleItems(resources.getStringArray(R.array.colors))
+            carEditorTransmissionEt.setSimpleItems(resources.getStringArray(R.array.transmissions))
+            carEditorDrivetrainEt.setSimpleItems(resources.getStringArray(R.array.drivetrains))
+            carEditorWheelEt.setSimpleItems(resources.getStringArray(R.array.wheels))
+            carEditorConditionEt.setSimpleItems(resources.getStringArray(R.array.conditions))
+            carEditorOwnershipPeriodYearsEt.setSimpleItems(resources.getStringArray(R.array.number_of_years))
+            carEditorOwnershipPeriodMonthsEt.setSimpleItems(resources.getStringArray(R.array.number_of_months))
         }
 
-        binding.photosRv.adapter = carEditorPhotosAdapter
-
+        binding.createCarPhotosRv.adapter = carEditorPhotosAdapter
         carEditorPhotosAdapter.submitList(listOf(CarEditorPhotosAdapterItem.ButtonEditor))
 
         createCarViewModel.getBrands()
@@ -96,8 +95,8 @@ internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
 
         repeatOnLifecycleScope {
             createCarViewModel.isGuest.filterNotNull().collect {
-                binding.mainContainer.isVisible = !it
-                binding.guestContainer.root.isVisible = it
+                binding.createCarMainContainer.isVisible = !it
+                binding.createCarGuestContainer.root.isVisible = it
             }
         }
 
@@ -105,7 +104,7 @@ internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
 
         repeatOnLifecycleScope {
             createCarViewModel.brands.collect { brands ->
-                binding.carEditorFields.brandEt.setSimpleItems(
+                binding.carEditorFields.carEditorBrandEt.setSimpleItems(
                     brands.map { it.name }.toTypedArray()
                 )
             }
@@ -113,10 +112,10 @@ internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
 
         repeatOnLifecycleScope {
             createCarViewModel.models.collect { models ->
-                binding.carEditorFields.modelEt.setSimpleItems(
+                binding.carEditorFields.carEditorModelEt.setSimpleItems(
                     models.map { it.name }.toTypedArray()
                 )
-                binding.carEditorFields.modelTil.isVisible = models.isNotEmpty()
+                binding.carEditorFields.carEditorModelTil.isVisible = models.isNotEmpty()
             }
         }
 
@@ -137,46 +136,46 @@ internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
             }
         }
 
-        binding.carEditorFields.brandEt.setOnItemClickListener { parent, _, position, _ ->
-            binding.carEditorFields.modelTil.isVisible = true
-            binding.carEditorFields.modelEt.setText("", false)
+        binding.carEditorFields.carEditorBrandEt.setOnItemClickListener { parent, _, position, _ ->
+            binding.carEditorFields.carEditorModelTil.isVisible = true
+            binding.carEditorFields.carEditorModelEt.setText("", false)
             createCarViewModel.getModels(parent.getItemAtPosition(position) as String)
         }
 
-        binding.createAdButton.setOnClickListener {
+        binding.createCarBtn.setOnClickListener {
             val ownershipPeriod = run {
-                val yearsText = binding.carEditorFields.ownershipPeriodYearsEt.text.toString()
-                val monthsText = binding.carEditorFields.ownershipPeriodMonthsEt.text.toString()
+                val yearsText = binding.carEditorFields.carEditorOwnershipPeriodYearsEt.text.toString()
+                val monthsText = binding.carEditorFields.carEditorOwnershipPeriodMonthsEt.text.toString()
                 if (yearsText.startsWith("0")) monthsText else "$yearsText $monthsText"
             }
 
             createCarViewModel.createNewAd(
                 car = with(binding.carEditorFields) {
                     CreateCarRequest(
-                        brand = brandEt.text.toString(),
-                        model = modelEt.text.toString(),
-                        year = yearEt.text.toString().toShortOrNull()
+                        brand = carEditorBrandEt.text.toString(),
+                        model = carEditorModelEt.text.toString(),
+                        year = carEditorYearEt.text.toString().toShortOrNull()
                             ?: NumberErrorConsts.ERROR_SHORT_VALUE,
-                        price = priceEt.text.toString().toIntOrNull()
+                        price = carEditorPriceEt.text.toString().toIntOrNull()
                             ?: NumberErrorConsts.ERROR_INT_VALUE,
-                        enginePower = enginePowerEt.text.toString().toShortOrNull()
+                        enginePower = carEditorEnginePowerEt.text.toString().toShortOrNull()
                             ?: NumberErrorConsts.ERROR_SHORT_VALUE,
-                        engineCapacity = engineCapacityEt.text.toString().toDoubleOrNull()
+                        engineCapacity = carEditorEngineCapacityEt.text.toString().toDoubleOrNull()
                             ?: NumberErrorConsts.ERROR_DOUBLE_VALUE,
-                        fuelType = fuelTypeEt.text.toString(),
-                        mileage = mileageEt.text.toString().toIntOrNull()
+                        fuelType = carEditorFuelTypeEt.text.toString(),
+                        mileage = carEditorMileageEt.text.toString().toIntOrNull()
                             ?: NumberErrorConsts.ERROR_INT_VALUE,
-                        bodyType = bodyTypeEt.text.toString(),
-                        color = colorEt.text.toString(),
-                        transmission = transmissionEt.text.toString(),
-                        drivetrain = drivetrainEt.text.toString(),
-                        wheel = wheelEt.text.toString(),
-                        condition = conditionEt.text.toString(),
-                        owners = numberOfOwnersEt.text.toString().toByteOrNull()
+                        bodyType = carEditorBodyTypeEt.text.toString(),
+                        color = carEditorColorEt.text.toString(),
+                        transmission = carEditorTransmissionEt.text.toString(),
+                        drivetrain = carEditorDrivetrainEt.text.toString(),
+                        wheel = carEditorWheelEt.text.toString(),
+                        condition = carEditorConditionEt.text.toString(),
+                        owners = carEditorNumberOfOwnersEt.text.toString().toByteOrNull()
                             ?: NumberErrorConsts.ERROR_BYTE_VALUE,
-                        vin = vinEt.text.toString(),
+                        vin = carEditorVinEt.text.toString(),
                         ownershipPeriod = ownershipPeriod,
-                        description = descriptionEt.text.toString()
+                        description = carEditorDescriptionEt.text.toString()
                     )
                 },
                 photos = carEditorPhotosAdapter.currentList
@@ -185,7 +184,7 @@ internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
             )
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.createCarNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             clearFields()
             createCarViewModel.getBrands()
         }
@@ -194,33 +193,33 @@ internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
     private fun updatePlaceholder(status: Status) = with(binding) {
         when (status) {
             is Status.Loading -> {
-                shimmerLayout.isVisible = true
-                shimmerLayout.startShimmer()
-                photosTv.isVisible = false
-                createAdButton.isVisible = false
-                photosRv.isVisible = false
+                createCarShimmerLayout.isVisible = true
+                createCarShimmerLayout.startShimmer()
+                createCarPhotosTv.isVisible = false
+                createCarPhotosRv.isVisible = false
                 carEditorFields.root.isVisible = false
-                noConnectionPlaceholder.root.isVisible = false
+                createCarBtn.isVisible = false
+                createCarNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Success -> {
-                shimmerLayout.isVisible = false
-                shimmerLayout.stopShimmer()
-                photosTv.isVisible = true
-                createAdButton.isVisible = true
-                photosRv.isVisible = true
+                createCarShimmerLayout.isVisible = false
+                createCarShimmerLayout.stopShimmer()
+                createCarPhotosTv.isVisible = true
+                createCarPhotosRv.isVisible = true
                 carEditorFields.root.isVisible = true
-                noConnectionPlaceholder.root.isVisible = false
+                createCarBtn.isVisible = true
+                createCarNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Error -> {
-                shimmerLayout.isVisible = false
-                shimmerLayout.stopShimmer()
-                photosTv.isVisible = false
-                createAdButton.isVisible = false
-                photosRv.isVisible = false
+                createCarShimmerLayout.isVisible = false
+                createCarShimmerLayout.stopShimmer()
+                createCarPhotosTv.isVisible = false
+                createCarPhotosRv.isVisible = false
                 carEditorFields.root.isVisible = false
-                noConnectionPlaceholder.root.isVisible = true
+                createCarBtn.isVisible = false
+                createCarNoConnectionPlaceholder.root.isVisible = true
             }
         }
     }
@@ -259,179 +258,179 @@ internal class CreateCarFragment : BaseFragment<FragmentCreateCarBinding>() {
     private fun observeBrandError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.brandError.collect {
-                brandTil.error = it
+                carEditorBrandTil.error = it
             }
         }
-        brandEt.clearErrorOnTextChanged(brandTil)
+        carEditorBrandEt.clearErrorOnTextChanged(carEditorBrandTil)
     }
 
     private fun observeModelError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.modelError.collect {
-                modelTil.error = it
+                carEditorModelTil.error = it
             }
         }
-        modelEt.clearErrorOnTextChanged(modelTil)
+        carEditorModelEt.clearErrorOnTextChanged(carEditorModelTil)
     }
 
     private fun observeYearError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.yearError.collect {
-                yearTil.error = it
+                carEditorYearTil.error = it
             }
         }
-        yearEt.clearErrorOnTextChanged(yearTil)
+        carEditorYearEt.clearErrorOnTextChanged(carEditorYearTil)
     }
 
     private fun observeVinError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.vinError.collect {
-                vinTil.error = it
+                carEditorVinTil.error = it
             }
         }
-        vinEt.clearErrorOnTextChanged(vinTil)
+        carEditorVinEt.clearErrorOnTextChanged(carEditorVinTil)
     }
 
     private fun observePriceError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.priceError.collect {
-                priceTil.error = it
+                carEditorPriceTil.error = it
             }
         }
-        priceEt.clearErrorOnTextChanged(priceTil)
+        carEditorPriceEt.clearErrorOnTextChanged(carEditorPriceTil)
     }
 
     private fun observeMileageError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.mileageError.collect {
-                mileageTil.error = it
+                carEditorMileageTil.error = it
             }
         }
-        mileageEt.clearErrorOnTextChanged(mileageTil)
+        carEditorMileageEt.clearErrorOnTextChanged(carEditorMileageTil)
     }
 
     private fun observeEnginePowerError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.enginePowerError.collect {
-                enginePowerTil.error = it
+                carEditorEnginePowerTil.error = it
             }
         }
-        enginePowerEt.clearErrorOnTextChanged(enginePowerTil)
+        carEditorEnginePowerEt.clearErrorOnTextChanged(carEditorEnginePowerTil)
     }
 
     private fun observeEngineCapacityError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.engineCapacityError.collect {
-                engineCapacityTil.error = it
+                carEditorEngineCapacityTil.error = it
             }
         }
-        engineCapacityEt.clearErrorOnTextChanged(engineCapacityTil)
+        carEditorEngineCapacityEt.clearErrorOnTextChanged(carEditorEngineCapacityTil)
     }
 
     private fun observeFuelTypeError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.fuelTypeError.collect {
-                fuelTypeTil.error = it
+                carEditorFuelTypeTil.error = it
             }
         }
-        fuelTypeEt.clearErrorOnTextChanged(fuelTypeTil)
+        carEditorFuelTypeEt.clearErrorOnTextChanged(carEditorFuelTypeTil)
     }
 
     private fun observeBodyTypeError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.bodyTypeError.collect {
-                bodyTypeTil.error = it
+                carEditorBodyTypeTil.error = it
             }
         }
-        bodyTypeEt.clearErrorOnTextChanged(bodyTypeTil)
+        carEditorBodyTypeEt.clearErrorOnTextChanged(carEditorBodyTypeTil)
     }
 
     private fun observeColorError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.colorError.collect {
-                colorTil.error = it
+                carEditorColorTil.error = it
             }
         }
-        colorEt.clearErrorOnTextChanged(colorTil)
+        carEditorColorEt.clearErrorOnTextChanged(carEditorColorTil)
     }
 
     private fun observeTransmissionError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.transmissionError.collect {
-                transmissionTil.error = it
+                carEditorTransmissionTil.error = it
             }
         }
-        transmissionEt.clearErrorOnTextChanged(transmissionTil)
+        carEditorTransmissionEt.clearErrorOnTextChanged(carEditorTransmissionTil)
     }
 
     private fun observeDrivetrainError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.drivetrainError.collect {
-                drivetrainTil.error = it
+                carEditorDrivetrainTil.error = it
             }
         }
-        drivetrainEt.clearErrorOnTextChanged(drivetrainTil)
+        carEditorDrivetrainEt.clearErrorOnTextChanged(carEditorDrivetrainTil)
     }
 
     private fun observeWheelError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.wheelError.collect {
-                wheelTil.error = it
+                carEditorWheelTil.error = it
             }
         }
-        wheelEt.clearErrorOnTextChanged(wheelTil)
+        carEditorWheelEt.clearErrorOnTextChanged(carEditorWheelTil)
     }
 
     private fun observeConditionError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.conditionError.collect {
-                conditionTil.error = it
+                carEditorConditionTil.error = it
             }
         }
-        conditionEt.clearErrorOnTextChanged(conditionTil)
+        carEditorConditionEt.clearErrorOnTextChanged(carEditorConditionTil)
     }
 
     private fun observeOwnersError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.ownersError.collect {
-                numberOfOwnersTil.error = it
+                carEditorNumberOfOwnersTil.error = it
             }
         }
-        numberOfOwnersEt.clearErrorOnTextChanged(numberOfOwnersTil)
+        carEditorNumberOfOwnersEt.clearErrorOnTextChanged(carEditorNumberOfOwnersTil)
     }
 
     private fun observeOwnershipPeriodError() = with(binding.carEditorFields) {
         repeatOnLifecycleScope {
             createCarViewModel.ownershipPeriodError.collect {
-                ownershipPeriodYearsTil.error = it
-                ownershipPeriodMonthsTil.error = it
+                carEditorOwnershipPeriodYearsTil.error = it
+                carEditorOwnershipPeriodMonthsTil.error = it
             }
         }
-        ownershipPeriodYearsEt.clearErrorOnTextChanged(ownershipPeriodYearsTil)
-        ownershipPeriodMonthsEt.clearErrorOnTextChanged(ownershipPeriodMonthsTil)
+        carEditorOwnershipPeriodYearsEt.clearErrorOnTextChanged(carEditorOwnershipPeriodYearsTil)
+        carEditorOwnershipPeriodMonthsEt.clearErrorOnTextChanged(carEditorOwnershipPeriodMonthsTil)
     }
 
     private fun clearFields() {
         with(binding.carEditorFields) {
-            brandEt.setText("", false)
-            modelEt.setText("", false)
-            mileageEt.text?.clear()
-            yearEt.setText("", false)
-            priceEt.text?.clear()
-            enginePowerEt.text?.clear()
-            engineCapacityEt.text?.clear()
-            fuelTypeEt.setText("", false)
-            bodyTypeEt.setText("", false)
-            colorEt.setText("", false)
-            transmissionEt.setText("", false)
-            drivetrainEt.setText("", false)
-            wheelEt.setText("", false)
-            conditionEt.setText("", false)
-            numberOfOwnersEt.text?.clear()
-            vinEt.text?.clear()
-            ownershipPeriodYearsEt.setText("", false)
-            ownershipPeriodMonthsEt.setText("", false)
-            descriptionEt.text?.clear()
+            carEditorBrandEt.setText("", false)
+            carEditorModelEt.setText("", false)
+            carEditorMileageEt.text?.clear()
+            carEditorYearEt.setText("", false)
+            carEditorPriceEt.text?.clear()
+            carEditorEnginePowerEt.text?.clear()
+            carEditorEngineCapacityEt.text?.clear()
+            carEditorFuelTypeEt.setText("", false)
+            carEditorBodyTypeEt.setText("", false)
+            carEditorColorEt.setText("", false)
+            carEditorTransmissionEt.setText("", false)
+            carEditorDrivetrainEt.setText("", false)
+            carEditorWheelEt.setText("", false)
+            carEditorConditionEt.setText("", false)
+            carEditorNumberOfOwnersEt.text?.clear()
+            carEditorVinEt.text?.clear()
+            carEditorOwnershipPeriodYearsEt.setText("", false)
+            carEditorOwnershipPeriodMonthsEt.setText("", false)
+            carEditorDescriptionEt.text?.clear()
             carEditorPhotosAdapter.submitList(listOf(CarEditorPhotosAdapterItem.ButtonEditor))
         }
     }

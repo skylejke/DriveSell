@@ -38,14 +38,14 @@ internal class SearchByFiltersFragment : BaseFragment<FragmentSearchByFiltersBin
         super.onViewCreated(view, savedInstanceState)
 
         with(binding.filtersFields) {
-            fuelTypeListTv.setSimpleItems(resources.getStringArray(R.array.fuel_types))
-            bodyTypeListTv.setSimpleItems(resources.getStringArray(R.array.body_types))
-            colorTv.setSimpleItems(resources.getStringArray(R.array.colors))
-            transmissionListTv.setSimpleItems(resources.getStringArray(R.array.transmissions))
-            drivetrainListTv.setSimpleItems(resources.getStringArray(R.array.drivetrains))
-            wheelListTv.setSimpleItems(resources.getStringArray(R.array.wheels))
-            conditionListTv.setSimpleItems(resources.getStringArray(R.array.conditions))
-            ownersTv.setSimpleItems(resources.getStringArray(R.array.owners))
+            filterFuelTypeAtv.setSimpleItems(resources.getStringArray(R.array.fuel_types))
+            filterBodyTypeAtv.setSimpleItems(resources.getStringArray(R.array.body_types))
+            filterColorAtv.setSimpleItems(resources.getStringArray(R.array.colors))
+            filterTransmissionAtv.setSimpleItems(resources.getStringArray(R.array.transmissions))
+            filterDrivetrainAtv.setSimpleItems(resources.getStringArray(R.array.drivetrains))
+            filterWheelAtv.setSimpleItems(resources.getStringArray(R.array.wheels))
+            filterConditionAtv.setSimpleItems(resources.getStringArray(R.array.conditions))
+            filterOwnersAtv.setSimpleItems(resources.getStringArray(R.array.owners))
         }
 
         repeatOnLifecycleScope {
@@ -54,7 +54,7 @@ internal class SearchByFiltersFragment : BaseFragment<FragmentSearchByFiltersBin
 
         repeatOnLifecycleScope {
             searchByFiltersViewModel.brands.collect { brands ->
-                binding.filtersFields.brandListTv.setSimpleItems(
+                binding.filtersFields.filterBrandAtv.setSimpleItems(
                     brands.map { it.name }.toTypedArray()
                 )
             }
@@ -62,47 +62,47 @@ internal class SearchByFiltersFragment : BaseFragment<FragmentSearchByFiltersBin
 
         repeatOnLifecycleScope {
             searchByFiltersViewModel.models.collect { models ->
-                binding.filtersFields.modelListTv.setSimpleItems(
+                binding.filtersFields.filterModelAtv.setSimpleItems(
                     models.map { it.name }.toTypedArray()
                 )
-                binding.filtersFields.modelList.isVisible = models.isNotEmpty()
+                binding.filtersFields.filterModelTil.isVisible = models.isNotEmpty()
             }
         }
 
-        binding.filtersFields.brandListTv.setOnItemClickListener { parent, _, position, _ ->
-            binding.filtersFields.modelList.isVisible = true
-            binding.filtersFields.modelListTv.setText("", false)
+        binding.filtersFields.filterBrandAtv.setOnItemClickListener { parent, _, position, _ ->
+            binding.filtersFields.filterModelTil.isVisible = true
+            binding.filtersFields.filterModelAtv.setText("", false)
             searchByFiltersViewModel.getModels(parent.getItemAtPosition(position) as String)
         }
 
-        binding.filtersFields.searchBtn.setOnClickListener {
+        binding.filtersFields.filterSearchBtn.setOnClickListener {
             with(binding.filtersFields) {
                 navigator.fromSearchByFiltersFragmentToSearchResultsFragment(
-                    brand = brandListTv.text.toString().takeIf { it.isNotBlank() },
-                    model = modelListTv.text.toString().takeIf { it.isNotBlank() },
-                    yearMin = yearEtMin.text.toString().takeIf { it.isNotBlank() },
-                    yearMax = yearEtMax.text.toString().takeIf { it.isNotBlank() },
-                    priceMin = priceEtMin.text.toString().takeIf { it.isNotBlank() },
-                    priceMax = priceEtMax.text.toString().takeIf { it.isNotBlank() },
-                    mileageMin = mileageEtMin.text.toString().takeIf { it.isNotBlank() },
-                    mileageMax = mileageEtMax.text.toString().takeIf { it.isNotBlank() },
-                    enginePowerMin = enginePowerMin.text.toString().takeIf { it.isNotBlank() },
-                    enginePowerMax = enginePowerMax.text.toString().takeIf { it.isNotBlank() },
-                    engineCapacityMin = engineCapacityMin.text.toString().takeIf { it.isNotBlank() },
-                    engineCapacityMax = engineCapacityMax.text.toString().takeIf { it.isNotBlank() },
-                    fuelType = fuelTypeListTv.text.toString().takeIf { it.isNotBlank() },
-                    bodyType = bodyTypeListTv.text.toString().takeIf { it.isNotBlank() },
-                    color = colorTv.text.toString().takeIf { it.isNotBlank() },
-                    transmission = transmissionListTv.text.toString().takeIf { it.isNotBlank() },
-                    drivetrain = drivetrainListTv.text.toString().takeIf { it.isNotBlank() },
-                    wheel = wheelListTv.text.toString().takeIf { it.isNotBlank() },
-                    condition = conditionListTv.text.toString().takeIf { it.isNotBlank() },
-                    owners = ownersTv.text.toString().takeIf { it.isNotBlank() }
+                    brand = filterBrandAtv.text.toString().takeIf { it.isNotBlank() },
+                    model = filterModelAtv.text.toString().takeIf { it.isNotBlank() },
+                    yearMin = filterYearEtMin.text.toString().takeIf { it.isNotBlank() },
+                    yearMax = filterYearEtMax.text.toString().takeIf { it.isNotBlank() },
+                    priceMin = filterPriceEtMin.text.toString().takeIf { it.isNotBlank() },
+                    priceMax = filterPriceEtMax.text.toString().takeIf { it.isNotBlank() },
+                    mileageMin = filterMileageEtMin.text.toString().takeIf { it.isNotBlank() },
+                    mileageMax = filterMileageEtMax.text.toString().takeIf { it.isNotBlank() },
+                    enginePowerMin = filterEnginePowerMin.text.toString().takeIf { it.isNotBlank() },
+                    enginePowerMax = filterEnginePowerMax.text.toString().takeIf { it.isNotBlank() },
+                    engineCapacityMin = filterEngineCapacityMin.text.toString().takeIf { it.isNotBlank() },
+                    engineCapacityMax = filterEngineCapacityMax.text.toString().takeIf { it.isNotBlank() },
+                    fuelType = filterFuelTypeAtv.text.toString().takeIf { it.isNotBlank() },
+                    bodyType = filterBodyTypeAtv.text.toString().takeIf { it.isNotBlank() },
+                    color = filterColorAtv.text.toString().takeIf { it.isNotBlank() },
+                    transmission = filterTransmissionAtv.text.toString().takeIf { it.isNotBlank() },
+                    drivetrain = filterDrivetrainAtv.text.toString().takeIf { it.isNotBlank() },
+                    wheel = filterWheelAtv.text.toString().takeIf { it.isNotBlank() },
+                    condition = filterConditionAtv.text.toString().takeIf { it.isNotBlank() },
+                    owners = filterOwnersAtv.text.toString().takeIf { it.isNotBlank() }
                 )
             }
         }
 
-        binding.noConnectionPlaceholder.tryAgainTv.setOnClickListener {
+        binding.filtersNoConnectionPlaceholder.tryAgainTv.setOnClickListener {
             clearFields()
             searchByFiltersViewModel.getBrands()
         }
@@ -111,57 +111,51 @@ internal class SearchByFiltersFragment : BaseFragment<FragmentSearchByFiltersBin
     private fun updatePlaceholder(status: Status) = with(binding) {
         when (status) {
             is Status.Loading -> {
-                shimmerLayout.isVisible = true
-                shimmerLayout.startShimmer()
+                filtersShimmerLayout.isVisible = true
+                filtersShimmerLayout.startShimmer()
                 filtersFields.root.isVisible = false
-                noConnectionPlaceholder.root.isVisible = false
+                filtersNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Success -> {
-                shimmerLayout.isVisible = false
-                shimmerLayout.stopShimmer()
+                filtersShimmerLayout.isVisible = false
+                filtersShimmerLayout.stopShimmer()
                 filtersFields.root.isVisible = true
-                noConnectionPlaceholder.root.isVisible = false
+                filtersNoConnectionPlaceholder.root.isVisible = false
             }
 
             is Status.Error -> {
-                shimmerLayout.isVisible = false
-                shimmerLayout.stopShimmer()
+                filtersShimmerLayout.isVisible = false
+                filtersShimmerLayout.stopShimmer()
                 filtersFields.root.isVisible = false
-                noConnectionPlaceholder.root.isVisible = true
+                filtersNoConnectionPlaceholder.root.isVisible = true
             }
         }
     }
 
     private fun clearFields() {
         with(binding.filtersFields) {
-            brandListTv.setText("", false)
-            modelListTv.setText("", false)
-            modelList.isVisible = false
-
-            yearEtMin.text?.clear()
-            yearEtMax.text?.clear()
-
-            priceEtMin.text?.clear()
-            priceEtMax.text?.clear()
-
-            mileageEtMin.text?.clear()
-            mileageEtMax.text?.clear()
-
-            enginePowerMin.text?.clear()
-            enginePowerMax.text?.clear()
-
-            engineCapacityMin.text?.clear()
-            engineCapacityMax.text?.clear()
-
-            fuelTypeListTv.setText("", false)
-            bodyTypeListTv.setText("", false)
-            colorTv.setText("", false)
-            transmissionListTv.setText("", false)
-            drivetrainListTv.setText("", false)
-            wheelListTv.setText("", false)
-            conditionListTv.setText("", false)
-            ownersTv.setText("", false)
+            filterBrandAtv.setText("", false)
+            filterModelAtv.setText("", false)
+            filterModelAtv.isVisible = false
+            filterYearEtMin.text?.clear()
+            filterYearEtMax.text?.clear()
+            filterPriceEtMin.text?.clear()
+            filterPriceEtMax.text?.clear()
+            filterMileageEtMin.text?.clear()
+            filterMileageEtMax.text?.clear()
+            filterEnginePowerMin.text?.clear()
+            filterEnginePowerMax.text?.clear()
+            filterEngineCapacityMin.text?.clear()
+            filterEngineCapacityMax.text?.clear()
+            filterFuelTypeAtv.setText("", false)
+            filterBodyTypeAtv.setText("", false)
+            filterColorAtv.setText("", false)
+            filterTransmissionAtv.setText("", false)
+            filterDrivetrainAtv.setText("", false)
+            filterWheelAtv.setText("", false)
+            filterConditionAtv.setText("", false)
+            filterOwnersAtv.setText("", false)
         }
     }
 }
