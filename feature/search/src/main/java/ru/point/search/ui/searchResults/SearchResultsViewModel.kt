@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import ru.point.cars.model.AdVo
 import ru.point.cars.model.asAdVo
 import ru.point.cars.repository.CarsRepository
+import ru.point.common.model.CarFilterParams
 import ru.point.common.model.Status
 
 internal class SearchResultsViewModel(private val carsRepository: CarsRepository) : ViewModel() {
@@ -35,52 +36,14 @@ internal class SearchResultsViewModel(private val carsRepository: CarsRepository
     }
 
     fun searchCarsByFilters(
-        brand: String? = null,
-        model: String? = null,
-        yearMin: Short? = null,
-        yearMax: Short? = null,
-        priceMin: Int? = null,
-        priceMax: Int? = null,
-        mileageMin: Int? = null,
-        mileageMax: Int? = null,
-        enginePowerMin: Short? = null,
-        enginePowerMax: Short? = null,
-        engineCapacityMin: Double? = null,
-        engineCapacityMax: Double? = null,
-        fuelType: String? = null,
-        bodyType: String? = null,
-        color: String? = null,
-        transmission: String? = null,
-        drivetrain: String? = null,
-        wheel: String? = null,
-        condition: String? = null,
-        owners: String? = null,
+        filterParams: CarFilterParams,
         sortParam: String,
         orderParam: String
     ) {
         _status.value = Status.Loading
         viewModelScope.launch {
             carsRepository.searchCarsByFilters(
-                brand = brand,
-                model = model,
-                yearMin = yearMin,
-                yearMax = yearMax,
-                priceMin = priceMin,
-                priceMax = priceMax,
-                mileageMin = mileageMin,
-                mileageMax = mileageMax,
-                enginePowerMin = enginePowerMin,
-                enginePowerMax = enginePowerMax,
-                engineCapacityMin = engineCapacityMin,
-                engineCapacityMax = engineCapacityMax,
-                fuelType = fuelType,
-                bodyType = bodyType,
-                color = color,
-                transmission = transmission,
-                drivetrain = drivetrain,
-                wheel = wheel,
-                condition = condition,
-                owners = owners,
+                filterParams = filterParams,
                 sortParam = sortParam,
                 orderParam = orderParam
             )

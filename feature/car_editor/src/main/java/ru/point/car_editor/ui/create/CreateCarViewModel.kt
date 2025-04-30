@@ -42,6 +42,9 @@ internal class CreateCarViewModel(
     private val _addCarEvent = MutableSharedFlow<EventState>()
     val addCarEvent get() = _addCarEvent.asSharedFlow()
 
+    private val _status = MutableStateFlow<Status>(Status.Loading)
+    val status get() = _status.asStateFlow()
+
     private val _vinError = MutableStateFlow<String?>(null)
     val vinError get() = _vinError.asStateFlow()
 
@@ -95,9 +98,6 @@ internal class CreateCarViewModel(
 
     private val _ownershipPeriodError = MutableStateFlow<String?>(null)
     val ownershipPeriodError get() = _ownershipPeriodError.asStateFlow()
-
-    private val _status = MutableStateFlow<Status>(Status.Loading)
-    val status get() = _status.asStateFlow()
 
     init {
         viewModelScope.launch {

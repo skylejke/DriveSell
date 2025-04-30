@@ -2,6 +2,7 @@ plugins {
     kotlin("plugin.serialization") version "2.1.10"
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    kotlin("plugin.parcelize")
     alias(libs.plugins.ksp)
 }
 
@@ -12,6 +13,7 @@ android {
     defaultConfig {
         minSdk = 30
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"http://192.168.1.23:8080\"")
     }
 
     compileOptions {
@@ -26,10 +28,6 @@ android {
     buildFeatures {
         buildConfig = true
         viewBinding = true
-    }
-
-    defaultConfig {
-        buildConfigField("String", "BASE_URL", "\"http://192.168.1.23:8080\"")
     }
 }
 

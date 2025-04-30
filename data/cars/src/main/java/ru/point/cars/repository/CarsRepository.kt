@@ -8,6 +8,7 @@ import ru.point.cars.model.CreateCarRequest
 import ru.point.cars.model.EditCarRequest
 import ru.point.cars.model.ModelDto
 import ru.point.cars.model.SearchHistory
+import ru.point.common.model.CarFilterParams
 import ru.point.common.model.ResponseMessage
 
 interface CarsRepository {
@@ -16,11 +17,7 @@ interface CarsRepository {
 
     suspend fun getModelsByBrand(brandName: String): Result<List<ModelDto>>
 
-    suspend fun getCars(
-        query: String,
-        sortParam: String,
-        orderParam: String
-    ): Result<List<AdDto>>
+    suspend fun getCars(query: String, sortParam: String, orderParam: String): Result<List<AdDto>>
 
     suspend fun getCarAdById(adId: String): Result<AdDto>
 
@@ -37,26 +34,7 @@ interface CarsRepository {
     suspend fun checkIsFavourite(adId: String): Result<Boolean>
 
     suspend fun searchCarsByFilters(
-        brand: String? = null,
-        model: String? = null,
-        yearMin: Short? = null,
-        yearMax: Short? = null,
-        priceMin: Int? = null,
-        priceMax: Int? = null,
-        mileageMin: Int? = null,
-        mileageMax: Int? = null,
-        enginePowerMin: Short? = null,
-        enginePowerMax: Short? = null,
-        engineCapacityMin: Double? = null,
-        engineCapacityMax: Double? = null,
-        fuelType: String? = null,
-        bodyType: String? = null,
-        color: String? = null,
-        transmission: String? = null,
-        drivetrain: String? = null,
-        wheel: String? = null,
-        condition: String? = null,
-        owners: String? = null,
+        filterParams: CarFilterParams,
         sortParam: String,
         orderParam: String
     ): Result<List<AdDto>>

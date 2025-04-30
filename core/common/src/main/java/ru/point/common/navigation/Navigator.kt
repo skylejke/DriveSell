@@ -1,5 +1,7 @@
 package ru.point.common.navigation
 
+import ru.point.common.model.CarFilterParams
+
 interface Navigator {
     fun popBackStack()
     fun fromLoginFragmentToRegisterFragment()
@@ -18,28 +20,7 @@ interface Navigator {
     fun fromSearchResultsFragmentToCarDetailsFragment(adId: String, userId: String)
     fun fromHomeFragmentToSearchFragment()
     fun fromSearchFragmentToSearchResultsFragment(query: String)
-    fun fromSearchByFiltersFragmentToSearchResultsFragment(
-        brand: String? = null,
-        model: String? = null,
-        yearMin: String? = null,
-        yearMax: String? = null,
-        priceMin: String? = null,
-        priceMax: String? = null,
-        mileageMin: String? = null,
-        mileageMax: String? = null,
-        enginePowerMin: String? = null,
-        enginePowerMax: String? = null,
-        engineCapacityMin: String? = null,
-        engineCapacityMax: String? = null,
-        fuelType: String? = null,
-        bodyType: String? = null,
-        color: String? = null,
-        transmission: String? = null,
-        drivetrain: String? = null,
-        wheel: String? = null,
-        condition: String? = null,
-        owners: String? = null
-    )
+    fun fromSearchByFiltersFragmentToSearchResultsFragment(filterParams: CarFilterParams)
     fun fromAddCarFragmentToHomeFragment()
     fun fromCarDetailsFragmentToEditCarFragment(adId: String, userId: String)
     fun fromMenuFragmentToComparisonsFragment()

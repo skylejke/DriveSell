@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import ru.point.common.di.FeatureDepsProvider
 import ru.point.common.ext.repeatOnLifecycleScope
+import ru.point.common.model.CarFilterParams
 import ru.point.common.model.Status
 import ru.point.common.ui.BaseFragment
 import ru.point.search.R
@@ -78,26 +79,28 @@ internal class SearchByFiltersFragment : BaseFragment<FragmentSearchByFiltersBin
         binding.filtersFields.filterSearchBtn.setOnClickListener {
             with(binding.filtersFields) {
                 navigator.fromSearchByFiltersFragmentToSearchResultsFragment(
-                    brand = filterBrandAtv.text.toString().takeIf { it.isNotBlank() },
-                    model = filterModelAtv.text.toString().takeIf { it.isNotBlank() },
-                    yearMin = filterYearEtMin.text.toString().takeIf { it.isNotBlank() },
-                    yearMax = filterYearEtMax.text.toString().takeIf { it.isNotBlank() },
-                    priceMin = filterPriceEtMin.text.toString().takeIf { it.isNotBlank() },
-                    priceMax = filterPriceEtMax.text.toString().takeIf { it.isNotBlank() },
-                    mileageMin = filterMileageEtMin.text.toString().takeIf { it.isNotBlank() },
-                    mileageMax = filterMileageEtMax.text.toString().takeIf { it.isNotBlank() },
-                    enginePowerMin = filterEnginePowerMin.text.toString().takeIf { it.isNotBlank() },
-                    enginePowerMax = filterEnginePowerMax.text.toString().takeIf { it.isNotBlank() },
-                    engineCapacityMin = filterEngineCapacityMin.text.toString().takeIf { it.isNotBlank() },
-                    engineCapacityMax = filterEngineCapacityMax.text.toString().takeIf { it.isNotBlank() },
-                    fuelType = filterFuelTypeAtv.text.toString().takeIf { it.isNotBlank() },
-                    bodyType = filterBodyTypeAtv.text.toString().takeIf { it.isNotBlank() },
-                    color = filterColorAtv.text.toString().takeIf { it.isNotBlank() },
-                    transmission = filterTransmissionAtv.text.toString().takeIf { it.isNotBlank() },
-                    drivetrain = filterDrivetrainAtv.text.toString().takeIf { it.isNotBlank() },
-                    wheel = filterWheelAtv.text.toString().takeIf { it.isNotBlank() },
-                    condition = filterConditionAtv.text.toString().takeIf { it.isNotBlank() },
-                    owners = filterOwnersAtv.text.toString().takeIf { it.isNotBlank() }
+                    CarFilterParams(
+                        brand = filterBrandAtv.text.toString().takeIf { it.isNotBlank() },
+                        model = filterModelAtv.text.toString().takeIf { it.isNotBlank() },
+                        yearMin = filterYearEtMin.text.toString().toShortOrNull(),
+                        yearMax = filterYearEtMax.text.toString().toShortOrNull(),
+                        priceMin = filterPriceEtMin.text.toString().toIntOrNull(),
+                        priceMax = filterPriceEtMax.text.toString().toIntOrNull(),
+                        mileageMin = filterMileageEtMin.text.toString().toIntOrNull(),
+                        mileageMax = filterMileageEtMax.text.toString().toIntOrNull(),
+                        enginePowerMin = filterEnginePowerMin.text.toString().toShortOrNull(),
+                        enginePowerMax = filterEnginePowerMax.text.toString().toShortOrNull(),
+                        engineCapacityMin = filterEngineCapacityMin.text.toString().toDoubleOrNull(),
+                        engineCapacityMax = filterEngineCapacityMax.text.toString().toDoubleOrNull(),
+                        fuelType = filterFuelTypeAtv.text.toString().takeIf { it.isNotBlank() },
+                        bodyType = filterBodyTypeAtv.text.toString().takeIf { it.isNotBlank() },
+                        color = filterColorAtv.text.toString().takeIf { it.isNotBlank() },
+                        transmission = filterTransmissionAtv.text.toString().takeIf { it.isNotBlank() },
+                        drivetrain = filterDrivetrainAtv.text.toString().takeIf { it.isNotBlank() },
+                        wheel = filterWheelAtv.text.toString().takeIf { it.isNotBlank() },
+                        condition = filterConditionAtv.text.toString().takeIf { it.isNotBlank() },
+                        owners = filterOwnersAtv.text.toString().takeIf { it.isNotBlank() }
+                    )
                 )
             }
         }

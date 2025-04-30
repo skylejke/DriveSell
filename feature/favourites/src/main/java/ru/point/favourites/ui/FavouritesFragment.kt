@@ -55,7 +55,7 @@ internal class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
         }
 
         repeatOnLifecycleScope {
-            combine(favouritesViewModel.status, favouritesViewModel.favourites) { status, cars -> status to cars }
+            combine(favouritesViewModel.status, favouritesViewModel.favouriteCars) { status, cars -> status to cars }
                 .collect { (status, cars) ->
                     with(binding) {
                         updatePlaceholder(status)

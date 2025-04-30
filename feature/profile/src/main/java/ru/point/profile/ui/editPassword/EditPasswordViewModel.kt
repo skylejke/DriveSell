@@ -20,6 +20,12 @@ internal class EditPasswordViewModel(
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
+    private val _passwordChangedEvent = MutableSharedFlow<Unit>(replay = 1)
+    val passwordChangedEvent = _passwordChangedEvent.asSharedFlow()
+
+    private val _status = MutableStateFlow<Status?>(null)
+    val status get() = _status.asStateFlow()
+
     private val _oldPasswordError = MutableStateFlow<String?>(null)
     val oldPasswordError get() = _oldPasswordError.asStateFlow()
 
@@ -28,12 +34,6 @@ internal class EditPasswordViewModel(
 
     private val _confirmNewPasswordError = MutableStateFlow<String?>(null)
     val confirmNewPasswordError get() = _confirmNewPasswordError.asStateFlow()
-
-    private val _passwordChangedEvent = MutableSharedFlow<Unit>(replay = 1)
-    val passwordChangedEvent = _passwordChangedEvent.asSharedFlow()
-
-    private val _status = MutableStateFlow<Status?>(null)
-    val status get() = _status.asStateFlow()
 
     fun editPassword(
         oldPassword: String,

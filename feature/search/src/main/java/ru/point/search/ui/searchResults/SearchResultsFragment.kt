@@ -200,26 +200,7 @@ internal class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding
             )
         } else {
             searchResultsViewModel.searchCarsByFilters(
-                brand = args.brand,
-                model = args.model,
-                yearMin = args.yearMin?.toShort(),
-                yearMax = args.yearMax?.toShort(),
-                priceMin = args.priceMin?.toInt(),
-                priceMax = args.priceMax?.toInt(),
-                mileageMin = args.mileageMin?.toInt(),
-                mileageMax = args.mileageMax?.toInt(),
-                enginePowerMin = args.enginePowerMin?.toShort(),
-                enginePowerMax = args.enginePowerMax?.toShort(),
-                engineCapacityMin = args.engineCapacityMin?.toDouble(),
-                engineCapacityMax = args.engineCapacityMax?.toDouble(),
-                fuelType = args.fuelType,
-                bodyType = args.bodyType,
-                color = args.color,
-                transmission = args.transmission,
-                drivetrain = args.drivetrain,
-                wheel = args.wheel,
-                condition = args.condition,
-                owners = args.owners,
+                filterParams = args.filterParams,
                 sortParam = sortParam,
                 orderParam = orderParam
             )

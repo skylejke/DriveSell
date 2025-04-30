@@ -14,7 +14,9 @@ import ru.point.cars.model.asRequestBody
 import ru.point.cars.room.DataBase
 import ru.point.cars.service.CarsService
 import ru.point.common.ext.uriToMultipart
+import ru.point.common.model.CarFilterParams
 import ru.point.common.model.ResponseMessage
+import ru.point.common.model.toQueryMap
 import ru.point.common.storage.TokenStorage
 
 class CarsRepositoryImpl(
@@ -68,50 +70,12 @@ class CarsRepositoryImpl(
     }
 
     override suspend fun searchCarsByFilters(
-        brand: String?,
-        model: String?,
-        yearMin: Short?,
-        yearMax: Short?,
-        priceMin: Int?,
-        priceMax: Int?,
-        mileageMin: Int?,
-        mileageMax: Int?,
-        enginePowerMin: Short?,
-        enginePowerMax: Short?,
-        engineCapacityMin: Double?,
-        engineCapacityMax: Double?,
-        fuelType: String?,
-        bodyType: String?,
-        color: String?,
-        transmission: String?,
-        drivetrain: String?,
-        wheel: String?,
-        condition: String?,
-        owners: String?,
+        filterParams: CarFilterParams,
         sortParam: String,
         orderParam: String
     ) = withContext(dispatcher) {
         carsService.searchCarsByFilters(
-            brand = brand,
-            model = model,
-            yearMin = yearMin,
-            yearMax = yearMax,
-            priceMin = priceMin,
-            priceMax = priceMax,
-            mileageMin = mileageMin,
-            mileageMax = mileageMax,
-            enginePowerMin = enginePowerMin,
-            enginePowerMax = enginePowerMax,
-            engineCapacityMin = engineCapacityMin,
-            engineCapacityMax = engineCapacityMax,
-            fuelType = fuelType,
-            bodyType = bodyType,
-            color = color,
-            transmission = transmission,
-            drivetrain = drivetrain,
-            wheel = wheel,
-            condition = condition,
-            owners = owners,
+            filterParams = filterParams.toQueryMap(),
             sortParam = sortParam,
             orderParam = orderParam
         )

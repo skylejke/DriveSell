@@ -12,8 +12,8 @@ import ru.point.common.model.Status
 
 internal class FavouritesViewModel(private val carsRepository: CarsRepository) : ViewModel() {
 
-    private val _favourites = MutableStateFlow<List<AdVo>>(emptyList())
-    val favourites get() = _favourites.asStateFlow()
+    private val _favouriteCars = MutableStateFlow<List<AdVo>>(emptyList())
+    val favouriteCars get() = _favouriteCars.asStateFlow()
 
     private val _status = MutableStateFlow<Status>(Status.Loading)
     val status get() = _status.asStateFlow()
@@ -28,7 +28,7 @@ internal class FavouritesViewModel(private val carsRepository: CarsRepository) :
             carsRepository.getUsersFavourites()
                 .onSuccess { favourites ->
                     _status.value = Status.Success
-                    _favourites.value = favourites.map { it.asAdVo }
+                    _favouriteCars.value = favourites.map { it.asAdVo }
                 }
                 .onFailure { _status.value = Status.Error }
         }

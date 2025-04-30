@@ -2,6 +2,7 @@ package ru.point.drivesell.utils
 
 import androidx.navigation.NavController
 import ru.point.car_details.ui.CarDetailsFragmentDirections
+import ru.point.common.model.CarFilterParams
 import ru.point.common.navigation.Navigator
 import ru.point.comparisons.ui.ComparisonsFragmentDirections
 import ru.point.drivesell.R
@@ -112,75 +113,16 @@ class NavigatorImpl(
         navController.navigate(
             SearchFragmentDirections.actionSearchFragmentToSearchResultsFragment(
                 query = query,
-                brand = null,
-                model = null,
-                yearMin = null,
-                yearMax = null,
-                priceMin = null,
-                priceMax = null,
-                mileageMin = null,
-                mileageMax = null,
-                enginePowerMin = null,
-                enginePowerMax = null,
-                engineCapacityMin = null,
-                engineCapacityMax = null,
-                fuelType = null,
-                bodyType = null,
-                color = null,
-                transmission = null,
-                drivetrain = null,
-                wheel = null,
-                condition = null,
-                owners = null,
+               filterParams = CarFilterParams()
             )
         )
     }
 
-    override fun fromSearchByFiltersFragmentToSearchResultsFragment(
-        brand: String?,
-        model: String?,
-        yearMin: String?,
-        yearMax: String?,
-        priceMin: String?,
-        priceMax: String?,
-        mileageMin: String?,
-        mileageMax: String?,
-        enginePowerMin: String?,
-        enginePowerMax: String?,
-        engineCapacityMin: String?,
-        engineCapacityMax: String?,
-        fuelType: String?,
-        bodyType: String?,
-        color: String?,
-        transmission: String?,
-        drivetrain: String?,
-        wheel: String?,
-        condition: String?,
-        owners: String?
-    ) {
+    override fun fromSearchByFiltersFragmentToSearchResultsFragment(filterParams: CarFilterParams) {
         navController.navigate(
             SearchByFiltersFragmentDirections.actionSearchByFiltersFragmentToSearchResultsFragment(
                 query = null,
-                brand = brand,
-                model = model,
-                yearMin = yearMin,
-                yearMax = yearMax,
-                priceMin = priceMin,
-                priceMax = priceMax,
-                mileageMin = mileageMin,
-                mileageMax = mileageMax,
-                enginePowerMin = enginePowerMin,
-                enginePowerMax = enginePowerMax,
-                engineCapacityMin = engineCapacityMin,
-                engineCapacityMax = engineCapacityMax,
-                fuelType = fuelType,
-                bodyType = bodyType,
-                color = color,
-                transmission = transmission,
-                drivetrain = drivetrain,
-                wheel = wheel,
-                condition = condition,
-                owners = owners,
+                filterParams = filterParams,
             )
         )
     }

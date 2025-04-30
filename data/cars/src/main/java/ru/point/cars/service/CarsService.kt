@@ -10,6 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 import ru.point.cars.model.AdDto
 import ru.point.cars.model.BrandDto
 import ru.point.cars.model.ModelDto
@@ -58,26 +59,7 @@ interface CarsService {
 
     @GET("/cars/filters")
     suspend fun searchCarsByFilters(
-        @Query("brand") brand: String? = null,
-        @Query("model") model: String? = null,
-        @Query("yearMin") yearMin: Short? = null,
-        @Query("yearMax") yearMax: Short? = null,
-        @Query("priceMin") priceMin: Int? = null,
-        @Query("priceMax") priceMax: Int? = null,
-        @Query("mileageMin") mileageMin: Int? = null,
-        @Query("mileageMax") mileageMax: Int? = null,
-        @Query("enginePowerMin") enginePowerMin: Short? = null,
-        @Query("enginePowerMax") enginePowerMax: Short? = null,
-        @Query("engineCapacityMin") engineCapacityMin: Double? = null,
-        @Query("engineCapacityMax") engineCapacityMax: Double? = null,
-        @Query("fuelType") fuelType: String? = null,
-        @Query("bodyType") bodyType: String? = null,
-        @Query("color") color: String? = null,
-        @Query("transmission") transmission: String? = null,
-        @Query("drivetrain") drivetrain: String? = null,
-        @Query("wheel") wheel: String? = null,
-        @Query("condition") condition: String? = null,
-        @Query("owners") owners: String? = null,
+        @QueryMap filterParams: Map<String, String>,
         @Query("sortParam") sortParam: String,
         @Query("orderParam") orderParam: String
     ): Result<List<AdDto>>

@@ -28,6 +28,12 @@ internal class EditUserDataViewModel(
     private val _userData = MutableStateFlow<UserData?>(null)
     val userData get() = _userData.asStateFlow()
 
+    private val _userDataChangedEvent = MutableSharedFlow<Unit>(replay = 1)
+    val userDataChangedEvent get() = _userDataChangedEvent.asSharedFlow()
+
+    private val _status = MutableStateFlow<Status>(Status.Loading)
+    val status get() = _status.asStateFlow()
+
     private val _usernameError = MutableStateFlow<String?>(null)
     val usernameError get() = _usernameError.asStateFlow()
 
@@ -36,12 +42,6 @@ internal class EditUserDataViewModel(
 
     private val _phoneNumberError = MutableStateFlow<String?>(null)
     val phoneNumberError get() = _phoneNumberError.asStateFlow()
-
-    private val _userDataChangedEvent = MutableSharedFlow<Unit>(replay = 1)
-    val userDataChangedEvent get() = _userDataChangedEvent.asSharedFlow()
-
-    private val _status = MutableStateFlow<Status>(Status.Loading)
-    val status get() = _status.asStateFlow()
 
     init {
         getUserData()
